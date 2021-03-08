@@ -1,18 +1,20 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using BepInEx.Configuration;
 using HarmonyLib;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace COM3D2.Lilly.BepInEx
+namespace COM3D2.Lilly.Plugin
 {
     // 이벤트 함수의 실행 순서
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
 
-    [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "1.0.0.2")]
+    [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "1.0.0.3")]
     
     public class Plugin : BaseUnityPlugin
     {
@@ -23,13 +25,27 @@ namespace COM3D2.Lilly.BepInEx
 
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
-            Harmony.CreateAndPatchAll(typeof(CharacterMgrPatch), null);// 3.5 에선 null 넣어주기
-            Harmony.CreateAndPatchAll(typeof(AudioSourceMgrPatch), null);
-            Harmony.CreateAndPatchAll(typeof(MaidPatch),null);
-            Harmony.CreateAndPatchAll(typeof(SceneScenarioSelectPatch),null);
-            Harmony.CreateAndPatchAll(typeof(BgMgrPatch),null);
-            Harmony.CreateAndPatchAll(typeof(GameMainPatch),null);
-            Harmony.CreateAndPatchAll(typeof(SaveAndLoadCtrlPatch),null);
+            List<Type> list=new List<Type>();
+            list.Add(typeof(CharacterMgrPatch));
+            list.Add(typeof(AudioSourceMgrPatch));
+            list.Add(typeof(MaidPatch));
+            list.Add(typeof(SceneScenarioSelectPatch));
+            list.Add(typeof(BgMgrPatch));
+            list.Add(typeof(GameMainPatch));
+            list.Add(typeof(SaveAndLoadCtrlPatch));
+            foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
+            {
+                try
+                {
+                    Harmony.CreateAndPatchAll(item, null);
+                }
+                catch (Exception e)
+                {
+                    MyLog.Log("Plugin:"+ item.Name);
+                    MyLog.Log("Plugin:"+ e.ToString());
+                }
+            }
+
         }
 
         //-----------------------------------------------

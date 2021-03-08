@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine.SceneManagement;
 
-namespace COM3D2.Lilly.BepInEx
+namespace COM3D2.Lilly.Plugin
 {
     /// <summary>
     /// 메이드 설정 관련
@@ -32,13 +32,15 @@ namespace COM3D2.Lilly.BepInEx
             if (__instance.Visible)
             {
                 MyLog.Log("Maid.SetPropPost2.filename:" + filename);
+                MyLog.Log("Maid.SetPropPost2.mp.strTempFileName:" + mp.strTempFileName);
             }
+
         }
 
         // public void SetProp(string tag, string filename, int f_nFileNameRID, bool f_bTemp = false, bool f_bNoScale = false)
 
         /// <summary>
-        /// 메이드에게 메뉴가 설정 되었을시 작동
+        /// 메이드에게 메뉴가 설정 되었을시 작동. 뭐지 나중에 오류남
         /// </summary>
         /// <param name="__instance"></param>
         /// <param name="tag"></param>
@@ -46,42 +48,41 @@ namespace COM3D2.Lilly.BepInEx
         /// <param name="f_nFileNameRID"></param>
         /// <param name="f_bTemp"></param>
         /// <param name="f_bNoScale"></param>
-        [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
-        { typeof(string) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
-        [HarmonyPostfix]
-        public static void SetPropPost0(Maid __instance, string tag, string filename, int f_nFileNameRID, bool f_bTemp , bool f_bNoScale )
-        {
-            // 로딩중에도 불러와버림. 대책 테스트중
-            //if (SceneManager.GetActiveScene().isLoaded)//실패
-            //if (__instance.Visible)            
-            //{
-            //    MyLog.Log("Maid.SetPropPre0.filename:" + filename);
-            //}            
-        }
+        //[HarmonyPatch(typeof(Maid), "SetProp", new Type[]
+        //{ typeof(string) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
+        //[HarmonyPostfix]
+        //public static void SetPropPost0(Maid __instance, string tag, string filename, int f_nFileNameRID, bool f_bTemp , bool f_bNoScale )
+        //{
+        //    // 로딩중에도 불러와버림. 대책 테스트중
+        //    //if (SceneManager.GetActiveScene().isLoaded)//실패
+        //    //if (__instance.Visible)            
+        //    //{
+        //    //    MyLog.Log("Maid.SetPropPre0.filename:" + filename);
+        //    //}            
+        //}
 
         //------------------------------
         // private void SetProp(MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale = false)
         // 작동 안함
-        [HarmonyPatch(typeof(Maid), "SetProp")]
-        [HarmonyPostfix]
-        public static void SetPropPostfix1(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
-        {
-            MyLog.Log("Maid.SetPropPrefix1.mp.strTempFileName:" + mp.strTempFileName);
-            MyLog.Log("Maid.SetPropPrefix1.filename:" + filename);
-        }
+        //[HarmonyPatch(typeof(Maid), "SetProp")]
+        //[HarmonyPostfix]
+        //public static void SetPropPostfix1(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
+        //{
+        //
+        //}
 
         //------------------------------
         // public void SetProp(MPN idx, int val, bool f_bTemp = false)
-        [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
-        {
-                    typeof(MPN) ,typeof(int),typeof(bool)
-        })]
-        [HarmonyPostfix]
-        public static void SetPropPostfix3(Maid __instance, MPN idx, int val, bool f_bTemp)
-        {
-            MyLog.Log("Maid.SetPropPostfix3.strTempFileName:" + __instance.GetProp(idx).strTempFileName);
-            MyLog.Log("Maid.SetPropPostfix3.strFileName:" + __instance.GetProp(idx).strFileName);
-        }
+        //[HarmonyPatch(typeof(Maid), "SetProp", new Type[]
+        //{
+        //            typeof(MPN) ,typeof(int),typeof(bool)
+        //})]
+        //[HarmonyPostfix]
+        //public static void SetPropPostfix3(Maid __instance, MPN idx, int val, bool f_bTemp)
+        //{
+        //    MyLog.Log("Maid.SetPropPostfix3.strTempFileName:" + __instance.GetProp(idx).strTempFileName);
+        //    MyLog.Log("Maid.SetPropPostfix3.strFileName:" + __instance.GetProp(idx).strFileName);
+        //}
 
         //------------------------------
         // public bool DelProp(MPN idx, bool f_bTemp = false)

@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using Yotogis;
 
-namespace COM3D2.Lilly.BepInEx
+namespace COM3D2.Lilly.Plugin
 {
     /// <summary>
     /// 캐릭터 설정 관련
     /// </summary>
-    public static class CharacterMgrPatch
+    public static class CharacterMgrPatch // 이름은 마음대로 지어도 되긴 한데 나같은 경우 정리를 위해서 해킹 대상 클래스 이름에다가 접미사를 붇임
     {
         // https://github.com/BepInEx/HarmonyX/wiki/Prefix-changes
         // https://github.com/BepInEx/HarmonyX/wiki/Patch-parameters
@@ -48,7 +48,6 @@ namespace COM3D2.Lilly.BepInEx
         [HarmonyPostfix]
         public static void PresetLoadPostfix(CharacterMgr __instance, string f_strFileName)
         {
-              // __result 조심 
             //MyLog.Log("PresetLoadPostfix():" + f_strFileName);
         }
 

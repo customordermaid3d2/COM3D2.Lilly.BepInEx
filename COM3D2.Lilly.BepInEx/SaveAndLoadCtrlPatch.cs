@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace COM3D2.Lilly.BepInEx
+namespace COM3D2.Lilly.Plugin
 {
     // 파일 저장 관련
     class SaveAndLoadCtrlPatch
@@ -12,9 +12,9 @@ namespace COM3D2.Lilly.BepInEx
         // public void LoadData()
         [HarmonyPatch(typeof(SaveAndLoadCtrl), "LoadData")]
         [HarmonyPrefix]// 나중에 __m_loadDataNo 지워짐
-        private static void LoadDataPre(SaveAndLoadCtrl __instance, string __m_loadDataNo)
+        private static void LoadDataPre(SaveAndLoadCtrl __instance )// string __m_loadDataNo 못가져옴
         {
-            MyLog.Log("SaveAndLoadCtrl.LoadDataPre:" + __m_loadDataNo);
+            MyLog.Log("SaveAndLoadCtrl.LoadDataPre" );
             
         }
 

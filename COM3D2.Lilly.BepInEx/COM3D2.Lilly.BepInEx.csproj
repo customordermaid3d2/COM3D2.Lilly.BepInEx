@@ -48,6 +48,9 @@
       <HintPath>F:\COM3D2\BepInEx\core\BepInEx.Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="BepInEx.Preloader">
+      <HintPath>F:\COM3D2\BepInEx\core\BepInEx.Preloader.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
