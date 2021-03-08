@@ -4,6 +4,7 @@ using HarmonyLib;
 using System;
 using System.IO;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace COM3D2.Lilly.BepInEx
@@ -12,6 +13,7 @@ namespace COM3D2.Lilly.BepInEx
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
 
     [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "1.0.0.2")]
+    
     public class Plugin : BaseUnityPlugin
     {
 
@@ -24,6 +26,9 @@ namespace COM3D2.Lilly.BepInEx
             Harmony.CreateAndPatchAll(typeof(CharacterMgrPatch), null);// 3.5 에선 null 넣어주기
             Harmony.CreateAndPatchAll(typeof(AudioSourceMgrPatch), null);
             Harmony.CreateAndPatchAll(typeof(MaidPatch),null);
+            Harmony.CreateAndPatchAll(typeof(SceneScenarioSelectPatch),null);
+            Harmony.CreateAndPatchAll(typeof(BgMgrPatch),null);
+            Harmony.CreateAndPatchAll(typeof(GameMainPatch),null);
         }
 
         //-----------------------------------------------
@@ -103,7 +108,10 @@ namespace COM3D2.Lilly.BepInEx
 
         public void Update()
         {
+            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            {
 
+            }
         }
 
         //-----------------------------------------------

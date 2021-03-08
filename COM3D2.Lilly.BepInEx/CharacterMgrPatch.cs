@@ -8,6 +8,9 @@ using Yotogis;
 
 namespace COM3D2.Lilly.BepInEx
 {
+    /// <summary>
+    /// 캐릭터 설정 관련
+    /// </summary>
     public static class CharacterMgrPatch
     {
         // https://github.com/BepInEx/HarmonyX/wiki/Prefix-changes
@@ -15,6 +18,8 @@ namespace COM3D2.Lilly.BepInEx
         // 
         // 매개 변수의 순서는 중요하지 않지만 이름은 중요합니다. 원본 메소드의 이름과 똑같아야함
         // 모든 매개 변수를 전달할 필요는 없습니다.
+
+        // ------------------------------------
 
         // public CharacterMgr.Preset PresetLoad(BinaryReader brRead, string f_strFileName)
 
@@ -30,18 +35,31 @@ namespace COM3D2.Lilly.BepInEx
         //}
 
         // 정상
-        //[HarmonyPatch(typeof(CharacterMgr), "PresetLoad", new Type[]
-        //{
-        //            typeof(BinaryReader) ,typeof(string)
-        //})]
-        //[HarmonyPostfix]
-        //public static void PresetLoadPostfix(CharacterMgr __instance, CharacterMgr.Preset __result, string f_strFileName)
-        //{
-        //      // __result 조심 
-        //    //MyLog.Log("PresetLoadPostfix():" + f_strFileName);
-        //}
+        /// <summary>
+        /// 주의. 에딧 모드에서 프리셋 창 뜰때 이 함수를 이용해서 파일들을 다 읽어옴
+        /// </summary>
+        /// <param name="__instance"></param>
+        /// <param name="__result"></param>
+        /// <param name="f_strFileName"></param>
+        [HarmonyPatch(typeof(CharacterMgr), "PresetLoad", new Type[]
+        {
+                    typeof(BinaryReader) ,typeof(string)
+        })]
+        [HarmonyPostfix]
+        public static void PresetLoadPostfix(CharacterMgr __instance, string f_strFileName)
+        {
+              // __result 조심 
+            //MyLog.Log("PresetLoadPostfix():" + f_strFileName);
+        }
 
-        // 테스팅 완료
+        // ------------------------------------
+
+        /// <summary>
+        /// 프리셋 선택해서 메이드에게 입힐때 작동
+        /// </summary>
+        /// <param name="__instance"></param>
+        /// <param name="f_maid"></param>
+        /// <param name="f_prest"></param>
         [HarmonyPatch(typeof(CharacterMgr), "PresetSet")]
         [HarmonyPrefix]
         public static void PresetSetPretfix1(CharacterMgr __instance, Maid f_maid, CharacterMgr.Preset f_prest)
@@ -70,6 +88,11 @@ namespace COM3D2.Lilly.BepInEx
             }
         }
 
+        /// <summary>
+        /// 프리셋에서 불러온 메뉴들을 반납
+        /// </summary>
+        /// <param name="f_prest"></param>
+        /// <returns></returns>
         private static MaidProp[] getMaidProp(CharacterMgr.Preset f_prest)
         {
             MaidProp[] array;
@@ -93,6 +116,19 @@ namespace COM3D2.Lilly.BepInEx
             }
 
             return array;
+        }
+
+        // ------------------------------------
+
+        // public void SetActiveMaid(Maid f_maid, int f_nActiveSlotNo)
+
+        [HarmonyPatch(typeof(CharacterMgr), "SetActiveMaid", new Type[]{
+            typeof(Maid) ,typeof(int)
+        })]
+        [HarmonyPostfix]
+        public static void SetActiveMaidPost0(Maid f_maid, int f_nActiveSlotNo)
+        {
+            MyLog.Log("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
         }
     }
 }

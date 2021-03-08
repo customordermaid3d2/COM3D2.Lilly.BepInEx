@@ -3,9 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 namespace COM3D2.Lilly.BepInEx
 {
+    /// <summary>
+    /// 메이드 설정 관련
+    /// </summary>
     public static class MaidPatch
     {
         // https://github.com/BepInEx/HarmonyX/wiki/Prefix-changes
@@ -17,15 +21,42 @@ namespace COM3D2.Lilly.BepInEx
         // Maid 클래스들의 메소드들은 아예 못들고오는듯
 
         //------------------------------
-        // public void SetProp(string tag, string filename, int f_nFileNameRID, bool f_bTemp = false, bool f_bNoScale = false)
+
+        // private void SetProp(MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale = false)
         [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
-        {
-                    typeof(string) ,typeof(string),typeof(int),typeof(bool),typeof(bool)
-        })]
+        { typeof(string) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
         [HarmonyPostfix]
-        public static void SetPropPostfix0(Maid __instance, string tag, string filename, int f_nFileNameRID, bool f_bTemp , bool f_bNoScale )
+        public static void SetPropPost2(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
         {
-            MyLog.Log("Maid.SetPropPrefix0.filename:" + filename);
+            //if (SceneManager.GetActiveScene().isLoaded)//실패
+            if (__instance.Visible)
+            {
+                MyLog.Log("Maid.SetPropPost2.filename:" + filename);
+            }
+        }
+
+        // public void SetProp(string tag, string filename, int f_nFileNameRID, bool f_bTemp = false, bool f_bNoScale = false)
+
+        /// <summary>
+        /// 메이드에게 메뉴가 설정 되었을시 작동
+        /// </summary>
+        /// <param name="__instance"></param>
+        /// <param name="tag"></param>
+        /// <param name="filename"></param>
+        /// <param name="f_nFileNameRID"></param>
+        /// <param name="f_bTemp"></param>
+        /// <param name="f_bNoScale"></param>
+        [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
+        { typeof(string) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
+        [HarmonyPostfix]
+        public static void SetPropPost0(Maid __instance, string tag, string filename, int f_nFileNameRID, bool f_bTemp , bool f_bNoScale )
+        {
+            // 로딩중에도 불러와버림. 대책 테스트중
+            //if (SceneManager.GetActiveScene().isLoaded)//실패
+            //if (__instance.Visible)            
+            //{
+            //    MyLog.Log("Maid.SetPropPre0.filename:" + filename);
+            //}            
         }
 
         //------------------------------
