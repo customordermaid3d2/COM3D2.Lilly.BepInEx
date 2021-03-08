@@ -6,7 +6,7 @@ using System.Text;
 
 namespace COM3D2.Lilly.BepInEx
 {
-    class AudioSourceMgrPatch
+    public static class AudioSourceMgrPatch
     {
         // https://github.com/BepInEx/HarmonyX/wiki/Prefix-changes
         // https://github.com/BepInEx/HarmonyX/wiki/Patch-parameters
@@ -16,18 +16,19 @@ namespace COM3D2.Lilly.BepInEx
 
         // public void LoadPlay(string f_strFileName, float f_fFadeTime, bool f_bStreaming, bool f_bLoop = false)
 
+        // 정상
         [HarmonyPatch(typeof(AudioSourceMgr), "LoadPlay")]
         [HarmonyPrefix]
-        public static void LoadPlayPrefix(CharacterMgr __instance, string f_strFileName)
+        public static void LoadPlayPrefix1(string f_strFileName)
         {
-            MyLog.Log("LoadPlayPrefix():" + f_strFileName);
+            MyLog.Log("LoadPlayPrefix1:" + f_strFileName);
         }
 
         [HarmonyPatch(typeof(AudioSourceMgr), "LoadPlay")]
         [HarmonyPostfix]
-        public static void LoadPlayPostfix(CharacterMgr __instance, string f_strFileName)
+        public static void LoadPlayPostfix2(AudioSourceMgr __instance, string f_strFileName)
         {
-            MyLog.Log("LoadPlayPostfix():" + f_strFileName);
+            MyLog.Log("LoadPlayPostfix2:" + f_strFileName);
         }
     }
 }
