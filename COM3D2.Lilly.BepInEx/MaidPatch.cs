@@ -24,7 +24,7 @@ namespace COM3D2.Lilly.BepInEx
 
         // private void SetProp(MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale = false)
         [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
-        { typeof(string) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
+        { typeof(MaidProp) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
         [HarmonyPostfix]
         public static void SetPropPost2(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
         {

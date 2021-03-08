@@ -22,13 +22,14 @@ namespace COM3D2.Lilly.BepInEx
             MyLog.Log("Plugin()");
 
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
-            // 이거로 원본 메소드에 연결시켜줌
+            // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
             Harmony.CreateAndPatchAll(typeof(CharacterMgrPatch), null);// 3.5 에선 null 넣어주기
             Harmony.CreateAndPatchAll(typeof(AudioSourceMgrPatch), null);
             Harmony.CreateAndPatchAll(typeof(MaidPatch),null);
             Harmony.CreateAndPatchAll(typeof(SceneScenarioSelectPatch),null);
             Harmony.CreateAndPatchAll(typeof(BgMgrPatch),null);
             Harmony.CreateAndPatchAll(typeof(GameMainPatch),null);
+            Harmony.CreateAndPatchAll(typeof(SaveAndLoadCtrlPatch),null);
         }
 
         //-----------------------------------------------

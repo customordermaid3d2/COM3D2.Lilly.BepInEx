@@ -67,6 +67,8 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="MyLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaveAndLoadCtrlPatch.cs" />
+    <Compile Include="SceneMgrPatch.cs" />
     <Compile Include="SceneScenarioSelectPatch.cs" />
   </ItemGroup>
   <ItemGroup>
