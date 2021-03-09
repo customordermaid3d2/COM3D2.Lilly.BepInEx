@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Reflection;
 
 namespace COM3D2.Lilly.Plugin
 {
@@ -25,7 +26,12 @@ namespace COM3D2.Lilly.Plugin
 
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
+
+            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
+
+            /*
             List<Type> list=new List<Type>();
+
             list.Add(typeof(CharacterMgrPatch));
             list.Add(typeof(AudioSourceMgrPatch));
             list.Add(typeof(MaidPatch));
@@ -33,19 +39,24 @@ namespace COM3D2.Lilly.Plugin
             list.Add(typeof(BgMgrPatch));
             list.Add(typeof(GameMainPatch));
             list.Add(typeof(SaveAndLoadCtrlPatch));
+            list.Add(typeof(SkillPatch));
+            list.Add(typeof(ScriptManagerPatch));
+            list.Add(typeof(KasizukiMainMenuPatch));
+
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
                 try
                 {
+                    MyLog.Log("Plugin:"+ item.Name);
                     Harmony.CreateAndPatchAll(item, null);
                 }
                 catch (Exception e)
                 {
-                    MyLog.Log("Plugin:"+ item.Name);
-                    MyLog.Log("Plugin:"+ e.ToString());
+                    MyLog.LogError("Plugin:"+ e.ToString());
                 }
             }
-
+            */
+            
         }
 
         //-----------------------------------------------
@@ -67,6 +78,13 @@ namespace COM3D2.Lilly.Plugin
             MyLog.Log("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex  );
             // SceneManager.GetActiveScene().name;
             
+            switch (scene.name)
+            {
+                case "SceneYotogi":// 밤시중 선택
+                    break;
+                default:
+                    break;
+            }
         }
 
         //-----------------------------------------------

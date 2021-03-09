@@ -129,5 +129,14 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.Log("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
         }
+
+        // public CharacterMgr.Preset PresetSave(Maid f_maid, CharacterMgr.PresetType f_type)
+
+        [HarmonyPatch(typeof(CharacterMgr), "PresetSave")]
+        [HarmonyPostfix]
+        public static void PresetSavePost0(Maid f_maid, CharacterMgr.PresetType f_type, CharacterMgr.Preset __result)
+        {
+            MyLog.Log("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName);
+        }
     }
 }

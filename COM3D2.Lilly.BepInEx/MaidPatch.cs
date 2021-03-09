@@ -18,12 +18,26 @@ namespace COM3D2.Lilly.Plugin
         // 매개 변수의 순서는 중요하지 않지만 이름은 중요합니다.
         // 모든 매개 변수를 전달할 필요는 없습니다.
 
-        // Maid 클래스들의 메소드들은 아예 못들고오는듯
+        // public void SetMaterialProperty(MPN m_mpn, TBody.SlotID f_slot, int f_nMatNo, string f_strPropName, string f_strTypeName, string f_strValue)
+        [HarmonyPatch(typeof(Maid), "SetMaterialProperty", new Type[]
+        { typeof(MPN) ,typeof(TBody.SlotID),typeof(int),typeof(string),typeof(string),typeof(string) })]
+        [HarmonyPostfix]
+        public static void SetMaterialPropertyPost2(Maid __instance, MPN m_mpn, TBody.SlotID f_slot, int f_nMatNo, string f_strPropName, string f_strTypeName, string f_strValue)
+        {
+            //if (SceneManager.GetActiveScene().isLoaded)//실패
+            if (__instance.Visible)
+            {
+                MyLog.Log("Maid.SetMaterialPropertyPost2:" + f_strPropName + "," + f_strTypeName+ "," + f_strValue);
+                //MyLog.Log("Maid.SetPropPost2.mp.strTempFileName:" + mp.strTempFileName);// 계속 빈값
+            }
 
-        //------------------------------
+        }
 
-        // private void SetProp(MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale = false)
-        [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
+
+    //------------------------------
+    // 정상
+    // private void SetProp(MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale = false)
+    [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
         { typeof(MaidProp) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
         [HarmonyPostfix]
         public static void SetPropPost2(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
@@ -32,7 +46,7 @@ namespace COM3D2.Lilly.Plugin
             if (__instance.Visible)
             {
                 MyLog.Log("Maid.SetPropPost2.filename:" + filename);
-                MyLog.Log("Maid.SetPropPost2.mp.strTempFileName:" + mp.strTempFileName);
+                //MyLog.Log("Maid.SetPropPost2.mp.strTempFileName:" + mp.strTempFileName);// 계속 빈값
             }
 
         }

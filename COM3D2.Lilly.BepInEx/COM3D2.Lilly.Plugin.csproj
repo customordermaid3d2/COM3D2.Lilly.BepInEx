@@ -7,8 +7,8 @@
     <ProjectGuid>{91BD9D6D-516D-4AE6-A522-5066935B9EE3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>COM3D2.Lilly.BepInEx</RootNamespace>
-    <AssemblyName>COM3D2.Lilly.BepInEx</AssemblyName>
+    <RootNamespace>COM3D2.Lilly.Plugin</RootNamespace>
+    <AssemblyName>COM3D2.Lilly.Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -40,6 +40,9 @@
       <HintPath>F:\COM3D2\COM3D2x64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>F:\COM3D2\COM3D2x64_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
     <Reference Include="BepInEx">
       <HintPath>F:\COM3D2\BepInEx\core\BepInEx.dll</HintPath>
       <Private>False</Private>
@@ -51,7 +54,7 @@
     <Reference Include="BepInEx.Preloader">
       <HintPath>F:\COM3D2\BepInEx\core\BepInEx.Preloader.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data" />
@@ -65,7 +68,9 @@
     <Compile Include="AudioSourceMgrPatch.cs" />
     <Compile Include="BgMgrPatch.cs" />
     <Compile Include="CharacterMgrPatch.cs" />
+    <Compile Include="DeskManagerPatch.cs" />
     <Compile Include="GameMainPatch.cs" />
+    <Compile Include="KasizukiMainMenuPatch.cs" />
     <Compile Include="MaidPatch.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="MyLog.cs" />
@@ -73,6 +78,8 @@
     <Compile Include="SaveAndLoadCtrlPatch.cs" />
     <Compile Include="SceneMgrPatch.cs" />
     <Compile Include="SceneScenarioSelectPatch.cs" />
+    <Compile Include="ScriptManagerPatch.cs" />
+    <Compile Include="SkillPatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="comfile.bat" />
