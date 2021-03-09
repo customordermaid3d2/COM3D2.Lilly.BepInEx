@@ -23,14 +23,30 @@ namespace COM3D2.Lilly.Plugin
         // [Warning: HarmonyX] AccessTools.DeclaredMethod: Could not find method for type ScriptManager and name ExecScriptFile and parameters(System.String, TJSVariant)
         // [Warning: HarmonyX] AccessTools.Method: Could not find method for type ScriptManager and name ExecScriptFile and parameters(System.String, TJSVariant)
         // [Error: HarmonyX] Failed to process patch System.Void COM3D2.Lilly.Plugin.ScriptManagerPatch.ExecScriptFilePost2(System.String, TJSVariant&, ScriptManager) - Could not find method ExecScriptFile with(System.String, TJSVariant) parameters in type ScriptManager
-    [HarmonyPatch(typeof(ScriptManager), "ExecScriptFile", 
-            new Type[] { typeof(string), typeof(TJSVariant) },
-            new ArgumentType[] {ArgumentType.Normal, ArgumentType.Ref}
-            )]
+        [HarmonyPatch(typeof(ScriptManager), "ExecScriptFile", 
+                new Type[] { typeof(string), typeof(TJSVariant) },
+                new ArgumentType[] {ArgumentType.Normal, ArgumentType.Ref}
+                )]
         [HarmonyPostfix]
         static void ExecScriptFilePost2(string file_name, ref TJSVariant result,  ScriptManager __instance)// ref TJSVariant result,
         {
             MyLog.Log("ScriptManager.ExecScriptFilePost2:" + file_name);
+        }        
+
+        // public void EvalScript(string eval_str, TJSVariant result)
+        [HarmonyPatch(typeof(ScriptManager), "EvalScript", new Type[] { typeof(string), typeof(TJSVariant) } )]
+        [HarmonyPostfix]
+        static void EvalScriptPost1(string eval_str, TJSVariant result)
+        {
+            MyLog.Log("ScriptManager.EvalScriptPost1:" + eval_str + " , " + result.AsString());
+        }
+        // public void EvalScript(string eval_str, TJSVariant result)
+        [HarmonyPatch(typeof(ScriptManager), "EvalScript", new Type[] { typeof(string) } )]
+        [HarmonyPostfix]
+        static void EvalScriptPost2(string eval_str)
+        {
+            MyLog.Log("ScriptManager.EvalScriptPost2:" + eval_str );
         }
     }
+
 }

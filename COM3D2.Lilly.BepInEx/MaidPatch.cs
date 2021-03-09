@@ -42,8 +42,9 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void SetPropPost2(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
         {
-            //if (SceneManager.GetActiveScene().isLoaded)//실패
-            if (__instance.Visible)
+            if (SceneManager.GetActiveScene().isLoaded)//실패?
+            //if( GameMain.Instance.MainCamera.GetFadeState()==CameraMain.FadeState.Out)//효과 없음
+            //if (__instance.Visible)
             {
                 MyLog.Log("Maid.SetPropPost2.filename:" + filename);
                 //MyLog.Log("Maid.SetPropPost2.mp.strTempFileName:" + mp.strTempFileName);// 계속 빈값

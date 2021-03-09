@@ -72,14 +72,18 @@
     <Compile Include="GameMainPatch.cs" />
     <Compile Include="KasizukiMainMenuPatch.cs" />
     <Compile Include="MaidPatch.cs" />
+    <Compile Include="CameraMainPatch.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="MyLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SaveAndLoadCtrlPatch.cs" />
+    <Compile Include="SceneADVPatch.cs" />
     <Compile Include="SceneMgrPatch.cs" />
     <Compile Include="SceneScenarioSelectPatch.cs" />
+    <Compile Include="ScriptManagerFastPatch.cs" />
     <Compile Include="ScriptManagerPatch.cs" />
     <Compile Include="SkillPatch.cs" />
+    <Compile Include="TJSScriptPatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="comfile.bat" />

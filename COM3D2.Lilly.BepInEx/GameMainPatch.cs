@@ -11,9 +11,10 @@ namespace COM3D2.Lilly.Plugin
         // public void LoadScene(string f_strSceneName)
         [HarmonyPatch(typeof(GameMain), "LoadScene")]
         [HarmonyPostfix]
-        private static void LoadScenePost(string f_strSceneName)
+        private static void LoadScenePost(string f_strSceneName, GameMain __instance)
         {
             MyLog.Log("LoadScenePost:" + f_strSceneName);
+            //__instance.
         }
 
         // public void SceneActivate(string f_strSceneName)

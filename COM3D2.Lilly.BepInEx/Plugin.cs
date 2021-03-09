@@ -32,16 +32,20 @@ namespace COM3D2.Lilly.Plugin
            
             List<Type> list=new List<Type>();
 
-            list.Add(typeof(CharacterMgrPatch));
             list.Add(typeof(AudioSourceMgrPatch));
-            list.Add(typeof(MaidPatch));
-            list.Add(typeof(SceneScenarioSelectPatch));
             list.Add(typeof(BgMgrPatch));
+            list.Add(typeof(CameraMainPatch));
+            list.Add(typeof(CharacterMgrPatch));
             list.Add(typeof(GameMainPatch));
-            list.Add(typeof(SaveAndLoadCtrlPatch));
-            list.Add(typeof(SkillPatch));
-            list.Add(typeof(ScriptManagerPatch));
             list.Add(typeof(KasizukiMainMenuPatch));
+            list.Add(typeof(MaidPatch));
+            list.Add(typeof(SaveAndLoadCtrlPatch));
+            list.Add(typeof(SceneADVPatch));
+            list.Add(typeof(SceneScenarioSelectPatch));
+            list.Add(typeof(ScriptManagerFastPatch));
+            list.Add(typeof(ScriptManagerPatch));
+            list.Add(typeof(SkillPatch));
+            list.Add(typeof(TJSScriptPatch));
 
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
@@ -75,7 +79,7 @@ namespace COM3D2.Lilly.Plugin
         // 커오메용
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            MyLog.Log("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex  );
+            MyLog.Log("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex +" , "+ scene.isLoaded);
             // SceneManager.GetActiveScene().name;
             
             switch (scene.name)
