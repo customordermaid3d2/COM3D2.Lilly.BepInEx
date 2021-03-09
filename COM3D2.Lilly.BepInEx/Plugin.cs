@@ -27,9 +27,9 @@ namespace COM3D2.Lilly.Plugin
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
 
-            Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly());
+            // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
 
-            /*
+           
             List<Type> list=new List<Type>();
 
             list.Add(typeof(CharacterMgrPatch));
@@ -55,8 +55,8 @@ namespace COM3D2.Lilly.Plugin
                     MyLog.LogError("Plugin:"+ e.ToString());
                 }
             }
-            */
-            
+            /* */
+
         }
 
         //-----------------------------------------------

@@ -9,7 +9,7 @@ namespace COM3D2.Lilly.Plugin
 {
     static class MyLog 
     {
-        static ManualLogSource log = BepInEx.Logging.Logger.CreateLogSource("COM3D2.Lilly.Plugin");
+        static ManualLogSource log = BepInEx.Logging.Logger.CreateLogSource("Lilly");
 
         internal static void Log(string v)
         {
@@ -17,7 +17,7 @@ namespace COM3D2.Lilly.Plugin
             //Console.ForegroundColor = ConsoleColor.Green;//베핀쪽에서 색설정 막아버리는듯
             //Console.WriteLine("■Lilly: " + v+ " ■");
             //Debug.Log("■Lilly: " + v+ " ■");
-            log.LogMessage("■Lilly: " + v+ " ■");
+            log.LogMessage("■ " + v); // [Message:COM3D2.Lilly.Plugin] ■Lilly: Plugin() ■
             //Console.ResetColor();
             // Logger.LogInfo("This is information");
             // Logger.LogWarning("This is a warning");
@@ -28,7 +28,7 @@ namespace COM3D2.Lilly.Plugin
         {
 
             //Debug.LogError("■Lilly: " + v+ " ■");
-            log.LogError("■Lilly: " + v+ " ■");
+            log.LogError("■ " + v);
 
         }
     }
