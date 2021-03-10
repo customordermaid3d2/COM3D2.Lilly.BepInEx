@@ -63,11 +63,11 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPrefix]
         public static void PresetSetPretfix1(CharacterMgr __instance, Maid f_maid, CharacterMgr.Preset f_prest)
         {
-            MyLog.Log("PresetSetPretfix1.f_prest.strFileName:" + f_prest.strFileName);
+            MyLog.LogMessageS("PresetSetPretfix1.f_prest.strFileName:" + f_prest.strFileName);
             MaidProp[] array = getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
             {
-                MyLog.Log("PresetSetPretfix1: " + maidProp.idx + " , " + maidProp.strFileName);
+                MyLog.LogMessageS("PresetSetPretfix1: " + maidProp.idx + " , " + maidProp.strFileName);
             }
         }
 
@@ -79,11 +79,11 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void PresetSetPostfix2(Maid f_maid, CharacterMgr.Preset f_prest)
         {
-            MyLog.Log("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName);
+            MyLog.LogMessageS("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName);
             MaidProp[] array= getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
             {
-                MyLog.Log("PresetSetPostfix2: " + maidProp.idx + " , " + maidProp.strFileName);
+                MyLog.LogMessageS("PresetSetPostfix2: " + maidProp.idx + " , " + maidProp.strFileName);
             }
         }
 
@@ -127,7 +127,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void SetActiveMaidPost0(Maid f_maid, int f_nActiveSlotNo)
         {
-            MyLog.Log("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
+            MyLog.LogMessageS("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
         }
 
         // public CharacterMgr.Preset PresetSave(Maid f_maid, CharacterMgr.PresetType f_type)
@@ -136,7 +136,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void PresetSavePost0(Maid f_maid, CharacterMgr.PresetType f_type, CharacterMgr.Preset __result)
         {
-            MyLog.Log("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName);
+            MyLog.LogMessageS("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName);
         }
     }
 }

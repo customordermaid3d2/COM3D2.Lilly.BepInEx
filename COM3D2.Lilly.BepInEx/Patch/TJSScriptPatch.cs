@@ -10,19 +10,24 @@ namespace COM3D2.Lilly.Plugin
     {
         // public void EvalScript(string eval_str)
         [HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(string) })]
+        [HarmonyPostfix]
+        private static void EvalScriptPost0(string eval_str) // string __m_BGMName 못가져옴
+        {
+            //MyLog.LogMessageS("TJSScript.EvalScriptPost0:" + eval_str);
+        }        
+        
         [HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(string) , typeof(TJSVariant) })]
         [HarmonyPostfix]
         private static void EvalScriptPost1(string eval_str) // string __m_BGMName 못가져옴
         {
-            MyLog.Log("TJSScript.EvalScriptPost1:" + eval_str);
-            //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
+            //MyLog.LogMessageS("TJSScript.EvalScriptPost1:" + eval_str);
         }
 
         [HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(AFileBase) })]
         [HarmonyPostfix]
         private static void EvalScriptPost2(AFileBase file) // string __m_BGMName 못가져옴
         {
-            MyLog.Log("TJSScript.EvalScriptPost2:" + file.ToString());
+            MyLog.LogMessageS("TJSScript.EvalScriptPost2:" + file.ToString());
             //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
         }
     }

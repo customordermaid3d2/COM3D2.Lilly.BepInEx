@@ -36,7 +36,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void LoadPlayPostfix2(AudioSourceMgr __instance, string f_strFileName)
         {
-            MyLog.Log("LoadPlayPostfix2:" + f_strFileName);
+            MyLog.LogMessageS("LoadPlayPostfix2:" + f_strFileName);
         }
     }
 }

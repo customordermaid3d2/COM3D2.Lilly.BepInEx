@@ -15,7 +15,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void OnSelectScenarioPost(UILabel ___m_ContentsLabel, string ___m_JumpLabel) // string __m_BGMName 못가져옴
         {
-            MyLog.Log("OnSelectScenarioPost:"+ ___m_ContentsLabel.text + "," + ___m_JumpLabel);
+            MyLog.LogMessageS("OnSelectScenarioPost:"+ ___m_ContentsLabel.text + "," + ___m_JumpLabel);
             //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
         }
     }

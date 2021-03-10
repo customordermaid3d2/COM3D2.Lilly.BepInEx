@@ -13,7 +13,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void LoadScenePost(string f_strSceneName, GameMain __instance)
         {
-            MyLog.Log("LoadScenePost:" + f_strSceneName);
+            MyLog.LogMessageS("LoadScenePost:" + f_strSceneName);
             //__instance.
         }
 
@@ -22,7 +22,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void SceneActivatePost(string f_strSceneName)
         {
-            MyLog.Log("SceneActivatePost:" + f_strSceneName);
+            MyLog.LogMessageS("SceneActivatePost:" + f_strSceneName);
         }
     }
 }

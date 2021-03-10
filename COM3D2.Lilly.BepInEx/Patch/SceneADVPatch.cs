@@ -13,7 +13,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void CallTitleBarPost(SceneADV __instance, string title) // string __m_BGMName 못가져옴
         {
-            MyLog.Log("CallTitleBarPost:" + title);
+            MyLog.LogMessageS("CallTitleBarPost:" + title);
             //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
         }
     }

@@ -10,26 +10,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Reflection;
 
+
 namespace COM3D2.Lilly.Plugin
 {
     // 이벤트 함수의 실행 순서
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
 
-    [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "1.0.0.3")]
-    
-    public class Plugin : BaseUnityPlugin
+    [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "1.0.0.4")]    
+    public class Lilly : BaseUnityPlugin 
     {
+        MyLog log;
 
-        public Plugin()
+        public Lilly()
         {
-            MyLog.Log("Plugin()");
+            MyLog.LogMessageS("MainPlugin()");
+
+            log = new MyLog(this.GetType().Name);
+
 
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
 
             // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
-
-           
+                       
             List<Type> list=new List<Type>();
 
             list.Add(typeof(AudioSourceMgrPatch));
@@ -39,11 +42,17 @@ namespace COM3D2.Lilly.Plugin
             list.Add(typeof(GameMainPatch));
             list.Add(typeof(KasizukiMainMenuPatch));
             list.Add(typeof(MaidPatch));
+            list.Add(typeof(MotionWindowPatch));
+            list.Add(typeof(PopupAndTabListPatch));
+            list.Add(typeof(ProfileCtrlPapch));
+            list.Add(typeof(PhotoMotionDataPatch));
             list.Add(typeof(SaveAndLoadCtrlPatch));
+            list.Add(typeof(ScoutManagerPatch));
             list.Add(typeof(SceneADVPatch));
             list.Add(typeof(SceneScenarioSelectPatch));
             list.Add(typeof(ScriptManagerFastPatch));
             list.Add(typeof(ScriptManagerPatch));
+            list.Add(typeof(SceneEditPatch));
             list.Add(typeof(SkillPatch));
             list.Add(typeof(TJSScriptPatch));
 
@@ -51,12 +60,12 @@ namespace COM3D2.Lilly.Plugin
             {
                 try
                 {
-                    MyLog.Log("Plugin:"+ item.Name);
+                    log.LogMessage("Plugin:"+ item.Name);
                     Harmony.CreateAndPatchAll(item, null);
                 }
                 catch (Exception e)
                 {
-                    MyLog.LogError("Plugin:"+ e.ToString());
+                    log.LogError("Plugin:"+ e.ToString());
                 }
             }
             /* */
@@ -67,7 +76,12 @@ namespace COM3D2.Lilly.Plugin
 
         public void Awake()
         {
-            MyLog.Log("Awake");
+            MyLog.LogDebugS("Awake");
+            MyLog.LogInfoS("Awake");
+            MyLog.LogMessageS("Awake");
+            MyLog.LogWarningS("Awake");
+            MyLog.LogFatalS("Awake");
+            MyLog.LogErrorS("Awake");
 
             SetConfig();
 
@@ -79,12 +93,15 @@ namespace COM3D2.Lilly.Plugin
         // 커오메용
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            MyLog.Log("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex +" , "+ scene.isLoaded);
+            MyLog.LogMessageS("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex +" , "+ scene.isLoaded);
             // SceneManager.GetActiveScene().name;
             
             switch (scene.name)
             {
                 case "SceneYotogi":// 밤시중 선택
+                    break;
+                case "SceneEdit":// 메이드 에딧
+                    SceneEditPlugin.SetStatusAll();
                     break;
                 default:
                     break;
@@ -116,7 +133,7 @@ namespace COM3D2.Lilly.Plugin
 
             // 설정 파일 내보내기2
             var customFile = new ConfigFile(Path.Combine(Paths.ConfigPath, "lilly_config.cfg"), true);
-            MyLog.Log("Paths.ConfigPath:" + Paths.ConfigPath);
+            log.LogMessage("Paths.ConfigPath:" + Paths.ConfigPath);
             var userName = customFile.Bind("General",
                 "UserName",
                 "Deuce",

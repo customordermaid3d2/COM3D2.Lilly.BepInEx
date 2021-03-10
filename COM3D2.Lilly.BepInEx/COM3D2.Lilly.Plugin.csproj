@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -65,28 +65,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioSourceMgrPatch.cs" />
-    <Compile Include="BgMgrPatch.cs" />
-    <Compile Include="CharacterMgrPatch.cs" />
-    <Compile Include="DeskManagerPatch.cs" />
-    <Compile Include="GameMainPatch.cs" />
-    <Compile Include="KasizukiMainMenuPatch.cs" />
-    <Compile Include="MaidPatch.cs" />
-    <Compile Include="CameraMainPatch.cs" />
-    <Compile Include="Plugin.cs" />
+    <Compile Include="MaidStatus.cs" />
+    <Compile Include="Patch\AudioSourceMgrPatch.cs" />
+    <Compile Include="Patch\BgMgrPatch.cs" />
+    <Compile Include="Patch\CharacterMgrPatch.cs" />
+    <Compile Include="Patch\DeskManagerPatch.cs" />
+    <Compile Include="Patch\GameMainPatch.cs" />
+    <Compile Include="Patch\KasizukiMainMenuPatch.cs" />
+    <Compile Include="Patch\MaidPatch.cs" />
+    <Compile Include="Patch\CameraMainPatch.cs" />
+    <Compile Include="Lilly.cs" />
     <Compile Include="MyLog.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveAndLoadCtrlPatch.cs" />
-    <Compile Include="SceneADVPatch.cs" />
-    <Compile Include="SceneMgrPatch.cs" />
-    <Compile Include="SceneScenarioSelectPatch.cs" />
-    <Compile Include="ScriptManagerFastPatch.cs" />
-    <Compile Include="ScriptManagerPatch.cs" />
-    <Compile Include="SkillPatch.cs" />
-    <Compile Include="TJSScriptPatch.cs" />
+    <Compile Include="Patch\MotionWindowPatch.cs" />
+    <Compile Include="Patch\PhotoMotionDataPatch.cs" />
+    <Compile Include="Patch\PopupAndTabListPatch.cs" />
+    <Compile Include="Patch\ProfileCtrlPapch.cs" />
+    <Compile Include="Patch\SceneEditPatch.cs" />
+    <Compile Include="Patch\MaidManagementMainPatch.cs" />
+    <Compile Include="Patch\ScoutManagerPatch.cs" />
+    <Compile Include="Patch\SaveAndLoadCtrlPatch.cs" />
+    <Compile Include="Patch\SceneADVPatch.cs" />
+    <Compile Include="Patch\SceneMgrPatch.cs" />
+    <Compile Include="Patch\SceneScenarioSelectPatch.cs" />
+    <Compile Include="Patch\ScriptManagerFastPatch.cs" />
+    <Compile Include="Patch\ScriptManagerPatch.cs" />
+    <Compile Include="Patch\SkillPatch.cs" />
+    <Compile Include="Patch\StatusMgrPatch.cs" />
+    <Compile Include="Patch\TJSScriptPatch.cs" />
+    <Compile Include="Plugin\SceneEditPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="comfile.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -13,7 +13,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void LoadScriptPost(string f_strFileName) 
         {
-            MyLog.Log("ScriptManagerFast.LoadScriptPost:" + f_strFileName);
+            MyLog.LogMessageS("ScriptManagerFast.LoadScriptPost:" + f_strFileName);
         }
     }
 }

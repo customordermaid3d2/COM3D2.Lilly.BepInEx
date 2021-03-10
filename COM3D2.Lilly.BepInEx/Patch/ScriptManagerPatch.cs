@@ -14,7 +14,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void ExecScriptFilePost1(string file_name,  ScriptManager __instance)// ref TJSVariant result,
         {
-            MyLog.Log("ScriptManager.ExecScriptFilePost1:" + file_name);
+            MyLog.LogMessageS("ScriptManager.ExecScriptFilePost1:" + file_name);
         }
 
         // 정상 처리
@@ -30,7 +30,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void ExecScriptFilePost2(string file_name, ref TJSVariant result,  ScriptManager __instance)// ref TJSVariant result,
         {
-            MyLog.Log("ScriptManager.ExecScriptFilePost2:" + file_name);
+            MyLog.LogMessageS("ScriptManager.ExecScriptFilePost2:" + file_name);
         }        
 
         // public void EvalScript(string eval_str, TJSVariant result)
@@ -38,15 +38,30 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void EvalScriptPost1(string eval_str, TJSVariant result)
         {
-            MyLog.Log("ScriptManager.EvalScriptPost1:" + eval_str + " , " + result.AsString());
+            MyLog.LogMessageS("ScriptManager.EvalScriptPost1:" + eval_str + " , " + result.AsString());
+            
         }
+
         // public void EvalScript(string eval_str, TJSVariant result)
         [HarmonyPatch(typeof(ScriptManager), "EvalScript", new Type[] { typeof(string) } )]
         [HarmonyPostfix]
         static void EvalScriptPost2(string eval_str)
         {
-            MyLog.Log("ScriptManager.EvalScriptPost2:" + eval_str );
+            // ScriptManager.EvalScriptPost2:global.__skill_command_file.add(%['file'=>'C1_RR_CA001f.ks','label'=>'*RR2','rrlock'=>'false']);
+            MyLog.LogMessageS("ScriptManager.EvalScriptPost2:" + eval_str );
         }
+        
+        // 메이드 새로 만들때?
+        // TJSFuncCreateNewMaid
+        // private void TJSFuncCreateNewMaid(TJSVariantRef[] tjs_param, TJSVariantRef result)
+        //[HarmonyPatch(typeof(ScriptManager), "TJSFuncCreateNewMaid" )]
+        //[HarmonyPostfix]
+        //static void TJSFuncCreateNewMaid()
+        //{
+        //    MyLog.LogMessageS("ScriptManager.TJSFuncCreateNewMaid."  );
+        //
+        //    MaidStatus.MaidStatusAll();
+        //}
     }
 
 }
