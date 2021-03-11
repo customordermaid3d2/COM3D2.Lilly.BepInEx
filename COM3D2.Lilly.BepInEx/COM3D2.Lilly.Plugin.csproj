@@ -65,7 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MaidStatus.cs" />
+    <Compile Include="Plugin\MaidStatusPlugin.cs" />
     <Compile Include="Patch\AudioSourceMgrPatch.cs" />
     <Compile Include="Patch\BgMgrPatch.cs" />
     <Compile Include="Patch\CharacterMgrPatch.cs" />
@@ -92,7 +92,6 @@
     <Compile Include="Patch\SkillPatch.cs" />
     <Compile Include="Patch\StatusMgrPatch.cs" />
     <Compile Include="Patch\TJSScriptPatch.cs" />
-    <Compile Include="Plugin\SceneEditPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="comfile.bat" />

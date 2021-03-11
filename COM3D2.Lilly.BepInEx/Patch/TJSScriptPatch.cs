@@ -6,6 +6,9 @@ using System.Text;
 
 namespace COM3D2.Lilly.Plugin
 {
+    /// <summary>
+    /// ks 스크립트 관련
+    /// </summary>
     class TJSScriptPatch
     {
         // public void EvalScript(string eval_str)

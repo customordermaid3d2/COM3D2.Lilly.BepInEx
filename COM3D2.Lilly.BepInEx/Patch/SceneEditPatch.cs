@@ -19,7 +19,7 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogMessageS("SceneEdit.Start:" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
 
-            MaidStatus.SetMaidStatus(___m_maid);
+            MaidStatusPlugin.SetMaidStatus(___m_maid);
         }
     }
 }

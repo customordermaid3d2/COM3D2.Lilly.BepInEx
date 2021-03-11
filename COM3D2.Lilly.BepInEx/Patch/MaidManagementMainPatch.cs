@@ -6,6 +6,9 @@ using System.Text;
 
 namespace COM3D2.Lilly.Plugin
 {
+    /// <summary>
+    /// 어디서 실행되는 클래스였지?
+    /// </summary>
     class MaidManagementMainPatch
     {
         [HarmonyPatch(typeof(MaidManagementMain), "OnSelectChara")]
@@ -14,7 +17,7 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogMessageS("SceneEdit.Start:" + ___select_maid_.status.charaName.name1 + " , " + ___select_maid_.status.charaName.name2);
 
-            MaidStatus.SetMaidStatus(___select_maid_);
+            MaidStatusPlugin.SetMaidStatus(___select_maid_);
             //___m_maid.status.base = 9999;
             //___m_maid.status.base = 9999;
 

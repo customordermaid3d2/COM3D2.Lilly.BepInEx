@@ -8,7 +8,7 @@ using UnityEngine;
 namespace COM3D2.Lilly.Plugin
 {
 
-    static class MaidStatus
+    static class MaidStatusPlugin
     {
         // AddYotogiWorkResultParam 
 
