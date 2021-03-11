@@ -96,7 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="comfile.bat" />
-    <None Include="README.MD" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
