@@ -17,7 +17,7 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogMessageS("SceneEdit.Start:" + ___select_maid_.status.charaName.name1 + " , " + ___select_maid_.status.charaName.name2);
 
-            MaidStatusPlugin.SetMaidStatus(___select_maid_);
+            MaidStatusUtill.SetMaidStatus(___select_maid_);
             //___m_maid.status.base = 9999;
             //___m_maid.status.base = 9999;
 

@@ -9,7 +9,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Reflection;
-
+using GearMenu;
 
 namespace COM3D2.Lilly.Plugin
 {
@@ -17,23 +17,33 @@ namespace COM3D2.Lilly.Plugin
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
 
     [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "1.0.0.4")]    
-    public class Lilly : BaseUnityPlugin 
+    public class MainPlugin : BaseUnityPlugin 
     {
         MyLog log;
 
-        public Lilly()
+        List<Type> list = new List<Type>();//patch용
+        //List<Func<Scene, LoadSceneMode>> func = new List<Func<Scene, LoadSceneMode>>();//plugin용
+        List<Action<Scene, LoadSceneMode>> actioOnSceneLoadedn = new List<Action<Scene, LoadSceneMode>>();//plugin용
+
+        public MainPlugin()
         {
             MyLog.LogMessageS("MainPlugin()");
 
             log = new MyLog(this.GetType().Name);
 
+            SetPatch();
+            
+            //
+            actioOnSceneLoadedn.Add(GearMenuAddPlugin.OnSceneLoaded);
+        }
+
+        private void SetPatch()
+        {
 
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
 
             // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
-                       
-            List<Type> list=new List<Type>();
 
             list.Add(typeof(AudioSourceMgrPatch));
             list.Add(typeof(BgMgrPatch));
@@ -60,16 +70,14 @@ namespace COM3D2.Lilly.Plugin
             {
                 try
                 {
-                    log.LogMessage("Plugin:"+ item.Name);
+                    log.LogMessage("Plugin:" + item.Name);
                     Harmony.CreateAndPatchAll(item, null);
                 }
                 catch (Exception e)
                 {
-                    log.LogError("Plugin:"+ e.ToString());
+                    log.LogError("Plugin:" + e.ToString());
                 }
             }
-            /* */
-
         }
 
         //-----------------------------------------------
@@ -95,16 +103,21 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogMessageS("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex +" , "+ scene.isLoaded);
             // SceneManager.GetActiveScene().name;
-            
+
             switch (scene.name)
             {
                 case "SceneYotogi":// 밤시중 선택
                     break;
                 case "SceneEdit":// 메이드 에딧
-                    SceneEditPlugin.SetStatusAll();
+                    
                     break;
                 default:
                     break;
+            }
+
+            foreach (var item in actioOnSceneLoadedn)
+            {
+                item(scene, mode);
             }
         }
 

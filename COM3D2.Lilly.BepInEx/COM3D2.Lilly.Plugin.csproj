@@ -65,7 +65,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Plugin\MaidStatusPlugin.cs" />
+    <Compile Include="Utill\GearMenu.cs" />
+    <Compile Include="Plugin\GearMenuAddPlugin.cs" />
+    <Compile Include="Utill\MaidStatusUtill.cs" />
     <Compile Include="Patch\AudioSourceMgrPatch.cs" />
     <Compile Include="Patch\BgMgrPatch.cs" />
     <Compile Include="Patch\CharacterMgrPatch.cs" />
@@ -74,8 +76,8 @@
     <Compile Include="Patch\KasizukiMainMenuPatch.cs" />
     <Compile Include="Patch\MaidPatch.cs" />
     <Compile Include="Patch\CameraMainPatch.cs" />
-    <Compile Include="Lilly.cs" />
-    <Compile Include="MyLog.cs" />
+    <Compile Include="Plugin\MainPlugin.cs" />
+    <Compile Include="Utill\MyLog.cs" />
     <Compile Include="Patch\MotionWindowPatch.cs" />
     <Compile Include="Patch\PhotoMotionDataPatch.cs" />
     <Compile Include="Patch\PopupAndTabListPatch.cs" />
