@@ -59,7 +59,8 @@ namespace COM3D2.Lilly.Plugin
             list.Add(typeof(ProfileCtrlPapch));
             list.Add(typeof(SaveAndLoadCtrlPatch));
             list.Add(typeof(SceneADVPatch));
-            list.Add(typeof(SceneEditPatch));
+            list.Add(typeof(SceneEditPatch)); //자꾸 오류남?
+            //list.Add(typeof(ScheduleMgrPatch));// 스케줄
             list.Add(typeof(SceneMgrPatch));
             list.Add(typeof(SceneScenarioSelectPatch));
             list.Add(typeof(ScoutManagerPatch));

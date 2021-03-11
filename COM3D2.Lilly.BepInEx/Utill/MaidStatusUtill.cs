@@ -27,7 +27,7 @@ namespace COM3D2.Lilly.Plugin
 
             foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
             {
-                MyLog.LogMessageS("MaidStatusUtill.ActiveManSloatCount: " + maid.status.firstName +" , "+ maid.status.lastName);
+                //MyLog.LogMessageS("MaidStatusUtill.ActiveManSloatCount: " + maid.status.firstName +" , "+ maid.status.lastName);
                 
                 SetMaidStatus(maid);
             }
@@ -35,7 +35,12 @@ namespace COM3D2.Lilly.Plugin
 
         public static void SetMaidStatus(Maid ___select_maid_)
         {
-                MyLog.LogMessageS("MaidStatusUtill.SetMaidStatus: " + ___select_maid_.status.firstName +" , "+ ___select_maid_.status.lastName);
+            if (___select_maid_==null)
+            {
+                MyLog.LogErrorS("MaidStatusUtill.SetMaidStatus:null");
+                return;
+            }
+            MyLog.LogMessageS("MaidStatusUtill.SetMaidStatus:name: " + ___select_maid_.status.firstName +" , "+ ___select_maid_.status.lastName);
 
             ___select_maid_.status.employmentDay = 1;
 
@@ -59,31 +64,40 @@ namespace COM3D2.Lilly.Plugin
             
             ___select_maid_.status.studyRate = 0;
 
-            foreach (Feature.Data data in Feature.GetAllDatas(true))
+            try
             {
-                ___select_maid_.status.AddFeature(data);
-            }
-
-            foreach (Propensity.Data data in Propensity.GetAllDatas(true))
-            {
-                ___select_maid_.status.AddPropensity(data);
-            }
-
-            // 스킬 추가
-            //___select_maid_.status.yotogiSkill.Add(skillId);
-            {
-                List<Skill.Data> learnPossibleSkills = Skill.GetLearnPossibleSkills(___select_maid_.status);
-                foreach (Skill.Data data2 in learnPossibleSkills)
+                foreach (Feature.Data data in Feature.GetAllDatas(true))
                 {
-                    ___select_maid_.status.yotogiSkill.Add(data2.id);
+                    ___select_maid_.status.AddFeature(data);
+                }
+
+                foreach (Propensity.Data data in Propensity.GetAllDatas(true))
+                {
+                    ___select_maid_.status.AddPropensity(data);
+                }
+
+                // 스킬 추가
+                //___select_maid_.status.yotogiSkill.Add(skillId);
+                {
+                    List<Skill.Data> learnPossibleSkills = Skill.GetLearnPossibleSkills(___select_maid_.status);
+                    foreach (Skill.Data data in learnPossibleSkills)
+                    {
+                        MyLog.LogMessageS("MaidStatusUtill.SetMaidStatus:Skill1: " + data.name + " , " + data.termName + " , " + data.start_call_file + " , " + data.start_call_file2);
+                        ___select_maid_.status.yotogiSkill.Add(data.id);
+                    }
+                }
+                {
+                    List<Skill.Old.Data> learnPossibleSkills = Skill.Old.GetLearnPossibleSkills(___select_maid_.status);
+                    foreach (Skill.Old.Data data in learnPossibleSkills)
+                    {
+                        MyLog.LogMessageS("MaidStatusUtill.SetMaidStatus:Skill2: " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
+                        ___select_maid_.status.yotogiSkill.Add(data.id);
+                    }
                 }
             }
+            catch (Exception e)
             {
-                List<Skill.Old.Data> learnPossibleSkills = Skill.Old.GetLearnPossibleSkills(___select_maid_.status);
-                foreach (Skill.Old.Data data in learnPossibleSkills)
-                {
-                    ___select_maid_.status.yotogiSkill.Add(data.id);
-                }
+                MyLog.LogErrorS("MaidStatusUtill.SetMaidStatus: "+e.ToString());
             }
         }
     }

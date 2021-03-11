@@ -37,6 +37,7 @@ namespace COM3D2.Lilly.Plugin
             //Open/Close the UI
             displayUI = !displayUI;
             MyLog.LogMessageS("GearMenuAddPlugin.OnMenuButtonClickCallback:"+ displayUI);
+            MaidStatusUtill.SetMaidStatusAll();
         }
     }
 }

@@ -6,6 +6,7 @@
 # 컴파일 방법
 
 - comfile.bat 파일을 본인 환경에 맞게 수정
+- obj 폴더는 삭제하고 comfile.bat 실행하기 (못없애나)
 
 
 # 구성 
@@ -31,6 +32,7 @@
 ## GearMenuAddPlugin
 
 - 기어 메뉴 추가
+- 클릭시 모든 메이드 스텟 및 스킬 멕스 설정
 
 
 # utill folder
@@ -54,7 +56,7 @@
 
 ## AudioSourceMgrPatch
 
-- 소리 출력 파일명
+- 소리 출력되는 파일명 로그찍음
 
 
 ## CharacterMgrPatch
@@ -64,7 +66,9 @@
 
 ## MaidManagementMainPatch
 
-- 메이드 스테이터스 멕스 찍기
+- 메이드 관리 화면
+- (제거됨)메이드 스테이터스 멕스 찍기 테스트중
+- 모든 버튼 활성화
 
 
 ## SceneEditPatch
@@ -76,7 +80,12 @@
 ## ScoutManagerPatch
 
 - 스카웃 모드 클래스
-- 스카웃 모드 메이드 제한수 제거 코드 통합
+- 스카웃 모드 버튼 뜰수 있게 메이드 제한수 제거 코드 가져와서 넣음
+
+
+## ScriptManagerPatch
+
+- ks 스크립트 관련?
 
 
 ## StatusMgrPatch
@@ -84,3 +93,4 @@
 - 메이드 스텟 관련 클래스
 - 게임 원본 코드 그대도 복사해봄
 - 메이드 목록에서 스테이터스 버튼 클릭시 해당 메이드 스텟 및 스킬 습득하도록 설정
+

@@ -6,6 +6,9 @@ using System.Text;
 
 namespace COM3D2.Lilly.Plugin
 {
+    /// <summary>
+    /// ks 스크립트 관련?
+    /// </summary>
     class ScriptManagerPatch
     {        
         // System.Reflection.AmbiguousMatchException: Ambiguous match for ScriptManager::ExecScriptFile($) ---> System.Reflection.AmbiguousMatchException: Ambiguous matching in method resolution
