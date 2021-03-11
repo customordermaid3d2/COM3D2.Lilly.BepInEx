@@ -20,20 +20,37 @@
 - 해당 메소드 실행시 로그가 직히도록 해보는중
 
 
+# plugin folder
+
 ## Lilly
 
 - 플러그인 메인 클래스
+- 여기서 전부 시작
 
+
+## GearMenuAddPlugin
+
+- 기어 메뉴 추가
+
+
+# utill folder
 
 ## MyLog
 
 - 로그 찍는 클레스. 좀더 쉽게 못하려나
 
 
-## MaidStatus
+## GearMenu
 
-- 메이드 스텟 설정 관련
+- 기어메뉴 추가해주는 클래스
 
+
+## MaidStatusUtill
+
+- 메이드 스텟 설정 관련. 스텟 및 스킬을 전부 습듭한다던가
+
+
+# Patch folder
 
 ## AudioSourceMgrPatch
 
@@ -66,3 +83,4 @@
 
 - 메이드 스텟 관련 클래스
 - 게임 원본 코드 그대도 복사해봄
+- 메이드 목록에서 스테이터스 버튼 클릭시 해당 메이드 스텟 및 스킬 습득하도록 설정

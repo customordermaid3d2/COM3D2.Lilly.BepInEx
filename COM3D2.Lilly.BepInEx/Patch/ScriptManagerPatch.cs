@@ -50,6 +50,33 @@ namespace COM3D2.Lilly.Plugin
             // ScriptManager.EvalScriptPost2:global.__skill_command_file.add(%['file'=>'C1_RR_CA001f.ks','label'=>'*RR2','rrlock'=>'false']);
             MyLog.LogMessageS("ScriptManager.EvalScriptPost2:" + eval_str );
         }
+
+        // private void TJSFuncLearningYotogiSkill(TJSVariantRef[] tjs_param, TJSVariantRef result)
+        [HarmonyPatch(typeof(ScriptManager), "TJSFuncLearningYotogiSkill" )]
+        [HarmonyPostfix]
+        static void TJSFuncLearningYotogiSkill(TJSVariantRef[] tjs_param, TJSVariantRef result)
+        {
+            MyLog.LogMessageS("ScriptManager.TJSFuncLearningYotogiSkill:"  );
+            
+            //NDebug.Assert(tjs_param.Length == 2, "LearningYotogiSkill args count error.");
+            if (tjs_param.Length == 2)
+            {
+                MyLog.LogErrorS("LearningYotogiSkill args count error.");
+            }
+            // NDebug.Assert(tjs_param[0].type == TJSVariantRef.Type.tvtInteger && tjs_param[1].type == TJSVariantRef.Type.tvtInteger, "error.");
+            if (tjs_param[0].type == TJSVariantRef.Type.tvtInteger && tjs_param[1].type == TJSVariantRef.Type.tvtInteger)
+            {
+                MyLog.LogErrorS("error.");
+            }            
+            Maid maid = GameMain.Instance.CharacterMgr.GetMaid(tjs_param[0].AsInteger());
+            if (maid == null)
+            {
+                MyLog.LogErrorS("maid is null. LearningYotogiSkill");
+                return;
+            }
+            // int skillId = tjs_param[1].AsInteger();
+            // maid.status.yotogiSkill.Add(skillId);
+        }
         
         // 메이드 새로 만들때?
         // TJSFuncCreateNewMaid

@@ -7,8 +7,23 @@ using System.Text;
 
 namespace COM3D2.Lilly.Plugin
 {
+	/// <summary>
+	/// 메이드 목록에서 스테이터스 버튼 클릭시 나오는 화면 관련?
+	/// </summary>
     class StatusMgrPatch
     {
+		/// <summary>
+		/// 스테이터스 버튼 클릭시 나오는 화면
+		/// </summary>
+		/// <param name="___m_maid"></param>
+		[HarmonyPatch(typeof(StatusMgr), "UpdateMaidStatus")]
+		[HarmonyPrefix]
+		static void OpenStatusPanel(Maid ___m_maid)
+		{
+            MyLog.LogMessageS("StatusMgr.OpenStatusPanel" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
+			MaidStatusUtill.SetMaidStatus(___m_maid);
+		}		
+
 		[HarmonyPatch(typeof(StatusMgr), "UpdateMaidStatus")]
 		[HarmonyPrefix]
 		static void UpdateMaidStatusPre(Maid maid)

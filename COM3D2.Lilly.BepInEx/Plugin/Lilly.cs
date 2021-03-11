@@ -16,16 +16,15 @@ namespace COM3D2.Lilly.Plugin
     // 이벤트 함수의 실행 순서
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
 
-    [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "1.0.0.4")]    
-    public class MainPlugin : BaseUnityPlugin 
+    [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "210311")]    
+    public class Lilly : BaseUnityPlugin 
     {
         MyLog log;
 
         List<Type> list = new List<Type>();//patch용
-        //List<Func<Scene, LoadSceneMode>> func = new List<Func<Scene, LoadSceneMode>>();//plugin용
-        List<Action<Scene, LoadSceneMode>> actioOnSceneLoadedn = new List<Action<Scene, LoadSceneMode>>();//plugin용
+        event Action<Scene, LoadSceneMode> actioOnSceneLoaded ;//plugin용
 
-        public MainPlugin()
+        public Lilly()
         {
             MyLog.LogMessageS("MainPlugin()");
 
@@ -34,7 +33,7 @@ namespace COM3D2.Lilly.Plugin
             SetPatch();
             
             //
-            actioOnSceneLoadedn.Add(GearMenuAddPlugin.OnSceneLoaded);
+            actioOnSceneLoaded+=(GearMenuAddPlugin.OnSceneLoaded);
         }
 
         private void SetPatch()
@@ -49,22 +48,27 @@ namespace COM3D2.Lilly.Plugin
             list.Add(typeof(BgMgrPatch));
             list.Add(typeof(CameraMainPatch));
             list.Add(typeof(CharacterMgrPatch));
+            list.Add(typeof(DeskManagerPatch));
             list.Add(typeof(GameMainPatch));
             list.Add(typeof(KasizukiMainMenuPatch));
+            list.Add(typeof(MaidManagementMainPatch));
             list.Add(typeof(MaidPatch));
             list.Add(typeof(MotionWindowPatch));
+            list.Add(typeof(PhotoMotionDataPatch));
             list.Add(typeof(PopupAndTabListPatch));
             list.Add(typeof(ProfileCtrlPapch));
-            list.Add(typeof(PhotoMotionDataPatch));
             list.Add(typeof(SaveAndLoadCtrlPatch));
-            list.Add(typeof(ScoutManagerPatch));
             list.Add(typeof(SceneADVPatch));
+            list.Add(typeof(SceneEditPatch));
+            list.Add(typeof(SceneMgrPatch));
             list.Add(typeof(SceneScenarioSelectPatch));
+            list.Add(typeof(ScoutManagerPatch));
             list.Add(typeof(ScriptManagerFastPatch));
             list.Add(typeof(ScriptManagerPatch));
-            list.Add(typeof(SceneEditPatch));
             list.Add(typeof(SkillPatch));
+            list.Add(typeof(StatusMgrPatch));
             list.Add(typeof(TJSScriptPatch));
+
 
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
@@ -115,10 +119,7 @@ namespace COM3D2.Lilly.Plugin
                     break;
             }
 
-            foreach (var item in actioOnSceneLoadedn)
-            {
-                item(scene, mode);
-            }
+            actioOnSceneLoaded(scene, mode);
         }
 
         //-----------------------------------------------
