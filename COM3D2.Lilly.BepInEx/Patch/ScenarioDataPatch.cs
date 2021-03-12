@@ -21,14 +21,13 @@ namespace COM3D2.Lilly.Plugin
            //}
         }
 
-        // 이게 이벤트 처리 같음
-        // public void RemoveEventMaid(Maid maid, bool not_again = false)
-        [HarmonyPatch(typeof(ScenarioData), "RemoveEventMaid")]
+
+        [HarmonyPatch(typeof(ScenarioData), "RemoveEventMaid",new Type[] {typeof(Maid),typeof(bool) })]
         [HarmonyPostfix]
-        private static void RemoveEventMaid(Maid maid, bool not_again, List<Maid> ___m_EventMaid, int ___ID)
+        private static void RemoveEventMaid2(Maid maid, bool not_again, List<Maid> ___m_EventMaid, int ___ID)
         {
             // !maid.status.GetEventEndFlag(this.ID)
-            MyLog.LogMessageS("RemoveEventMaid");
+            MyLog.LogMessageS("RemoveEventMaid2");
             //for (int j = 0; j < GameMain.Instance.CharacterMgr.GetStockMaidCount(); j++)
             //{
             //    Maid stockMaid = GameMain.Instance.CharacterMgr.GetStockMaid(j);

@@ -10,7 +10,7 @@ namespace COM3D2.Lilly.Plugin
     {
         public  static void SetScenarioDataAll()
         {
-            MyLog.LogMessageS("ScenarioDataUtill.SetScenarioDataAll");
+            MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll");
 
             Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
             {

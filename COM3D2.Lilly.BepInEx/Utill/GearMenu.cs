@@ -322,7 +322,7 @@ namespace GearMenu
         }
 
         /// <summary>
-        /// マウスオーバー時のテキスト指定
+        /// 마우스 오버시 텍스트 지정
         /// </summary>
         /// <param name="go">ボタンのGameObject。Add()の戻り値</param>
         /// <param name="label">マウスオーバー時のテキスト。null可</param>
@@ -333,7 +333,7 @@ namespace GearMenu
             EventDelegate.Add(t.onHoverOver, () => { SysShortcut.VisibleExplanation(label, label != null); });
             var b = go.GetComponent<UIButton>();
 
-            // 既にホバー中なら説明を変更する
+            // 이미 가져 중이라면 설명을 변경하려면
             if (b.state == UIButtonColor.State.Hover)
             {
                 SysShortcut.VisibleExplanation(label, label != null);

@@ -16,14 +16,14 @@ namespace COM3D2.Lilly.Plugin
         public static void SetMaidStatusAll()
         {
             MyLog.LogDebugS("MaidStatusAll ");
-            MyLog.LogMessageS("Application.installerName : " + Application.installerName);
-            MyLog.LogMessageS("Application.version : " + Application.version);
-            MyLog.LogMessageS("Application.unityVersion : " + Application.unityVersion);
-            MyLog.LogMessageS("Application.companyName : " + Application.companyName);
-            MyLog.LogMessageS("CharacterMgr.MaidStockMax : " + CharacterMgr.MaidStockMax);
-            MyLog.LogMessageS("CharacterMgr.ActiveMaidSlotCount : " + CharacterMgr.ActiveMaidSlotCount);
-            MyLog.LogMessageS("CharacterMgr.NpcMaidCreateCount : " + CharacterMgr.NpcMaidCreateCount);
-            MyLog.LogMessageS("CharacterMgr.ActiveManSloatCount : " + CharacterMgr.ActiveManSloatCount);
+            MyLog.LogInfoS("Application.installerName : " + Application.installerName);
+            MyLog.LogInfoS("Application.version : " + Application.version);
+            MyLog.LogInfoS("Application.unityVersion : " + Application.unityVersion);
+            MyLog.LogInfoS("Application.companyName : " + Application.companyName);
+            MyLog.LogInfoS("CharacterMgr.MaidStockMax : " + CharacterMgr.MaidStockMax);
+            MyLog.LogInfoS("CharacterMgr.ActiveMaidSlotCount : " + CharacterMgr.ActiveMaidSlotCount);
+            MyLog.LogInfoS("CharacterMgr.NpcMaidCreateCount : " + CharacterMgr.NpcMaidCreateCount);
+            MyLog.LogInfoS("CharacterMgr.ActiveManSloatCount : " + CharacterMgr.ActiveManSloatCount);
 
             foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
             {
@@ -40,7 +40,7 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogErrorS("MaidStatusUtill.SetMaidStatus:null");
                 return;
             }
-            MyLog.LogMessageS("MaidStatusUtill.SetMaidStatus:name: " + ___select_maid_.status.firstName +" , "+ ___select_maid_.status.lastName);
+            MyLog.LogInfoS("MaidStatusUtill.SetMaidStatus:name: " + ___select_maid_.status.firstName +" , "+ ___select_maid_.status.lastName);
 
             ___select_maid_.status.employmentDay = 1;
 

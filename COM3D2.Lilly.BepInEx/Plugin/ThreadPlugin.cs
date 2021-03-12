@@ -53,7 +53,7 @@ namespace COM3D2.Lilly.Plugin
         }
         static void Run(object scene)
         {
-            if (scene is Scene)// scene.GetType()==typeof(Scene)  //상속 대비해서 is 사용
+            //if (scene is Scene)//안된다? scene.GetType()==typeof(Scene)  //상속 대비해서 is 사용
             {
                 Run(scene);
             }
@@ -61,8 +61,9 @@ namespace COM3D2.Lilly.Plugin
 
         static void Run(Scene scene)
         {
-                MyLog.LogMessageS("ThreadPlugin.Run:" + Thread.CurrentThread.Name + " : " + cnt++);
-                MyLog.LogMessageS("ThreadPlugin.Run:" + Thread.CurrentThread.Name + " : " + cnt++);
+            MyLog.LogMessageS("ThreadPlugin.Run st:" + Thread.CurrentThread.Name + " : " + cnt++);
+            Thread.Sleep(1000);
+            MyLog.LogMessageS("ThreadPlugin.Run ed:" + Thread.CurrentThread.Name + " : " + cnt++);
         }
     }
 }
