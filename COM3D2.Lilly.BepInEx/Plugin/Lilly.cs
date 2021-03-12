@@ -21,7 +21,13 @@ namespace COM3D2.Lilly.Plugin
     {
         MyLog log;
 
+        /// <summary>
+        /// Harmony.CreateAndPatchAll 처리할 대상을 담는 리스트
+        /// </summary>
         List<Type> list = new List<Type>();//patch용
+        /// <summary>
+        ///  SceneManager.sceneLoaded += 관리하기 편하게 이벤트 사용
+        /// </summary>
         event Action<Scene, LoadSceneMode> actioOnSceneLoaded ;//plugin용
 
         public Lilly()
@@ -30,18 +36,24 @@ namespace COM3D2.Lilly.Plugin
 
             log = new MyLog(this.GetType().Name);
 
-            //  Harmony.CreateAndPatchAll 모음
-            SetPatch();
-            
-            // 관리하기 편하게 이벤트 사용
-            actioOnSceneLoaded+=(GearMenuAddPlugin.OnSceneLoaded);
-            actioOnSceneLoaded+=(ThreadPlugin.OnSceneLoaded);
+            SetHarmonyPatch();
+            SetOnSceneLoaded();
+        }
+
+        /// <summary>
+        /// OnSceneLoaded+= 할것들. 관리하기 편하게 이벤트 사용
+        /// 사실 SceneManager.sceneLoaded += this.OnSceneLoaded; 이거 직접 써도 되...
+        /// </summary>
+        private void SetOnSceneLoaded()
+        {   
+            actioOnSceneLoaded += (GearMenuAddPlugin.OnSceneLoaded);
+            // actioOnSceneLoaded+=(ThreadPlugin.OnSceneLoaded);//정상 작동
         }
 
         /// <summary>
         ///  Harmony.CreateAndPatchAll 모음
         /// </summary>
-        private void SetPatch()
+        private void SetHarmonyPatch()
         {
 
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
@@ -126,9 +138,8 @@ namespace COM3D2.Lilly.Plugin
                     break;
             }
 
-            // 관리하기 편하게 이벤트 사용
-            actioOnSceneLoaded(scene, mode);
-            
+            // 관리하기 편하게 이벤트 한번에 부름
+            actioOnSceneLoaded(scene, mode);            
         }
 
         //-----------------------------------------------

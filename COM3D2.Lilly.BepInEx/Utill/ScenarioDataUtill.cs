@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace COM3D2.Lilly.Plugin
 {
+    /// <summary>
+    /// 이벤트 관련
+    /// </summary>
     public static class ScenarioDataUtill
     {
+        /// <summary>
+        /// 모든 이벤트 처리용
+        /// </summary>
         public  static void SetScenarioDataAll()
         {
             MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll");
@@ -30,7 +36,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 b = item.status.GetEventEndFlag(__instance.ID);
                 MyLog.LogMessageS(".SetEventEndFlagAll:" + __instance.ID +" , " + item.status.firstName + " , " + item.status.lastName + " , " + b + " , " + __instance.Title); ;
-                if (b)
+                if (!b)
                 {
                     item.status.SetEventEndFlag(__instance.ID, true);
                 }
