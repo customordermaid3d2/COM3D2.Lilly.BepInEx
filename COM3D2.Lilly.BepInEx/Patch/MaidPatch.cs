@@ -28,7 +28,6 @@ namespace COM3D2.Lilly.Plugin
             if (__instance.Visible)
             {
                 MyLog.LogMessageS("Maid.SetMaterialPropertyPost2:" + f_strPropName + "," + f_strTypeName+ "," + f_strValue);
-                //MyLog.Log("Maid.SetPropPost2.mp.strTempFileName:" + mp.strTempFileName);// 계속 빈값
             }
 
         }
@@ -46,8 +45,10 @@ namespace COM3D2.Lilly.Plugin
             //if( GameMain.Instance.MainCamera.GetFadeState()==CameraMain.FadeState.Out)//효과 없음
             //if (__instance.Visible)
             {
-                MyLog.LogMessageS("Maid.SetPropPost2.filename:" + filename);
-                //MyLog.Log("Maid.SetPropPost2.mp.strTempFileName:" + mp.strTempFileName);// 계속 빈값
+                MyLog.LogMessageS("Maid.SetPropPost2:" + filename + " , " + mp.strFileName + " , " + mp.name);
+
+                //Menu.m_dicResourceRef.ContainsKey(mp.nFileNameRID);
+                //Menu.m_dicResourceRef.ge
             }
 
         }

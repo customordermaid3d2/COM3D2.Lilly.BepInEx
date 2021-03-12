@@ -15,7 +15,7 @@ namespace COM3D2.Lilly.Plugin
         private static void FadeInPost(CameraMain __instance) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessageS("FadeInPost:"+ __instance.GetFadeState());
-            //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
+
         }        
         
         [HarmonyPatch(typeof(CameraMain), "FadeOut")]
@@ -23,7 +23,7 @@ namespace COM3D2.Lilly.Plugin
         private static void FadeOutPost(CameraMain __instance) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessageS("FadeOutPost:" + __instance.GetFadeState());
-            //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
+
         }
 
         //		CameraMain.FadeOut(float, bool, CameraMain.dgOnCompleteFade, bool, Color) : void @060018DD

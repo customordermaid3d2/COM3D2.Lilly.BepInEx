@@ -151,6 +151,7 @@ namespace GearMenu
             try
             {
                 // ギアメニューの子として、コンフィグパネル呼び出しボタンを複製
+                // 기어 메뉴의 하위로 구성 패널 통화 버튼을 복제
                 goButton = NGUITools.AddChild(Grid, UTY.GetChildObject(Grid, "Config", true));
 
                 // 名前を設定
@@ -160,11 +161,14 @@ namespace GearMenu
                 }
 
                 // イベントハンドラ設定（同時に、元から持っていたハンドラは削除）
+                // 이벤트 핸들러 설정 (동시에 원래부터 가지고 있던 핸들러는 삭제)
                 EventDelegate.Set(goButton.GetComponent<UIButton>().onClick, () => { action(goButton); });
 
                 // ポップアップテキストを追加
+                // 팝업 텍스트 추가
                 {
                     UIEventTrigger t = goButton.GetComponent<UIEventTrigger>();
+                    //EventDelegate.Add(t.onHoverOver, () => { SysShortcut.VisibleExplanation(null, true); });
                     EventDelegate.Add(t.onHoverOut, () => { SysShortcut.VisibleExplanation(null, false); });
                     EventDelegate.Add(t.onDragStart, () => { SysShortcut.VisibleExplanation(null, false); });
                     SetText(goButton, label);

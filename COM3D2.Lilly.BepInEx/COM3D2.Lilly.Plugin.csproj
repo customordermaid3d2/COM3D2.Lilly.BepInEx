@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Plugin\Lilly.cs" />
+    <Compile Include="Patch\ScenarioDataPatch.cs" />
+    <Compile Include="Plugin\ThreadPlugin.cs" />
     <Compile Include="Utill\GearMenu.cs" />
     <Compile Include="Plugin\GearMenuAddPlugin.cs" />
     <Compile Include="Utill\MaidStatusUtill.cs" />
@@ -94,6 +96,7 @@
     <Compile Include="Patch\SkillPatch.cs" />
     <Compile Include="Patch\StatusMgrPatch.cs" />
     <Compile Include="Patch\TJSScriptPatch.cs" />
+    <Compile Include="Utill\ScenarioDataUtill.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="comfile.bat" />

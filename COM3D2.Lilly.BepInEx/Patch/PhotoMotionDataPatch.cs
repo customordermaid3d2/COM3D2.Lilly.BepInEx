@@ -34,7 +34,7 @@ namespace COM3D2.Lilly.Plugin
         public static void CreatePost0(PhotoMotionData __instance) // string __m_BGMName 못가져옴
         {
             LogMessageS("PhotoMotionData.Create");
-            //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
+
         }
     }
 }

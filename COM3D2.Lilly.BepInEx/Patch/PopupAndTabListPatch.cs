@@ -19,7 +19,6 @@ namespace COM3D2.Lilly.Plugin
         private static void SetDataPost0(PopupAndTabList __instance) // string __m_BGMName 못가져옴
         {
             LogMessageS(name+ ".SetData" );
-            //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace COM3D2.Lilly.Plugin
 		{
 			if (___m_maid == null)
 			{
-				MyLog.LogErrorS("StatusMgr.OpenStatusPanel:null");
+				MyLog.LogWarningS("StatusMgr.OpenStatusPanel:null");
 				return;
 			}
             MyLog.LogMessageS("StatusMgr.OpenStatusPanel" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);

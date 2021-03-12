@@ -14,7 +14,6 @@ namespace COM3D2.Lilly.Plugin
         private static void CallTitleBarPost(SceneADV __instance, string title) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessageS("CallTitleBarPost:" + title);
-            //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
         }
     }
 }

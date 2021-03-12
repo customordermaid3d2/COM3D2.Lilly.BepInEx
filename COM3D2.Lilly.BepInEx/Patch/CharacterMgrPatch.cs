@@ -79,11 +79,11 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void PresetSetPostfix2(Maid f_maid, CharacterMgr.Preset f_prest)
         {
-            MyLog.LogMessageS("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName);
+            MyLog.LogMessageS("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName +" , "+ f_prest.ePreType);
             MaidProp[] array= getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
             {
-                MyLog.LogMessageS("PresetSetPostfix2: " + maidProp.idx + " , " + maidProp.strFileName);
+                MyLog.LogMessageS("PresetSetPostfix2: " + maidProp.idx.ToString().PadLeft(3) + " , " + maidProp.strFileName);
             }
         }
 

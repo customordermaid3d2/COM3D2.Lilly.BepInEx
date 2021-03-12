@@ -30,12 +30,17 @@ namespace COM3D2.Lilly.Plugin
 
             log = new MyLog(this.GetType().Name);
 
+            //  Harmony.CreateAndPatchAll 모음
             SetPatch();
             
-            //
+            // 관리하기 편하게 이벤트 사용
             actioOnSceneLoaded+=(GearMenuAddPlugin.OnSceneLoaded);
+            actioOnSceneLoaded+=(ThreadPlugin.OnSceneLoaded);
         }
 
+        /// <summary>
+        ///  Harmony.CreateAndPatchAll 모음
+        /// </summary>
         private void SetPatch()
         {
 
@@ -58,6 +63,7 @@ namespace COM3D2.Lilly.Plugin
             list.Add(typeof(PopupAndTabListPatch));
             list.Add(typeof(ProfileCtrlPapch));
             list.Add(typeof(SaveAndLoadCtrlPatch));
+            list.Add(typeof(ScenarioDataPatch));//
             list.Add(typeof(SceneADVPatch));
             list.Add(typeof(SceneEditPatch)); //자꾸 오류남?
             //list.Add(typeof(ScheduleMgrPatch));// 스케줄
@@ -120,7 +126,9 @@ namespace COM3D2.Lilly.Plugin
                     break;
             }
 
+            // 관리하기 편하게 이벤트 사용
             actioOnSceneLoaded(scene, mode);
+            
         }
 
         //-----------------------------------------------

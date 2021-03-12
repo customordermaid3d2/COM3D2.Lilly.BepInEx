@@ -18,6 +18,7 @@ namespace COM3D2.Lilly.Plugin
 ;
         static private UnityEngine.GameObject menuButton;
         private static bool displayUI = false;
+        static string name;
 
         public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
@@ -25,19 +26,51 @@ namespace COM3D2.Lilly.Plugin
             // SceneManager.GetActiveScene().name;
 
             //Add the button
-            if (GameMain.Instance != null && GameMain.Instance.SysShortcut != null && !Buttons.Contains("GearMenuAddPlugin"))
+            if (GameMain.Instance == null || GameMain.Instance.SysShortcut==null)
             {
-                menuButton = GearMenu.Buttons.Add("GearMenuAddPlugin", "GearMenuAddPlugin", Convert.FromBase64String(pngBase64), OnMenuButtonClickCallback);
+                return;
+            }
+
+            name = "GearMenuAddPlugin";
+            if ( !Buttons.Contains(name))
+            {
+                menuButton = Buttons.Add(name, "displayUI", Convert.FromBase64String(pngBase64), OnMenuButtonClickCallback);
+            }
+
+            name = "SetMaidStatusAll";
+            if ( !Buttons.Contains(name))
+            {
+                menuButton = Buttons.Add(name, "MaidStatusUtill.SetMaidStatusAll();", Convert.FromBase64String(pngBase64), OnMenuButtonClickCallback_SetMaidStatusAll);
+            }
+
+            name = "SetScenarioDataAll";
+            if ( !Buttons.Contains(name))
+            {
+                menuButton = Buttons.Add(name, "ScenarioDataUtill.SetScenarioDataAll();", Convert.FromBase64String(pngBase64), OnMenuButtonClickCallback_SetMaidStatusAll);
             }
 
         }
 
         private static void OnMenuButtonClickCallback(GameObject gearMenuButton)
-        {
+        {            
             //Open/Close the UI
             displayUI = !displayUI;
-            MyLog.LogMessageS("GearMenuAddPlugin.OnMenuButtonClickCallback:"+ displayUI);
+            MyLog.LogMessageS(gearMenuButton.name+":" + displayUI);
+        }
+
+        private static void OnMenuButtonClickCallback_SetMaidStatusAll(GameObject gearMenuButton)
+        {
+            MyLog.LogMessageS(gearMenuButton.name);            
             MaidStatusUtill.SetMaidStatusAll();
         }
+
+        private static void OnMenuButtonClickCallback_SetScenarioDataAll(GameObject gearMenuButton)
+        {
+            MyLog.LogMessageS(gearMenuButton.name);
+            ScenarioDataUtill.SetScenarioDataAll();
+        }
+
+
+
     }
 }

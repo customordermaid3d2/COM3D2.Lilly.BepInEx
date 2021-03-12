@@ -31,5 +31,19 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogMessageS("SceneEdit.Start:" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
             MaidStatusUtill.SetMaidStatus(___m_maid);
         }
+
+        //[HarmonyPatch(typeof(SceneEdit.MenuItemSet), "Start")]
+        //[HarmonyPostfix]
+        //public static void StartPos() // Maid ___m_maid,SceneEdit __instance
+        //{            
+        //    Maid ___m_maid = SceneEdit.Instance.maid;
+        //    if (___m_maid == null)
+        //    {
+        //        MyLog.LogErrorS("SceneEdit.Start:null");
+        //        return;
+        //    }
+        //    MyLog.LogMessageS("SceneEdit.Start:" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
+        //    MaidStatusUtill.SetMaidStatus(___m_maid);
+        //}
     }
 }

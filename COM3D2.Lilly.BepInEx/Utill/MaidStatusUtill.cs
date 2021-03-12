@@ -63,6 +63,7 @@ namespace COM3D2.Lilly.Plugin
             ___select_maid_.status.baseVocal = 9999;
             
             ___select_maid_.status.studyRate = 0;
+            ___select_maid_.status.likability = 999;
 
             try
             {
