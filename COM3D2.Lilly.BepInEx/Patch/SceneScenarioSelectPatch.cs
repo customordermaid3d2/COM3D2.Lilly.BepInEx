@@ -52,33 +52,33 @@ namespace COM3D2.Lilly.Plugin
             )
         {
             MyLog.LogMessageS("SetScenarioPlate.GetAllScenarioData");
-            foreach (ScenarioData scenarioData in GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData())
-            {
-                //if (scenarioData.IsPlayable)
-                {
-                    MyLog.LogMessageS(".GetAllScenarioData:" + scenarioData.Title);// +","+ scenarioData.ConditionText//함수
-                    foreach (string str in scenarioData.ConditionText)
-                    {
-                        MyLog.LogMessageS(".ConditionText:" + str);// 조건
-                    }
-                }
-            }
+            //foreach (ScenarioData scenarioData in GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData())
+            //{
+            //    //if (scenarioData.IsPlayable)
+            //    {
+            //        MyLog.LogMessageS(".GetAllScenarioData:" + scenarioData.Title);// +","+ scenarioData.ConditionText//함수
+            //        foreach (string str in scenarioData.ConditionText)
+            //        {
+            //            MyLog.LogMessageS(".ConditionText:" + str);// 조건
+            //        }
+            //    }
+            //}
 
             MyLog.LogMessageS("SetScenarioPlate.___m_ScenarioButtonpair");
-            foreach (var item in ___m_ScenarioButtonpair)
-            {
-                MyLog.LogMessageS(".___m_ScenarioButtonpair:" + item.Value.Title + "," + item.Value.EventContents+ "," + item.Value.ScriptLabel+ "," + item.Value.Notification);
-                foreach (string str in item.Value.ConditionText)
-                {
-                    MyLog.LogMessageS(".ConditionText:" + str);// 조건
-                }
-            }
+            //foreach (var item in ___m_ScenarioButtonpair)
+            //{
+            //    MyLog.LogMessageS(".___m_ScenarioButtonpair:" + item.Value.Title + "," + item.Value.EventContents+ "," + item.Value.ScriptLabel+ "," + item.Value.Notification);
+            //    foreach (string str in item.Value.ConditionText)
+            //    {
+            //        MyLog.LogMessageS(".ConditionText:" + str);// 조건
+            //    }
+            //}
 
             MyLog.LogMessageS("SetScenarioPlate.___m_SelectedMaid");
-            foreach (var item in ___m_SelectedMaid)
-            {
-                MyLog.LogMessageS(".___m_SelectedMaid:" +item.status.firstName + " , " + item.status.lastName);
-            }
+            //foreach (var item in ___m_SelectedMaid)
+            //{
+            //    MyLog.LogMessageS(".___m_SelectedMaid:" +item.status.firstName + " , " + item.status.lastName);
+            //}
 
                 // 원본 코드
                 return;

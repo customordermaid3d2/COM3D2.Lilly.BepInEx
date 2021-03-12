@@ -26,8 +26,8 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void RemoveEventMaid2(Maid maid, bool not_again, List<Maid> ___m_EventMaid, int ___ID)
         {
+            //MyLog.LogMessageS("RemoveEventMaid2");
             // !maid.status.GetEventEndFlag(this.ID)
-            MyLog.LogMessageS("RemoveEventMaid2");
             //for (int j = 0; j < GameMain.Instance.CharacterMgr.GetStockMaidCount(); j++)
             //{
             //    Maid stockMaid = GameMain.Instance.CharacterMgr.GetStockMaid(j);
@@ -57,7 +57,7 @@ namespace COM3D2.Lilly.Plugin
             )
         {
             // !maid.status.GetEventEndFlag(this.ID)
-            MyLog.LogMessageS("CheckPlayableCondition1" + condition);
+            //MyLog.LogMessageS("CheckPlayableCondition1" + condition);
             // CheckPlayableCondition1シナリオ
             //for (int j = 0; j < GameMain.Instance.CharacterMgr.GetStockMaidCount(); j++)
             //{
@@ -69,7 +69,7 @@ namespace COM3D2.Lilly.Plugin
             //FacilityManager facilityMgr = GameMain.Instance.FacilityMgr;
 
             // 이벤트 했다는 플레그 설정
-            ScenarioDataUtill.SetEventEndFlagAll(___m_EventMaid, __instance);
+            //ScenarioDataUtill.SetEventEndFlagAll(___m_EventMaid, __instance);
 
             //MyLog.LogMessageS("CheckPlayableCondition1.___m_EventMaid");
             //foreach (var item in ___m_PlayableData)

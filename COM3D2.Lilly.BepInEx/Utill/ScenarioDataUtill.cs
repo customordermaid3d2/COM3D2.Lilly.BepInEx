@@ -25,11 +25,11 @@ namespace COM3D2.Lilly.Plugin
         public static void SetEventEndFlagAll(List<Maid> ___m_EventMaid, ScenarioData __instance)
         {
             bool b;
-            MyLog.LogMessageS(".m_EventMaid");
+            //MyLog.LogMessageS(".m_EventMaid");
             foreach (var item in ___m_EventMaid)
             {
                 b = item.status.GetEventEndFlag(__instance.ID);
-                MyLog.LogMessageS(".m_EventMaid:" + item.status.firstName + " , " + item.status.lastName + " , " + b); ;
+                MyLog.LogMessageS(".SetEventEndFlagAll:" + __instance.ID +" , " + item.status.firstName + " , " + item.status.lastName + " , " + b + " , " + __instance.Title); ;
                 if (b)
                 {
                     item.status.SetEventEndFlag(__instance.ID, true);
