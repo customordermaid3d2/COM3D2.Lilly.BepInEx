@@ -63,12 +63,12 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPrefix]
         public static void PresetSetPretfix1(CharacterMgr __instance, Maid f_maid, CharacterMgr.Preset f_prest)
         {
-            MyLog.LogMessageS("PresetSetPretfix1.f_prest.strFileName:" + f_prest.strFileName);
-            MaidProp[] array = PresetUtill.getMaidProp(f_prest);
-            foreach (MaidProp maidProp in array)
-            {
-                MyLog.LogMessageS("PresetSetPretfix1: " + maidProp.idx + " , " + maidProp.strFileName);
-            }
+            //MyLog.LogMessageS("PresetSetPretfix1.f_prest.strFileName:" + f_prest.strFileName);
+            //MaidProp[] array = PresetUtill.getMaidProp(f_prest);
+            //foreach (MaidProp maidProp in array)
+            //{
+            //    MyLog.LogMessageS("PresetSetPretfix1: " + maidProp.idx + " , " + maidProp.strFileName);
+            //}
         }
 
         // public void PresetSet(Maid f_maid, CharacterMgr.Preset f_prest)
@@ -83,7 +83,10 @@ namespace COM3D2.Lilly.Plugin
             MaidProp[] array= PresetUtill.getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
             {
-                MyLog.LogMessageS("PresetSetPostfix2: " + maidProp.idx.ToString().PadLeft(3) + " , " + maidProp.strFileName);
+                if (maidProp.strFileName.Length>0)// 값 없는거 출력 방지
+                {
+                    MyLog.LogMessageS("PresetSetPostfix2: " + maidProp.idx.ToString().PadLeft(3) + " , " + maidProp.strFileName);
+                }
             }
         }
 

@@ -9,14 +9,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Reflection;
-using GearMenu;
 
 namespace COM3D2.Lilly.Plugin
 {
     // 이벤트 함수의 실행 순서
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
 
-    [BepInPlugin("COM3D2.Lilly.BepInEx", "Lilly", "210311")]    
+    [BepInPlugin("COM3D2.Lilly.Plugin", "Lilly", "210313")]    
     public class Lilly : BaseUnityPlugin 
     {
         MyLog log;
