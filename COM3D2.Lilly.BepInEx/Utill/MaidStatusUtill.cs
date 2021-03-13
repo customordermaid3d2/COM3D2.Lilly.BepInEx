@@ -42,7 +42,7 @@ namespace COM3D2.Lilly.Plugin
             }
             MyLog.LogInfoS("MaidStatusUtill.SetMaidStatus:name: " + ___select_maid_.status.firstName +" , "+ ___select_maid_.status.lastName);
 
-            ___select_maid_.status.employmentDay = 1;
+            ___select_maid_.status.employmentDay = 1;// 고용기간
 
             ___select_maid_.status.baseAppealPoint = 9999;
             ___select_maid_.status.baseCare = 9999;
@@ -62,8 +62,8 @@ namespace COM3D2.Lilly.Plugin
             ___select_maid_.status.baseTeachRate = 9999;
             ___select_maid_.status.baseVocal = 9999;
             
-            ___select_maid_.status.studyRate = 0;
-            ___select_maid_.status.likability = 999;
+            ___select_maid_.status.studyRate = 0;   // 습득율
+            ___select_maid_.status.likability = 999;// 호감도
 
             try
             {

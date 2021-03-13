@@ -64,7 +64,7 @@ namespace COM3D2.Lilly.Plugin
         public static void PresetSetPretfix1(CharacterMgr __instance, Maid f_maid, CharacterMgr.Preset f_prest)
         {
             MyLog.LogMessageS("PresetSetPretfix1.f_prest.strFileName:" + f_prest.strFileName);
-            MaidProp[] array = getMaidProp(f_prest);
+            MaidProp[] array = PresetUtill.getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
             {
                 MyLog.LogMessageS("PresetSetPretfix1: " + maidProp.idx + " , " + maidProp.strFileName);
@@ -80,41 +80,11 @@ namespace COM3D2.Lilly.Plugin
         public static void PresetSetPostfix2(Maid f_maid, CharacterMgr.Preset f_prest)
         {
             MyLog.LogMessageS("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName +" , "+ f_prest.ePreType);
-            MaidProp[] array= getMaidProp(f_prest);
+            MaidProp[] array= PresetUtill.getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
             {
                 MyLog.LogMessageS("PresetSetPostfix2: " + maidProp.idx.ToString().PadLeft(3) + " , " + maidProp.strFileName);
             }
-        }
-
-        /// <summary>
-        /// 프리셋에서 불러온 메뉴들을 반납
-        /// </summary>
-        /// <param name="f_prest"></param>
-        /// <returns></returns>
-        private static MaidProp[] getMaidProp(CharacterMgr.Preset f_prest)
-        {
-            MaidProp[] array;
-            if (f_prest.ePreType == CharacterMgr.PresetType.Body)
-            {
-                array = (from mp in f_prest.listMprop
-                         where (1 <= mp.idx && mp.idx <= 80) || (115 <= mp.idx && mp.idx <= 122)
-                         select mp).ToArray<MaidProp>();
-            }
-            else if (f_prest.ePreType == CharacterMgr.PresetType.Wear)
-            {
-                array = (from mp in f_prest.listMprop
-                         where 81 <= mp.idx && mp.idx <= 110
-                         select mp).ToArray<MaidProp>();
-            }
-            else
-            {
-                array = (from mp in f_prest.listMprop
-                         where (1 <= mp.idx && mp.idx <= 110) || (115 <= mp.idx && mp.idx <= 122)
-                         select mp).ToArray<MaidProp>();
-            }
-
-            return array;
         }
 
         // ------------------------------------

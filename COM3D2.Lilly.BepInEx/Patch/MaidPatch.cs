@@ -45,7 +45,7 @@ namespace COM3D2.Lilly.Plugin
             //if( GameMain.Instance.MainCamera.GetFadeState()==CameraMain.FadeState.Out)//효과 없음
             //if (__instance.Visible)
             {
-                MyLog.LogMessageS("Maid.SetPropPost2:" + filename + " , " + mp.strFileName + " , " + mp.name);
+                MyLog.LogMessageS("Maid.SetPropPost2:" +  mp.strFileName + " , " + mp.name + " , " + mp.idx);//filename + " , " +
 
                 //Menu.m_dicResourceRef.ContainsKey(mp.nFileNameRID);
                 //Menu.m_dicResourceRef.ge

@@ -96,6 +96,7 @@
     <Compile Include="Patch\SkillPatch.cs" />
     <Compile Include="Patch\StatusMgrPatch.cs" />
     <Compile Include="Patch\TJSScriptPatch.cs" />
+    <Compile Include="Utill\PresetUtill.cs" />
     <Compile Include="Utill\ScenarioDataUtill.cs" />
   </ItemGroup>
   <ItemGroup>
