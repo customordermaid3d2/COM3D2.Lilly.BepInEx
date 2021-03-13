@@ -14,8 +14,8 @@ namespace COM3D2.Lilly.Plugin
 {
     // 이벤트 함수의 실행 순서
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
-
-    [BepInPlugin("COM3D2.Lilly.Plugin", "Lilly", "210313")]    
+    
+    [BepInPlugin("COM3D2.Lilly.Plugin", "Lilly", "21.3.13")]// 버전 규칙 잇음. 반드시 2~4개의 숫자구성으로 해야함
     public class Lilly : BaseUnityPlugin 
     {
         MyLog log;

@@ -35,6 +35,7 @@ namespace COM3D2.Lilly.Plugin
             //}
 
             return;
+            /*
             if (___m_EventMaid.Contains(maid))
             {
                 ___m_EventMaid.Remove(maid);
@@ -43,6 +44,7 @@ namespace COM3D2.Lilly.Plugin
                     maid.status.SetEventEndFlag(___ID, true);
                 }
             }
+            */
         }
 
         //public bool CheckPlayableCondition(ScenarioData.PlayableCondition condition, bool maid_update = true)

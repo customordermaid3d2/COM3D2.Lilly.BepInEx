@@ -82,6 +82,7 @@ namespace COM3D2.Lilly.Plugin
 
                 // 원본 코드
                 return;
+            /*
             foreach (ScenarioData scenarioData in GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData())
             {
                 if (scenarioData.IsPlayable)
@@ -97,8 +98,10 @@ namespace COM3D2.Lilly.Plugin
                     ___m_ScenarioButtonpair.Add(componentInChildren, scenarioData);
                 }
             }
+            */
             //___m_ScenarioScroll.Grid.repositionNow = true;
             //___m_ScenarioScroll.ScrollView.ResetPosition();
+            /*
             ___m_UIWFTabPanel.UpdateChildren();
             if (___m_ScenarioButtonpair.Count<KeyValuePair<UIWFTabButton, ScenarioData>>() > 0)
             {
@@ -108,7 +111,6 @@ namespace COM3D2.Lilly.Plugin
             {
                 ___m_OkButton.isEnabled = false;
             }
-            /*
             */
         }
 
