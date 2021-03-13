@@ -18,8 +18,10 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll");
 
+            // 병렬 처리
             Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
             {
+                MyLog.LogMessageS(".SetEventEndFlagAll:" + scenarioData.ID + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
                 if (scenarioData.IsPlayable)
                 {                    
                     SetEventEndFlagAll(scenarioData.GetEventMaidList(), scenarioData);
@@ -27,20 +29,48 @@ namespace COM3D2.Lilly.Plugin
             });
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="___m_EventMaid"></param>
+        /// <param name="__instance"></param>
         public static void SetEventEndFlagAll(List<Maid> ___m_EventMaid, ScenarioData __instance)
         {
+            Action<Maid> action = delegate (Maid maid)
+            {
+                //maid.status.RemoveEventEndFlagAll();
+                maid.status.SetEventEndFlag(__instance.ID, true);
+            };
             bool b;
             //MyLog.LogMessageS(".m_EventMaid");
-            foreach (var item in ___m_EventMaid)
+            foreach (var maid in ___m_EventMaid)
             {
-                b = item.status.GetEventEndFlag(__instance.ID);
-                MyLog.LogMessageS(".SetEventEndFlagAll:" + __instance.ID +" , " + item.status.firstName + " , " + item.status.lastName + " , " + b + " , " + __instance.Title); ;
+                b = maid.status.GetEventEndFlag(__instance.ID);
+                MyLog.LogMessageS(".SetEventEndFlagAll:" + __instance.ID +" , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b + " , " + __instance.Title); ;
                 if (!b)
                 {
-                    item.status.SetEventEndFlag(__instance.ID, true);
+                    action(maid);
                 }
             }
+        }
+
+        /// <summary>
+        ///  CheckPlayableCondition 참고
+        /// </summary>
+        public static void RemoveEventEndFlagAll()
+        {
+            CharacterMgr characterMgr = GameMain.Instance.CharacterMgr;
+            Action<Maid> action = delegate (Maid maid)
+            {
+                    maid.status.RemoveEventEndFlagAll();             
+            };
+            for (int j = 0; j < characterMgr.GetStockMaidCount(); j++)
+            {
+                Maid stockMaid = characterMgr.GetStockMaid(j);
+                MyLog.LogMessageS(".RemoveEventEndFlagAll:" + stockMaid.status.firstName + " , " + stockMaid.status.lastName ); ;
+                action(stockMaid);
+            }
+
         }
 
         //public void RemoveEventMaid(Maid maid, bool not_again = false)

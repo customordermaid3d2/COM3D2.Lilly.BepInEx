@@ -25,6 +25,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="COM3D2.Lilly.plugin.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="0Harmony20, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>F:\COM3D2\BepInEx\core\0Harmony20.dll</HintPath>
       <Private>False</Private>

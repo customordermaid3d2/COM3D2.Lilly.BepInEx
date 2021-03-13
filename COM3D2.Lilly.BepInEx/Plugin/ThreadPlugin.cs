@@ -1,8 +1,11 @@
-﻿using System;
+﻿using BepInEx;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace COM3D2.Lilly.Plugin
@@ -10,11 +13,16 @@ namespace COM3D2.Lilly.Plugin
     /// <summary>
     /// 스레드 테스트
     /// </summary>
-    class ThreadPlugin
+    public class ThreadPlugin : MonoBehaviour
     {
         static int cnt=0;
 
-        public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        public ThreadPlugin()
+        {
+
+        }
+
+        public  void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             MyLog.LogMessageS("GearMenuAddPlugin.OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex + " , " + scene.isLoaded);
             // SceneManager.GetActiveScene().name;
@@ -50,8 +58,19 @@ namespace COM3D2.Lilly.Plugin
 
             // 간략한 표현
             //new Thread(() => Run(scene)).Start();
+
+            StartCoroutine(MyCoroutine());
         }
-        static void Run(object scene)
+
+        public System.Collections.IEnumerator MyCoroutine()
+        {
+            MyLog.LogMessageS("ThreadPlugin.MyCoroutine st:" + Thread.CurrentThread.Name + " : " + cnt++);
+            Thread.Sleep(1000);
+            MyLog.LogMessageS("ThreadPlugin.MyCoroutine ed:" + Thread.CurrentThread.Name + " : " + cnt++);
+            yield  return null;
+        }
+
+         void Run(object scene)
         {
             //if (scene is Scene)//안된다? scene.GetType()==typeof(Scene)  //상속 대비해서 is 사용
             {
@@ -59,7 +78,7 @@ namespace COM3D2.Lilly.Plugin
             }
         }
 
-        static void Run(Scene scene)
+         void Run(Scene scene)
         {
             MyLog.LogMessageS("ThreadPlugin.Run st:" + Thread.CurrentThread.Name + " : " + cnt++);
             Thread.Sleep(1000);

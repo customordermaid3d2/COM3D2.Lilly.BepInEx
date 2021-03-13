@@ -109,7 +109,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void PresetSavePost0(Maid f_maid, CharacterMgr.PresetType f_type, CharacterMgr.Preset __result)
         {
-            MyLog.LogMessageS("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName);
+            MyLog.LogMessageS("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName +" , "+ __result.ePreType);
         }
     }
 }

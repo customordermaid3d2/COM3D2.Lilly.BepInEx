@@ -101,5 +101,29 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogErrorS("MaidStatusUtill.SetMaidStatus: "+e.ToString());
             }
         }
+
+        public static TJSScript tjs_;
+        public static ScriptManager scriptManager;
+
+        public static void Test()
+        {
+            scriptManager = GameMain.Instance.ScriptMgr;
+            //GameMain.Instance
+            //tjs_ = TJSScript.Create(scriptManager.file_system);
+            //tjs_.AddFunction("IsYotogiClass", new TJSScript.FunctionCallBack(TJSFuncIsYotogiClass));
+            //this.tjs_.AddFunction("IsMarriage", new TJSScript.FunctionCallBack(this.OldTJSFuncIsMarriage));
+            //this.tjs_.AddFunction("IsNewWifeFlag", new TJSScript.FunctionCallBack(this.OldTJSFuncIsNewWifeFlag));
+
+            //int nMaidNo = tjs_param[0].AsInteger();
+            //Maid maid = GameMain.Instance.CharacterMgr.GetMaid(nMaidNo);
+            //if (maid != null && maid.status.OldStatus != null)
+            //{
+            //    result.SetBool(maid.status.OldStatus.isMarriage);
+            //}
+            //else
+            //{
+            //    result.SetBool(false);
+            //}
+        }
     }
 }

@@ -41,6 +41,8 @@ namespace COM3D2.Lilly.Plugin
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_SetMaidStatusAll), name, png);                
                 name = "SetScenarioDataAll";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_SetScenarioDataAll), name, png);                
+                name = "RemoveEventEndFlagAll";
+                SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_RemoveEventEndFlagAll), name, png);                
                 buttonAdded1 = true;
             }
         }
@@ -62,6 +64,12 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogMessageS("OnMenuButtonClickCallback_SetScenarioDataAll");            
             ScenarioDataUtill.SetScenarioDataAll();
+        }
+        
+        private static void OnMenuButtonClickCallback_RemoveEventEndFlagAll()
+        {
+            MyLog.LogMessageS("OnMenuButtonClickCallback_RemoveEventEndFlagAll");            
+            ScenarioDataUtill.RemoveEventEndFlagAll();
         }
 
 

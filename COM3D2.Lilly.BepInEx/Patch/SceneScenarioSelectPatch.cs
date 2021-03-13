@@ -39,6 +39,36 @@ namespace COM3D2.Lilly.Plugin
             //}
 
         }
+
+        /// <summary>
+        /// 이게 스크립트 불러와서 실행 처리
+        /// </summary>
+        [HarmonyPatch(typeof(SceneScenarioSelect), "JumpNextLabel")]
+        [HarmonyPostfix]
+        private static void JumpNextLabel(ScenarioData ___m_CurrentScenario, List<Maid> ___m_SelectedMaid) 
+        {
+            
+            //if (this.m_JumpLabel == this.m_OkLabel)
+            {
+                //this.m_CurrentScenario.ScenarioPlay(this.m_SelectedMaid);
+                //NDebug.Assert(!string.IsNullOrEmpty(this.m_CurrentScenario.ScenarioScript), "SceneScenarioSelect.cs:選択したシナリオのスクリプトファイル名が設定されてません");
+                //NDebug.Assert(!string.IsNullOrEmpty(this.m_CurrentScenario.ScriptLabel), "SceneScenarioSelect.cs:選択したシナリオのラベル名が設定されてません");
+                string text = ___m_CurrentScenario.ScenarioScript;
+                MyLog.LogMessageS("JumpNextLabel: "+text);
+                if (___m_SelectedMaid.Count > 0 && text.IndexOf("?") >= 0)
+                {
+                    text = ScriptManager.ReplacePersonal(___m_SelectedMaid[0], text);
+                    MyLog.LogMessageS("JumpNextLabel: "+text);
+                }
+                // 스크립트 실행 부분
+                //GameMain.Instance.ScriptMgr.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
+                //GameMain.Instance.ScriptMgr.EvalScript("&tf['label_name'] = '" + this.m_CurrentScenario.ScriptLabel + "';");
+            }
+            //this.m_AdvkagMgr.JumpLabel(this.m_JumpLabel);
+            //this.m_AdvkagMgr.Exec();
+        }
+
+
         
         // 이걸론 안됨
         [HarmonyPatch(typeof(SceneScenarioSelect), "SetScenarioPlate")]

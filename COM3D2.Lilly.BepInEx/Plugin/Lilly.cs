@@ -29,11 +29,15 @@ namespace COM3D2.Lilly.Plugin
         /// </summary>
         event Action<Scene, LoadSceneMode> actioOnSceneLoaded ;//plugin용
 
+        ThreadPlugin threadPlugin;
+
         public Lilly()
         {
             MyLog.LogMessageS("MainPlugin()");
 
             log = new MyLog(this.GetType().Name);
+
+            threadPlugin = new ThreadPlugin();
 
             SetHarmonyPatch();
             SetOnSceneLoaded();
@@ -46,7 +50,7 @@ namespace COM3D2.Lilly.Plugin
         private void SetOnSceneLoaded()
         {   
             actioOnSceneLoaded += (GearMenuAddPlugin.OnSceneLoaded);
-            // actioOnSceneLoaded+=(ThreadPlugin.OnSceneLoaded);//정상 작동
+            actioOnSceneLoaded+=(threadPlugin.OnSceneLoaded);//정상 작동
         }
 
         /// <summary>
