@@ -20,25 +20,31 @@ namespace COM3D2.Lilly.Plugin
     {
         MyLog log;
 
+        public static Lilly lilly;
         /// <summary>
         /// Harmony.CreateAndPatchAll 처리할 대상을 담는 리스트
         /// </summary>
-        List<Type> list = new List<Type>();//patch용
+        public List<Type> lists = new List<Type>();//patch용
+        public List<Type> listd = new List<Type>();//patch용
         /// <summary>
         ///  SceneManager.sceneLoaded += 관리하기 편하게 이벤트 사용
         /// </summary>
         event Action<Scene, LoadSceneMode> actioOnSceneLoaded ;//plugin용
 
         ThreadPlugin threadPlugin;
+        public static Dictionary<Type, Harmony> harmonys=new Dictionary<Type, Harmony>();
 
         public Lilly()
         {
+            lilly = this;
+
             MyLog.LogMessageS("MainPlugin()");
 
             log = new MyLog(this.GetType().Name);
 
             threadPlugin = new ThreadPlugin();
 
+            SetHarmonyList();
             SetHarmonyPatch();
             SetOnSceneLoaded();
         }
@@ -50,60 +56,104 @@ namespace COM3D2.Lilly.Plugin
         private void SetOnSceneLoaded()
         {   
             actioOnSceneLoaded += (GearMenuAddPlugin.OnSceneLoaded);
-            actioOnSceneLoaded+=(threadPlugin.OnSceneLoaded);//정상 작동
+            //actioOnSceneLoaded+=(threadPlugin.OnSceneLoaded);//정상 작동
         }
 
         /// <summary>
         ///  Harmony.CreateAndPatchAll 모음
         /// </summary>
-        private void SetHarmonyPatch()
+        public void SetHarmonyPatch()
         {
+            SetHarmonyPatch(lists);
+        }
 
+        public void SetHarmonyPatch(List<Type> list)
+        {
             // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
 
             // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
-
-            list.Add(typeof(AudioSourceMgrPatch));
-            list.Add(typeof(BgMgrPatch));
-            list.Add(typeof(CameraMainPatch));
-            list.Add(typeof(CharacterMgrPatch));
-            list.Add(typeof(DeskManagerPatch));
-            list.Add(typeof(GameMainPatch));
-            list.Add(typeof(KasizukiMainMenuPatch));
-            list.Add(typeof(MaidManagementMainPatch));
-            list.Add(typeof(MaidPatch));
-            list.Add(typeof(MotionWindowPatch));
-            list.Add(typeof(PhotoMotionDataPatch));
-            list.Add(typeof(PopupAndTabListPatch));
-            list.Add(typeof(ProfileCtrlPapch));
-            list.Add(typeof(SaveAndLoadCtrlPatch));
-            list.Add(typeof(ScenarioDataPatch));//
-            list.Add(typeof(SceneADVPatch));
-            list.Add(typeof(SceneEditPatch)); //자꾸 오류남?
-            //list.Add(typeof(ScheduleMgrPatch));// 스케줄
-            list.Add(typeof(SceneMgrPatch));
-            list.Add(typeof(SceneScenarioSelectPatch));
-            list.Add(typeof(ScoutManagerPatch));
-            list.Add(typeof(ScriptManagerFastPatch));
-            list.Add(typeof(ScriptManagerPatch));
-            list.Add(typeof(SkillPatch));
-            list.Add(typeof(StatusMgrPatch));
-            list.Add(typeof(TJSScriptPatch));
-
-
+            
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
                 try
                 {
                     log.LogMessage("Plugin:" + item.Name);
-                    Harmony.CreateAndPatchAll(item, null);
+                    if (!harmonys.ContainsKey(item))
+                    {
+                        harmonys.Add(item, Harmony.CreateAndPatchAll(item, null));
+                    }
                 }
                 catch (Exception e)
                 {
                     log.LogError("Plugin:" + e.ToString());
                 }
             }
+        }
+
+        public void DelHarmonyPatch()
+        {
+            DelHarmonyPatch(lists);
+        }
+        public void DelHarmonyPatch(List<Type> list)
+        {
+            // https://github.com/BepInEx/HarmonyX/wiki/Patching-with-Harmony
+            // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
+
+            // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
+
+            foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
+            {
+                try
+                {
+                    log.LogMessage("Plugin:" + item.Name);
+                    Harmony harmony;
+                    if (harmonys.TryGetValue(item, out harmony))
+                    {
+                        harmonys.Remove(item);
+                        harmony.UnpatchSelf();
+                    }
+                }
+                catch (Exception e)
+                {
+                    log.LogError("Plugin:" + e.ToString());
+                }
+            }
+        }
+
+        private void SetHarmonyList()
+        {
+            listd = new List<Type>() {
+                typeof(CsvParserPatch),
+                typeof(GameUtyPatch)
+            };
+
+            lists.Add(typeof(AudioSourceMgrPatch));
+            lists.Add(typeof(BgMgrPatch));
+            lists.Add(typeof(CameraMainPatch));
+            lists.Add(typeof(CharacterMgrPatch));
+            lists.Add(typeof(DeskManagerPatch));
+            lists.Add(typeof(GameMainPatch));
+            lists.Add(typeof(KasizukiMainMenuPatch));
+            lists.Add(typeof(MaidManagementMainPatch));
+            lists.Add(typeof(MaidPatch));
+            lists.Add(typeof(MotionWindowPatch));
+            lists.Add(typeof(PhotoMotionDataPatch));
+            lists.Add(typeof(PopupAndTabListPatch));
+            lists.Add(typeof(ProfileCtrlPapch));
+            lists.Add(typeof(SaveAndLoadCtrlPatch));
+            lists.Add(typeof(ScenarioDataPatch));//
+            lists.Add(typeof(SceneADVPatch));
+            lists.Add(typeof(SceneEditPatch)); //자꾸 오류남?
+            lists.Add(typeof(SceneMgrPatch));
+            lists.Add(typeof(ScenarioSelectMgrPatch));
+            lists.Add(typeof(SceneScenarioSelectPatch));
+            lists.Add(typeof(ScoutManagerPatch));
+            lists.Add(typeof(ScriptManagerFastPatch));
+            lists.Add(typeof(ScriptManagerPatch));
+            lists.Add(typeof(SkillPatch));
+            lists.Add(typeof(StatusMgrPatch));
+            lists.Add(typeof(TJSScriptPatch));
         }
 
         //-----------------------------------------------

@@ -28,9 +28,8 @@
     <None Remove="COM3D2.Lilly.plugin.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="0Harmony20, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>F:\COM3D2\BepInEx\core\0Harmony20.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="0Harmony">
+      <HintPath>F:\COM3D2\BepInEx\core\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>F:\COM3D2\COM3D2x64_Data\Managed\Assembly-CSharp.dll</HintPath>

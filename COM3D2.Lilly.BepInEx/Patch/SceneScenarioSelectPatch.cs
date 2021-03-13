@@ -69,6 +69,8 @@ namespace COM3D2.Lilly.Plugin
         }
 
 
+
+
         
         // 이걸론 안됨
         [HarmonyPatch(typeof(SceneScenarioSelect), "SetScenarioPlate")]
@@ -81,7 +83,7 @@ namespace COM3D2.Lilly.Plugin
             UIButton ___m_OkButton
             )
         {
-            MyLog.LogMessageS("SetScenarioPlate.GetAllScenarioData");
+            //MyLog.LogMessageS("SetScenarioPlate.GetAllScenarioData");
             //foreach (ScenarioData scenarioData in GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData())
             //{
             //    //if (scenarioData.IsPlayable)
@@ -94,7 +96,7 @@ namespace COM3D2.Lilly.Plugin
             //    }
             //}
 
-            MyLog.LogMessageS("SetScenarioPlate.___m_ScenarioButtonpair");
+            //MyLog.LogMessageS("SetScenarioPlate.___m_ScenarioButtonpair");
             //foreach (var item in ___m_ScenarioButtonpair)
             //{
             //    MyLog.LogMessageS(".___m_ScenarioButtonpair:" + item.Value.Title + "," + item.Value.EventContents+ "," + item.Value.ScriptLabel+ "," + item.Value.Notification);
@@ -104,7 +106,7 @@ namespace COM3D2.Lilly.Plugin
             //    }
             //}
 
-            MyLog.LogMessageS("SetScenarioPlate.___m_SelectedMaid");
+           // MyLog.LogMessageS("SetScenarioPlate.___m_SelectedMaid");
             //foreach (var item in ___m_SelectedMaid)
             //{
             //    MyLog.LogMessageS(".___m_SelectedMaid:" +item.status.firstName + " , " + item.status.lastName);
@@ -151,12 +153,13 @@ namespace COM3D2.Lilly.Plugin
         private static void SetPlayableText(UILabel ___m_ContentsLabel, List<Maid> ___m_SelectedMaid, List<UILabel> ___m_PlayableTextUIList) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessageS("SetPlayableText");
-            foreach (var item in ___m_PlayableTextUIList)
-            {
-                MyLog.LogMessageS("StartPost:" + item.text);
-            }
+            //foreach (var item in ___m_PlayableTextUIList)
+            //{
+            //    MyLog.LogMessageS("SetPlayableText:" + item.text);
+            //}
 
         }
+
         // 이걸론 안됨
         [HarmonyPatch(typeof(SceneScenarioSelect), "UpdateCharaUI")]
         [HarmonyPostfix]
@@ -167,51 +170,64 @@ namespace COM3D2.Lilly.Plugin
             ScenarioData ___m_CurrentScenario,
             CharacterSelectManager ___m_CharaSelectMgr) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("UpdateCharaUI");
-
-            foreach (var item in ___m_SelectedMaid)
-            {
-                MyLog.LogMessageS("UpdateCharaUI:m_SelectedMaid:" + item.status.firstName + " , " + item.status.lastName);
-            }
-
-            // 조건 목록
-            foreach (var item in ___m_PlayableTextUIList)
-            {
-                MyLog.LogMessageS("UpdateCharaUI:m_PlayableTextUIList:" + item.text);
-            }
-
-            foreach (var item in ___m_CurrentScenario.ConditionTextTerms)
-            {
-                MyLog.LogMessageS("UpdateCharaUI:ConditionTextTerms:" + item);
-            }
-
-            foreach (var item in ___m_CurrentScenario.ConditionText)
-            {
-                MyLog.LogMessageS("UpdateCharaUI:ConditionText:" + item);
-            }
-
-
-                /*
-                string[] conditionTextTerms =___m_CurrentScenario.ConditionTextTerms;
-                for (int i = 0; i < ___m_PlayableTextUIList.Count; i++)
-                {
-                    GameObject gameObject = ___m_PlayableTextUIList[i].transform.parent.gameObject;
-                    gameObject.SetActive(false);
-                    if (i <___m_CurrentScenario.ConditionText.Count<string>())
-                    {
-                        string text =___m_CurrentScenario.ConditionText[i];
-                        if (!string.IsNullOrEmpty(text))
-                        {
-                            gameObject.SetActive(true);
-                            ___m_PlayableTextUIList[i].text = text;
-                            if (!Utility.SetLocalizeTerm(___m_PlayableTextUIList[i], conditionTextTerms[i], false))
-                            {
-                                ___m_PlayableTextUIList[i].text = ___m_PlayableTextUIList[i].text.Replace(" ", "\u00a0");
-                            }
-                        }
-                    }
-                }
-                */
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ScenarioScript);
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ScriptLabel);
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ConditionText);
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ConditionTextTerms);
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Notification);
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.EventContents);
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Title);
+            
+            // SceneScenarioSelect
+            // Token: 0x06003F9A RID: 16282 RVA: 0x001F3004 File Offset: 0x001F1404
+            
+            //CharacterSelectManager m_CharaSelectMgr=new CharacterSelectManager();
+            ////this.m_SelectedMaid.Clear();
+            //if (___m_CurrentScenario.IsFixedMaid)
+            //{
+            //    //___m_CharaSelectMgr.Create(CharacterSelectManager.Type.Multiple, ___m_CurrentScenario.EventMaidCount, true);
+            //    //for (int i = 0; i < ___m_CurrentScenario.EventMaidCount; i++)
+            //    //{
+            //    //    ___m_SelectedMaid.Add(___m_CurrentScenario.GetEventMaid(i));
+            //    //}
+            //    foreach (var maid in ___m_SelectedMaid)
+            //    {
+            //        MyLog.LogMessageS("UpdateCharaUI1:" + MaidUtill.GetMaidFullNale(maid));
+            //    }
+            //    //base.StartCoroutine(___ColiderOff());
+            //}
+            //else
+            //{
+            //    CharacterSelectManager.CallBackOnSelect callBackCallBackOnSelect = delegate (Maid maid)
+            //    {
+            //        MyLog.LogMessageS("UpdateCharaUI2:" + MaidUtill.GetMaidFullNale(maid));
+            //        //___m_SelectedMaid.Clear();
+            //        //___m_SelectedMaid.Add(maid);
+            //    };
+            //    m_CharaSelectMgr.SetCallBackCallBackOnSelect(callBackCallBackOnSelect);
+            //    m_CharaSelectMgr.Create(CharacterSelectManager.Type.Select, 3, true);
+            //}
+            //m_CharaSelectMgr.big_thumbnail.Visible = false;
+            //for (int j = 0; j < GameMain.Instance.CharacterMgr.GetStockMaidCount(); j++)
+            //{
+            //    Maid stockMaid = GameMain.Instance.CharacterMgr.GetStockMaid(j);
+            //    if (!___m_CurrentScenario.ExistEventMaid(stockMaid))
+            //    {
+            //        m_CharaSelectMgr.RemoveMaidPlate(stockMaid);
+            //    }
+            //}
+            //if (___m_CurrentScenario.IsFixedMaid || ___m_CurrentScenario.EventMaidCount == 0)
+            //{
+            //    return;
+            //}
+            //if (___m_CurrentScenario.EventMaidCount != GameMain.Instance.CharacterMgr.GetStockMaidCount())
+            //{
+            //    List<Transform> childList = m_CharaSelectMgr.MaidPlateParentGrid.GetChildList();
+            //    m_CharaSelectMgr.SelectMaid(childList[0].GetComponent<MaidPlate>().maid);
+            //}
         }
+        /*
+
+        */
     }
 }

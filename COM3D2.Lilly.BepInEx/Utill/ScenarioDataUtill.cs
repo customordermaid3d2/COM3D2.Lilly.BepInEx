@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaidStatus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,9 @@ namespace COM3D2.Lilly.Plugin
     /// </summary>
     public static class ScenarioDataUtill
     {
+        static CharacterMgr characterMgr = GameMain.Instance.CharacterMgr;
+        static ﻿ScriptManager﻿ scriptManager = new ScriptManager();
+
         /// <summary>
         /// 모든 이벤트 처리용
         /// </summary>
@@ -21,7 +25,7 @@ namespace COM3D2.Lilly.Plugin
             // 병렬 처리
             Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
             {
-                MyLog.LogMessageS(".SetEventEndFlagAll:" + scenarioData.ID + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
+                // MyLog.LogMessageS(".SetScenarioDataAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
                 if (scenarioData.IsPlayable)
                 {                    
                     SetEventEndFlagAll(scenarioData.GetEventMaidList(), scenarioData);
@@ -33,20 +37,35 @@ namespace COM3D2.Lilly.Plugin
         /// 
         /// </summary>
         /// <param name="___m_EventMaid"></param>
-        /// <param name="__instance"></param>
-        public static void SetEventEndFlagAll(List<Maid> ___m_EventMaid, ScenarioData __instance)
+        /// <param name="scenarioData"></param>
+        public static void SetEventEndFlagAll(List<Maid> ___m_EventMaid, ScenarioData scenarioData)
         {
             Action<Maid> action = delegate (Maid maid)
             {
+                // //___select_maid_.status.specialRelation = SpecialRelation.Married;// 호감도
                 //maid.status.RemoveEventEndFlagAll();
-                maid.status.SetEventEndFlag(__instance.ID, true);
+
+                
+                maid.status.SetEventEndFlag(scenarioData.ID, true);
+                if (scenarioData.ScenarioScript.Contains("_Marriage"))
+                {
+                    maid.status.specialRelation = SpecialRelation.Married;
+                    maid.status.relation = Relation.Lover;
+                    maid.status.OldStatus.isMarriage = true;
+                    maid.status.OldStatus.isNewWife = true;
+                    //SetMaidCondition(0, '嫁');
+                }
+
+                //scriptManager.EvalScript("&tf['scenario_file_name'] = '" + __instance.ScenarioScript + "';");
+                //scriptManager.EvalScript("&tf['label_name'] = '" + __instance.ScriptLabel + "';");
+
             };
             bool b;
             //MyLog.LogMessageS(".m_EventMaid");
             foreach (var maid in ___m_EventMaid)
             {
-                b = maid.status.GetEventEndFlag(__instance.ID);
-                MyLog.LogMessageS(".SetEventEndFlagAll:" + __instance.ID +" , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b + " , " + __instance.Title); ;
+                b = maid.status.GetEventEndFlag(scenarioData.ID);
+                MyLog.LogMessageS(".SetEventEndFlagAll:" + scenarioData.ID +" , " + scenarioData.ScenarioScript + " , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b + " , " + scenarioData.Title); ;
                 if (!b)
                 {
                     action(maid);
@@ -59,7 +78,7 @@ namespace COM3D2.Lilly.Plugin
         /// </summary>
         public static void RemoveEventEndFlagAll()
         {
-            CharacterMgr characterMgr = GameMain.Instance.CharacterMgr;
+            
             Action<Maid> action = delegate (Maid maid)
             {
                     maid.status.RemoveEventEndFlagAll();             

@@ -26,6 +26,21 @@ namespace COM3D2.Lilly.Plugin
         {
             LogMessageS(name+" : "+v);
         }
+        internal static void LogMessageS(params string[] args)
+        {
+            StringBuilder s = new StringBuilder(args[0]);
+            string[] t=new string[args.Length-1];
+            args.CopyTo(t, 1);
+            foreach (var i in t)
+            {
+                s.Append(" , "+i);
+            }
+            Debug.Log("Lilly:" + s);
+            // s.Append(args[1..]); //8.0 문법;;
+            // s.Append(args[1..]); //8.0 문법;;
+        }
+
+
         internal static void LogMessageS(string v)
         {
             //Debug.Log("Lilly:"+v);

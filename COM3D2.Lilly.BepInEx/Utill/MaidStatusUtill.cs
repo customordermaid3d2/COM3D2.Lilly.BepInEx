@@ -65,6 +65,11 @@ namespace COM3D2.Lilly.Plugin
             ___select_maid_.status.studyRate = 0;   // 습득율
             ___select_maid_.status.likability = 999;// 호감도
 
+            ___select_maid_.status.heroineType=HeroineType.Transfer;// 호감도
+            ___select_maid_.status.relation= Relation.Lover;// 호감도
+            ___select_maid_.status.seikeiken = Seikeiken.Yes_Yes;// 호감도
+            //___select_maid_.status.specialRelation = SpecialRelation.Married;// 호감도
+
             try
             {
                 foreach (Feature.Data data in Feature.GetAllDatas(true))
@@ -102,12 +107,47 @@ namespace COM3D2.Lilly.Plugin
             }
         }
 
-        public static TJSScript tjs_;
-        public static ScriptManager scriptManager;
+        //public static TJSScript tjs_;
+        public static ScriptManager scriptManager= new ScriptManager();
+        public static ScenarioSelectMgr scenarioSelectMgr;
+        public static ScenarioData[] scenarioDatas;
 
         public static void Test()
         {
-            scriptManager = GameMain.Instance.ScriptMgr;
+            //scriptManager = GameMain.Instance.ScriptMgr;
+            scenarioSelectMgr = GameMain.Instance.ScenarioSelectMgr;
+            scenarioDatas = scenarioSelectMgr.GetAllScenarioData();
+
+            foreach (var scenarioData in scenarioDatas)
+            {
+                string text﻿=scenarioData.ScenarioScript;
+                //if (this.m_SelectedMaid.Count > 0 && text.IndexOf("?") >= 0)
+                //{
+                //    text = ScriptManager.ReplacePersonal(this.m_SelectedMaid[0], text);
+                //}
+                ////ScriptManager
+                //GameMain.Instance.ScriptMgr.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
+                //GameMain.Instance.ScriptMgr.EvalScript("&tf['label_name'] = '" + this.m_CurrentScenario.ScriptLabel + "';");
+                
+                scriptManager.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
+
+                // ScriptManager.EvalScriptPost2:&tf['scenario_file_name'] = 'j1_marriage_0006';
+                // [Message:     Lilly] ScriptManager.EvalScriptPost2:&tf['label_name'] = '*OK押された時のとび先';
+
+                //ScriptManager.EvalScript(string) : void @06004DF7
+                //public void EvalScript(string eval_str)
+                //{
+                //    this.tjs_.EvalScript(eval_str);
+                //}
+
+                // this.tjs_ = TJSScript.Create(this.file_system);
+                // ScriptManager.tjs_ : TJSScript @04004686
+                // this.tjs_.AddFunction("IsMarriage", new TJSScript.FunctionCallBack(this.OldTJSFuncIsMarriage));
+                // ﻿public delegate void FunctionCallBack(TJSVariantRef[] param, TJSVariantRef result);﻿
+
+
+            }
+
             //GameMain.Instance
             //tjs_ = TJSScript.Create(scriptManager.file_system);
             //tjs_.AddFunction("IsYotogiClass", new TJSScript.FunctionCallBack(TJSFuncIsYotogiClass));

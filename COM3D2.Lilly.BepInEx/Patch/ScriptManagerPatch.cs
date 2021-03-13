@@ -15,10 +15,10 @@ namespace COM3D2.Lilly.Plugin
         // public void EvalScript(string eval_str, TJSVariant result)
         [HarmonyPatch(typeof(ScriptManager), "EvalScript", new Type[] { typeof(string) })]
         [HarmonyPostfix]
-        static void EvalScriptPost0(string eval_str)
+        static void EvalScript(string eval_str)
         {
             // ScriptManager.EvalScriptPost2:global.__skill_command_file.add(%['file'=>'C1_RR_CA001f.ks','label'=>'*RR2','rrlock'=>'false']);
-            MyLog.LogMessageS("ScriptManager.EvalScriptPost2:" + eval_str);
+            MyLog.LogMessageS("ScriptManager.EvalScript:" + eval_str);
         }
 
         // public void EvalScript(string eval_str, TJSVariant result)
@@ -135,17 +135,55 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogMessageS("OldTJSFuncIsNewWifeFlag." + MaidUtill.GetMaidFullNale(maid));
         }
 
-            // 메이드 새로 만들때?
-            // TJSFuncCreateNewMaid
-            // private void TJSFuncCreateNewMaid(TJSVariantRef[] tjs_param, TJSVariantRef result)
-            //[HarmonyPatch(typeof(ScriptManager), "TJSFuncCreateNewMaid" )]
-            //[HarmonyPostfix]
-            //static void TJSFuncCreateNewMaid()
-            //{
-            //    MyLog.LogMessageS("ScriptManager.TJSFuncCreateNewMaid."  );
-            //
-            //    MaidStatus.MaidStatusAll();
-            //}
+
+        // private void TJSFuncSetMaidCondition(TJSVariantRef[] tjs_param, TJSVariantRef result)
+        [HarmonyPatch(typeof(ScriptManager), "TJSFuncSetMaidCondition")]
+        [HarmonyPostfix]
+        static void TJSFuncSetMaidCondition(TJSVariantRef[] tjs_param, TJSVariantRef result)
+        {
+            int nMaidNo = tjs_param[0].AsInteger();
+            string a = tjs_param[1].AsString();
+            Maid maid = GameMain.Instance.CharacterMgr.GetMaid(nMaidNo);
+
+            MyLog.LogMessageS("TJSFuncSetMaidCondition: " + MaidUtill.GetMaidFullNale(maid));
         }
+
+        // 	public void TJSFuncCreateStockMaidLoopData(TJSVariantRef[] tjs_param, TJSVariantRef result)
+        [HarmonyPatch(typeof(ScriptManager), "TJSFuncCreateStockMaidLoopData")]
+        [HarmonyPostfix]
+        static void TJSFuncCreateStockMaidLoopData(TJSVariantRef[] tjs_param, TJSVariantRef result, List<Maid> ___stock_maid_loop_list)
+        {
+            // List<Maid> stock_maid_loop_list = new List<Maid>();
+            // //this.stock_maid_loop_list.Clear();
+            // CharacterMgr characterMgr = GameMain.Instance.CharacterMgr;
+            // for (int i = 0; i < characterMgr.GetStockMaidCount(); i++)
+            // {
+            //     //this.stock_maid_loop_list.Add(characterMgr.GetStockMaid(i));
+            // }
+            // List<Maid> list = stock_maid_loop_list;
+            // Comparison<Maid> f__mgcache0= new Comparison<Maid>(CharacterSelectManager.SortMaidStandard);           
+            // list.Sort(f__mgcache0);
+            // if (result != null)
+            // {
+            //     result.SetInteger(stock_maid_loop_list.Count);
+            // }
+            foreach (var maid in ___stock_maid_loop_list)
+            {
+               MyLog.LogMessageS("TJSFuncCreateStockMaidLoopData: " + MaidUtill.GetMaidFullNale(maid));
+            }
+        }
+
+        // 메이드 새로 만들때?
+        // TJSFuncCreateNewMaid
+        // private void TJSFuncCreateNewMaid(TJSVariantRef[] tjs_param, TJSVariantRef result)
+        //[HarmonyPatch(typeof(ScriptManager), "TJSFuncCreateNewMaid" )]
+        //[HarmonyPostfix]
+        //static void TJSFuncCreateNewMaid()
+        //{
+        //    MyLog.LogMessageS("ScriptManager.TJSFuncCreateNewMaid."  );
+        //
+        //    MaidStatus.MaidStatusAll();
+        //}
+    }
 
 }

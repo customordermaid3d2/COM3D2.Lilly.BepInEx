@@ -59,7 +59,7 @@ namespace COM3D2.Lilly.Plugin
             // 간략한 표현
             //new Thread(() => Run(scene)).Start();
 
-            StartCoroutine(MyCoroutine());
+            //StartCoroutine(MyCoroutine()); // 실패
         }
 
         public System.Collections.IEnumerator MyCoroutine()
