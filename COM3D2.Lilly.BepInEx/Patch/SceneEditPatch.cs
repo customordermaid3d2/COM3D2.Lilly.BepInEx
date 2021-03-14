@@ -20,7 +20,7 @@ namespace COM3D2.Lilly.Plugin
         //private Maid m_maid;
         [HarmonyPatch(typeof(SceneEdit), "Start")]
         [HarmonyPostfix]
-        public static void StartPos() // Maid ___m_maid,SceneEdit __instance
+        public static void Start() // Maid ___m_maid,SceneEdit __instance
         {            
             Maid ___m_maid = SceneEdit.Instance.maid;
             if (___m_maid == null)

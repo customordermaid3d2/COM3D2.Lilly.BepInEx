@@ -7,11 +7,15 @@ using UnityEngine.SceneManagement;
 
 namespace COM3D2.Lilly.Plugin
 {
+
+
     /// <summary>
     /// 메이드 설정 관련
     /// </summary>
     public static class MaidPatch
     {
+        public static bool isOnOff;
+
         // https://github.com/BepInEx/HarmonyX/wiki/Prefix-changes
         // https://github.com/BepInEx/HarmonyX/wiki/Patch-parameters
         // 
@@ -25,7 +29,7 @@ namespace COM3D2.Lilly.Plugin
         public static void SetMaterialPropertyPost2(Maid __instance, MPN m_mpn, TBody.SlotID f_slot, int f_nMatNo, string f_strPropName, string f_strTypeName, string f_strValue)
         {
             //if (SceneManager.GetActiveScene().isLoaded)//실패
-            if (__instance.Visible)
+            if (isOnOff&&__instance.Visible )
             {
                 MyLog.LogMessageS("Maid.SetMaterialPropertyPost2:" + f_strPropName + "," + f_strTypeName+ "," + f_strValue);
             }
@@ -41,7 +45,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void SetPropPost2(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
         {
-            if (SceneManager.GetActiveScene().isLoaded)//실패?
+            if (isOnOff&&SceneManager.GetActiveScene().isLoaded)//실패?
             //if( GameMain.Instance.MainCamera.GetFadeState()==CameraMain.FadeState.Out)//효과 없음
             //if (__instance.Visible)
             {
@@ -107,7 +111,9 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPrefix]
         public static void DelPropPrefix4(Maid __instance, MPN idx, bool f_bTemp)
         {
-            MyLog.LogMessageS("Maid.DelPropPrefix4");
+            if (isOnOff && __instance.Visible)
+                MyLog.LogMessageS("Maid.DelPropPrefix4");
+
         }
 
 

@@ -6,6 +6,9 @@ using System.Text;
 
 namespace COM3D2.Lilly.Plugin
 {
+    /// <summary>
+    /// 에딧모드에서 
+    /// </summary>
     class ProfileCtrlPapch
     {
         /*

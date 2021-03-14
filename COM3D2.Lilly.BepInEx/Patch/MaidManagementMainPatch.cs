@@ -16,7 +16,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void OnSelectChara(Maid ___select_maid_, Dictionary<string, UIButton> ___button_dic_, MaidManagementMain __instance)
         {
-            MyLog.LogMessageS("SceneEdit.Start:" + ___select_maid_.status.charaName.name1 + " , " + ___select_maid_.status.charaName.name2);
+            MyLog.LogMessageS("MaidManagementMain.OnSelectChara:" + ___select_maid_.status.charaName.name1 + " , " + ___select_maid_.status.charaName.name2);
 
             
             // MaidStatusUtill.SetMaidStatus(___select_maid_);

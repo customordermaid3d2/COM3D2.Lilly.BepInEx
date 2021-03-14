@@ -56,6 +56,7 @@ namespace COM3D2.Lilly.Plugin
         private void SetOnSceneLoaded()
         {   
             actioOnSceneLoaded += (GearMenuAddPlugin.OnSceneLoaded);
+            actioOnSceneLoaded += (SceneMaidManagementPlugin.OnSceneLoaded);
             //actioOnSceneLoaded+=(threadPlugin.OnSceneLoaded);//정상 작동
         }
 
@@ -124,36 +125,36 @@ namespace COM3D2.Lilly.Plugin
         private void SetHarmonyList()
         {
             listd = new List<Type>() {
-                typeof(CsvParserPatch),
-                typeof(GameUtyPatch)
+                //typeof(CsvParserPatch),
+                //typeof(GameUtyPatch)
             };
 
             lists.Add(typeof(AudioSourceMgrPatch));
             lists.Add(typeof(BgMgrPatch));
-            lists.Add(typeof(CameraMainPatch));
+            //lists.Add(typeof(CameraMainPatch));
             lists.Add(typeof(CharacterMgrPatch));
-            lists.Add(typeof(DeskManagerPatch));
-            lists.Add(typeof(GameMainPatch));
-            lists.Add(typeof(KasizukiMainMenuPatch));
+            //lists.Add(typeof(DeskManagerPatch));
+            //lists.Add(typeof(GameMainPatch));
+            //lists.Add(typeof(KasizukiMainMenuPatch));
             lists.Add(typeof(MaidManagementMainPatch));
             lists.Add(typeof(MaidPatch));
-            lists.Add(typeof(MotionWindowPatch));
-            lists.Add(typeof(PhotoMotionDataPatch));
-            lists.Add(typeof(PopupAndTabListPatch));
+            //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
+            //lists.Add(typeof(PhotoMotionDataPatch));
+            //lists.Add(typeof(PopupAndTabListPatch));
             lists.Add(typeof(ProfileCtrlPapch));
-            lists.Add(typeof(SaveAndLoadCtrlPatch));
-            lists.Add(typeof(ScenarioDataPatch));//
-            lists.Add(typeof(SceneADVPatch));
+            //lists.Add(typeof(SaveAndLoadCtrlPatch));
+            //lists.Add(typeof(ScenarioDataPatch));//
+            //lists.Add(typeof(SceneADVPatch));
             lists.Add(typeof(SceneEditPatch)); //자꾸 오류남?
-            lists.Add(typeof(SceneMgrPatch));
-            lists.Add(typeof(ScenarioSelectMgrPatch));
+            //lists.Add(typeof(SceneMgrPatch));
+            //lists.Add(typeof(ScenarioSelectMgrPatch));// 이벤트 기초 목록 관련
             lists.Add(typeof(SceneScenarioSelectPatch));
-            lists.Add(typeof(ScoutManagerPatch));
-            lists.Add(typeof(ScriptManagerFastPatch));
+            lists.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.
+            //lists.Add(typeof(ScriptManagerFastPatch));
             lists.Add(typeof(ScriptManagerPatch));
-            lists.Add(typeof(SkillPatch));
-            lists.Add(typeof(StatusMgrPatch));
-            lists.Add(typeof(TJSScriptPatch));
+            //lists.Add(typeof(SkillPatch));
+            //lists.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
+            //lists.Add(typeof(TJSScriptPatch));
         }
 
         //-----------------------------------------------

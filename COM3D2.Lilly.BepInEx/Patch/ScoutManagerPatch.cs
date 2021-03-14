@@ -7,9 +7,12 @@ using System.Text;
 
 namespace COM3D2.Lilly.Plugin
 {
+    /// <summary>
+    /// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제. 원본이 하모니 못먹음
+    /// </summary>
     class ScoutManagerPatch
     {
-        // 스카우트 모드의 필요사항 (메이드 수 등등)을 해제. 원본이 하모니 못먹음
+        // 
         [HarmonyPatch(typeof(ScoutManager), "isModeEnabled", MethodType.Getter)]
         [HarmonyPrefix]
         public static bool GetIsScoutMode(ref bool __result)

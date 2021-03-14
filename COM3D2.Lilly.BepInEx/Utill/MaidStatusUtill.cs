@@ -13,6 +13,8 @@ namespace COM3D2.Lilly.Plugin
     {
         // AddYotogiWorkResultParam 
 
+        //static
+
         public static void SetMaidStatusAll()
         {
             MyLog.LogDebugS("MaidStatusAll ");
@@ -65,10 +67,14 @@ namespace COM3D2.Lilly.Plugin
             ___select_maid_.status.studyRate = 0;   // 습득율
             ___select_maid_.status.likability = 999;// 호감도
 
-            ___select_maid_.status.heroineType=HeroineType.Transfer;// 호감도
+            ___select_maid_.status.heroineType=HeroineType.Transfer;// 기본, ? , 이전
             ___select_maid_.status.relation= Relation.Lover;// 호감도
-            ___select_maid_.status.seikeiken = Seikeiken.Yes_Yes;// 호감도
+            ___select_maid_.status.seikeiken = Seikeiken.Yes_Yes;// 
             //___select_maid_.status.specialRelation = SpecialRelation.Married;// 호감도
+
+            // this.tjs_.AddFunction("GetMaidStatus", new TJSScript.FunctionCallBack(this.TJSFuncGetMaidStatus));
+
+
 
             try
             {

@@ -28,7 +28,7 @@ namespace COM3D2.Lilly.Plugin
         }
 
         // 이걸론 안됨
-        [HarmonyPatch(typeof(SceneScenarioSelect), "Start")]
+        //[HarmonyPatch(typeof(SceneScenarioSelect), "Start")]
         [HarmonyPostfix]
         private static void StartPost(UILabel ___m_ContentsLabel, List<Maid> ___m_SelectedMaid, List<UILabel> ___m_PlayableTextUIList) // string __m_BGMName 못가져옴
         {
@@ -73,7 +73,7 @@ namespace COM3D2.Lilly.Plugin
 
         
         // 이걸론 안됨
-        [HarmonyPatch(typeof(SceneScenarioSelect), "SetScenarioPlate")]
+        //[HarmonyPatch(typeof(SceneScenarioSelect), "SetScenarioPlate")]
         [HarmonyPostfix]
         private static void SetScenarioPlate(
             Dictionary<UIWFTabButton, ScenarioData> ___m_ScenarioButtonpair,
@@ -148,7 +148,7 @@ namespace COM3D2.Lilly.Plugin
 
 
         // 이걸론 안됨
-        [HarmonyPatch(typeof(SceneScenarioSelect), "SetPlayableText")]
+        //[HarmonyPatch(typeof(SceneScenarioSelect), "SetPlayableText")]
         [HarmonyPostfix]
         private static void SetPlayableText(UILabel ___m_ContentsLabel, List<Maid> ___m_SelectedMaid, List<UILabel> ___m_PlayableTextUIList) // string __m_BGMName 못가져옴
         {
@@ -170,14 +170,17 @@ namespace COM3D2.Lilly.Plugin
             ScenarioData ___m_CurrentScenario,
             CharacterSelectManager ___m_CharaSelectMgr) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ScenarioScript);
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ScriptLabel);
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ConditionText);
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ConditionTextTerms);
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Notification);
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.EventContents);
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Title);
-            
+            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ScenarioScript +" , " + ___m_CurrentScenario.ScriptLabel +" , " + ___m_CurrentScenario.Title + " , " + ___m_CurrentScenario.EventContents);            
+            //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.EventContents);
+            //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Title);
+            //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ConditionText);            
+            //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ConditionTextTerms);
+            //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Notification);
+            foreach (var item in ___m_CurrentScenario.ConditionText)
+            {
+                MyLog.LogMessageS("UpdateCharaUI:" + item);
+            }
+
             // SceneScenarioSelect
             // Token: 0x06003F9A RID: 16282 RVA: 0x001F3004 File Offset: 0x001F1404
             

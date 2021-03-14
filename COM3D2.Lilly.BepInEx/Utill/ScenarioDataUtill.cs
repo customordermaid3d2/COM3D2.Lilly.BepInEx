@@ -13,24 +13,24 @@ namespace COM3D2.Lilly.Plugin
     public static class ScenarioDataUtill
     {
         static CharacterMgr characterMgr = GameMain.Instance.CharacterMgr;
-        static ﻿ScriptManager﻿ scriptManager = new ScriptManager();
+        static ScriptManager﻿ scriptManager = new ScriptManager();
 
         /// <summary>
         /// 모든 이벤트 처리용
         /// </summary>
-        public  static void SetScenarioDataAll()
+        public static void SetScenarioDataAll()
         {
-            MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll");
-
+            MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll st");
             // 병렬 처리
-            Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
+            ParallelLoopResult r = Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
             {
-                // MyLog.LogMessageS(".SetScenarioDataAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
-                if (scenarioData.IsPlayable)
-                {                    
+            // MyLog.LogMessageS(".SetScenarioDataAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
+            if (scenarioData.IsPlayable)
+                {
                     SetEventEndFlagAll(scenarioData.GetEventMaidList(), scenarioData);
                 }
             });
+            MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll ed : " + r);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace COM3D2.Lilly.Plugin
                 // //___select_maid_.status.specialRelation = SpecialRelation.Married;// 호감도
                 //maid.status.RemoveEventEndFlagAll();
 
-                
+
                 maid.status.SetEventEndFlag(scenarioData.ID, true);
                 if (scenarioData.ScenarioScript.Contains("_Marriage"))
                 {
@@ -65,12 +65,14 @@ namespace COM3D2.Lilly.Plugin
             foreach (var maid in ___m_EventMaid)
             {
                 b = maid.status.GetEventEndFlag(scenarioData.ID);
-                MyLog.LogMessageS(".SetEventEndFlagAll:" + scenarioData.ID +" , " + scenarioData.ScenarioScript + " , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b + " , " + scenarioData.Title); ;
+                MyLog.LogMessageS(".SetEventEndFlagAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b +  " , " + scenarioData.ScenarioScript.Contains("_Marriage") + " , " + scenarioData.Title); ;
                 if (!b)
                 {
                     action(maid);
                 }
             }
+
+
         }
 
         /// <summary>
@@ -78,18 +80,28 @@ namespace COM3D2.Lilly.Plugin
         /// </summary>
         public static void RemoveEventEndFlagAll()
         {
-            
+
             Action<Maid> action = delegate (Maid maid)
             {
-                    maid.status.RemoveEventEndFlagAll();             
+                maid.status.RemoveEventEndFlagAll();
             };
             for (int j = 0; j < characterMgr.GetStockMaidCount(); j++)
             {
                 Maid stockMaid = characterMgr.GetStockMaid(j);
-                MyLog.LogMessageS(".RemoveEventEndFlagAll:" + stockMaid.status.firstName + " , " + stockMaid.status.lastName ); ;
+                MyLog.LogMessageS(".RemoveEventEndFlagAll:" + stockMaid.status.firstName + " , " + stockMaid.status.lastName); ;
                 action(stockMaid);
             }
 
+        }
+
+        public static void RemoveEventEndFlag(Maid maid)
+        {
+            if (maid!=null)
+            {
+                MyLog.LogMessageS(".RemoveEventEndFlag:" + maid.status.firstName + " , " + maid.status.lastName); ;
+                maid.status.RemoveEventEndFlagAll();
+            }
+          
         }
 
         //public void RemoveEventMaid(Maid maid, bool not_again = false)

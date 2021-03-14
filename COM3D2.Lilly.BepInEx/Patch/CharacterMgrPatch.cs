@@ -41,10 +41,7 @@ namespace COM3D2.Lilly.Plugin
         /// <param name="__instance"></param>
         /// <param name="__result"></param>
         /// <param name="f_strFileName"></param>
-        [HarmonyPatch(typeof(CharacterMgr), "PresetLoad", new Type[]
-        {
-                    typeof(BinaryReader) ,typeof(string)
-        })]
+        //[HarmonyPatch(typeof(CharacterMgr), "PresetLoad", new Type[] {typeof(BinaryReader) ,typeof(string) })]
         [HarmonyPostfix]
         public static void PresetLoadPostfix(CharacterMgr __instance, string f_strFileName)
         {
@@ -59,7 +56,7 @@ namespace COM3D2.Lilly.Plugin
         /// <param name="__instance"></param>
         /// <param name="f_maid"></param>
         /// <param name="f_prest"></param>
-        [HarmonyPatch(typeof(CharacterMgr), "PresetSet")]
+        //[HarmonyPatch(typeof(CharacterMgr), "PresetSet")]
         [HarmonyPrefix]
         public static void PresetSetPretfix1(CharacterMgr __instance, Maid f_maid, CharacterMgr.Preset f_prest)
         {
@@ -94,9 +91,7 @@ namespace COM3D2.Lilly.Plugin
 
         // public void SetActiveMaid(Maid f_maid, int f_nActiveSlotNo)
 
-        [HarmonyPatch(typeof(CharacterMgr), "SetActiveMaid", new Type[]{
-            typeof(Maid) ,typeof(int)
-        })]
+        //[HarmonyPatch(typeof(CharacterMgr), "SetActiveMaid", new Type[]{ typeof(Maid) ,typeof(int)        })]
         [HarmonyPostfix]
         public static void SetActiveMaidPost0(Maid f_maid, int f_nActiveSlotNo)
         {

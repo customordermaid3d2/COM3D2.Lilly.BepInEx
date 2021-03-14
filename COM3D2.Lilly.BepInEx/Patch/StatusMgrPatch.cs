@@ -16,7 +16,7 @@ namespace COM3D2.Lilly.Plugin
 		/// 스테이터스 버튼 클릭시 나오는 화면
 		/// </summary>
 		/// <param name="___m_maid"></param>
-		[HarmonyPatch(typeof(StatusMgr), "UpdateMaidStatus")]
+		[HarmonyPatch(typeof(StatusMgr), "OpenStatusPanel")]
 		[HarmonyPrefix]
 		static void OpenStatusPanel(StatusMgr __instance, Maid ___m_maid)
 		{
@@ -29,6 +29,10 @@ namespace COM3D2.Lilly.Plugin
 			//MaidStatusUtill.SetMaidStatus(___m_maid);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="maid"></param>
 		[HarmonyPatch(typeof(StatusMgr), "UpdateMaidStatus")]
 		[HarmonyPrefix]
 		static void UpdateMaidStatusPre(Maid maid)
@@ -39,7 +43,7 @@ namespace COM3D2.Lilly.Plugin
 				return;
 			}
 			MyLog.LogMessageS("StatusMgr.UpdateMaidStatusPre"+ maid.status.charaName.name1 +" , "+ maid.status.charaName.name2);
-			MaidStatusUtill.SetMaidStatus(maid);
+			//MaidStatusUtill.SetMaidStatus(maid);
 		}
 
 		/// <summary>
