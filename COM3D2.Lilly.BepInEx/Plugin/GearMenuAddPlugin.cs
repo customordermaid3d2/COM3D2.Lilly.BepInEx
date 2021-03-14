@@ -26,7 +26,7 @@ namespace COM3D2.Lilly.Plugin
 
         public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            MyLog.LogMessageS("GearMenuAddPlugin.OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex + " , " + scene.isLoaded);
+            //MyLog.LogMessageS("GearMenuAddPlugin.OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex + " , " + scene.isLoaded);
             // SceneManager.GetActiveScene().name;
 
             //Add the button

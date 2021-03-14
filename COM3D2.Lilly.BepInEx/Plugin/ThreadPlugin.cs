@@ -60,6 +60,20 @@ namespace COM3D2.Lilly.Plugin
             //new Thread(() => Run(scene)).Start();
 
             //StartCoroutine(MyCoroutine()); // 실패
+
+            //StartCoroutine(test(() => {
+            //    MyLog.LogMessageS("StartCoroutine:"+ cnt++);
+            //}));
+
+            // yield return new WaitWhile(() => {  //true 인동안 대기
+            //     return isFinish1.Contains<bool>(false);// 하나라도 진행중이면 대기
+            // });
+        }
+
+        private System.Collections.IEnumerator test(Action action)
+        {
+            action();
+            yield return null;
         }
 
         public System.Collections.IEnumerator MyCoroutine()

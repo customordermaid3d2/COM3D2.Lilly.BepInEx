@@ -29,7 +29,7 @@ namespace COM3D2.Lilly.Plugin
 
         // 이걸론 안됨
         //[HarmonyPatch(typeof(SceneScenarioSelect), "Start")]
-        [HarmonyPostfix]
+        //[HarmonyPostfix]
         private static void StartPost(UILabel ___m_ContentsLabel, List<Maid> ___m_SelectedMaid, List<UILabel> ___m_PlayableTextUIList) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessageS("StartPost");
@@ -74,7 +74,7 @@ namespace COM3D2.Lilly.Plugin
         
         // 이걸론 안됨
         //[HarmonyPatch(typeof(SceneScenarioSelect), "SetScenarioPlate")]
-        [HarmonyPostfix]
+        //[HarmonyPostfix]
         private static void SetScenarioPlate(
             Dictionary<UIWFTabButton, ScenarioData> ___m_ScenarioButtonpair,
             List<Maid> ___m_SelectedMaid,
@@ -149,7 +149,7 @@ namespace COM3D2.Lilly.Plugin
 
         // 이걸론 안됨
         //[HarmonyPatch(typeof(SceneScenarioSelect), "SetPlayableText")]
-        [HarmonyPostfix]
+        //[HarmonyPostfix]
         private static void SetPlayableText(UILabel ___m_ContentsLabel, List<Maid> ___m_SelectedMaid, List<UILabel> ___m_PlayableTextUIList) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessageS("SetPlayableText");
