@@ -34,12 +34,14 @@ namespace COM3D2.Lilly.Plugin
             Thread t1 = new Thread(new ParameterizedThreadStart(Run));
             t1.Name = "1";
             t1.Start(scene);
+            // 안됨
 
             // 컴파일러가 Run() 메서드의 함수 프로토타입으로부터
             // ThreadStart Delegate객체를 추론하여 생성함
             Thread t2 = new Thread(Run);
             t2.Name = "2";
             t2.Start(scene);
+            // 안됨
 
             // 익명메서드(Anonymous Method)를 사용하여
             // 쓰레드 생성
@@ -55,6 +57,8 @@ namespace COM3D2.Lilly.Plugin
             Thread t4 = new Thread(() => Run(scene));
             t4.Name = "4";
             t4.Start();
+
+            //t4.Join(1000); 완료까지 대기. 확인 주기 밀리초
 
             // 간략한 표현
             //new Thread(() => Run(scene)).Start();

@@ -136,8 +136,12 @@ namespace COM3D2.Lilly.Plugin
             //lists.Add(typeof(DeskManagerPatch));
             //lists.Add(typeof(GameMainPatch));
             //lists.Add(typeof(KasizukiMainMenuPatch));
-            lists.Add(typeof(MaidManagementMainPatch));
+            lists.Add(typeof(MaidManagementMainPatch));// 메이드 관리
+            lists.Add(typeof(CsvCommonIdManagerPatch));
             lists.Add(typeof(MaidPatch));
+            //lists.Add(typeof(ProfileCtrlPatch));
+            lists.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서
+            //lists.Add(typeof(StatusPatch));// 오류/떠서 사용 포기
             //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
             //lists.Add(typeof(PhotoMotionDataPatch));
             //lists.Add(typeof(PopupAndTabListPatch));

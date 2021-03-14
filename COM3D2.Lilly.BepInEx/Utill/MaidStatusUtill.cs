@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEngine;
 using Yotogis;
 
@@ -18,21 +19,13 @@ namespace COM3D2.Lilly.Plugin
         public static void SetMaidStatusAll()
         {
             MyLog.LogDebugS("MaidStatusAll ");
-            MyLog.LogInfoS("Application.installerName : " + Application.installerName);
-            MyLog.LogInfoS("Application.version : " + Application.version);
-            MyLog.LogInfoS("Application.unityVersion : " + Application.unityVersion);
-            MyLog.LogInfoS("Application.companyName : " + Application.companyName);
-            MyLog.LogInfoS("CharacterMgr.MaidStockMax : " + CharacterMgr.MaidStockMax);
-            MyLog.LogInfoS("CharacterMgr.ActiveMaidSlotCount : " + CharacterMgr.ActiveMaidSlotCount);
-            MyLog.LogInfoS("CharacterMgr.NpcMaidCreateCount : " + CharacterMgr.NpcMaidCreateCount);
-            MyLog.LogInfoS("CharacterMgr.ActiveManSloatCount : " + CharacterMgr.ActiveManSloatCount);
 
-            foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
+            Parallel.ForEach(GameMain.Instance.CharacterMgr.GetStockMaidList(), maid =>
             {
                 //MyLog.LogMessageS("MaidStatusUtill.ActiveManSloatCount: " + maid.status.firstName +" , "+ maid.status.lastName);
                 
                 SetMaidStatus(maid);
-            }
+            });
         }
 
         public static void SetMaidStatus(Maid ___select_maid_)
@@ -42,7 +35,7 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogErrorS("MaidStatusUtill.SetMaidStatus:null");
                 return;
             }
-            MyLog.LogInfoS("MaidStatusUtill.SetMaidStatus:name: " + ___select_maid_.status.firstName +" , "+ ___select_maid_.status.lastName);
+            MyLog.LogInfoS(".SetMaidStatus:: " + MaidUtill.GetMaidFullNale(___select_maid_));
 
             ___select_maid_.status.employmentDay = 1;// 고용기간
 
@@ -94,7 +87,7 @@ namespace COM3D2.Lilly.Plugin
                     List<Skill.Data> learnPossibleSkills = Skill.GetLearnPossibleSkills(___select_maid_.status);
                     foreach (Skill.Data data in learnPossibleSkills)
                     {
-                        MyLog.LogMessageS("MaidStatusUtill.SetMaidStatus:Skill1: " + data.name + " , " + data.termName + " , " + data.start_call_file + " , " + data.start_call_file2);
+                        MyLog.LogMessageS(".:Skill1: " + MaidUtill.GetMaidFullNale(___select_maid_) + " , " + data.name + " , " + data.termName + " , " + data.start_call_file + " , " + data.start_call_file2);
                         ___select_maid_.status.yotogiSkill.Add(data.id);
                     }
                 }
@@ -102,7 +95,7 @@ namespace COM3D2.Lilly.Plugin
                     List<Skill.Old.Data> learnPossibleSkills = Skill.Old.GetLearnPossibleSkills(___select_maid_.status);
                     foreach (Skill.Old.Data data in learnPossibleSkills)
                     {
-                        MyLog.LogMessageS("MaidStatusUtill.SetMaidStatus:Skill2: " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
+                        MyLog.LogMessageS(".:Skill2: " + MaidUtill.GetMaidFullNale(___select_maid_) + " , " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
                         ___select_maid_.status.yotogiSkill.Add(data.id);
                     }
                 }

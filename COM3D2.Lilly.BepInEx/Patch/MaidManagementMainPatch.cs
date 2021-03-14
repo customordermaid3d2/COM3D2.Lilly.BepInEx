@@ -7,11 +7,17 @@ using System.Text;
 namespace COM3D2.Lilly.Plugin
 {
     /// <summary>
-    /// 어디서 실행되는 클래스였지?
+    /// 메이드 관리
     /// SceneMaidManagement 장면과 관련된 클래스 찿아야 하는데
     /// </summary>
     class MaidManagementMainPatch
     {
+        /// <summary>
+        /// 메이드 관리에서 모든 버튼 활성화
+        /// </summary>
+        /// <param name="___select_maid_"></param>
+        /// <param name="___button_dic_"></param>
+        /// <param name="__instance"></param>
         [HarmonyPatch(typeof(MaidManagementMain), "OnSelectChara")]
         [HarmonyPostfix]
         public static void OnSelectChara(Maid ___select_maid_, Dictionary<string, UIButton> ___button_dic_, MaidManagementMain __instance)

@@ -49,8 +49,15 @@ namespace COM3D2.Lilly.Plugin
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_RemoveEventEndFlagAll), name, png);                
                 name = "아이템 장착 콘솔 로그 표시 여부";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_MaidPatch), name, png);                
+                name = "게임 정보 얻기";
+                SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_gameInfo), name, png);                
                 buttonAdded1 = true;
             }
+        }
+
+        private static void OnMenuButtonClickCallback_gameInfo()
+        {
+            MaidUtill.GetGameInfo();
         }
 
         private static void OnMenuButtonClickCallback_MaidPatch()
