@@ -19,7 +19,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void Awake( Dictionary<int, ClassUnit> ___job_class_unit_dic_, Dictionary<int, ClassUnit> ___yotogi_class_unit_dic_)
         {
-            if (job_class_unit_dic_.Count != 0)
+            if (job_class_unit_dic_.Count != null)
             {
                 return;
             }
@@ -49,7 +49,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void CreateClassText(Dictionary<int, SortedList<int, List<Skill.Data>>> ___job_class_special_skill_list_)
         {
-            if (job_class_special_skill_list_.Count != 0)
+            if (job_class_special_skill_list_ != null)
             {
                 return;
             }
