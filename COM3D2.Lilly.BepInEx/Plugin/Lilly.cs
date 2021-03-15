@@ -22,8 +22,8 @@ namespace COM3D2.Lilly.Plugin
         /// <summary>
         /// Harmony.CreateAndPatchAll 처리할 대상을 담는 리스트
         /// </summary>
-        public static List<Type> lists = new List<Type>();//patch용
-        public static List<Type> listd = new List<Type>();//patch용
+        public static List<Type> listA = new List<Type>();//patch용
+        public static List<Type> listB = new List<Type>();//patch용
 
         public static Dictionary<Type,bool> isLogOnOff = new Dictionary<Type, bool>();//patch용
         public static bool isLogOnOffAll = true;
@@ -53,11 +53,11 @@ namespace COM3D2.Lilly.Plugin
 
         private void SetHarmonyisOnOff()
         {
-            foreach (var item in lists)
+            foreach (var item in listA)
             {
                 isLogOnOff.Add(item,true);
             }
-            foreach (var item in listd)
+            foreach (var item in listB)
             {
                 isLogOnOff.Add(item,false);
             }
@@ -79,7 +79,7 @@ namespace COM3D2.Lilly.Plugin
         /// </summary>
         public void SetHarmonyPatch()
         {
-            SetHarmonyPatch(lists);
+            SetHarmonyPatch(listA);
         }
 
         public void SetHarmonyPatch(List<Type> list)
@@ -108,7 +108,7 @@ namespace COM3D2.Lilly.Plugin
 
         public void DelHarmonyPatch()
         {
-            DelHarmonyPatch(lists);
+            DelHarmonyPatch(listA);
         }
         public void DelHarmonyPatch(List<Type> list)
         {
@@ -138,54 +138,53 @@ namespace COM3D2.Lilly.Plugin
 
         private void SetHarmonyList()
         {
-            listd = new List<Type>() {
+            listB = new List<Type>() {
                 //typeof(CsvParserPatch),
                 //typeof(GameUtyPatch)
             };
 
-            lists.Add(typeof(AudioSourceMgrPatch));
-            lists.Add(typeof(BgMgrPatch));
+            listA.Add(typeof(AudioSourceMgrPatch));
+            listA.Add(typeof(BgMgrPatch));
             //lists.Add(typeof(CameraMainPatch));
-            lists.Add(typeof(CharacterMgrPatch));
+            listA.Add(typeof(CharacterMgrPatch));
             //lists.Add(typeof(DeskManagerPatch));
             //lists.Add(typeof(GameMainPatch));
             //lists.Add(typeof(KasizukiMainMenuPatch));
-            lists.Add(typeof(MaidManagementMainPatch));// 메이드 관리
-            lists.Add(typeof(CsvCommonIdManagerPatch));
-            lists.Add(typeof(ClassChangePanelPatch));
-            lists.Add(typeof(JobClassPatch));
-            lists.Add(typeof(YotogiSkillSystemPatch));
-            lists.Add(typeof(YotogiClassSystemPatch));
-            lists.Add(typeof(YotogiSkillDataPatch));
-            lists.Add(typeof(MaidPatch));
-            lists.Add(typeof(ProfileCtrlPatch));
-            lists.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서
+            listA.Add(typeof(CsvCommonIdManagerPatch));
+            listA.Add(typeof(ClassChangePanelPatch));
+            listA.Add(typeof(JobClassPatch));
+            //lists.Add(typeof(JobClassSystemPatch));
+            listA.Add(typeof(MaidManagementMainPatch));// 메이드 관리
+            listA.Add(typeof(MaidPatch));
+            listA.Add(typeof(ProfileCtrlPatch));
+            listA.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서
             //lists.Add(typeof(StatusPatch));// 오류/떠서 사용 포기
             //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
             //lists.Add(typeof(PhotoMotionDataPatch));
             //lists.Add(typeof(PopupAndTabListPatch));
-
             //lists.Add(typeof(SaveAndLoadCtrlPatch));
             //lists.Add(typeof(ScenarioDataPatch));//
             //lists.Add(typeof(SceneADVPatch));
-            lists.Add(typeof(SceneEditPatch)); //자꾸 오류남?
+            listA.Add(typeof(SceneEditPatch)); //자꾸 오류남?
             //lists.Add(typeof(SceneMgrPatch));
             //lists.Add(typeof(ScenarioSelectMgrPatch));// 이벤트 기초 목록 관련
-            lists.Add(typeof(SceneScenarioSelectPatch));
-            lists.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.
+            listA.Add(typeof(SceneScenarioSelectPatch));
+            listA.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.
             //lists.Add(typeof(ScriptManagerFastPatch));
-            lists.Add(typeof(ScriptManagerPatch));
-            lists.Add(typeof(SkillPatch));// 밤시중 스테이지 선택후 스킬 목록 가져오면서 작동
-            lists.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
-            lists.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입
-            //lists.Add(typeof(TJSScriptPatch));
+            listA.Add(typeof(ScriptManagerPatch));
+            listA.Add(typeof(SkillPatch));// 밤시중 스테이지 선택후 스킬 목록 가져오면서 작동
+            listA.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
+            listA.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입
+                                               //lists.Add(typeof(TJSScriptPatch));
+            listA.Add(typeof(YotogiSkillSystemPatch));
+            listA.Add(typeof(YotogiClassSystemPatch));
         }
 
         //-----------------------------------------------
 
         public void Awake()
         {
-            MyLog.LogDebug("Awake");
+            MyLog.LogDebug("=== Awake ===");
             MyLog.LogInfo("Awake");
             MyLog.LogMessage("Awake");
             MyLog.LogWarning("Awake");

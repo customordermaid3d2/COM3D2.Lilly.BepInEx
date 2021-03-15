@@ -14,7 +14,7 @@ namespace COM3D2.Lilly.Plugin
 		public static CsvCommonIdManager commonIdManager;
 		public static Dictionary<int, JobClass.Data> basicDatas;
 
-		[HarmonyPatch(typeof(ClassChangePanel), "Awake")]
+		[HarmonyPatch(typeof(JobClass), "CreateData")]
         [HarmonyPostfix]
 		// MaidStatus.JobClass
 		// Token: 0x06001D95 RID: 7573 RVA: 0x000DD810 File Offset: 0x000DBC10

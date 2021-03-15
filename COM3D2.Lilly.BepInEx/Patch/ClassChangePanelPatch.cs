@@ -17,7 +17,7 @@ namespace COM3D2.Lilly.Plugin
 
         [HarmonyPatch(typeof(ClassChangePanel), "Awake")]
         [HarmonyPostfix]
-        public void Awake( Dictionary<int, ClassUnit> ___job_class_unit_dic_, Dictionary<int, ClassUnit> ___yotogi_class_unit_dic_)
+        public static void Awake( Dictionary<int, ClassUnit> ___job_class_unit_dic_, Dictionary<int, ClassUnit> ___yotogi_class_unit_dic_)
         {
             if (job_class_unit_dic_.Count != 0)
             {

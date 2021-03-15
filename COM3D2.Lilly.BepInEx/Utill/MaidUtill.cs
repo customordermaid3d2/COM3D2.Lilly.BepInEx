@@ -66,11 +66,15 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogInfo("Application.unityVersion : " + Application.unityVersion);
             MyLog.LogInfo("Application.companyName : " + Application.companyName);
 
+            MyLog.LogInfo();
+
             MyLog.LogInfo("CharacterMgr.MaidStockMax : " + CharacterMgr.MaidStockMax);
             MyLog.LogInfo("CharacterMgr.ActiveMaidSlotCount : " + CharacterMgr.ActiveMaidSlotCount);
             MyLog.LogInfo("CharacterMgr.NpcMaidCreateCount : " + CharacterMgr.NpcMaidCreateCount);
             MyLog.LogInfo("CharacterMgr.ActiveManSloatCount : " + CharacterMgr.ActiveManSloatCount);
 
+            MyLog.LogInfo();
+            /*
             try
             {
                 foreach (KeyValuePair<int, KeyValuePair<string, string>> i in PersonalPatch.commonIdManager.idMap)
@@ -82,7 +86,8 @@ namespace COM3D2.Lilly.Plugin
             {
                 MyLog.LogMessage("idMap:" + e.ToString());
             }
-
+            */
+            /*
             try
             {
                 foreach (var item in PersonalPatch.commonIdManager.nameMap)
@@ -94,7 +99,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 MyLog.LogMessage("nameMap:" + e.ToString());
             }
-
+            */
             try
             {
                 foreach (var item in PersonalPatch.basicDatas)
@@ -107,6 +112,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 MyLog.LogMessage("basicDatas:" + e.ToString());
             }
+            MyLog.LogInfo();
 
             try
             {
@@ -119,44 +125,74 @@ namespace COM3D2.Lilly.Plugin
             {
                 MyLog.LogMessage("m_dicPersonal:" + e.ToString());
             }
-
-            try
-            {
-                foreach (var item in YotogiClass.GetAllDatas(false))
-                {
-                    MyLog.LogMessage("YotogiClass:"  +   item.id + " : " + item.uniqueName + " : " +  item.termExplanatoryText + " : " + item.drawName + " : " + item.explanatoryText);// + " : " +  item.termName
-                    
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("m_dicPersonal:" + e.ToString());
-            }
+            MyLog.LogInfo();
 
             // [Message: Lilly] YotogiClass: らぶらぶメイド: ご主人様ととってもらぶらぶになりたいメイドの為の夜伽クラス。大好きな恋人とらぶらぶえっちしましょう。 : 3700 : MaidStatus / 夜伽クラス / 説明 / loveloveplus : MaidStatus / 夜伽クラス / loveloveplus : loveloveplus
             // [Message: Lilly] YotogiClass: 欲情メイド: ご主人様に欲情してちょっとアブノーマルになったメイドの為の夜伽クラス。恋人の為ならどんなことだって…… : 3710 : MaidStatus / 夜伽クラス / 説明 / yokujyouplus : MaidStatus / 夜伽クラス / yokujyouplus : yokujyouplus
             // [Message: Lilly] YotogiClass: らぶらぶメイド: ご主人様ととってもらぶらぶになりたいメイドの為の夜伽クラス。大好きな恋人とらぶらぶえっちしましょう。 : 3720 : MaidStatus / 夜伽クラス / 説明 / loveloveplus_add : MaidStatus / 夜伽クラス / loveloveplus_add : loveloveplus_add
             // [Message: Lilly] YotogiClass: 欲情メイド: ご主人様に欲情してちょっとアブノーマルになったメイドの為の夜伽クラス。恋人の為ならどんなことだって…… : 3730 : MaidStatus / 夜伽クラス / 説明 / yokujyouplus_add : MaidStatus / 夜伽クラス / yokujyouplus_add : yokujyouplus_add
             // [Message: Lilly] YotogiClass: 発情淫語メイド: ご主人様の為に恥ずかしくて下品な言葉を言っちゃうようになっちゃった夜伽クラス。こんな言葉は、ご主人様だけ……♪ : 3800 : MaidStatus / 夜伽クラス / 説明 / Hatujyouingo : MaidStatus / 夜伽クラス / Hatujyouingo : Hatujyouingo
-
-            foreach (KeyValuePair<int, ClassUnit> item in ClassChangePanelPatch.job_class_unit_dic_)
+            try
             {
-                ClassUnit value = item.Value;
-                JobClass.Data data = JobClass.GetData(value.maid_class_type);
-                MyLog.LogMessage("JobClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                foreach (var data in JobClass.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("JobClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                }
             }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("JobClass:" + e.ToString());
+            }
+            MyLog.LogInfo();
 
+            try
+            {
+                foreach (var data in YotogiClass.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("YotogiClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                }
+            }
+            catch (Exception e)
+            {
+
+                MyLog.LogMessage("YotogiClass:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            /*
+            try
+            {
+                foreach (KeyValuePair<int, ClassUnit> item in ClassChangePanelPatch.job_class_unit_dic_)// 외부 클래스걸 못가져옴
+                {
+                    ClassUnit value = item.Value;
+                    JobClass.Data data = JobClass.GetData(value.maid_class_type);
+                    MyLog.LogMessage("JobClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("job_class_unit_dic_:" + e.ToString());
+            }
+            */
             // 20 , New , コンシェルジュメイド , Concierge , ベッドメイクやドア係など、ホテルで働く際に必要な技術の習熟を表すジョブメイドクラス。ホテルを建設する事で習得可能。特別な記念日のフォローなども行います。 , MaidStatus / ジョブクラス / Concierge , MaidStatus / ジョブクラス / 説明 / Concierge
             // 60 , New , セラピストメイド , Therapist , 施術全般や健康に関わる事など、リフレで働く際に必要な技術の習熟を表すジョブメイドクラス。リフレを建設する事で習得可能。お客様の身も心も癒します。 , MaidStatus / ジョブク ラス / Therapist , MaidStatus / ジョブクラス / 説明 / Therapist
             // 100 , New , ナイトメイド , Night , 女王様やM嬢など、SMクラブで働く際に必要な技術の習熟を表すジョブメイドクラス。SMクラブを建設する事で習得可能。背徳的でアブノーマルな奉仕をお客様に。 , MaidStatus / ジョブクラス / Night , MaidStatus / ジョブクラス / 説明 / Night
 
-            foreach (KeyValuePair<int, ClassUnit> item in ClassChangePanelPatch.yotogi_class_unit_dic_)
+            /*
+            try 
             {
-                ClassUnit value = item.Value;
-                YotogiClass.Data data = YotogiClass.GetData(value.yotogi_class_type);
-                MyLog.LogMessage("YotogiClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                foreach (KeyValuePair<int, ClassUnit> item in ClassChangePanelPatch.yotogi_class_unit_dic_)// 외부 클래스걸 못가져옴
+                {
+                    ClassUnit value = item.Value;
+                    YotogiClass.Data data = YotogiClass.GetData(value.yotogi_class_type);
+                    MyLog.LogMessage("YotogiClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                }
             }
-
+            catch (Exception e)
+            {
+                MyLog.LogMessage("job_class_unit_dic_:" + e.ToString());
+            }
+            */
             // 39 , Old , ヒーリングメイド , Healing , メイドから癒やしと快楽を与えられたいときの夜伽クラス。時には優しく、時には厳しいご奉仕を貴方へ。 , MaidStatus / 夜伽クラス / Healing , MaidStatus / 夜伽クラス / 説明 / Healing
             // 40 , Old , オビディエントメイド , Obedient , 嗜虐的な欲望、その全てをメイドに与えたいときの夜伽クラス。もっと拘束して、もっと激しく苛め倒す。 , MaidStatus / 夜伽クラス / Obedient , MaidStatus / 夜伽クラス / 説明 / Obedient
             // 42 , New , 変態辱めセックスメイド , Hentaihazukasime , 時には辱め、そして時には二人きりで愛し合いたいときの夜伽クラス。露出して、おしっこも出しちゃいます。 , MaidStatus / 夜伽クラス / Hentaihazukasime , MaidStatus / 夜伽クラス / 説明 / Hentaihazukasime

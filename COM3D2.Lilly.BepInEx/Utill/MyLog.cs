@@ -11,67 +11,53 @@ namespace COM3D2.Lilly.Plugin
     {
         static ManualLogSource log = BepInEx.Logging.Logger.CreateLogSource("Lilly");
 
-
-        internal static void LogMessage(string name,params object[] args)
+        private static void LogOut(object[] args, Action<string> action)
         {
             if (!Lilly.isLogOnOffAll)
                 return;
+            if (args.Length==0)
+            {
+                action("");
+            }
+
             StringBuilder s = new StringBuilder();
+            //s.Append(name + " , ");
             s.Append(args[0].ToString());
             for (int i = 1; i < args.Length; i++)
             {
-                s.Append(" , "+ args[i].ToString());
+                s.Append(" , " + args[i].ToString());
             }
-            log.LogMessage(s);
-            // s.Append(args[1..]); //8.0 문법;;
+            action(s.ToString());
         }
 
-
-        internal static void LogMessage(string v)
+        internal static void LogMessage(params object[] args)
         {
-            if (Lilly.isLogOnOffAll)
-            {
-            log.LogMessage( v); // [Message:COM3D2.Lilly.Plugin] ■Lilly: Plugin() ■
-            }
-            //Debug.Log("Lilly:"+v);
-            //Console.ForegroundColor = ConsoleColor.Green;//베핀쪽에서 색설정 막아버리는듯
-            //Console.WriteLine("■Lilly: " + v+ " ■");
-            //Debug.Log("■Lilly: " + v+ " ■");
-            //Console.ResetColor();
-            // Logger.LogInfo("This is information");
-            // Logger.LogWarning("This is a warning");
-            // Logger.LogError("This is an error");
+            LogOut(args, log.LogMessage);
         }
 
-        internal static void LogWarning(string v)
+        internal static void LogWarning(params object[] args)
         {
-            if (Lilly.isLogOnOffAll)
-                log.LogWarning(v);
-        }
-        internal static void LogInfo(string v)
-        {
-            if (Lilly.isLogOnOffAll)
-                log.LogInfo(v);
-        }
-        internal static void LogFatal(string v)
-        {
-            if (Lilly.isLogOnOffAll)
-                log.LogFatal(v);
-        }
-        internal static void LogDebug(string v)
-        {
-            if (Lilly.isLogOnOffAll)
-                log.LogDebug(v);
-
+            LogOut(args, log.LogWarning);
         }
 
-        internal static void LogError(string v)
+        internal static void LogInfo(params object[] args)
         {
+            LogOut(args, log.LogInfo);
+        }
 
-            //Debug.LogError("■Lilly: " + v+ " ■");
-            if (Lilly.isLogOnOffAll)
-                log.LogError( v);
+        internal static void LogFatal(params object[] args)
+        {
+            LogOut(args, log.LogFatal);
+        }
 
+        internal static void LogDebug(params object[] args)
+        {
+            LogOut(args, log.LogDebug);
+        }
+
+        internal static void LogError(params object[] args)
+        {
+            LogOut(args, log.LogError);
         }
 
     }

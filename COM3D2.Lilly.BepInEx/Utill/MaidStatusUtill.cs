@@ -1,4 +1,5 @@
 ﻿using MaidStatus;
+using MaidStatus.CsvData;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogError("MaidStatusUtill.SetMaidStatus:null");
                 return;
             }
-            MyLog.LogInfo(".SetMaidStatus:: " + MaidUtill.GetMaidFullNale(maid));
+            MyLog.LogMessage(".SetMaidStatus:: " + MaidUtill.GetMaidFullNale(maid));
 
             maid.status.employmentDay = 1;// 고용기간
 
@@ -99,11 +100,11 @@ namespace COM3D2.Lilly.Plugin
                 List<Skill.Data> learnPossibleSkills = Skill.GetLearnPossibleSkills(maid.status);
                 foreach (Skill.Data data in learnPossibleSkills)
                 {
-                    MyLog.LogMessage(".Skill1: " + MaidUtill.GetMaidFullNale(maid) );
-                    MyLog.LogMessage("id: " + data.id + " , " + data.name  + " , " + data.start_call_file + " , " + data.start_call_file2 + " , " + data.termName);
-                    MyLog.LogMessage("ban_id_array: " + MyUtill.Join<int>(" , ", data.ban_id_array));
-                    MyLog.LogMessage("skill_exp_table: " + MyUtill.Join<int>(" , ", data.skill_exp_table));                    
-                    MyLog.LogMessage("playable_stageid_list: " + MyUtill.Join<int>(" , ", data.playable_stageid_list));
+                    MyLog.LogDebug(".Skill1: " + MaidUtill.GetMaidFullNale(maid) );
+                    MyLog.LogDebug("id: " + data.id + " , " + data.name  + " , " + data.start_call_file + " , " + data.start_call_file2 + " , " + data.termName);
+                    MyLog.LogDebug("ban_id_array: " + MyUtill.Join<int>(" , ", data.ban_id_array));
+                    MyLog.LogDebug("skill_exp_table: " + MyUtill.Join<int>(" , ", data.skill_exp_table));                    
+                    MyLog.LogDebug("playable_stageid_list: " + MyUtill.Join<int>(" , ", data.playable_stageid_list));
 
                     YotogiSkillData yotogiSkillData = maid.status.yotogiSkill.Add(data);
                     SimpleExperienceSystem expSystem =yotogiSkillData.expSystem;
@@ -113,18 +114,18 @@ namespace COM3D2.Lilly.Plugin
             }
             catch (Exception e)
             {
-                MyLog.LogError("SetMaidStatus: " + e.ToString());
+                MyLog.LogError("Skill1: " + e.ToString());
             }
 
             try
             {
                 List<Skill.Old.Data> learnPossibleSkills = Skill.Old.GetLearnPossibleSkills(maid.status);
+                MyLog.LogMessage(".Skill2: " + MaidUtill.GetMaidFullNale(maid) );
                 foreach (Skill.Old.Data data in learnPossibleSkills)
                 {
-                    MyLog.LogMessage(".Skill2: " + MaidUtill.GetMaidFullNale(maid) );
-                    MyLog.LogMessage("id: " + data.id + " , " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
-                    MyLog.LogMessage("ban_id_array: " + MyUtill.Join(" , ", data.ban_id_array));
-                    MyLog.LogMessage("skill_exp_table: " + MyUtill.Join(" , ", data.skill_exp_table));
+                    MyLog.LogDebug("id: " + data.id + " , " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
+                    MyLog.LogDebug("ban_id_array: " + MyUtill.Join(" , ", data.ban_id_array));
+                    MyLog.LogDebug("skill_exp_table: " + MyUtill.Join(" , ", data.skill_exp_table));
 
                     YotogiSkillData yotogiSkillData = maid.status.yotogiSkill.Add(data);
                     SimpleExperienceSystem expSystem = yotogiSkillData.expSystem;
@@ -134,16 +135,50 @@ namespace COM3D2.Lilly.Plugin
             }
             catch (Exception e)
             {
-                MyLog.LogError("SetMaidStatus: " + e.ToString());
+                MyLog.LogError("Skill2: " + e.ToString());
             }
 
+            // 실패한듯
             try
             {
+                JobClassSystem jobClassSystem = maid.status.jobClass;
 
+                List<JobClass.Data> learnPossibleClassDatas = jobClassSystem.GetLearnPossibleClassDatas(true, AbstractClassData.ClassType.Share | AbstractClassData.ClassType.New);
+                MyLog.LogMessage("JobClass.learn: " + MaidUtill.GetMaidFullNale(maid), learnPossibleClassDatas.Count);
+                
+                foreach (JobClass.Data data in learnPossibleClassDatas)
+                {
+                    MyLog.LogDebug("JobClass.learn:" + data.id + " , " + data.uniqueName+ " , " + data.drawName + " , " + data.explanatoryText + " , " + data.termExplanatoryText);
+                    MyLog.LogDebug("JobClass.learn: " + jobClassSystem.Contains(data) , MyUtill.Join(" , ", data.levelBonuss));
+                    if (!jobClassSystem.Contains(data))
+                    {
+                        ClassData<JobClass.Data> classData=jobClassSystem.Add(data, true, true);
+                    } 
+                    //ClassData<JobClass.Data> classData=jobClassSystem.Get(data);
+                    //SimpleExperienceSystem expSystem = classData.expSystem;
+                    //expSystem.SetTotalExp(expSystem.GetMaxLevelNeedExp());
+                    //expSystem.SetLevel(expSystem.GetMaxLevel());
+                }
+
+                SortedDictionary<int, ClassData<JobClass.Data>> keyValuePairs =jobClassSystem.GetAllDatas();
+                MyLog.LogMessage("JobClass.expSystem: " + MaidUtill.GetMaidFullNale(maid) , keyValuePairs.Count);
+                
+                foreach (var item in keyValuePairs)
+                {
+                    ClassData<JobClass.Data> classData = item.Value;
+                    JobClass.Data data = classData.data;
+
+                    MyLog.LogDebug("JobClass.expSystem:" + data.id + " , " + data.uniqueName + " , " + data.drawName + " , " + data.explanatoryText + " , " + data.termExplanatoryText);
+
+                    SimpleExperienceSystem expSystem = classData.expSystem;
+                    expSystem.SetTotalExp(expSystem.GetMaxLevelNeedExp());
+                    expSystem.SetLevel(expSystem.GetMaxLevel());
+                }
+                //maid.status.UpdateClassBonusStatus();
             }
             catch (Exception e)
             {
-                MyLog.LogError("SetMaidStatus: " + e.ToString());
+                MyLog.LogError("JobClass: " + e.ToString());
             }
 
         }
