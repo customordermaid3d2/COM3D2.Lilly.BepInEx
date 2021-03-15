@@ -9,6 +9,7 @@ using Yotogis;
 
 namespace COM3D2.Lilly.Plugin
 {
+    // 자구 널포인트 에러나고 사용도 안해서 제거
     class ClassChangePanelPatch
     {
         public static Dictionary<int, SortedList<int, List<Skill.Data>>> job_class_special_skill_list_;// = new Dictionary<int, SortedList<int, List<Skill.Data>>>();
@@ -46,7 +47,7 @@ namespace COM3D2.Lilly.Plugin
         }
 
         [HarmonyPatch(typeof(ClassChangePanel), "CreateClassText")]
-        [HarmonyPostfix]
+        [HarmonyPostfix]        
         public static void CreateClassText(Dictionary<int, SortedList<int, List<Skill.Data>>> ___job_class_special_skill_list_)
         {
             if (job_class_special_skill_list_ != null)

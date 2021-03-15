@@ -26,12 +26,12 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPatch(typeof(Maid), "SetMaterialProperty", new Type[]
         { typeof(MPN) ,typeof(TBody.SlotID),typeof(int),typeof(string),typeof(string),typeof(string) })]
         [HarmonyPostfix]
-        public static void SetMaterialPropertyPost2(Maid __instance, MPN m_mpn, TBody.SlotID f_slot, int f_nMatNo, string f_strPropName, string f_strTypeName, string f_strValue)
+        public static void SetMaterialProperty(Maid __instance, MPN m_mpn, TBody.SlotID f_slot, int f_nMatNo, string f_strPropName, string f_strTypeName, string f_strValue)
         {
             //if (SceneManager.GetActiveScene().isLoaded)//실패
             if (isOnOff&&__instance.Visible )
             {
-                MyLog.LogMessage("Maid.SetMaterialPropertyPost2:" + f_strPropName + "," + f_strTypeName+ "," + f_strValue);
+                MyLog.LogMessage("Maid.SetMaterialProperty:" + f_strPropName + "," + f_strTypeName+ "," + f_strValue);
             }
 
         }
@@ -43,13 +43,13 @@ namespace COM3D2.Lilly.Plugin
     [HarmonyPatch(typeof(Maid), "SetProp", new Type[]
         { typeof(MaidProp) ,typeof(string),typeof(int),typeof(bool),typeof(bool) })]
         [HarmonyPostfix]
-        public static void SetPropPost2(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
+        public static void SetProp(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale)
         {
             if (isOnOff&&SceneManager.GetActiveScene().isLoaded)//실패?
             //if( GameMain.Instance.MainCamera.GetFadeState()==CameraMain.FadeState.Out)//효과 없음
             //if (__instance.Visible)
             {
-                MyLog.LogMessage("Maid.SetPropPost2:"+ __instance.status.firstName+ " , "+ __instance.status.firstName +" , "+  mp.strFileName + " , " + mp.name + " , " + mp.idx);//filename + " , " +
+                MyLog.LogMessage("Maid.SetProp:" + __instance.status.firstName+ " , "+ __instance.status.firstName +" , "+  mp.strFileName + " , " + mp.name + " , " + mp.idx);//filename + " , " +
 
                 //Menu.m_dicResourceRef.ContainsKey(mp.nFileNameRID);
                 //Menu.m_dicResourceRef.ge
@@ -109,10 +109,10 @@ namespace COM3D2.Lilly.Plugin
 
         [HarmonyPatch(typeof(Maid), "DelProp")]
         [HarmonyPrefix]
-        public static void DelPropPrefix4(Maid __instance, MPN idx, bool f_bTemp)
+        public static void DelProp(Maid __instance, MPN idx, bool f_bTemp)
         {
             if (isOnOff && __instance.Visible)
-                MyLog.LogMessage("Maid.DelPropPrefix4");
+                MyLog.LogMessage("Maid.DelProp");
 
         }
 

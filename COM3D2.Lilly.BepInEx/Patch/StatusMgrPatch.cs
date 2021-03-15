@@ -10,7 +10,7 @@ namespace COM3D2.Lilly.Plugin
 	/// <summary>
 	/// 메이드 목록에서 스테이터스 버튼 클릭시 나오는 화면 관련?
 	/// </summary>
-    class StatusMgrPatch : BaseCreatePanel
+    class StatusMgrPatch //: BaseCreatePanel
 	{
 		/// <summary>
 		/// 스테이터스 버튼 클릭시 나오는 화면
@@ -64,7 +64,7 @@ namespace COM3D2.Lilly.Plugin
 			MyLog.LogMessage("StatusMgr.LoadDataPre" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
 			//MaidStatusUtill.SetMaidStatus(___m_maid);
 		}
-
+		/*
 		StatusMgr statusMgr;
 		protected StatusCtrl m_ctrl;
 		protected Maid m_maid;
@@ -77,6 +77,6 @@ namespace COM3D2.Lilly.Plugin
 			this.m_ctrl.Init(statusMgr, this.m_goPanel);
 			this.m_goPanel.SetActive(false);
 		}
-
+		*/
 	}
 }

@@ -9,6 +9,7 @@ namespace COM3D2.Lilly.Plugin
 {
     /// <summary>
     /// 성격 정보가 있나?
+    /// MaidUtill.GetGameInfo 용으로 남겨둠
     /// </summary>
     class ProfileCtrlPatch
     {
@@ -33,6 +34,13 @@ namespace COM3D2.Lilly.Plugin
         public static ProfileCtrl instance;
         public static Dictionary<string, Personal.Data> m_dicPersonal;
 
+        /// <summary>
+        /// 성격 관련?
+        /// </summary>
+        /// <param name="__instance"></param>
+        /// <param name="selectValue"></param>
+        /// <param name="___m_dicPersonal"></param>
+        /// <param name="___m_maidStatus"></param>
         [HarmonyPatch(typeof(ProfileCtrl), "SetPersonal")]
         [HarmonyPrefix]
         public static void SetPersonal(ProfileCtrl __instance, string selectValue, Dictionary<string, Personal.Data> ___m_dicPersonal, Status ___m_maidStatus)

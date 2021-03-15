@@ -7,7 +7,7 @@ using System.Text;
 namespace COM3D2.Lilly.Plugin
 {
     /// <summary>
-    /// 메이드 관리
+    /// 메이드 관리 화면
     /// SceneMaidManagement 장면과 관련된 클래스 찿아야 하는데
     /// </summary>
     class MaidManagementMainPatch

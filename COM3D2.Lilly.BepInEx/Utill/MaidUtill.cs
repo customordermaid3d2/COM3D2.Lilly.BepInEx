@@ -1,4 +1,5 @@
-﻿using MaidStatus;
+﻿using Kasizuki;
+using MaidStatus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,56 +75,43 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogInfo("CharacterMgr.ActiveManSloatCount : " + CharacterMgr.ActiveManSloatCount);
 
             MyLog.LogInfo();
-            /*
+
             try
             {
-                foreach (KeyValuePair<int, KeyValuePair<string, string>> i in PersonalPatch.commonIdManager.idMap)
+                foreach (var item in Feature.GetAllDatas(false))
                 {
-                    MyLog.LogMessage("idMap:" + i.Key + " , " + i.Value.Key + " , " + i.Value.Value);
+                    MyLog.LogMessage("Feature:", item.id ,  item.uniqueName, item.drawName, item.termName);//
                 }
             }
             catch (Exception e)
             {
-                MyLog.LogMessage("idMap:" + e.ToString());
-            }
-            */
-            /*
-            try
-            {
-                foreach (var item in PersonalPatch.commonIdManager.nameMap)
-                {
-                    MyLog.LogMessage("nameMap:" + item);
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("nameMap:" + e.ToString());
-            }
-            */
-            try
-            {
-                foreach (var item in PersonalPatch.basicDatas)
-                {
-                    MyLog.LogMessage("basicDatas:" + item.Key + " : " + item.Value.drawName + " : " + item.Value.id + " : " + item.Value.replaceText + " : " + item.Value.termName + " : " + item.Value.uniqueName);//
-                                                                                                                                                                                                                     // competitiveMotionFileVictory  경쟁적인 모션 파일 승리
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("basicDatas:" + e.ToString());
+                MyLog.LogMessage("Feature:" + e.ToString());
             }
             MyLog.LogInfo();
 
             try
             {
-                foreach (var item in ProfileCtrlPatch.m_dicPersonal)
+                foreach (var item in Personal.GetAllDatas(false))
                 {
-                    MyLog.LogMessage("m_dicPersonal:" + item.Key + " : " + item.Value.drawName + " : " + item.Value.id + " : " + item.Value.replaceText + " : " + item.Value.termName + " : " + item.Value.uniqueName);//
+                    MyLog.LogMessage("Personal:", item.id , item.replaceText, item.uniqueName, item.drawName, item.termName);//
                 }
             }
             catch (Exception e)
             {
-                MyLog.LogMessage("m_dicPersonal:" + e.ToString());
+                MyLog.LogMessage("Personal:" + e.ToString());
+            }
+            MyLog.LogInfo();
+            
+            try
+            {
+                foreach (var item in Propensity.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("Propensity:", item.id , item.uniqueName, item.drawName, item.termName);//
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("Propensity:" + e.ToString());
             }
             MyLog.LogInfo();
 
@@ -158,50 +146,68 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogMessage("YotogiClass:" + e.ToString());
             }
             MyLog.LogInfo();
-
-            /*
+            
             try
             {
-                foreach (KeyValuePair<int, ClassUnit> item in ClassChangePanelPatch.job_class_unit_dic_)// 외부 클래스걸 못가져옴
+                foreach (var data in PlayData.GetAllDatas(false))
                 {
-                    ClassUnit value = item.Value;
-                    JobClass.Data data = JobClass.GetData(value.maid_class_type);
-                    MyLog.LogMessage("JobClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                    MyLog.LogMessage("PlayData"
+                        , data.ID
+                        , data.drawName
+                        , data.drawNameTerm
+                        );
                 }
             }
             catch (Exception e)
             {
-                MyLog.LogMessage("job_class_unit_dic_:" + e.ToString());
-            }
-            */
-            // 20 , New , コンシェルジュメイド , Concierge , ベッドメイクやドア係など、ホテルで働く際に必要な技術の習熟を表すジョブメイドクラス。ホテルを建設する事で習得可能。特別な記念日のフォローなども行います。 , MaidStatus / ジョブクラス / Concierge , MaidStatus / ジョブクラス / 説明 / Concierge
-            // 60 , New , セラピストメイド , Therapist , 施術全般や健康に関わる事など、リフレで働く際に必要な技術の習熟を表すジョブメイドクラス。リフレを建設する事で習得可能。お客様の身も心も癒します。 , MaidStatus / ジョブク ラス / Therapist , MaidStatus / ジョブクラス / 説明 / Therapist
-            // 100 , New , ナイトメイド , Night , 女王様やM嬢など、SMクラブで働く際に必要な技術の習熟を表すジョブメイドクラス。SMクラブを建設する事で習得可能。背徳的でアブノーマルな奉仕をお客様に。 , MaidStatus / ジョブクラス / Night , MaidStatus / ジョブクラス / 説明 / Night
 
-            /*
-            try 
+                MyLog.LogMessage("PlayData:" + e.ToString());
+            }
+            MyLog.LogInfo();
+            
+            try
             {
-                foreach (KeyValuePair<int, ClassUnit> item in ClassChangePanelPatch.yotogi_class_unit_dic_)// 외부 클래스걸 못가져옴
+                foreach (var data in RoomData.GetAllDatas(false))
                 {
-                    ClassUnit value = item.Value;
-                    YotogiClass.Data data = YotogiClass.GetData(value.yotogi_class_type);
-                    MyLog.LogMessage("YotogiClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                    MyLog.LogMessage("RoomData"
+                        , data.ID
+                        , data.upwardRoomID
+                        , data.uniqueName
+                        , data.isEnableNTR
+                        , data.isOnlyNTR
+                        , data.drawName
+                        , data.drawNameTerm
+                        , data.explanatoryTextTerm
+                        , data.facilityTypeID
+                        , data.facilityDefaultName
+                        );
                 }
             }
             catch (Exception e)
             {
-                MyLog.LogMessage("job_class_unit_dic_:" + e.ToString());
+
+                MyLog.LogMessage("RoomData:" + e.ToString());
             }
-            */
-            // 39 , Old , ヒーリングメイド , Healing , メイドから癒やしと快楽を与えられたいときの夜伽クラス。時には優しく、時には厳しいご奉仕を貴方へ。 , MaidStatus / 夜伽クラス / Healing , MaidStatus / 夜伽クラス / 説明 / Healing
-            // 40 , Old , オビディエントメイド , Obedient , 嗜虐的な欲望、その全てをメイドに与えたいときの夜伽クラス。もっと拘束して、もっと激しく苛め倒す。 , MaidStatus / 夜伽クラス / Obedient , MaidStatus / 夜伽クラス / 説明 / Obedient
-            // 42 , New , 変態辱めセックスメイド , Hentaihazukasime , 時には辱め、そして時には二人きりで愛し合いたいときの夜伽クラス。露出して、おしっこも出しちゃいます。 , MaidStatus / 夜伽クラス / Hentaihazukasime , MaidStatus / 夜伽クラス / 説明 / Hentaihazukasime
-            // 43 , New , ソープご奉仕セックスメイド , Sorpgohousi , 温かいお風呂でご主人様にご奉仕する夜伽クラス。ぬるぬるのするのはローションだけ？ , MaidStatus / 夜伽クラス / Sorpgohousi , MaidStatus / 夜伽クラス / 説明 / Sorpgohousi
-            // 44 , Share , 変態辱めセックスメイド , Hentaihazukasime_old , 時には辱め、そして時には二人きりで愛し合いたいときの夜伽クラス。露出して……おしっこも出しちゃいます。 , MaidStatus / 夜伽クラス / Hentaihazukasime_old , MaidStatus / 夜伽クラス / 説明 / Hentaihazukasime_old
-            // 45 , Share , ソープご奉仕セックスメイド , Sorpgohousi_old , 温かいお風呂でご主人様にご奉仕する夜伽クラス。ぬるぬるのするのはローションだけ……？ , MaidStatus / 夜伽クラス / Sorpgohousi_old , MaidStatus / 夜伽クラス / 説明 / Sorpgohousi_old
+            MyLog.LogInfo();
 
+            
+            try
+            {
+                foreach (var data in YotogiStage.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("YotogiStage"
+                        , data.id                        
+                        , data.uniqueName
+                        , data.drawName
+                        );
+                }
+            }
+            catch (Exception e)
+            {
 
-
+                MyLog.LogMessage("YotogiStage:" + e.ToString());
+            }
+            MyLog.LogInfo();
 
 
         }

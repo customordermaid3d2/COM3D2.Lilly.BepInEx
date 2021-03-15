@@ -146,18 +146,18 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(AudioSourceMgrPatch));
             listA.Add(typeof(BgMgrPatch));
             //lists.Add(typeof(CameraMainPatch));
-            listA.Add(typeof(CharacterMgrPatch));
+            listA.Add(typeof(CharacterMgrPatch));// 프리셋값 출력용
             //lists.Add(typeof(DeskManagerPatch));
             //lists.Add(typeof(GameMainPatch));
             //lists.Add(typeof(KasizukiMainMenuPatch));
             listA.Add(typeof(CsvCommonIdManagerPatch));
-            listA.Add(typeof(ClassChangePanelPatch));
-            listA.Add(typeof(JobClassPatch));
+            // listA.Add(typeof(ClassChangePanelPatch));
+            //listA.Add(typeof(JobClassPatch));
             //lists.Add(typeof(JobClassSystemPatch));
-            listA.Add(typeof(MaidManagementMainPatch));// 메이드 관리
+            listA.Add(typeof(MaidManagementMainPatch));// 메이드 관리 화면
             listA.Add(typeof(MaidPatch));
-            listA.Add(typeof(ProfileCtrlPatch));
-            listA.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서
+            listA.Add(typeof(ProfileCtrlPatch));// MaidUtill.GetGameInfo 용으로 남겨둠
+            listA.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서 MaidUtill 용으로 남겨둠
             //lists.Add(typeof(StatusPatch));// 오류/떠서 사용 포기
             //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
             //lists.Add(typeof(PhotoMotionDataPatch));
@@ -171,13 +171,13 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(SceneScenarioSelectPatch));
             listA.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.
             //lists.Add(typeof(ScriptManagerFastPatch));
-            listA.Add(typeof(ScriptManagerPatch));
+            //listA.Add(typeof(ScriptManagerPatch));// 그냥 보지 말자. 가져올 값도 없음
             listA.Add(typeof(SkillPatch));// 밤시중 스테이지 선택후 스킬 목록 가져오면서 작동
             listA.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
-            listA.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입
+            //listA.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입.. 쓸일 없음
                                                //lists.Add(typeof(TJSScriptPatch));
-            listA.Add(typeof(YotogiSkillSystemPatch));
-            listA.Add(typeof(YotogiClassSystemPatch));
+            //listA.Add(typeof(YotogiSkillSystemPatch));// 코드 분석용
+            // listA.Add(typeof(YotogiClassSystemPatch));// 코드 분석용
         }
 
         //-----------------------------------------------

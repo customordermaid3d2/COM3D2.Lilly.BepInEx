@@ -10,7 +10,9 @@ using wf;
 namespace COM3D2.Lilly.Plugin
 {
 
-
+    /// <summary>
+    /// MaidUtill 용으로 남겨둠
+    /// </summary>
     class PersonalPatch
     {
         // Personal
@@ -66,7 +68,7 @@ namespace COM3D2.Lilly.Plugin
                        
 
             return;
-
+            /*
             // 쓸데없이 로그 많음
             foreach (KeyValuePair<int, KeyValuePair<string, string>> i in commonIdManager.idMap)
            {
@@ -113,6 +115,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 basicDatas.Add(keyValuePair.Key, new Personal.Data(keyValuePair.Key, array2[0].Value, array2[1].Value, additionalRelationEnabledIdList));
             }
+            */
         }
 
 

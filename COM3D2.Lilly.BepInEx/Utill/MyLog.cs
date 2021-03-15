@@ -18,6 +18,7 @@ namespace COM3D2.Lilly.Plugin
             if (args.Length==0)
             {
                 action("");
+                return;
             }
 
             StringBuilder s = new StringBuilder();
