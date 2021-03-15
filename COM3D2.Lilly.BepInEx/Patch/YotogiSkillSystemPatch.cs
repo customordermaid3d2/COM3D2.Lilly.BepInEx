@@ -9,8 +9,8 @@ namespace COM3D2.Lilly.Plugin
 {
     class YotogiSkillSystemPatch
 	{
-		protected SortedDictionary<int, YotogiSkillData> skillDatas_;
-		protected SortedDictionary<int, YotogiSkillData> oldSkillDatas_;
+		// protected SortedDictionary<int, YotogiSkillData> skillDatas_;
+		// protected SortedDictionary<int, YotogiSkillData> oldSkillDatas_;
 		/*
 		public YotogiSkillSystem(Status status)
 		{
@@ -20,6 +20,8 @@ namespace COM3D2.Lilly.Plugin
 			this.oldSkillDatas_ = new SortedDictionary<int, YotogiSkillData>();
 			this.oldDatas = new ReadOnlySortedDictionary<int, YotogiSkillData>(this.oldSkillDatas_);
 		}*/
+
+		/*
 
 		public YotogiSkillData Add(Skill.Data data)
 		{
@@ -42,5 +44,7 @@ namespace COM3D2.Lilly.Plugin
 			}
 			return yotogiSkillData;
 		}
+
+		*/
 	}
 }

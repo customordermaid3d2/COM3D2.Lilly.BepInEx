@@ -34,12 +34,6 @@ namespace COM3D2.Lilly.Plugin
                     termName
                 this.SetPersonal(Personal.GetData("Muku"));
         */
-        MaidUtill()
-        {
-
-        }
-
-        static Maid maid;
 
         public static string GetMaidFullNale(Maid maid)
         {

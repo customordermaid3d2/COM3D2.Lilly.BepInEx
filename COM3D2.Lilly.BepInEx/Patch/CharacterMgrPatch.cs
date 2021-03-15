@@ -70,11 +70,21 @@ namespace COM3D2.Lilly.Plugin
             //}
         }
 
+        // public CharacterMgr.Preset PresetSave(Maid f_maid, CharacterMgr.PresetType f_type)
+        [HarmonyPatch(typeof(CharacterMgr), "PresetSave")]
+        [HarmonyPostfix]
+        public static void PresetSavePost0(Maid f_maid, CharacterMgr.PresetType f_type, CharacterMgr.Preset __result)
+        {
+            if (!Lilly.isLogOnOff[typeof(CharacterMgrPatch)])
+            {
+                return;
+            }
+            MyLog.LogMessage("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName + " , " + __result.strFileName + " , " + __result.ePreType);
+        }
+
         // public void PresetSet(Maid f_maid, CharacterMgr.Preset f_prest)
         // 테스팅 완료
-        [HarmonyPatch(typeof(CharacterMgr), "PresetSet", new Type[]{
-            typeof(Maid) ,typeof(CharacterMgr.Preset)
-        })]
+        [HarmonyPatch(typeof(CharacterMgr), "PresetSet", new Type[]{typeof(Maid) ,typeof(CharacterMgr.Preset)})]
         [HarmonyPostfix]
         public static void PresetSetPostfix2(Maid f_maid, CharacterMgr.Preset f_prest)
         {
@@ -109,17 +119,6 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogMessage("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
         }
 
-        // public CharacterMgr.Preset PresetSave(Maid f_maid, CharacterMgr.PresetType f_type)
 
-        [HarmonyPatch(typeof(CharacterMgr), "PresetSave")]
-        [HarmonyPostfix]
-        public static void PresetSavePost0(Maid f_maid, CharacterMgr.PresetType f_type, CharacterMgr.Preset __result)
-        {
-            if (!Lilly.isLogOnOff[typeof(CharacterMgrPatch)])
-            {
-                return;
-            }
-            MyLog.LogMessage("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName +" , "+ __result.ePreType);
-        }
     }
 }

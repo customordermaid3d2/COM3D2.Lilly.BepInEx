@@ -11,6 +11,52 @@ namespace COM3D2.Lilly.Plugin
 	{
 		// Status
 
+		[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
+		[HarmonyPostfix]
+		public static void GetFlag(Status __instance, string flagName)
+        {
+            if (__instance ==null)
+            {
+				MyLog.LogMessage("GetFlag: " +  flagName);
+				return;
+            }
+			MyLog.LogMessage("GetFlag: " + MaidUtill.GetMaidFullNale( __instance.maid), flagName);
+		}		
+
+		[HarmonyPatch(typeof(Status), "AddFlag")]//,new Type[] { typeof(Personal.Data) }
+		[HarmonyPostfix]
+		public static void AddFlag(Status __instance, string flagName, int value)
+        {
+			if (__instance == null)
+			{
+				MyLog.LogMessage("AddFlag: " + flagName);
+				return;
+			}
+			MyLog.LogMessage("AddFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName, value);
+		}
+
+		[HarmonyPatch(typeof(Status), "RemoveFlag")]//,new Type[] { typeof(Personal.Data) }
+		[HarmonyPostfix]
+		public static void RemoveFlag(Status __instance, string flagName)
+        {
+			if (__instance == null)
+			{
+				MyLog.LogMessage("RemoveFlag: " + flagName);
+				return;
+			}
+			MyLog.LogMessage("RemoveFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName);
+		}
+
+		[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
+		[HarmonyPatch(typeof(Status), "AddFlag")]//,new Type[] { typeof(Personal.Data) }
+		[HarmonyPatch(typeof(Status), "RemoveFlag")]//,new Type[] { typeof(Personal.Data) }
+		[HarmonyFinalizer]
+		public static void Finalizer(Exception __exception)
+		{
+			MyLog.LogMessage("Status.Finalizer: " + __exception.ToString());
+			__exception = null;
+		}
+
 		// public ReadOnlyDictionary<int, bool> eventEndFlags { get; private set; }
 		// public ReadOnlyDictionary<string, int> flags { get; private set; }
 		// public ReadOnlyDictionary<int, WorkData> workDatas { get; private set; }
@@ -20,13 +66,14 @@ namespace COM3D2.Lilly.Plugin
 		// public ReadOnlyDictionary<int, Propensity.Data> propensitys { get; private set; }
 		// public Maid maid { get; private set; }
 
-		static Status instance;
+		//public static Status instance;
 
 		// 도저히 안되겠음 인샙션뜸
 		//[HarmonyPatch(typeof(Status), "SetPersonal",new Type[] { typeof(Personal.Data) })]
-        //[HarmonyPostfix]
-        private static void SetPersonal(Status __instance, Personal.Data data) // string __m_BGMName 못가져옴
+		//[HarmonyPostfix]
+		private static void SetPersonal(Status __instance, Personal.Data data) // string __m_BGMName 못가져옴
         {
+			/*
             if (__instance != null)
             {
 				instance = __instance;				
@@ -36,7 +83,7 @@ namespace COM3D2.Lilly.Plugin
 				MyLog.LogMessage("SetPersonal:" + MaidUtill.GetMaidFullNale(__instance.maid));
 
             }
-
+			*/
 
 			// Personal.Data personal = __instance.personal;
 
@@ -67,7 +114,7 @@ namespace COM3D2.Lilly.Plugin
 		}
 
 
-
+		/*
 
 		private BonusStatus bonusStatus;
 		public HeroineType heroineType;
@@ -90,6 +137,6 @@ namespace COM3D2.Lilly.Plugin
 			}
 		}
 
-
+		*/
 	}
 }

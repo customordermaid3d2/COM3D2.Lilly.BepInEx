@@ -21,7 +21,7 @@ namespace COM3D2.Lilly.Plugin
         /// <param name="customCheckFunction"></param>
         // public CsvCommonIdManager(string csvTopCommonName, string typeName, CsvCommonIdManager.Type type, Func<int, bool> customCheckFunction = null)
         [HarmonyPatch(typeof(CsvCommonIdManager),new Type[] { typeof(string) , typeof(string)  , typeof(CsvCommonIdManager)  , typeof(Func<int, bool>) })]
-        //[HarmonyPostfix]
+        [HarmonyPostfix]
         private static void ctor(CsvCommonIdManagerPatch __instance, string csvTopCommonName, string typeName, CsvCommonIdManager.Type type, Func<int, bool> customCheckFunction ) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessage("CsvCommonIdManager:" + csvTopCommonName +" , "+ typeName + " , " + type + " , " + (customCheckFunction==null));

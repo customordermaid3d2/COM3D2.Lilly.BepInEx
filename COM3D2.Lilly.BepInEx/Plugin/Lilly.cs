@@ -150,7 +150,7 @@ namespace COM3D2.Lilly.Plugin
             //lists.Add(typeof(DeskManagerPatch));
             //lists.Add(typeof(GameMainPatch));
             //lists.Add(typeof(KasizukiMainMenuPatch));
-            listA.Add(typeof(CsvCommonIdManagerPatch));
+            //listA.Add(typeof(CsvCommonIdManagerPatch));
             // listA.Add(typeof(ClassChangePanelPatch));
             //listA.Add(typeof(JobClassPatch));
             //lists.Add(typeof(JobClassSystemPatch));
@@ -168,11 +168,14 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(SceneEditPatch)); //자꾸 오류남?
             //lists.Add(typeof(SceneMgrPatch));
             //lists.Add(typeof(ScenarioSelectMgrPatch));// 이벤트 기초 목록 관련
+            //listA.Add(typeof(FreeModeItemEverydayPatch));
+            //listA.Add(typeof(SceneFreeModeSelectManagerPatch));
             listA.Add(typeof(SceneScenarioSelectPatch));
             listA.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.
             //lists.Add(typeof(ScriptManagerFastPatch));
             //listA.Add(typeof(ScriptManagerPatch));// 그냥 보지 말자. 가져올 값도 없음
             listA.Add(typeof(SkillPatch));// 밤시중 스테이지 선택후 스킬 목록 가져오면서 작동
+            listA.Add(typeof(StatusPatch));// 플레그 확인용
             listA.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
             //listA.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입.. 쓸일 없음
                                                //lists.Add(typeof(TJSScriptPatch));

@@ -20,17 +20,56 @@ namespace COM3D2.Lilly.Plugin
         /// </summary>
         public static void SetScenarioDataAll()
         {
-            MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll st");
-            // 병렬 처리
-            ParallelLoopResult r = Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
+            MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll st"); 
+            
+            try
             {
-            // MyLog.LogMessageS(".SetScenarioDataAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
-            if (scenarioData.IsPlayable)
+                // 병렬 처리
+                ParallelLoopResult r = Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
                 {
-                    SetEventEndFlagAll(scenarioData.GetEventMaidList(), scenarioData);
+                // MyLog.LogMessageS(".SetScenarioDataAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
+                if (scenarioData.IsPlayable)
+                    {
+                        SetEventEndFlagAll(scenarioData.GetEventMaidList(), scenarioData);
+                    }
+                });
+                MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll ed : " + r);
+            }
+            catch (Exception e)
+            {
+                MyLog.LogError("ScenarioDataUtill.SetScenarioDataAll : " + e.ToString());
+            }
+
+            return;
+
+            try
+            {
+                foreach (FreeModeItemEveryday item in FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou,null))
+                {
+
                 }
-            });
-            MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll ed : " + r);
+                
+            }
+            catch (Exception e)
+            {
+
+                MyLog.LogError("FreeModeItemEveryday.Nitijyou : " + e.ToString());
+            }
+            
+            try
+            {
+                foreach (FreeModeItemEveryday item in FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story,null))
+                {
+
+                }
+                
+            }
+            catch (Exception e)
+            {
+
+                MyLog.LogError("FreeModeItemEveryday.Story : " + e.ToString());
+            }
+
         }
 
         /// <summary>

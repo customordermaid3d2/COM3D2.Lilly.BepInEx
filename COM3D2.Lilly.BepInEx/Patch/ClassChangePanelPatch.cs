@@ -20,7 +20,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void Awake( Dictionary<int, ClassUnit> ___job_class_unit_dic_, Dictionary<int, ClassUnit> ___yotogi_class_unit_dic_)
         {
-            if (job_class_unit_dic_.Count != null)
+            if (job_class_unit_dic_ != null)
             {
                 return;
             }
@@ -59,11 +59,12 @@ namespace COM3D2.Lilly.Plugin
             job_class_special_skill_list_ = ___job_class_special_skill_list_;
 
             return;
-
+            /*
             foreach (JobClass.Data data in JobClass.GetAllDatas(false))
             {
                 job_class_special_skill_list_.Add(data.id, new SortedList<int, List<Skill.Data>>());
             }
+            */
         }
 
         //private Dictionary<int, ClassUnit> job_class_unit_dic_ = new Dictionary<int, ClassUnit>();               

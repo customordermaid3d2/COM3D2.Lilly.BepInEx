@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using wf;
 using Yotogis;
 
 namespace COM3D2.Lilly.Plugin
@@ -181,65 +182,84 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogError("JobClass: " + e.ToString());
             }
 
-        }
+            return;
 
-        //public static TJSScript tjs_;
-        public static ScriptManager scriptManager = new ScriptManager();
-        public static ScenarioSelectMgr scenarioSelectMgr;
-        public static ScenarioData[] scenarioDatas;
+            // SceneFreeModeSelectManager.Start 참조
 
-        public static void Test()
-        {
-            //scriptManager = GameMain.Instance.ScriptMgr;
-            scenarioSelectMgr = GameMain.Instance.ScenarioSelectMgr;
-            scenarioDatas = scenarioSelectMgr.GetAllScenarioData();
-
-            foreach (var scenarioData in scenarioDatas)
+            try
             {
-                string text﻿ = scenarioData.ScenarioScript;
-                //if (this.m_SelectedMaid.Count > 0 && text.IndexOf("?") >= 0)
-                //{
-                //    text = ScriptManager.ReplacePersonal(this.m_SelectedMaid[0], text);
-                //}
-                ////ScriptManager
-                //GameMain.Instance.ScriptMgr.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
-                //GameMain.Instance.ScriptMgr.EvalScript("&tf['label_name'] = '" + this.m_CurrentScenario.ScriptLabel + "';");
+                foreach (FreeModeItemVip item in FreeModeItemVip.CreateItemVipList(maid.status))
+                {
+                    
+                }
+            }
+            catch (Exception e)
+            {
 
-                scriptManager.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
-
-                // ScriptManager.EvalScriptPost2:&tf['scenario_file_name'] = 'j1_marriage_0006';
-                // [Message:     Lilly] ScriptManager.EvalScriptPost2:&tf['label_name'] = '*OK押された時のとび先';
-
-                //ScriptManager.EvalScript(string) : void @06004DF7
-                //public void EvalScript(string eval_str)
-                //{
-                //    this.tjs_.EvalScript(eval_str);
-                //}
-
-                // this.tjs_ = TJSScript.Create(this.file_system);
-                // ScriptManager.tjs_ : TJSScript @04004686
-                // this.tjs_.AddFunction("IsMarriage", new TJSScript.FunctionCallBack(this.OldTJSFuncIsMarriage));
-                // ﻿public delegate void FunctionCallBack(TJSVariantRef[] param, TJSVariantRef result);﻿
-
-
+                MyLog.LogError("JobClass: " + e.ToString());
             }
 
-            //GameMain.Instance
-            //tjs_ = TJSScript.Create(scriptManager.file_system);
-            //tjs_.AddFunction("IsYotogiClass", new TJSScript.FunctionCallBack(TJSFuncIsYotogiClass));
-            //this.tjs_.AddFunction("IsMarriage", new TJSScript.FunctionCallBack(this.OldTJSFuncIsMarriage));
-            //this.tjs_.AddFunction("IsNewWifeFlag", new TJSScript.FunctionCallBack(this.OldTJSFuncIsNewWifeFlag));
+            
+            try
+            {
+            // scene_label_everyday
+                foreach (FreeModeItemEveryday item in FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, maid.status))
+                {
+                    
+                }
+            }
+            catch (Exception e)
+            {
 
-            //int nMaidNo = tjs_param[0].AsInteger();
-            //Maid maid = GameMain.Instance.CharacterMgr.GetMaid(nMaidNo);
-            //if (maid != null && maid.status.OldStatus != null)
-            //{
-            //    result.SetBool(maid.status.OldStatus.isMarriage);
-            //}
-            //else
-            //{
-            //    result.SetBool(false);
-            //}
+                MyLog.LogError("JobClass: " + e.ToString());
+            }
+
+                        
+            try
+            {
+            // scene_label_everyday
+                foreach (FreeModeItemEveryday item in FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, maid.status))
+                {
+                    
+                }
+            }
+            catch (Exception e)
+            {
+
+                MyLog.LogError("JobClass: " + e.ToString());
+            }
+
+
+
+            // scene_label_mainstory
+            List<FreeModeItemEveryday> list3 = FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null);
+
+            List<FreeModeItemLifeMode> list2 = FreeModeItemLifeMode.CreateItemList(true);
+
+
         }
+
+
+        public static void GetMaidStatus()
+        {
+            Maid maid_= GameMain.Instance.CharacterMgr.GetStockMaid(0);
+
+            ReadOnlyDictionary<int, bool> eventEndFlags= maid_.status.eventEndFlags;
+
+            ReadOnlyDictionary<string, int> flags =maid_.status.flags;
+            foreach (var item in flags)
+            {
+                MyLog.LogError("flags: " +  item.Key,item.Value);
+            }
+                        
+            ReadOnlyDictionary<int, WorkData> workDatas = maid_.status.workDatas;
+            foreach (var item in workDatas)
+            {
+                MyLog.LogError("workDatas: " +  item.Key,item.Value.id,item.Value.level);
+            }
+
+
+        }
+        
     }
 }
