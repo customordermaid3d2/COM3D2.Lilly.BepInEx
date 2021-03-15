@@ -23,7 +23,7 @@ namespace COM3D2.Lilly.Plugin
         private static void OnSelectScenarioPost(ScenarioData ___m_CurrentScenario) // string __m_BGMName 못가져옴
         {
             //쓰지 말자 거의 도움 안됨
-            MyLog.LogMessageS("OnSelectScenarioPost:" + ___m_CurrentScenario.Title + " , " + ___m_CurrentScenario.EventContents);
+            MyLog.LogMessage("OnSelectScenarioPost:" + ___m_CurrentScenario.Title + " , " + ___m_CurrentScenario.EventContents);
 
         }
 
@@ -32,7 +32,7 @@ namespace COM3D2.Lilly.Plugin
         //[HarmonyPostfix]
         private static void StartPost(UILabel ___m_ContentsLabel, List<Maid> ___m_SelectedMaid, List<UILabel> ___m_PlayableTextUIList) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("StartPost");
+            MyLog.LogMessage("StartPost");
             //foreach (var item in ___m_PlayableTextUIList)
             //{
             //    MyLog.LogMessageS("StartPost:" + item.text );
@@ -54,11 +54,11 @@ namespace COM3D2.Lilly.Plugin
                 //NDebug.Assert(!string.IsNullOrEmpty(this.m_CurrentScenario.ScenarioScript), "SceneScenarioSelect.cs:選択したシナリオのスクリプトファイル名が設定されてません");
                 //NDebug.Assert(!string.IsNullOrEmpty(this.m_CurrentScenario.ScriptLabel), "SceneScenarioSelect.cs:選択したシナリオのラベル名が設定されてません");
                 string text = ___m_CurrentScenario.ScenarioScript;
-                MyLog.LogMessageS("JumpNextLabel: "+text);
+                MyLog.LogMessage("JumpNextLabel: "+text);
                 if (___m_SelectedMaid.Count > 0 && text.IndexOf("?") >= 0)
                 {
                     text = ScriptManager.ReplacePersonal(___m_SelectedMaid[0], text);
-                    MyLog.LogMessageS("JumpNextLabel: "+text);
+                    MyLog.LogMessage("JumpNextLabel: "+text);
                 }
                 // 스크립트 실행 부분
                 //GameMain.Instance.ScriptMgr.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
@@ -152,7 +152,7 @@ namespace COM3D2.Lilly.Plugin
         //[HarmonyPostfix]
         private static void SetPlayableText(UILabel ___m_ContentsLabel, List<Maid> ___m_SelectedMaid, List<UILabel> ___m_PlayableTextUIList) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("SetPlayableText");
+            MyLog.LogMessage("SetPlayableText");
             //foreach (var item in ___m_PlayableTextUIList)
             //{
             //    MyLog.LogMessageS("SetPlayableText:" + item.text);
@@ -170,7 +170,7 @@ namespace COM3D2.Lilly.Plugin
             ScenarioData ___m_CurrentScenario,
             CharacterSelectManager ___m_CharaSelectMgr) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ScenarioScript +" , " + ___m_CurrentScenario.ScriptLabel +" , " + ___m_CurrentScenario.Title + " , " + ___m_CurrentScenario.EventContents);            
+            MyLog.LogMessage("UpdateCharaUI:" + ___m_CurrentScenario.ScenarioScript +" , " + ___m_CurrentScenario.ScriptLabel +" , " + ___m_CurrentScenario.Title + " , " + ___m_CurrentScenario.EventContents);            
             //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.EventContents);
             //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Title);
             //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.ConditionText);            
@@ -178,7 +178,7 @@ namespace COM3D2.Lilly.Plugin
             //MyLog.LogMessageS("UpdateCharaUI:" + ___m_CurrentScenario.Notification);
             foreach (var item in ___m_CurrentScenario.ConditionText)
             {
-                MyLog.LogMessageS("UpdateCharaUI:" + item);
+                MyLog.LogMessage("UpdateCharaUI:" + item);
             }
 
             // SceneScenarioSelect

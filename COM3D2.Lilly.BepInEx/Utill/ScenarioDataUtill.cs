@@ -20,7 +20,7 @@ namespace COM3D2.Lilly.Plugin
         /// </summary>
         public static void SetScenarioDataAll()
         {
-            MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll st");
+            MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll st");
             // 병렬 처리
             ParallelLoopResult r = Parallel.ForEach(GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData(), scenarioData =>
             {
@@ -30,7 +30,7 @@ namespace COM3D2.Lilly.Plugin
                     SetEventEndFlagAll(scenarioData.GetEventMaidList(), scenarioData);
                 }
             });
-            MyLog.LogDebugS("ScenarioDataUtill.SetScenarioDataAll ed : " + r);
+            MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll ed : " + r);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace COM3D2.Lilly.Plugin
             foreach (var maid in ___m_EventMaid)
             {
                 b = maid.status.GetEventEndFlag(scenarioData.ID);
-                MyLog.LogMessageS(".SetEventEndFlagAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b +  " , " + scenarioData.ScenarioScript.Contains("_Marriage") + " , " + scenarioData.Title); ;
+                MyLog.LogMessage(".SetEventEndFlagAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b +  " , " + scenarioData.ScenarioScript.Contains("_Marriage") + " , " + scenarioData.Title); ;
                 if (!b)
                 {
                     action(maid);
@@ -88,7 +88,7 @@ namespace COM3D2.Lilly.Plugin
             for (int j = 0; j < characterMgr.GetStockMaidCount(); j++)
             {
                 Maid stockMaid = characterMgr.GetStockMaid(j);
-                MyLog.LogMessageS(".RemoveEventEndFlagAll:" + stockMaid.status.firstName + " , " + stockMaid.status.lastName); ;
+                MyLog.LogMessage(".RemoveEventEndFlagAll:" + stockMaid.status.firstName + " , " + stockMaid.status.lastName); ;
                 action(stockMaid);
             }
 
@@ -98,7 +98,7 @@ namespace COM3D2.Lilly.Plugin
         {
             if (maid!=null)
             {
-                MyLog.LogMessageS(".RemoveEventEndFlag:" + maid.status.firstName + " , " + maid.status.lastName); ;
+                MyLog.LogMessage(".RemoveEventEndFlag:" + maid.status.firstName + " , " + maid.status.lastName); ;
                 maid.status.RemoveEventEndFlagAll();
             }
           

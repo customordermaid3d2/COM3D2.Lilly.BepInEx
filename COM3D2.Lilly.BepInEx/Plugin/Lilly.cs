@@ -18,8 +18,6 @@ namespace COM3D2.Lilly.Plugin
     [BepInPlugin("COM3D2.Lilly.Plugin", "Lilly", "21.3.13")]// 버전 규칙 잇음. 반드시 2~4개의 숫자구성으로 해야함
     public class Lilly : BaseUnityPlugin 
     {
-        MyLog log;
-
         public static Lilly lilly;
         /// <summary>
         /// Harmony.CreateAndPatchAll 처리할 대상을 담는 리스트
@@ -42,9 +40,7 @@ namespace COM3D2.Lilly.Plugin
         {
             lilly = this;
 
-            MyLog.LogMessageS("MainPlugin()");
-
-            log = new MyLog(this.GetType().Name);
+            MyLog.LogMessage("MainPlugin()");
 
             threadPlugin = new ThreadPlugin();
 
@@ -97,7 +93,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 try
                 {
-                    log.LogMessage("Plugin:" + item.Name);
+                    MyLog.LogMessage("Plugin:" + item.Name);
                     if (!harmonys.ContainsKey(item))
                     {
                         harmonys.Add(item, Harmony.CreateAndPatchAll(item, null));
@@ -105,7 +101,7 @@ namespace COM3D2.Lilly.Plugin
                 }
                 catch (Exception e)
                 {
-                    log.LogError("Plugin:" + e.ToString());
+                    MyLog.LogError("Plugin:" + e.ToString());
                 }
             }
         }
@@ -125,7 +121,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 try
                 {
-                    log.LogMessage("Plugin:" + item.Name);
+                    MyLog.LogMessage("Plugin:" + item.Name);
                     Harmony harmony;
                     if (harmonys.TryGetValue(item, out harmony))
                     {
@@ -135,7 +131,7 @@ namespace COM3D2.Lilly.Plugin
                 }
                 catch (Exception e)
                 {
-                    log.LogError("Plugin:" + e.ToString());
+                    MyLog.LogError("Plugin:" + e.ToString());
                 }
             }
         }
@@ -157,7 +153,10 @@ namespace COM3D2.Lilly.Plugin
             lists.Add(typeof(MaidManagementMainPatch));// 메이드 관리
             lists.Add(typeof(CsvCommonIdManagerPatch));
             lists.Add(typeof(ClassChangePanelPatch));
+            lists.Add(typeof(JobClassPatch));
+            lists.Add(typeof(YotogiSkillSystemPatch));
             lists.Add(typeof(YotogiClassSystemPatch));
+            lists.Add(typeof(YotogiSkillDataPatch));
             lists.Add(typeof(MaidPatch));
             lists.Add(typeof(ProfileCtrlPatch));
             lists.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서
@@ -177,7 +176,8 @@ namespace COM3D2.Lilly.Plugin
             //lists.Add(typeof(ScriptManagerFastPatch));
             lists.Add(typeof(ScriptManagerPatch));
             lists.Add(typeof(SkillPatch));// 밤시중 스테이지 선택후 스킬 목록 가져오면서 작동
-            //lists.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
+            lists.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
+            lists.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입
             //lists.Add(typeof(TJSScriptPatch));
         }
 
@@ -185,12 +185,12 @@ namespace COM3D2.Lilly.Plugin
 
         public void Awake()
         {
-            MyLog.LogDebugS("Awake");
-            MyLog.LogInfoS("Awake");
-            MyLog.LogMessageS("Awake");
-            MyLog.LogWarningS("Awake");
-            MyLog.LogFatalS("Awake");
-            MyLog.LogErrorS("Awake");
+            MyLog.LogDebug("Awake");
+            MyLog.LogInfo("Awake");
+            MyLog.LogMessage("Awake");
+            MyLog.LogWarning("Awake");
+            MyLog.LogFatal("Awake");
+            MyLog.LogError("Awake");
 
             SetConfig();
 
@@ -202,7 +202,7 @@ namespace COM3D2.Lilly.Plugin
         // 커오메용
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            MyLog.LogMessageS("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex +" , "+ scene.isLoaded);
+            MyLog.LogMessage("OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex +" , "+ scene.isLoaded);
             // SceneManager.GetActiveScene().name;
 
             switch (scene.name)
@@ -245,7 +245,7 @@ namespace COM3D2.Lilly.Plugin
 
             // 설정 파일 내보내기2
             var customFile = new ConfigFile(Path.Combine(Paths.ConfigPath, "lilly_config.cfg"), true);
-            log.LogMessage("Paths.ConfigPath:" + Paths.ConfigPath);
+            MyLog.LogMessage("Paths.ConfigPath:" + Paths.ConfigPath);
             var userName = customFile.Bind("General",
                 "UserName",
                 "Deuce",

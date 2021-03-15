@@ -33,7 +33,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void CreatePost0(PhotoMotionData __instance) // string __m_BGMName 못가져옴
         {
-            LogMessageS("PhotoMotionData.Create");
+            LogMessage("PhotoMotionData.Create");
 
         }
     }

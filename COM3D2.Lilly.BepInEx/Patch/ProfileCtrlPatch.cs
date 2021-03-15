@@ -20,7 +20,7 @@ namespace COM3D2.Lilly.Plugin
         //[HarmonyPostfix]
         private static void Init(ProfileCtrl __instance, Status ___m_maidStatus) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("ProfileCtrl.Init:");
+            MyLog.LogMessage("ProfileCtrl.Init:");
         }
 
         //[HarmonyPatch(typeof(ProfileCtrl), "SetEnableInput")]
@@ -51,7 +51,7 @@ namespace COM3D2.Lilly.Plugin
             s.Append(" , " + data.uniqueName);
             s.Append(" , " + data.drawName);
 
-            MyLog.LogMessageS("SetPersonal: "+s.ToString());
+            MyLog.LogMessage("SetPersonal: "+s.ToString());
 
 
             //Personal.Data data;

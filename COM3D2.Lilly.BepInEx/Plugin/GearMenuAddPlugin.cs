@@ -39,14 +39,19 @@ namespace COM3D2.Lilly.Plugin
             {
                 name = "로그 온오프";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback), name, png);                
+                
                 name = "Lilly관련 패치 온오프";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_Patch), name, png);                
-                name = "SetMaidStatusAll";
+               
+                name = "SetMaidStatusAll. stat,sikill,job";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_SetMaidStatusAll), name, png);                
-                name = "SetScenarioDataAll";
+                
+                name = "SetScenarioDataAll.SetEventEndFlagAll 이벤트 클리어 처리";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_SetScenarioDataAll), name, png);                
-                name = "RemoveEventEndFlagAll";
+                
+                name = "SetScenarioDataAll.RemoveEventEndFlagAll 이벤트 클리어 제거";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_RemoveEventEndFlagAll), name, png);                
+                
                 //name = "아이템 장착 콘솔 로그 표시 여부";
                 //SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_MaidPatch), name, png);                
                 name = "게임 정보 얻기";
@@ -79,7 +84,7 @@ namespace COM3D2.Lilly.Plugin
             Lilly.isLogOnOffAll = !Lilly.isLogOnOffAll;
                 //displayUI = !displayUI;
 
-            MyLog.LogMessageS("OnMenuButtonClickCallback:" + Lilly.isLogOnOffAll);
+            MyLog.LogMessage("OnMenuButtonClickCallback:" + Lilly.isLogOnOffAll);
 
         }
 
@@ -95,26 +100,26 @@ namespace COM3D2.Lilly.Plugin
             }
             patchOnOff = !patchOnOff;
 
-            MyLog.LogMessageS("OnMenuButtonClickCallback_Patch:" + patchOnOff);
+            MyLog.LogMessage("OnMenuButtonClickCallback_Patch:" + patchOnOff);
         }
 
 
 
         private static void OnMenuButtonClickCallback_SetMaidStatusAll()
         {
-            MyLog.LogMessageS("OnMenuButtonClickCallback_SetMaidStatusAll");            
+            MyLog.LogMessage("OnMenuButtonClickCallback_SetMaidStatusAll");            
             MaidStatusUtill.SetMaidStatusAll();
         }
 
         private static void OnMenuButtonClickCallback_SetScenarioDataAll()
         {
-            MyLog.LogMessageS("OnMenuButtonClickCallback_SetScenarioDataAll");            
+            MyLog.LogMessage("OnMenuButtonClickCallback_SetScenarioDataAll");            
             ScenarioDataUtill.SetScenarioDataAll();
         }
         
         private static void OnMenuButtonClickCallback_RemoveEventEndFlagAll()
         {
-            MyLog.LogMessageS("OnMenuButtonClickCallback_RemoveEventEndFlagAll");            
+            MyLog.LogMessage("OnMenuButtonClickCallback_RemoveEventEndFlagAll");            
             ScenarioDataUtill.RemoveEventEndFlagAll();
         }
 

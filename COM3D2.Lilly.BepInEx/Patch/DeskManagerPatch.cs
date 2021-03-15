@@ -20,7 +20,7 @@ namespace COM3D2.Lilly.Plugin
         //[HarmonyPostfix]
         private static void OnChangeBGPost(string bg_name, GameObject bg_object)
         {
-            MyLog.LogMessageS("BgMgr.OnChangeBGPost:" + bg_name);
+            MyLog.LogMessage("BgMgr.OnChangeBGPost:" + bg_name);
         }
          
     }

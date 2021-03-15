@@ -10,8 +10,8 @@ namespace COM3D2.Lilly.Plugin
 	/// <summary>
 	/// 메이드 목록에서 스테이터스 버튼 클릭시 나오는 화면 관련?
 	/// </summary>
-    class StatusMgrPatch
-    {
+    class StatusMgrPatch : BaseCreatePanel
+	{
 		/// <summary>
 		/// 스테이터스 버튼 클릭시 나오는 화면
 		/// </summary>
@@ -22,10 +22,10 @@ namespace COM3D2.Lilly.Plugin
 		{
 			if (___m_maid == null)
 			{
-				MyLog.LogWarningS("StatusMgr.OpenStatusPanel:null");
+				MyLog.LogWarning("StatusMgr.OpenStatusPanel:null");
 				return;
 			}
-            MyLog.LogMessageS("StatusMgr.OpenStatusPanel" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
+            MyLog.LogMessage("StatusMgr.OpenStatusPanel" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
 			//MaidStatusUtill.SetMaidStatus(___m_maid);
 		}
 
@@ -39,10 +39,10 @@ namespace COM3D2.Lilly.Plugin
 		{
 			if (maid == null)
 			{
-				MyLog.LogErrorS("StatusMgr.UpdateMaidStatusPre:null");
+				MyLog.LogError("StatusMgr.UpdateMaidStatusPre:null");
 				return;
 			}
-			MyLog.LogMessageS("StatusMgr.UpdateMaidStatusPre"+ maid.status.charaName.name1 +" , "+ maid.status.charaName.name2);
+			MyLog.LogMessage("StatusMgr.UpdateMaidStatusPre"+ maid.status.charaName.name1 +" , "+ maid.status.charaName.name2);
 			//MaidStatusUtill.SetMaidStatus(maid);
 		}
 
@@ -58,11 +58,25 @@ namespace COM3D2.Lilly.Plugin
 		{
 			if (___m_maid == null)
 			{
-				MyLog.LogErrorS("StatusMgr.LoadDataPre:null");
+				MyLog.LogError("StatusMgr.LoadDataPre:null");
 				return;
 			}
-			MyLog.LogMessageS("StatusMgr.LoadDataPre" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
+			MyLog.LogMessage("StatusMgr.LoadDataPre" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
 			//MaidStatusUtill.SetMaidStatus(___m_maid);
 		}
-    }
+
+		StatusMgr statusMgr;
+		protected StatusCtrl m_ctrl;
+		protected Maid m_maid;
+		protected Dictionary<int, string> m_dicCrownIcon;
+
+		public override void Init()
+		{
+			this.m_goPanel = base.GetPanel("StatusPanel");
+			this.m_ctrl = base.GetCtrl<StatusCtrl>();
+			this.m_ctrl.Init(statusMgr, this.m_goPanel);
+			this.m_goPanel.SetActive(false);
+		}
+
+	}
 }

@@ -27,7 +27,7 @@ namespace COM3D2.Lilly.Plugin.Patch
             {
                 return;
             }
-            MyLog.LogMessageS("YotogiClass.CreateData()");
+            MyLog.LogMessage("YotogiClass.CreateData()");
             commonIdManager = ___commonIdManager;
             basicDatas = ___basicDatas;
             learnSkillList = ___learnSkillList;

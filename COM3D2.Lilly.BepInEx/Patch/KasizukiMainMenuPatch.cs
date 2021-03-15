@@ -24,7 +24,7 @@ namespace COM3D2.Lilly.Plugin
 		[HarmonyPostfix]
 		static void StartSenarioPre(Maid targetMaid, RoomData.Data targetRoom, KasizukiMainMenu __instance)
 		{
-			MyLog.LogMessageS("KasizukiMainMenu.StartSenarioPre:");
+			MyLog.LogMessage("KasizukiMainMenu.StartSenarioPre:");
 		}
 
 		[HarmonyPatch(typeof(KasizukiMainMenu), "StartFree")]   // private void StartFree(Maid targetMaid, RoomData.Data targetRoom, ManData.Data targetMan, PlayData.Data targetPlay)
@@ -33,7 +33,7 @@ namespace COM3D2.Lilly.Plugin
 		// ref Exception __exception, 없다고함
 		static void StartFreePre( Maid targetMaid, RoomData.Data targetRoom ,KasizukiMainMenu __instance)
 		{   
-			MyLog.LogErrorS("KasizukiMainMenu.StartFreePre");
+			MyLog.LogError("KasizukiMainMenu.StartFreePre");
 
 		}
 	}

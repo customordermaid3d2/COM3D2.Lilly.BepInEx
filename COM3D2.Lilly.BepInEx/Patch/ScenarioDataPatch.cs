@@ -13,7 +13,7 @@ namespace COM3D2.Lilly.Plugin
         private static void ScenarioPlay()
         {
             // !maid.status.GetEventEndFlag(this.ID)
-            MyLog.LogMessageS("ScenarioPlay");
+            MyLog.LogMessage("ScenarioPlay");
            //for (int j = 0; j < GameMain.Instance.CharacterMgr.GetStockMaidCount(); j++)
            //{
            //    Maid stockMaid = GameMain.Instance.CharacterMgr.GetStockMaid(j);

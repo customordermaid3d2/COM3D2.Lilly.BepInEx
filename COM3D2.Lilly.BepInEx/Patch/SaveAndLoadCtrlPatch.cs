@@ -14,7 +14,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPrefix]// 나중에 __m_loadDataNo 지워짐
         private static void LoadDataPre(SaveAndLoadCtrl __instance )// string __m_loadDataNo 못가져옴
         {
-            MyLog.LogMessageS("SaveAndLoadCtrl.LoadDataPre" );
+            MyLog.LogMessage("SaveAndLoadCtrl.LoadDataPre" );
             
         }
 
@@ -23,7 +23,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]// 나중에 __m_loadDataNo 지워짐
         private static void GetLoadDataUnitByKeyPost(SaveAndLoadCtrl __instance, string key, SaveAndLoadCtrl.LoadDataUnit __result)
         {
-            MyLog.LogMessageS("SaveAndLoadCtrl.GetLoadDataUnitByKeyPost:" + key 
+            MyLog.LogMessage("SaveAndLoadCtrl.GetLoadDataUnitByKeyPost:" + key 
                 + " , " + __result.managerName 
                 + " , " + __result.pageNo 
                 + " , " + __result.serialNo 

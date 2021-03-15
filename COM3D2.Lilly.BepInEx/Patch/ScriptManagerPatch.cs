@@ -18,7 +18,7 @@ namespace COM3D2.Lilly.Plugin
         static void EvalScript(string eval_str)
         {
             // ScriptManager.EvalScriptPost2:global.__skill_command_file.add(%['file'=>'C1_RR_CA001f.ks','label'=>'*RR2','rrlock'=>'false']);
-            MyLog.LogMessageS("ScriptManager.EvalScript:" + eval_str);
+            MyLog.LogMessage("ScriptManager.EvalScript:" + eval_str);
         }
 
         // public void EvalScript(string eval_str, TJSVariant result)
@@ -26,7 +26,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void EvalScriptPost1(string eval_str, TJSVariant result)
         {
-            MyLog.LogMessageS("ScriptManager.EvalScriptPost1:" + eval_str + " , " + result.AsString());
+            MyLog.LogMessage("ScriptManager.EvalScriptPost1:" + eval_str + " , " + result.AsString());
         }
 
 
@@ -41,7 +41,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void ExecScriptFilePost1(string file_name, ScriptManager __instance)// ref TJSVariant result,
         {
-            MyLog.LogMessageS("ScriptManager.ExecScriptFilePost1:" + file_name);
+            MyLog.LogMessage("ScriptManager.ExecScriptFilePost1:" + file_name);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void ExecScriptFilePost2(string file_name, ref TJSVariant result, ScriptManager __instance)// ref TJSVariant result,
         {
-            MyLog.LogMessageS("ScriptManager.ExecScriptFilePost2:" + file_name);
+            MyLog.LogMessage("ScriptManager.ExecScriptFilePost2:" + file_name);
         }
 
         // private void TJSFuncLearningYotogiSkill(TJSVariantRef[] tjs_param, TJSVariantRef result)
@@ -71,22 +71,22 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void TJSFuncLearningYotogiSkill(TJSVariantRef[] tjs_param, TJSVariantRef result)
         {
-            MyLog.LogMessageS("ScriptManager.TJSFuncLearningYotogiSkill:"  );
+            MyLog.LogMessage("ScriptManager.TJSFuncLearningYotogiSkill:"  );
             
             //NDebug.Assert(tjs_param.Length == 2, "LearningYotogiSkill args count error.");
             if (tjs_param.Length == 2)
             {
-                MyLog.LogErrorS("LearningYotogiSkill args count error.");
+                MyLog.LogError("LearningYotogiSkill args count error.");
             }
             // NDebug.Assert(tjs_param[0].type == TJSVariantRef.Type.tvtInteger && tjs_param[1].type == TJSVariantRef.Type.tvtInteger, "error.");
             if (tjs_param[0].type == TJSVariantRef.Type.tvtInteger && tjs_param[1].type == TJSVariantRef.Type.tvtInteger)
             {
-                MyLog.LogErrorS("error.");
+                MyLog.LogError("error.");
             }            
             Maid maid = GameMain.Instance.CharacterMgr.GetMaid(tjs_param[0].AsInteger());
             if (maid == null)
             {
-                MyLog.LogErrorS("maid is null. LearningYotogiSkill");
+                MyLog.LogError("maid is null. LearningYotogiSkill");
                 return;
             }
             // int skillId = tjs_param[1].AsInteger();
@@ -106,7 +106,7 @@ namespace COM3D2.Lilly.Plugin
             // 이게 결혼 여부 설정
             int nMaidNo = tjs_param[0].AsInteger();
             Maid maid = GameMain.Instance.CharacterMgr.GetMaid(nMaidNo);
-            MyLog.LogMessageS("OldTJSFuncIsMarriage." + MaidUtill.GetMaidFullNale(maid));
+            MyLog.LogMessage("OldTJSFuncIsMarriage." + MaidUtill.GetMaidFullNale(maid));
             //if (maid != null && maid.status.OldStatus != null)
             //{
             //    result.SetBool(maid.status.OldStatus.isMarriage);
@@ -132,7 +132,7 @@ namespace COM3D2.Lilly.Plugin
             //{
             //    result.SetBool(false);
             //}
-            MyLog.LogMessageS("OldTJSFuncIsNewWifeFlag." + MaidUtill.GetMaidFullNale(maid));
+            MyLog.LogMessage("OldTJSFuncIsNewWifeFlag." + MaidUtill.GetMaidFullNale(maid));
         }
 
 
@@ -145,7 +145,7 @@ namespace COM3D2.Lilly.Plugin
             string a = tjs_param[1].AsString();
             Maid maid = GameMain.Instance.CharacterMgr.GetMaid(nMaidNo);
 
-            MyLog.LogMessageS("TJSFuncSetMaidCondition: " + MaidUtill.GetMaidFullNale(maid));
+            MyLog.LogMessage("TJSFuncSetMaidCondition: " + MaidUtill.GetMaidFullNale(maid));
         }
 
         // 	public void TJSFuncCreateStockMaidLoopData(TJSVariantRef[] tjs_param, TJSVariantRef result)
@@ -169,7 +169,7 @@ namespace COM3D2.Lilly.Plugin
             // }
             foreach (var maid in ___stock_maid_loop_list)
             {
-               MyLog.LogMessageS("TJSFuncCreateStockMaidLoopData: " + MaidUtill.GetMaidFullNale(maid));
+               MyLog.LogMessage("TJSFuncCreateStockMaidLoopData: " + MaidUtill.GetMaidFullNale(maid));
             }
         }
 

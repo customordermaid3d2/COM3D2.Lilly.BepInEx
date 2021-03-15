@@ -10,41 +10,24 @@ namespace COM3D2.Lilly.Plugin
     class MyLog 
     {
         static ManualLogSource log = BepInEx.Logging.Logger.CreateLogSource("Lilly");
-        string name;
 
-        public MyLog()
-        {            
-            this.name = this.GetType().Name;
-        }
 
-        public MyLog(string name)
-        {
-            this.name = name;
-        }
-
-        public void LogMessage(string v)
-        {
-            LogMessageS(name+" : "+v);
-        }
-        
-        internal static void LogMessageS(params object[] args)
+        internal static void LogMessage(string name,params object[] args)
         {
             if (!Lilly.isLogOnOffAll)
                 return;
-            StringBuilder s = new StringBuilder(args[0].ToString());
-            object[] t=new object[args.Length-1];
-            args.CopyTo(t, 1);
-            foreach (var i in t)
+            StringBuilder s = new StringBuilder();
+            s.Append(args[0].ToString());
+            for (int i = 1; i < args.Length; i++)
             {
-                s.Append(" , "+i);
+                s.Append(" , "+ args[i].ToString());
             }
-            Debug.Log("Lilly:" + s);
-            // s.Append(args[1..]); //8.0 문법;;
+            log.LogMessage(s);
             // s.Append(args[1..]); //8.0 문법;;
         }
 
 
-        internal static void LogMessageS(string v)
+        internal static void LogMessage(string v)
         {
             if (Lilly.isLogOnOffAll)
             {
@@ -60,29 +43,29 @@ namespace COM3D2.Lilly.Plugin
             // Logger.LogError("This is an error");
         }
 
-        internal static void LogWarningS(string v)
+        internal static void LogWarning(string v)
         {
             if (Lilly.isLogOnOffAll)
                 log.LogWarning(v);
         }
-        internal static void LogInfoS(string v)
+        internal static void LogInfo(string v)
         {
             if (Lilly.isLogOnOffAll)
                 log.LogInfo(v);
         }
-        internal static void LogFatalS(string v)
+        internal static void LogFatal(string v)
         {
             if (Lilly.isLogOnOffAll)
                 log.LogFatal(v);
         }
-        internal static void LogDebugS(string v)
+        internal static void LogDebug(string v)
         {
             if (Lilly.isLogOnOffAll)
                 log.LogDebug(v);
 
         }
 
-        internal static void LogErrorS(string v)
+        internal static void LogError(string v)
         {
 
             //Debug.LogError("■Lilly: " + v+ " ■");
@@ -91,10 +74,5 @@ namespace COM3D2.Lilly.Plugin
 
         }
 
-        internal void LogError(string v)
-        {
-            if (Lilly.isLogOnOffAll)
-                LogErrorS(name + " : " + v);
-        }
     }
 }

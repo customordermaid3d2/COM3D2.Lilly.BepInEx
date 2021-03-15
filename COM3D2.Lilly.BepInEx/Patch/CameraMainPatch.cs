@@ -14,7 +14,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void FadeInPost(CameraMain __instance) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("FadeInPost:"+ __instance.GetFadeState());
+            MyLog.LogMessage("FadeInPost:"+ __instance.GetFadeState());
 
         }        
         
@@ -22,7 +22,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void FadeOutPost(CameraMain __instance) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("FadeOutPost:" + __instance.GetFadeState());
+            MyLog.LogMessage("FadeOutPost:" + __instance.GetFadeState());
 
         }
 

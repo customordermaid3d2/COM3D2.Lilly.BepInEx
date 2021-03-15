@@ -35,7 +35,7 @@ namespace COM3D2.Lilly.Plugin
 			{
 				if (!YotogiClass.IsEnabled(data.id))
 				{
-					MyLog.LogErrorS(string.Concat(new string[]
+					MyLog.LogError(string.Concat(new string[]
 					{
 						"메이드[",
 						this.status.fullNameJpStyle,

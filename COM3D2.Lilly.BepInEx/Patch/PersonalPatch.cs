@@ -33,7 +33,7 @@ namespace COM3D2.Lilly.Plugin
             
             foreach (var field in fields)
             {
-                MyLog.LogDebugS(string.Format("{0}.{1} {2}", type.Name, field.Name, field.FieldType));
+                MyLog.LogDebug(string.Format("{0}.{1} {2}", type.Name, field.Name, field.FieldType));
             }
 
             // 효율때문에
@@ -59,7 +59,7 @@ namespace COM3D2.Lilly.Plugin
                 return;
             }
 
-            MyLog.LogMessageS("CreateData." );
+            MyLog.LogMessage("CreateData." );
 
             commonIdManager = ___commonIdManager;
             basicDatas = ___basicDatas;
@@ -70,16 +70,16 @@ namespace COM3D2.Lilly.Plugin
             // 쓸데없이 로그 많음
             foreach (KeyValuePair<int, KeyValuePair<string, string>> i in commonIdManager.idMap)
            {
-               MyLog.LogMessageS("idMap:"+ i.Key + " , " + i.Value.Key + " , " + i.Value.Value);
+               MyLog.LogMessage("idMap:"+ i.Key + " , " + i.Value.Key + " , " + i.Value.Value);
            }
            
            foreach (var item in commonIdManager.nameMap)
            {
-               MyLog.LogMessageS("nameMap:" + item);
+               MyLog.LogMessage("nameMap:" + item);
            }
            foreach (var item in basicDatas)
            {
-               MyLog.LogMessageS("basicDatas:" + item.Key + " : " + item.Value.drawName + " : " + item.Value.id + " : " + item.Value.replaceText + " : " + item.Value.termName + " : " + item.Value.uniqueName);//
+               MyLog.LogMessage("basicDatas:" + item.Key + " : " + item.Value.drawName + " : " + item.Value.id + " : " + item.Value.replaceText + " : " + item.Value.termName + " : " + item.Value.uniqueName);//
                // competitiveMotionFileVictory  경쟁적인 모션 파일 승리
            }
 
@@ -121,7 +121,7 @@ namespace COM3D2.Lilly.Plugin
         //[HarmonyPostfix]
         private static void uniqueNameToId( string name) // Personal __instance,
         {
-            MyLog.LogMessageS("Personal.uniqueNameToId:" + name);
+            MyLog.LogMessage("Personal.uniqueNameToId:" + name);
         }
     }
 }

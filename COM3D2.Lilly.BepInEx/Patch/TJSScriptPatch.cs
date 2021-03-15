@@ -30,7 +30,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void EvalScriptPost2(AFileBase file) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("TJSScript.EvalScriptPost2:" + file.ToString());
+            MyLog.LogMessage("TJSScript.EvalScriptPost2:" + file.ToString());
             //MyLog.Log("OnSelectScenarioPost:" + __m_BGMName);
         }
     }

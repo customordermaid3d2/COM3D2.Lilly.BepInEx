@@ -31,7 +31,7 @@ namespace COM3D2.Lilly.Plugin
             //if (SceneManager.GetActiveScene().isLoaded)//실패
             if (isOnOff&&__instance.Visible )
             {
-                MyLog.LogMessageS("Maid.SetMaterialPropertyPost2:" + f_strPropName + "," + f_strTypeName+ "," + f_strValue);
+                MyLog.LogMessage("Maid.SetMaterialPropertyPost2:" + f_strPropName + "," + f_strTypeName+ "," + f_strValue);
             }
 
         }
@@ -49,7 +49,7 @@ namespace COM3D2.Lilly.Plugin
             //if( GameMain.Instance.MainCamera.GetFadeState()==CameraMain.FadeState.Out)//효과 없음
             //if (__instance.Visible)
             {
-                MyLog.LogMessageS("Maid.SetPropPost2:"+ __instance.status.firstName+ " , "+ __instance.status.firstName +" , "+  mp.strFileName + " , " + mp.name + " , " + mp.idx);//filename + " , " +
+                MyLog.LogMessage("Maid.SetPropPost2:"+ __instance.status.firstName+ " , "+ __instance.status.firstName +" , "+  mp.strFileName + " , " + mp.name + " , " + mp.idx);//filename + " , " +
 
                 //Menu.m_dicResourceRef.ContainsKey(mp.nFileNameRID);
                 //Menu.m_dicResourceRef.ge
@@ -112,7 +112,7 @@ namespace COM3D2.Lilly.Plugin
         public static void DelPropPrefix4(Maid __instance, MPN idx, bool f_bTemp)
         {
             if (isOnOff && __instance.Visible)
-                MyLog.LogMessageS("Maid.DelPropPrefix4");
+                MyLog.LogMessage("Maid.DelPropPrefix4");
 
         }
 

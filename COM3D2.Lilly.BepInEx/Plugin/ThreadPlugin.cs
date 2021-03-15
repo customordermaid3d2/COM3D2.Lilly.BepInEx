@@ -25,7 +25,7 @@ namespace COM3D2.Lilly.Plugin
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
-            MyLog.LogMessageS("GearMenuAddPlugin.OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex + " , " + scene.isLoaded);
+            MyLog.LogMessage("GearMenuAddPlugin.OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex + " , " + scene.isLoaded);
             // SceneManager.GetActiveScene().name;
 
             // Run 메서드를 입력받아
@@ -150,9 +150,9 @@ namespace COM3D2.Lilly.Plugin
 
         public System.Collections.IEnumerator MyCoroutine()
         {
-            MyLog.LogMessageS("ThreadPlugin.MyCoroutine st:" + Thread.CurrentThread.Name + " : " + cnt++);
+            MyLog.LogMessage("ThreadPlugin.MyCoroutine st:" + Thread.CurrentThread.Name + " : " + cnt++);
             Thread.Sleep(1000);
-            MyLog.LogMessageS("ThreadPlugin.MyCoroutine ed:" + Thread.CurrentThread.Name + " : " + cnt++);
+            MyLog.LogMessage("ThreadPlugin.MyCoroutine ed:" + Thread.CurrentThread.Name + " : " + cnt++);
             yield return null;
         }
 
@@ -166,9 +166,9 @@ namespace COM3D2.Lilly.Plugin
 
         void Run(Scene scene)
         {
-            MyLog.LogMessageS("ThreadPlugin.Run st:" + Thread.CurrentThread.Name + " : " + cnt++);
+            MyLog.LogMessage("ThreadPlugin.Run st:" + Thread.CurrentThread.Name + " : " + cnt++);
             Thread.Sleep(1000);
-            MyLog.LogMessageS("ThreadPlugin.Run ed:" + Thread.CurrentThread.Name + " : " + cnt++);
+            MyLog.LogMessage("ThreadPlugin.Run ed:" + Thread.CurrentThread.Name + " : " + cnt++);
         }
     }
 }

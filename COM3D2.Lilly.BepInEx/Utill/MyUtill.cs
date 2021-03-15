@@ -61,5 +61,15 @@ namespace COM3D2.Lilly.Plugin
 			}
 			return result;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="methodBase"></param>
+		/// <returns></returns>
+		public static string GetClassMethodName(System.Reflection.MethodBase methodBase)
+        {
+			return methodBase.ReflectedType.Name+"."+methodBase.Name+":" ;
+        }
 	}
 }

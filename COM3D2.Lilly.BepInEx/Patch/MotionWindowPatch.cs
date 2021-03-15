@@ -16,7 +16,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         private static void AwakePost0(MotionWindow __instance) // string __m_BGMName 못가져옴
         {
-            LogMessageS("MotionWindow.AwakePost0");
+            LogMessage("MotionWindow.AwakePost0");
 
         }
     }

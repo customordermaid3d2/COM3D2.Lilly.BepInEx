@@ -33,7 +33,7 @@ namespace COM3D2.Lilly.Plugin
             }
             if (__instance.maid != null)
             {
-				MyLog.LogMessageS("SetPersonal:" + MaidUtill.GetMaidFullNale(__instance.maid));
+				MyLog.LogMessage("SetPersonal:" + MaidUtill.GetMaidFullNale(__instance.maid));
 
             }
 

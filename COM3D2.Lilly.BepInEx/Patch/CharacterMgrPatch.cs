@@ -83,13 +83,13 @@ namespace COM3D2.Lilly.Plugin
                 return;
             }
 
-            MyLog.LogMessageS("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName +" , "+ f_prest.ePreType);
+            MyLog.LogMessage("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName +" , "+ f_prest.ePreType);
             MaidProp[] array= PresetUtill.getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
             {
                 if (maidProp.strFileName.Length>0)// 값 없는거 출력 방지
                 {
-                    MyLog.LogMessageS("PresetSetPostfix2: " + maidProp.idx.ToString().PadLeft(3) + " , " + maidProp.strFileName);
+                    MyLog.LogMessage("PresetSetPostfix2: " + maidProp.idx.ToString().PadLeft(3) + " , " + maidProp.strFileName);
                 }
             }
         }
@@ -106,7 +106,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 return;
             }
-            MyLog.LogMessageS("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
+            MyLog.LogMessage("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
         }
 
         // public CharacterMgr.Preset PresetSave(Maid f_maid, CharacterMgr.PresetType f_type)
@@ -119,7 +119,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 return;
             }
-            MyLog.LogMessageS("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName +" , "+ __result.ePreType);
+            MyLog.LogMessage("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName +" , "+ __result.ePreType);
         }
     }
 }

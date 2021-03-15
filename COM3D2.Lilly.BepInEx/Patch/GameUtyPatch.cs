@@ -15,7 +15,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void FileOpen(string fileName, AFileSystemBase priorityFileSystem)
         {
-            MyLog.LogMessageS(  "GameUty.FileOpen:" + fileName );           
+            MyLog.LogMessage(  "GameUty.FileOpen:" + fileName );           
         }
     }
 }

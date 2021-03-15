@@ -24,7 +24,7 @@ namespace COM3D2.Lilly.Plugin
         //[HarmonyPostfix]
         private static void ctor(CsvCommonIdManagerPatch __instance, string csvTopCommonName, string typeName, CsvCommonIdManager.Type type, Func<int, bool> customCheckFunction ) // string __m_BGMName 못가져옴
         {
-            MyLog.LogMessageS("CsvCommonIdManager:" + csvTopCommonName +" , "+ typeName + " , " + type + " , " + (customCheckFunction==null));
+            MyLog.LogMessage("CsvCommonIdManager:" + csvTopCommonName +" , "+ typeName + " , " + type + " , " + (customCheckFunction==null));
         }
     }
 }

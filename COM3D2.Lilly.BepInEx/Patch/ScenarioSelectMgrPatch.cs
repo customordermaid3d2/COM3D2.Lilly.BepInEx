@@ -25,7 +25,7 @@ namespace COM3D2.Lilly.Plugin
 				{
 					return;
 				}
-				MyLog.LogMessageS(".InitScenarioData:"+file_name);
+				MyLog.LogMessage(".InitScenarioData:"+file_name);
 				using (AFileBase afileBase2 = GameUty.FileSystem.FileOpen(file_name))
 				{
 					using (CsvParser csvParser2 = new CsvParser())

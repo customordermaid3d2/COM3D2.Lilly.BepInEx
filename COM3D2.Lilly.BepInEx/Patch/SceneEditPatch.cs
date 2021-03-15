@@ -25,10 +25,10 @@ namespace COM3D2.Lilly.Plugin
             Maid ___m_maid = SceneEdit.Instance.maid;
             if (___m_maid == null)
             {
-                MyLog.LogErrorS("SceneEdit.Start:null");
+                MyLog.LogError("SceneEdit.Start:null");
                 return;
             }
-            MyLog.LogMessageS("SceneEdit.Start:" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
+            MyLog.LogMessage("SceneEdit.Start:" + ___m_maid.status.charaName.name1 + " , " + ___m_maid.status.charaName.name2);
             MaidStatusUtill.SetMaidStatus(___m_maid);
         }
 

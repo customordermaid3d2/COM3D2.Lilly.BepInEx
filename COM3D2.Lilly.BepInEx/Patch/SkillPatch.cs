@@ -14,7 +14,7 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         static void IsExecStagePost(YotogiStage.Data stageData, ref bool __result, Skill.Data __instance)
         {   // ■ Skill.Data.IsExecStagePostBGM022.ogg , bigsight_night , System.String[] , SceneYotogi/背景タイプ/bigsight_night , bigsight_night
-			MyLog.LogMessageS("Skill.Data.IsExecStagePost:" + stageData.bgmFileName 
+			MyLog.LogMessage("Skill.Data.IsExecStagePost:" + stageData.bgmFileName 
 			    + " , " + stageData.drawName 
 			    //+ " , " + stageData.prefabName 
 			    + " , " + stageData.termName 
@@ -22,7 +22,7 @@ namespace COM3D2.Lilly.Plugin
 
 			for (int i = 0; i < stageData.prefabName.Length; i++)
 			{				
-				MyLog.LogMessageS(stageData.prefabName[i].ToString().Trim().ToLower());
+				MyLog.LogMessage(stageData.prefabName[i].ToString().Trim().ToLower());
 			}
 
 			
