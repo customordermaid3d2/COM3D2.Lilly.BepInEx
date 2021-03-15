@@ -65,5 +65,31 @@ namespace COM3D2.Lilly.Plugin
 			return true;
 			*/
 		}
-    }
+
+
+
+
+		private BonusStatus bonusStatus;
+		public HeroineType heroineType;
+		public JobClassSystem jobClass { get; private set; }
+
+		/// <summary>
+		/// 분석용
+		/// </summary>
+		public void UpdateClassBonusStatus()
+		{
+			this.bonusStatus.Clear();
+			if (this.heroineType == HeroineType.Sub)
+			{
+				return;
+			}
+			foreach (KeyValuePair<int, ClassData<JobClass.Data>> keyValuePair in this.jobClass.GetAllDatas())
+			{
+				ClassData<JobClass.Data> value = keyValuePair.Value;
+				value.data.levelBonuss[value.level - 1].ApplyAddBonusStatus(this.bonusStatus);
+			}
+		}
+
+
+	}
 }

@@ -24,12 +24,16 @@ namespace COM3D2.Lilly.Plugin
         /// <summary>
         /// Harmony.CreateAndPatchAll 처리할 대상을 담는 리스트
         /// </summary>
-        public List<Type> lists = new List<Type>();//patch용
-        public List<Type> listd = new List<Type>();//patch용
+        public static List<Type> lists = new List<Type>();//patch용
+        public static List<Type> listd = new List<Type>();//patch용
+
+        public static Dictionary<Type,bool> isLogOnOff = new Dictionary<Type, bool>();//patch용
+        public static bool isLogOnOffAll = true;
+
         /// <summary>
         ///  SceneManager.sceneLoaded += 관리하기 편하게 이벤트 사용
         /// </summary>
-        event Action<Scene, LoadSceneMode> actioOnSceneLoaded ;//plugin용
+        static event Action<Scene, LoadSceneMode> actioOnSceneLoaded ;//plugin용
 
         ThreadPlugin threadPlugin;
         public static Dictionary<Type, Harmony> harmonys=new Dictionary<Type, Harmony>();
@@ -46,7 +50,21 @@ namespace COM3D2.Lilly.Plugin
 
             SetHarmonyList();
             SetHarmonyPatch();
+            SetHarmonyisOnOff();
+
             SetOnSceneLoaded();
+        }
+
+        private void SetHarmonyisOnOff()
+        {
+            foreach (var item in lists)
+            {
+                isLogOnOff.Add(item,true);
+            }
+            foreach (var item in listd)
+            {
+                isLogOnOff.Add(item,false);
+            }
         }
 
         /// <summary>
@@ -138,14 +156,16 @@ namespace COM3D2.Lilly.Plugin
             //lists.Add(typeof(KasizukiMainMenuPatch));
             lists.Add(typeof(MaidManagementMainPatch));// 메이드 관리
             lists.Add(typeof(CsvCommonIdManagerPatch));
+            lists.Add(typeof(ClassChangePanelPatch));
+            lists.Add(typeof(YotogiClassSystemPatch));
             lists.Add(typeof(MaidPatch));
-            //lists.Add(typeof(ProfileCtrlPatch));
+            lists.Add(typeof(ProfileCtrlPatch));
             lists.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서
             //lists.Add(typeof(StatusPatch));// 오류/떠서 사용 포기
             //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
             //lists.Add(typeof(PhotoMotionDataPatch));
             //lists.Add(typeof(PopupAndTabListPatch));
-            lists.Add(typeof(ProfileCtrlPapch));
+
             //lists.Add(typeof(SaveAndLoadCtrlPatch));
             //lists.Add(typeof(ScenarioDataPatch));//
             //lists.Add(typeof(SceneADVPatch));
@@ -156,7 +176,7 @@ namespace COM3D2.Lilly.Plugin
             lists.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.
             //lists.Add(typeof(ScriptManagerFastPatch));
             lists.Add(typeof(ScriptManagerPatch));
-            //lists.Add(typeof(SkillPatch));
+            lists.Add(typeof(SkillPatch));// 밤시중 스테이지 선택후 스킬 목록 가져오면서 작동
             //lists.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
             //lists.Add(typeof(TJSScriptPatch));
         }

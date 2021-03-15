@@ -37,7 +37,7 @@ namespace COM3D2.Lilly.Plugin
 
             if ( !buttonAdded1)
             {
-                name = "그냥 테스트용";
+                name = "로그 온오프";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback), name, png);                
                 name = "Lilly관련 패치 온오프";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_Patch), name, png);                
@@ -47,8 +47,8 @@ namespace COM3D2.Lilly.Plugin
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_SetScenarioDataAll), name, png);                
                 name = "RemoveEventEndFlagAll";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_RemoveEventEndFlagAll), name, png);                
-                name = "아이템 장착 콘솔 로그 표시 여부";
-                SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_MaidPatch), name, png);                
+                //name = "아이템 장착 콘솔 로그 표시 여부";
+                //SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_MaidPatch), name, png);                
                 name = "게임 정보 얻기";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_gameInfo), name, png);                
                 buttonAdded1 = true;
@@ -62,23 +62,24 @@ namespace COM3D2.Lilly.Plugin
 
         private static void OnMenuButtonClickCallback_MaidPatch()
         {
-            MaidPatch.isOnOff = !MaidPatch.isOnOff;
+            //MaidPatch.isOnOff = !MaidPatch.isOnOff;
         }
 
         private static void OnMenuButtonClickCallback()
         {
             //Open/Close the UI
-            if (displayUI)
-            {
-                Lilly.lilly.DelHarmonyPatch(Lilly.lilly.listd);
-            }
-            else
-            {
-                Lilly.lilly.SetHarmonyPatch(Lilly.lilly.listd);
-            }
-            displayUI = !displayUI;
+            //if (displayUI)
+            //{
+            //    Lilly.lilly.DelHarmonyPatch(Lilly.listd);
+            //}
+            //else
+            //{
+            //    Lilly.lilly.SetHarmonyPatch(Lilly.listd);
+            //}
+            Lilly.isLogOnOffAll = !Lilly.isLogOnOffAll;
+                //displayUI = !displayUI;
 
-            MyLog.LogMessageS("OnMenuButtonClickCallback:" + displayUI);
+            MyLog.LogMessageS("OnMenuButtonClickCallback:" + Lilly.isLogOnOffAll);
 
         }
 

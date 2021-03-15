@@ -23,91 +23,133 @@ namespace COM3D2.Lilly.Plugin
             Parallel.ForEach(GameMain.Instance.CharacterMgr.GetStockMaidList(), maid =>
             {
                 //MyLog.LogMessageS("MaidStatusUtill.ActiveManSloatCount: " + maid.status.firstName +" , "+ maid.status.lastName);
-                
+
                 SetMaidStatus(maid);
             });
         }
 
-        public static void SetMaidStatus(Maid ___select_maid_)
+        public static void SetMaidStatus(Maid maid)
         {
-            if (___select_maid_==null)
+            if (maid == null)
             {
                 MyLog.LogErrorS("MaidStatusUtill.SetMaidStatus:null");
                 return;
             }
-            MyLog.LogInfoS(".SetMaidStatus:: " + MaidUtill.GetMaidFullNale(___select_maid_));
+            MyLog.LogInfoS(".SetMaidStatus:: " + MaidUtill.GetMaidFullNale(maid));
 
-            ___select_maid_.status.employmentDay = 1;// 고용기간
+            maid.status.employmentDay = 1;// 고용기간
 
-            ___select_maid_.status.baseAppealPoint = 9999;
-            ___select_maid_.status.baseCare = 9999;
-            ___select_maid_.status.baseCharm = 9999;
-            ___select_maid_.status.baseCooking = 9999;
-            ___select_maid_.status.baseDance = 9999;
-            ___select_maid_.status.baseElegance = 9999;
-            ___select_maid_.status.baseHentai = 9999;
-            ___select_maid_.status.baseHousi = 9999;
-            ___select_maid_.status.baseInyoku = 9999;
-            ___select_maid_.status.baseLovely = 9999;
-            ___select_maid_.status.baseMaxHp = 9999;
-            ___select_maid_.status.baseMaxMind = 9999;
-            ___select_maid_.status.baseMaxReason = 9999;
-            ___select_maid_.status.baseMvalue = 9999;
-            ___select_maid_.status.baseReception = 9999;
-            ___select_maid_.status.baseTeachRate = 9999;
-            ___select_maid_.status.baseVocal = 9999;
-            
-            ___select_maid_.status.studyRate = 0;   // 습득율
-            ___select_maid_.status.likability = 999;// 호감도
+            maid.status.baseAppealPoint = 9999;
+            maid.status.baseCare = 9999;
+            maid.status.baseCharm = 9999;
+            maid.status.baseCooking = 9999;
+            maid.status.baseDance = 9999;
+            maid.status.baseElegance = 9999;
+            maid.status.baseHentai = 9999;
+            maid.status.baseHousi = 9999;
+            maid.status.baseInyoku = 9999;
+            maid.status.baseLovely = 9999;
+            maid.status.baseMaxHp = 9999;
+            maid.status.baseMaxMind = 9999;
+            maid.status.baseMaxReason = 9999;
+            maid.status.baseMvalue = 9999;
+            maid.status.baseReception = 9999;
+            maid.status.baseTeachRate = 9999;
+            maid.status.baseVocal = 9999;
 
-            ___select_maid_.status.heroineType=HeroineType.Transfer;// 기본, ? , 이전
-            ___select_maid_.status.relation= Relation.Lover;// 호감도
-            ___select_maid_.status.seikeiken = Seikeiken.Yes_Yes;// 
+            maid.status.studyRate = 0;   // 습득율
+            maid.status.likability = 999;// 호감도
+
+            maid.status.heroineType = HeroineType.Transfer;// 기본, ? , 이전
+            maid.status.relation = Relation.Lover;// 호감도
+            maid.status.seikeiken = Seikeiken.Yes_Yes;// 
             //___select_maid_.status.specialRelation = SpecialRelation.Married;// 호감도
 
             // this.tjs_.AddFunction("GetMaidStatus", new TJSScript.FunctionCallBack(this.TJSFuncGetMaidStatus));
-
-
 
             try
             {
                 foreach (Feature.Data data in Feature.GetAllDatas(true))
                 {
-                    ___select_maid_.status.AddFeature(data);
-                }
-
-                foreach (Propensity.Data data in Propensity.GetAllDatas(true))
-                {
-                    ___select_maid_.status.AddPropensity(data);
-                }
-
-                // 스킬 추가
-                //___select_maid_.status.yotogiSkill.Add(skillId);
-                {
-                    List<Skill.Data> learnPossibleSkills = Skill.GetLearnPossibleSkills(___select_maid_.status);
-                    foreach (Skill.Data data in learnPossibleSkills)
-                    {
-                        MyLog.LogMessageS(".:Skill1: " + MaidUtill.GetMaidFullNale(___select_maid_) + " , " + data.name + " , " + data.termName + " , " + data.start_call_file + " , " + data.start_call_file2);
-                        ___select_maid_.status.yotogiSkill.Add(data.id);
-                    }
-                }
-                {
-                    List<Skill.Old.Data> learnPossibleSkills = Skill.Old.GetLearnPossibleSkills(___select_maid_.status);
-                    foreach (Skill.Old.Data data in learnPossibleSkills)
-                    {
-                        MyLog.LogMessageS(".:Skill2: " + MaidUtill.GetMaidFullNale(___select_maid_) + " , " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
-                        ___select_maid_.status.yotogiSkill.Add(data.id);
-                    }
+                    maid.status.AddFeature(data);
                 }
             }
             catch (Exception e)
             {
-                MyLog.LogErrorS("MaidStatusUtill.SetMaidStatus: "+e.ToString());
+                MyLog.LogErrorS("SetMaidStatus: " + e.ToString());
             }
+
+            try
+            {
+                // 특성
+                foreach (Propensity.Data data in Propensity.GetAllDatas(true))
+                {
+                    maid.status.AddPropensity(data);
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogErrorS("SetMaidStatus: " + e.ToString());
+            }
+
+            // 스킬 추가
+            //___select_maid_.status.yotogiSkill.Add(skillId);
+            try
+            {
+                List<Skill.Data> learnPossibleSkills = Skill.GetLearnPossibleSkills(maid.status);
+                foreach (Skill.Data data in learnPossibleSkills)
+                {
+                    MyLog.LogMessageS(".Skill1: " + MaidUtill.GetMaidFullNale(maid) );
+                    MyLog.LogMessageS("id: " + data.id + " , " + data.name  + " , " + data.start_call_file + " , " + data.start_call_file2 + " , " + data.termName);
+                    MyLog.LogMessageS("ban_id_array: " + MyUtill.Join<int>(" , ", data.ban_id_array));
+                    MyLog.LogMessageS("skill_exp_table: " + MyUtill.Join<int>(" , ", data.skill_exp_table));                    
+                    MyLog.LogMessageS("playable_stageid_list: " + MyUtill.Join<int>(" , ", data.playable_stageid_list));
+
+                    maid.status.yotogiSkill.Add(data.id);
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogErrorS("SetMaidStatus: " + e.ToString());
+            }
+
+            try
+            {
+                List<Skill.Old.Data> learnPossibleSkills = Skill.Old.GetLearnPossibleSkills(maid.status);
+                foreach (Skill.Old.Data data in learnPossibleSkills)
+                {
+                    MyLog.LogMessageS(".Skill2: " + MaidUtill.GetMaidFullNale(maid) );
+                    MyLog.LogMessageS("id: " + data.id + " , " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
+                    MyLog.LogMessageS("ban_id_array: " + MyUtill.Join(" , ", data.ban_id_array));
+                    MyLog.LogMessageS("skill_exp_table: " + MyUtill.Join(" , ", data.skill_exp_table));
+
+                    maid.status.yotogiSkill.Add(data.id);
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogErrorS("SetMaidStatus: " + e.ToString());
+            }
+
+            try
+            {
+                // YotogiClass.CreateData();// 에서 이미 만들어짐. 두번 만들 필요 없음
+                foreach (var item in maid.status.yotogiClass.GetAllDatas())
+                {
+                    //base.maid.status.selectedYotogiClass.expSystem.GetMaxLevel()
+                    MyLog.LogMessageS(".Class: " + MaidUtill.GetMaidFullNale(maid) + " , " + item.Value.data.id + " , " + item.Value.data.drawName + " , " + item.Value.data.learnConditions + " , " + item.Value.data.termExplanatoryText+ " , " + item.Value.data.termName+ " , " + item.Value.data.uniqueName);
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogErrorS("SetMaidStatus: " + e.ToString());
+            }
+
         }
 
         //public static TJSScript tjs_;
-        public static ScriptManager scriptManager= new ScriptManager();
+        public static ScriptManager scriptManager = new ScriptManager();
         public static ScenarioSelectMgr scenarioSelectMgr;
         public static ScenarioData[] scenarioDatas;
 
@@ -119,7 +161,7 @@ namespace COM3D2.Lilly.Plugin
 
             foreach (var scenarioData in scenarioDatas)
             {
-                string text﻿=scenarioData.ScenarioScript;
+                string text﻿ = scenarioData.ScenarioScript;
                 //if (this.m_SelectedMaid.Count > 0 && text.IndexOf("?") >= 0)
                 //{
                 //    text = ScriptManager.ReplacePersonal(this.m_SelectedMaid[0], text);
@@ -127,7 +169,7 @@ namespace COM3D2.Lilly.Plugin
                 ////ScriptManager
                 //GameMain.Instance.ScriptMgr.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
                 //GameMain.Instance.ScriptMgr.EvalScript("&tf['label_name'] = '" + this.m_CurrentScenario.ScriptLabel + "';");
-                
+
                 scriptManager.EvalScript("&tf['scenario_file_name'] = '" + text + "';");
 
                 // ScriptManager.EvalScriptPost2:&tf['scenario_file_name'] = 'j1_marriage_0006';

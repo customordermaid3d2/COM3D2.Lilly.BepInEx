@@ -13,7 +13,7 @@ namespace COM3D2.Lilly.Plugin
         string name;
 
         public MyLog()
-        {
+        {            
             this.name = this.GetType().Name;
         }
 
@@ -26,10 +26,13 @@ namespace COM3D2.Lilly.Plugin
         {
             LogMessageS(name+" : "+v);
         }
-        internal static void LogMessageS(params string[] args)
+        
+        internal static void LogMessageS(params object[] args)
         {
-            StringBuilder s = new StringBuilder(args[0]);
-            string[] t=new string[args.Length-1];
+            if (!Lilly.isLogOnOffAll)
+                return;
+            StringBuilder s = new StringBuilder(args[0].ToString());
+            object[] t=new object[args.Length-1];
             args.CopyTo(t, 1);
             foreach (var i in t)
             {
@@ -43,11 +46,14 @@ namespace COM3D2.Lilly.Plugin
 
         internal static void LogMessageS(string v)
         {
+            if (Lilly.isLogOnOffAll)
+            {
+            log.LogMessage( v); // [Message:COM3D2.Lilly.Plugin] ■Lilly: Plugin() ■
+            }
             //Debug.Log("Lilly:"+v);
             //Console.ForegroundColor = ConsoleColor.Green;//베핀쪽에서 색설정 막아버리는듯
             //Console.WriteLine("■Lilly: " + v+ " ■");
             //Debug.Log("■Lilly: " + v+ " ■");
-            log.LogMessage( v); // [Message:COM3D2.Lilly.Plugin] ■Lilly: Plugin() ■
             //Console.ResetColor();
             // Logger.LogInfo("This is information");
             // Logger.LogWarning("This is a warning");
@@ -56,32 +62,39 @@ namespace COM3D2.Lilly.Plugin
 
         internal static void LogWarningS(string v)
         {
-            log.LogWarning(v);
+            if (Lilly.isLogOnOffAll)
+                log.LogWarning(v);
         }
         internal static void LogInfoS(string v)
         {
-            log.LogInfo(v);
+            if (Lilly.isLogOnOffAll)
+                log.LogInfo(v);
         }
         internal static void LogFatalS(string v)
         {
-            log.LogFatal(v);
+            if (Lilly.isLogOnOffAll)
+                log.LogFatal(v);
         }
         internal static void LogDebugS(string v)
         {
-            log.LogDebug(v);
+            if (Lilly.isLogOnOffAll)
+                log.LogDebug(v);
+
         }
 
         internal static void LogErrorS(string v)
         {
 
             //Debug.LogError("■Lilly: " + v+ " ■");
-            log.LogError( v);
+            if (Lilly.isLogOnOffAll)
+                log.LogError( v);
 
         }
 
         internal void LogError(string v)
         {
-            LogErrorS(name + " : " + v);
+            if (Lilly.isLogOnOffAll)
+                LogErrorS(name + " : " + v);
         }
     }
 }

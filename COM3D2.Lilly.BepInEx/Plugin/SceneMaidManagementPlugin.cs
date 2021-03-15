@@ -27,7 +27,7 @@ namespace COM3D2.Lilly.Plugin
 
             if (!buttonAdded1)
             {
-                name = "SceneScenarioSelectPlugin";
+                name = "SceneScenarioSelectPlugin.RemoveEventEndFlag";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_SceneScenarioSelectPlugin), name, GearMenuAddPlugin.png);
                 buttonAdded1 = true;
             }

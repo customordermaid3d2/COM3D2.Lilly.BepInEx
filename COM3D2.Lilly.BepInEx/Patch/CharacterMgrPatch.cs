@@ -13,6 +13,8 @@ namespace COM3D2.Lilly.Plugin
     /// </summary>
     public static class CharacterMgrPatch // 이름은 마음대로 지어도 되긴 한데 나같은 경우 정리를 위해서 해킹 대상 클래스 이름에다가 접미사를 붇임
     {
+       
+
         // https://github.com/BepInEx/HarmonyX/wiki/Prefix-changes
         // https://github.com/BepInEx/HarmonyX/wiki/Patch-parameters
         // 
@@ -76,6 +78,11 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void PresetSetPostfix2(Maid f_maid, CharacterMgr.Preset f_prest)
         {
+            if (!Lilly.isLogOnOff[typeof(CharacterMgrPatch)])
+            {
+                return;
+            }
+
             MyLog.LogMessageS("PresetSetPostfix2.f_prest.strFileName:" + f_prest.strFileName +" , "+ f_prest.ePreType);
             MaidProp[] array= PresetUtill.getMaidProp(f_prest);
             foreach (MaidProp maidProp in array)
@@ -95,6 +102,10 @@ namespace COM3D2.Lilly.Plugin
        // [HarmonyPostfix]
         public static void SetActiveMaidPost0(Maid f_maid, int f_nActiveSlotNo)
         {
+            if (!Lilly.isLogOnOff[typeof(CharacterMgrPatch)])
+            {
+                return;
+            }
             MyLog.LogMessageS("CharacterMgr.SetActiveMaidPost0: " + f_maid.status.firstName + " , "+ f_maid.status.lastName);
         }
 
@@ -104,6 +115,10 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]
         public static void PresetSavePost0(Maid f_maid, CharacterMgr.PresetType f_type, CharacterMgr.Preset __result)
         {
+            if (!Lilly.isLogOnOff[typeof(CharacterMgrPatch)])
+            {
+                return;
+            }
             MyLog.LogMessageS("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName +" , "+ __result.strFileName +" , "+ __result.ePreType);
         }
     }

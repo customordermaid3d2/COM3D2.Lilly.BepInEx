@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,14 +16,14 @@ namespace COM3D2.Lilly.Plugin
     /// </summary>
     public class ThreadPlugin : MonoBehaviour
     {
-        static int cnt=0;
+        static int cnt = 0;
 
         public ThreadPlugin()
         {
 
         }
 
-        public  void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             MyLog.LogMessageS("GearMenuAddPlugin.OnSceneLoaded: " + scene.name + " , " + SceneManager.GetActiveScene().buildIndex + " , " + scene.isLoaded);
             // SceneManager.GetActiveScene().name;
@@ -72,6 +73,73 @@ namespace COM3D2.Lilly.Plugin
             // yield return new WaitWhile(() => {  //true 인동안 대기
             //     return isFinish1.Contains<bool>(false);// 하나라도 진행중이면 대기
             // });
+
+            // 이게 더 좋다고 함
+            Task.Factory.StartNew(() => Run(scene));
+
+            //======================================
+            // https://docs.microsoft.com/ko-kr/dotnet/standard/parallel-programming/task-based-asynchronous-programming
+
+            Thread.CurrentThread.Name = "Main";
+
+            // Create a task and supply a user delegate by using a lambda expression.
+            Task taskA = new Task(() => Console.WriteLine("Hello from taskA."));
+            // Start the task.
+            taskA.Start();
+
+            // Output a message from the calling thread.
+            Console.WriteLine("Hello from thread '{0}'.",
+                              Thread.CurrentThread.Name);
+            taskA.Wait();
+            //======================================
+
+
+            Task[] taskArray = new Task[10];
+            for (int i = 0; i < taskArray.Length; i++)
+            {
+                taskArray[i] = Task.Factory.StartNew((System.Object obj) =>
+                {
+                    var data = new CustomData() { Name = i, CreationTime = DateTime.Now.Ticks };
+                    data.ThreadNum = Thread.CurrentThread.ManagedThreadId;
+                    Console.WriteLine("Task #{0} created at {1} on thread #{2}.",
+                                      data.Name, data.CreationTime, data.ThreadNum);
+                },
+                                                     i);
+            }
+            Task.WaitAll(taskArray);
+
+            //======================================
+
+
+            //Task[] taskArray = new Task[10];
+            for (int i = 0; i < taskArray.Length; i++)
+            {
+                taskArray[i] = Task.Factory.StartNew((System.Object obj) =>
+                {
+                    CustomData data = obj as CustomData;
+                    if (data == null)
+                        return;
+
+                    data.ThreadNum = Thread.CurrentThread.ManagedThreadId;
+                },
+                                                      new CustomData() { Name = i, CreationTime = DateTime.Now.Ticks });
+            }
+            Task.WaitAll(taskArray);
+            foreach (var task in taskArray)
+            {
+                var data = task.AsyncState as CustomData;
+                if (data != null)
+                    Console.WriteLine("Task #{0} created at {1}, ran on thread #{2}.",
+                                      data.Name, data.CreationTime, data.ThreadNum);
+            }
+
+            //======================================
+        }
+        class CustomData
+        {
+            public long CreationTime;
+            public int Name;
+            public int ThreadNum;
         }
 
         private System.Collections.IEnumerator test(Action action)
@@ -85,10 +153,10 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogMessageS("ThreadPlugin.MyCoroutine st:" + Thread.CurrentThread.Name + " : " + cnt++);
             Thread.Sleep(1000);
             MyLog.LogMessageS("ThreadPlugin.MyCoroutine ed:" + Thread.CurrentThread.Name + " : " + cnt++);
-            yield  return null;
+            yield return null;
         }
 
-         void Run(object scene)
+        void Run(object scene)
         {
             //if (scene is Scene)//안된다? scene.GetType()==typeof(Scene)  //상속 대비해서 is 사용
             {
@@ -96,7 +164,7 @@ namespace COM3D2.Lilly.Plugin
             }
         }
 
-         void Run(Scene scene)
+        void Run(Scene scene)
         {
             MyLog.LogMessageS("ThreadPlugin.Run st:" + Thread.CurrentThread.Name + " : " + cnt++);
             Thread.Sleep(1000);

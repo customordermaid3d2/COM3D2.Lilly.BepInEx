@@ -18,7 +18,7 @@ namespace COM3D2.Lilly.Plugin
         public static Dictionary<int, Personal.Data> basicDatas;
 
         // 스테틱은 생성자가 없어서 사용 불가능한듯
-        // [HarmonyPatch(typeof(Personal),MethodType.Constructor)]        
+        [HarmonyPatch(typeof(Personal),MethodType.Constructor)]        
         static void Constructor(CsvCommonIdManager ___commonIdManager, Dictionary<int, Personal.Data> ___basicDatas)//Personal __instance, 
         {
             commonIdManager = ___commonIdManager;
@@ -30,11 +30,10 @@ namespace COM3D2.Lilly.Plugin
             Type type = typeof(Personal);
 
             System.Reflection.FieldInfo[] fields = type.GetFields();
-​
+            
             foreach (var field in fields)
             {
-                MyLog.LogDebugS(string.Format("{0}.{1} {2}",
-                                          type.Name, field.Name, field.FieldType));
+                MyLog.LogDebugS(string.Format("{0}.{1} {2}", type.Name, field.Name, field.FieldType));
             }
 
             // 효율때문에
@@ -51,8 +50,8 @@ namespace COM3D2.Lilly.Plugin
         /// <param name="___commonIdManager"></param>
         /// <param name="___basicDatas"></param>
         // public static int uniqueNameToId(string name)
-        //[HarmonyPatch(typeof(Personal), "CreateData")]
-        //[HarmonyPostfix]
+        [HarmonyPatch(typeof(Personal), "CreateData")]
+        [HarmonyPostfix]
         private static void CreateData(CsvCommonIdManager ___commonIdManager, Dictionary<int, Personal.Data> ___basicDatas) // Personal __instance,
         {
             if (commonIdManager != null)
