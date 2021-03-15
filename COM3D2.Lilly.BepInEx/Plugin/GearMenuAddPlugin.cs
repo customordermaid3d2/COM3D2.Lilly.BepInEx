@@ -50,7 +50,7 @@ namespace COM3D2.Lilly.Plugin
                 name = "게임 정보 얻기";
                 SystemShortcutAPI.AddButton(name, new Action(MaidUtill.GetGameInfo), name, png);                
                 
-                name = "게임 정보 얻기";
+                name = "메이드 정보 얻기";
                 SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.GetMaidStatus), name, png);                                
                 
                 buttonAdded1 = true;

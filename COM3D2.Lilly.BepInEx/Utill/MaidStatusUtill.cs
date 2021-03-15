@@ -22,12 +22,18 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogDebug("MaidStatusAll ");
 
+            foreach (var maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
+            {
+                SetMaidStatus(maid);
+            }
+            /*
             Parallel.ForEach(GameMain.Instance.CharacterMgr.GetStockMaidList(), maid =>
             {
                 //MyLog.LogMessageS("MaidStatusUtill.ActiveManSloatCount: " + maid.status.firstName +" , "+ maid.status.lastName);
 
                 SetMaidStatus(maid);
             });
+            */
         }
 
         public static void SetMaidStatus(Maid maid)
@@ -136,7 +142,7 @@ namespace COM3D2.Lilly.Plugin
             }
             catch (Exception e)
             {
-                MyLog.LogError("Skill2: " + e.ToString());
+                MyLog.LogError("Skill2: " + MaidUtill.GetMaidFullNale(maid) , e.ToString());
             }
 
             // 실패한듯
@@ -249,13 +255,13 @@ namespace COM3D2.Lilly.Plugin
             ReadOnlyDictionary<string, int> flags =maid_.status.flags;
             foreach (var item in flags)
             {
-                MyLog.LogError("flags: " +  item.Key,item.Value);
+                MyLog.LogMessage("flags: " +  item.Key,item.Value);
             }
                         
             ReadOnlyDictionary<int, WorkData> workDatas = maid_.status.workDatas;
             foreach (var item in workDatas)
             {
-                MyLog.LogError("workDatas: " +  item.Key,item.Value.id,item.Value.level);
+                MyLog.LogMessage("workDatas: " +  item.Key,item.Value.id,item.Value.level);
             }
 
 

@@ -13,49 +13,51 @@ namespace COM3D2.Lilly.Plugin
 
 		[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
 		[HarmonyPostfix]
-		public static void GetFlag(Status __instance, string flagName)
-        {
-            if (__instance ==null)
+		public static void GetFlag( string flagName)//Status __instance,
+		{
+            //if (__instance ==null)
             {
 				MyLog.LogMessage("GetFlag: " +  flagName);
 				return;
             }
-			MyLog.LogMessage("GetFlag: " + MaidUtill.GetMaidFullNale( __instance.maid), flagName);
+			//MyLog.LogMessage("GetFlag: " + MaidUtill.GetMaidFullNale( __instance.maid), flagName);
 		}		
 
 		[HarmonyPatch(typeof(Status), "AddFlag")]//,new Type[] { typeof(Personal.Data) }
 		[HarmonyPostfix]
-		public static void AddFlag(Status __instance, string flagName, int value)
-        {
-			if (__instance == null)
+		public static void AddFlag( string flagName, int value)//Status __instance,
+		{
+			//if (__instance == null)
 			{
 				MyLog.LogMessage("AddFlag: " + flagName);
 				return;
 			}
-			MyLog.LogMessage("AddFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName, value);
+			//MyLog.LogMessage("AddFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName, value);
 		}
 
 		[HarmonyPatch(typeof(Status), "RemoveFlag")]//,new Type[] { typeof(Personal.Data) }
 		[HarmonyPostfix]
-		public static void RemoveFlag(Status __instance, string flagName)
-        {
-			if (__instance == null)
+		public static void RemoveFlag(string flagName)//Status __instance, 
+		{
+			//if (__instance == null)
 			{
 				MyLog.LogMessage("RemoveFlag: " + flagName);
 				return;
 			}
-			MyLog.LogMessage("RemoveFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName);
+			//MyLog.LogMessage("RemoveFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName);
 		}
 
-		[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
-		[HarmonyPatch(typeof(Status), "AddFlag")]//,new Type[] { typeof(Personal.Data) }
-		[HarmonyPatch(typeof(Status), "RemoveFlag")]//,new Type[] { typeof(Personal.Data) }
-		[HarmonyFinalizer]
+		//[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
+		//[HarmonyPatch(typeof(Status), "AddFlag")]//,new Type[] { typeof(Personal.Data) }
+		//[HarmonyPatch(typeof(Status), "RemoveFlag")]//,new Type[] { typeof(Personal.Data) }
+		//[HarmonyFinalizer]
+		/*
 		public static void Finalizer(Exception __exception)
 		{
 			MyLog.LogMessage("Status.Finalizer: " + __exception.ToString());
 			__exception = null;
 		}
+		*/
 
 		// public ReadOnlyDictionary<int, bool> eventEndFlags { get; private set; }
 		// public ReadOnlyDictionary<string, int> flags { get; private set; }
@@ -71,9 +73,9 @@ namespace COM3D2.Lilly.Plugin
 		// 도저히 안되겠음 인샙션뜸
 		//[HarmonyPatch(typeof(Status), "SetPersonal",new Type[] { typeof(Personal.Data) })]
 		//[HarmonyPostfix]
-		private static void SetPersonal(Status __instance, Personal.Data data) // string __m_BGMName 못가져옴
-        {
+		//private static void SetPersonal(Status __instance, Personal.Data data) // string __m_BGMName 못가져옴
 			/*
+        {
             if (__instance != null)
             {
 				instance = __instance;				
@@ -87,7 +89,7 @@ namespace COM3D2.Lilly.Plugin
 
 			// Personal.Data personal = __instance.personal;
 
-			return;
+			//return;
 			/*
 			if (!Personal.IsEnabled(data.id) && !data.oldPersonal)
 			{
@@ -110,8 +112,8 @@ namespace COM3D2.Lilly.Plugin
 				this.OldStatus = null;
 			}
 			return true;
-			*/
 		}
+			*/
 
 
 		/*
