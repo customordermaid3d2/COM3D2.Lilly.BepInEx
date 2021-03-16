@@ -79,7 +79,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 return;
             }
-            MyLog.LogMessage("CharacterMgr.PresetSavePost0: " + f_maid.status.firstName + " , " + f_maid.status.lastName + " , " + __result.strFileName + " , " + __result.ePreType);
+            MyLog.LogMessage("CharacterMgr.PresetSavePost0: " + MaidUtill.GetMaidFullNale(f_maid) + " , " + __result.strFileName + " , " + __result.ePreType);
         }
 
         // public void PresetSet(Maid f_maid, CharacterMgr.Preset f_prest)
