@@ -30,6 +30,7 @@
   <ItemGroup>
     <Reference Include="0Harmony">
       <HintPath>F:\COM3D2\BepInEx\core\0Harmony.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>F:\COM3D2\COM3D2x64_Data\Managed\Assembly-CSharp.dll</HintPath>
@@ -51,13 +52,20 @@
     </Reference>
     <Reference Include="BepInEx.Preloader, Version=5.4.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>F:\COM3D2\BepInEx\core\BepInEx.Preloader.dll</HintPath>
+      <Private>false</Private>
     </Reference>
     <Reference Include="COM3D2.API, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>F:\COM3D2\BepInEx\plugins\COM3D2.API.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>false</Private>
+    </Reference>
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>F:\COM3D2\COM3D2x64_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
@@ -68,5 +76,30 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Update="System.Core">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Update="System.Data">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Update="System.Drawing">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Update="System.Numerics">
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Update="System.Runtime.Serialization">
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 </Project>

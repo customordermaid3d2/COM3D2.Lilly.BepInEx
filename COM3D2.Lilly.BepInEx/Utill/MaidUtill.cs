@@ -212,13 +212,15 @@ namespace COM3D2.Lilly.Plugin
             {
                 if (scneario ==null)
                 {
+                    // var newArray = Array.ConvertAll(array, item => (NewType)item);
                     // AbstractFreeModeItem  / protected static HashSet<int> GetEnabledIdList() / 에서 처리하자
-                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null));
-                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, null));
-                    // private static Dictionary<FreeModeItemEveryday.ScnearioType, FreeModeItemEveryday.ScnerioData> DataDic 
+                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null).ConvertAll( item => (AbstractFreeModeItem)item));
+                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, null).ConvertAll( item => (AbstractFreeModeItem)item));
+                    scneario.AddRange(FreeModeItemLifeMode.CreateItemList(true).ConvertAll( item => (AbstractFreeModeItem)item));
+                    scneario.AddRange(FreeModeItemVip.CreateItemVipList(null).ConvertAll( item => (AbstractFreeModeItem)item));
                     // 이걸 가져올 방법이 없어서 이렇게 씀
-                    scneario.AddRange(FreeModeItemLifeMode.CreateItemList(true));
-                    scneario.AddRange(FreeModeItemVip.CreateItemVipList(null));
+                    //scneario.AddRange(FreeModeItemLifeMode.CreateItemList(true));
+                    //scneario.AddRange(FreeModeItemVip.CreateItemVipList(null));
                 }
                 foreach (var data in scneario)
                 {

@@ -18,7 +18,7 @@ namespace COM3D2.Lilly.Plugin
 		{
 			if (values == null)
 			{
-				throw new ArgumentNullException("values");
+				return "";
 			}
 			if (separator == null)
 			{

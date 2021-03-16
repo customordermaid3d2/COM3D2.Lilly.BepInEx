@@ -174,10 +174,13 @@ namespace COM3D2.Lilly.Plugin
                 {
                     ClassData<JobClass.Data> classData = item.Value;
                     JobClass.Data data = classData.data;
+                    SimpleExperienceSystem expSystem = classData.expSystem;
+
+                    if (expSystem.GetMaxLevel() == expSystem.GetCurrentLevel())
+                        continue;
 
                     MyLog.LogDebug("JobClass.expSystem:" + data.id + " , " + data.uniqueName + " , " + data.drawName + " , " + data.explanatoryText + " , " + data.termExplanatoryText);
 
-                    SimpleExperienceSystem expSystem = classData.expSystem;
                     expSystem.SetTotalExp(expSystem.GetMaxLevelNeedExp());
                     expSystem.SetLevel(expSystem.GetMaxLevel());
                 }

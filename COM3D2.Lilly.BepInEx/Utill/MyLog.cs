@@ -15,20 +15,7 @@ namespace COM3D2.Lilly.Plugin
         {
             if (!Lilly.isLogOnOffAll)
                 return;
-            if (args.Length==0)
-            {
-                action("");
-                return;
-            }
-
-            StringBuilder s = new StringBuilder();
-            //s.Append(name + " , ");
-            s.Append(args[0].ToString());
-            for (int i = 1; i < args.Length; i++)
-            {
-                s.Append(" , " + args[i].ToString());
-            }
-            action(s.ToString());
+            action(MyUtill.Join(" , ", args));
         }
 
         internal static void LogMessage(params object[] args)

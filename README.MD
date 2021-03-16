@@ -4,6 +4,17 @@
 - 내가 만들어놓고 내가 모르기도 함
 
 
+# 필요한거
+
+- COM3D2.API.dll  https://github.com/JustAGuest4168/COM3D2.OutfitMatchHelper/releases
+- System.Threading.dll  어지간하면 탐색기에서 발견 가능. 릴리즈에 첨부하긴 함
+
+
+# 설치 위치
+
+- COM3D2\BepInEx\plugins
+
+
 # 구현해본것
 
 
