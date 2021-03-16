@@ -1,48 +1,52 @@
-# ¹¹Áö ÀÌ°Ç
+# ë­ì§€ ì´ê±´
 
-- ¿¬½À¿ëÀ¸·Î ¸¸µå´Â ÇÃ·¯±×ÀÎ
-- ³»°¡ ¸¸µé¾î³õ°í ³»°¡ ¸ð¸£±âµµ ÇÔ
+- ì—°ìŠµìš©ìœ¼ë¡œ ë§Œë“œëŠ” í”ŒëŸ¬ê·¸ì¸
+- ë‚´ê°€ ë§Œë“¤ì–´ë†“ê³  ë‚´ê°€ ëª¨ë¥´ê¸°ë„ í•¨
 
 
-# ÇÊ¿äÇÑ°Å
+# í•„ìš”í•œê±°
 
 - COM3D2.API.dll  https://github.com/JustAGuest4168/COM3D2.OutfitMatchHelper/releases
-- System.Threading.dll  ¾îÁö°£ÇÏ¸é Å½»ö±â¿¡¼­ ¹ß°ß °¡´É. ¸±¸®Áî¿¡ Ã·ºÎÇÏ±ä ÇÔ
+- System.Threading.dll  ì–´ì§€ê°„í•˜ë©´ íƒìƒ‰ê¸°ì—ì„œ ë°œê²¬ ê°€ëŠ¥. ë¦´ë¦¬ì¦ˆì— ì²¨ë¶€í•˜ê¸´ í•¨
 
 
-# ¼³Ä¡ À§Ä¡
+# ì„¤ì¹˜ ìœ„ì¹˜
 
 - COM3D2\BepInEx\plugins
 
 
-# ±¸ÇöÇØº»°Í
+# êµ¬í˜„í•´ë³¸ê²ƒ
 
 
-## ÀÚµ¿ ±â´É
+## ìžë™ ê¸°ëŠ¥
 
-- ¸ÞÀÌµå °ü¸® È­¸é¿¡¼­ ¸ðµç ¹öÆ° È°¼ºÈ­(MaidManagementMainPatch)
-- ¸ÞÀÌµå ¿¡µ÷ ÁøÀÔ½Ã ¸ðµç½ºÅÝ Àû¿ë (SetMaidStatus)
-
-
-## ±â¾î ¸Þ´º ±â´É
-
-- ¸ðµç ¸ÞÀÌµå ÀÌº¥Æ® Å¬¸®¾î ¿Ï·á ±â´É Ãß°¡
-- ¸ðµç ¸ÞÀÌµå ÀÌº¥Æ® Å¬¸®¾î º¹±¸ ±â´É Ãß°¡
-- ¸ðµç ¸ÞÀÌµå ½ºÅÝ ÃÖ´ë , Æ¯¼º È¹µæ , ½ºÅ³ È¹µæ Ãß°¡
-- ¾ÆÀÌÄÜ(±â´É ¾øÀ½) Ãß°¡
+- ë©”ì´ë“œ ê´€ë¦¬ í™”ë©´ì—ì„œ ëª¨ë“  ë²„íŠ¼ í™œì„±í™”(MaidManagementMainPatch)
+- ë©”ì´ë“œ ì—ë”§ ì§„ìž…ì‹œ ëª¨ë“ ìŠ¤í…Ÿ ì ìš© (SetMaidStatus)
 
 
-# ÄÄÆÄÀÏ ¹æ¹ý
+## ê¸°ì–´ ë©”ë‰´ ê¸°ëŠ¥
 
-- comfile.bat ÆÄÀÏÀ» º»ÀÎ È¯°æ¿¡ ¸Â°Ô ¼öÁ¤
-- comfile.bat ½ÇÇàÇÏ±â (obj Æú´õ´Â »èÁ¦ÇÏµµ·Ï ¸í·É¾î Ãß°¡)
+- í˜„ì œ ë³´ì´ëŠ” ë©”ì¸ ë©”ì´ë“œ ì •ë³´ê°’ ì¶œë ¥ (í˜„ìž¬ëŠ” ì¼ë°˜ í”Œë ˆê·¸ë§Œ)
+- ê²Œìž„ ì •ë³´ ì–»ê¸°(ì“¸ë°ê°€ ìžˆë‚˜? ë¶„ì„ìš©) 
+- ëª¨ë“  ë©”ì´ë“œ ìŠ¤í…Ÿ ìµœëŒ€ , íŠ¹ì„± íšë“ , ìŠ¤í‚¬ íšë“ 
+- ëª¨ë“  ë©”ì´ë“œ ì´ë²¤íŠ¸ í´ë¦¬ì–´ ì™„ë£Œ 
+- í˜„ì œ ë³´ì´ëŠ” ë©”ì¸ ë©”ì´ë“œ ì´ë²¤íŠ¸ í´ë¦¬ì–´ ì œê±°
+- ëª¨ë“  ë©”ì´ë“œ ì´ë²¤íŠ¸ í´ë¦¬ì–´ ì œê±°
+- ìžë™ê¸°ëŠ¥ ì˜¨ì˜¤í”„
+- ë¡œê·¸ ê¸°ë¡ ì˜¨ì˜¤í”„
+- 
+
+# ì»´íŒŒì¼ ë°©ë²•
+
+- comfile.bat íŒŒì¼ì„ ë³¸ì¸ í™˜ê²½ì— ë§žê²Œ ìˆ˜ì •
+- comfile.bat ì‹¤í–‰í•˜ê¸° (obj í´ë”ëŠ” ì‚­ì œí•˜ë„ë¡ ëª…ë ¹ì–´ ì¶”ê°€)
 
 
-# ±¸¼º 
+# êµ¬ì„± 
 
-- Patch : 0Harmony20 ¸¦ ÀÌ¿ëÇÑ ÇÃ·¯±×ÀÎ¸¸ ³Ö¾îµÒ
-- plugin : ¸ÞÀÎ ÇÃ·¯±×ÀÎ ¹× BepInPlugin °ü·ÃµÈ°Í¸¸. Æ¯È÷ OnSceneLoaded °ü·Ã
-- Utill : ³»°¡ ¾²±â ÆíÇÏ°Ô...
+- Patch : 0Harmony20 ë¥¼ ì´ìš©í•œ í”ŒëŸ¬ê·¸ì¸ë§Œ ë„£ì–´ë‘ 
+- plugin : ë©”ì¸ í”ŒëŸ¬ê·¸ì¸ ë° BepInPlugin ê´€ë ¨ëœê²ƒë§Œ. íŠ¹ížˆ OnSceneLoaded ê´€ë ¨
+- Utill : ë‚´ê°€ ì“°ê¸° íŽ¸í•˜ê²Œ...
 
 
 # plugin folder
@@ -50,19 +54,19 @@
 
 ## Lilly
 
-- ÇÃ·¯±×ÀÎ ¸ÞÀÎ Å¬·¡½º
-- ¿©±â¼­ ÀüºÎ ½ÃÀÛ
+- í”ŒëŸ¬ê·¸ì¸ ë©”ì¸ í´ëž˜ìŠ¤
+- ì—¬ê¸°ì„œ ì „ë¶€ ì‹œìž‘
 
 
 ## GearMenuAddPlugin
 
-- ±â¾î ¸Þ´º Ãß°¡ ¸ðÀ½
-- Å¬¸¯½Ã ¸ðµç ¸ÞÀÌµå ½ºÅÝ ¹× ½ºÅ³ ¸ß½º ¼³Á¤
+- ê¸°ì–´ ë©”ë‰´ ì¶”ê°€ ëª¨ìŒ
+- í´ë¦­ì‹œ ëª¨ë“  ë©”ì´ë“œ ìŠ¤í…Ÿ ë° ìŠ¤í‚¬ ë©•ìŠ¤ ì„¤ì •
 
 
 ## SceneMaidManagementPlugin
 
-- ±¦È÷ ºÐ¸®ÇÑµí. ¹» ÇÒ·Á°í ºÐ¸®ÇÑ°Å °°Àºµ¥ ³ªÁß¿¡ ´Ù½Ã ÇÕÃÄ¾ß ÇÒµí
+- ê´œížˆ ë¶„ë¦¬í•œë“¯. ë­˜ í• ë ¤ê³  ë¶„ë¦¬í•œê±° ê°™ì€ë° ë‚˜ì¤‘ì— ë‹¤ì‹œ í•©ì³ì•¼ í• ë“¯
 
 
 # utill folder
@@ -70,22 +74,22 @@
 
 ## MaidStatusUtill
 
-- ¸ÞÀÌµå ½ºÅÝ ¼³Á¤ °ü·Ã. ½ºÅÝ ¹× ½ºÅ³À» ÀüºÎ ½ÀµìÇÑ´Ù´ø°¡
+- ë©”ì´ë“œ ìŠ¤í…Ÿ ì„¤ì • ê´€ë ¨. ìŠ¤í…Ÿ ë° ìŠ¤í‚¬ì„ ì „ë¶€ ìŠµë“­í•œë‹¤ë˜ê°€
 
 
 ## MyLog
 
-- ·Î±× Âï´Â Å¬·¹½º. Á»´õ ½±°Ô ¸øÇÏ·Á³ª
+- ë¡œê·¸ ì°ëŠ” í´ë ˆìŠ¤. ì¢€ë” ì‰½ê²Œ ëª»í•˜ë ¤ë‚˜
 
 
 ## ScenarioDataUtill
 
-- ÀÌº¥Æ® °ü·Ã
+- ì´ë²¤íŠ¸ ê´€ë ¨
 
 
 ## ThreadPlugin
 
-- ½º·¹µå ¿¬½À¿ë
+- ìŠ¤ë ˆë“œ ì—°ìŠµìš©
 
 
 # Patch folder
@@ -93,41 +97,41 @@
 
 ## AudioSourceMgrPatch
 
-- ¼Ò¸® Ãâ·ÂµÇ´Â ÆÄÀÏ¸í ·Î±×ÂïÀ½
+- ì†Œë¦¬ ì¶œë ¥ë˜ëŠ” íŒŒì¼ëª… ë¡œê·¸ì°ìŒ
 
 
 ## CharacterMgrPatch
 
-- presetÆÄÀÏ ºÒ·¯¿Ã¶§ menuÆÄÀÏµé ·Î±×·Î Âï±â
+- presetíŒŒì¼ ë¶ˆëŸ¬ì˜¬ë•Œ menuíŒŒì¼ë“¤ ë¡œê·¸ë¡œ ì°ê¸°
 
 
 ## MaidManagementMainPatch
 
-- ¸ÞÀÌµå °ü¸® È­¸é
-- (Á¦°ÅµÊ)¸ÞÀÌµå ½ºÅ×ÀÌÅÍ½º ¸ß½º Âï±â Å×½ºÆ®Áß
-- ¸ðµç ¹öÆ° È°¼ºÈ­
+- ë©”ì´ë“œ ê´€ë¦¬ í™”ë©´
+- (ì œê±°ë¨)ë©”ì´ë“œ ìŠ¤í…Œì´í„°ìŠ¤ ë©•ìŠ¤ ì°ê¸° í…ŒìŠ¤íŠ¸ì¤‘
+- ëª¨ë“  ë²„íŠ¼ í™œì„±í™”
 
 
 ## SceneEditPatch
 
-- ¸ÞÀÌµå ¿¡µ÷ ¸ðµå Å¬·¡½º
-- ¸ÞÀÌµå ½ºÅ×ÀÌÅÍ½º ¸ß½º Âï±â
+- ë©”ì´ë“œ ì—ë”§ ëª¨ë“œ í´ëž˜ìŠ¤
+- ë©”ì´ë“œ ìŠ¤í…Œì´í„°ìŠ¤ ë©•ìŠ¤ ì°ê¸°
 
 
 ## ScoutManagerPatch
 
-- ½ºÄ«¿ô ¸ðµå Å¬·¡½º
-- ½ºÄ«¿ô ¸ðµå ¹öÆ° ¶ã¼ö ÀÖ°Ô ¸ÞÀÌµå Á¦ÇÑ¼ö Á¦°Å ÄÚµå °¡Á®¿Í¼­ ³ÖÀ½
+- ìŠ¤ì¹´ì›ƒ ëª¨ë“œ í´ëž˜ìŠ¤
+- ìŠ¤ì¹´ì›ƒ ëª¨ë“œ ë²„íŠ¼ ëœ°ìˆ˜ ìžˆê²Œ ë©”ì´ë“œ ì œí•œìˆ˜ ì œê±° ì½”ë“œ ê°€ì ¸ì™€ì„œ ë„£ìŒ
 
 
 ## ScriptManagerPatch
 
-- ks ½ºÅ©¸³Æ® °ü·Ã?
+- ks ìŠ¤í¬ë¦½íŠ¸ ê´€ë ¨?
 
 
 ## StatusMgrPatch
 
-- ¸ÞÀÌµå ½ºÅÝ °ü·Ã Å¬·¡½º
-- °ÔÀÓ ¿øº» ÄÚµå ±×´ëµµ º¹»çÇØº½
-- ¸ÞÀÌµå ¸ñ·Ï¿¡¼­ ½ºÅ×ÀÌÅÍ½º ¹öÆ° Å¬¸¯½Ã ÇØ´ç ¸ÞÀÌµå ½ºÅÝ ¹× ½ºÅ³ ½ÀµæÇÏµµ·Ï ¼³Á¤
+- ë©”ì´ë“œ ìŠ¤í…Ÿ ê´€ë ¨ í´ëž˜ìŠ¤
+- ê²Œìž„ ì›ë³¸ ì½”ë“œ ê·¸ëŒ€ë„ ë³µì‚¬í•´ë´„
+- ë©”ì´ë“œ ëª©ë¡ì—ì„œ ìŠ¤í…Œì´í„°ìŠ¤ ë²„íŠ¼ í´ë¦­ì‹œ í•´ë‹¹ ë©”ì´ë“œ ìŠ¤í…Ÿ ë° ìŠ¤í‚¬ ìŠµë“í•˜ë„ë¡ ì„¤ì •
 
