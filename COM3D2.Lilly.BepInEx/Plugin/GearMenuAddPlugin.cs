@@ -38,25 +38,32 @@ namespace COM3D2.Lilly.Plugin
                 name = "Lilly관련 패치 온오프";
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_Patch), name, png);                
                
+                name = "ScenarioDataUtill.RemoveEventEndFlagAll 이벤트 클리어 제거";
+                SystemShortcutAPI.AddButton(name, new Action(ScenarioDataUtill.RemoveEventEndFlagAll), name, png);                
+
+                name = "ScenarioDataUtill.RemoveEventEndFlag";
+                SystemShortcutAPI.AddButton(name, new Action(RemoveEventEndFlag), name, GearMenuAddPlugin.png);
+
+                name = "ScenarioDataUtill.SetEventEndFlagAll 이벤트 클리어 처리";
+                SystemShortcutAPI.AddButton(name, new Action(ScenarioDataUtill.SetScenarioDataAll), name, png);                
+                
                 name = "SetMaidStatusAll. stat,sikill,job";
                 SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.SetMaidStatusAll), name, png);                
                 
-                name = "SetScenarioDataAll.SetEventEndFlagAll 이벤트 클리어 처리";
-                SystemShortcutAPI.AddButton(name, new Action(ScenarioDataUtill.SetScenarioDataAll), name, png);                
-                
-                name = "SetScenarioDataAll.RemoveEventEndFlagAll 이벤트 클리어 제거";
-                SystemShortcutAPI.AddButton(name, new Action(ScenarioDataUtill.RemoveEventEndFlagAll), name, png);                
-
                 name = "게임 정보 얻기";
-                SystemShortcutAPI.AddButton(name, new Action(MaidUtill.GetGameInfo), name, png);                
+                SystemShortcutAPI.AddButton(name, new Action(GameUtill.GetGameInfo), name, png);                
                 
                 name = "메이드 정보 얻기";
-                SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.GetMaidStatus), name, png);                                
-                
+                SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.GetMaidStatus), name, png);
+
                 buttonAdded1 = true;
             }
         }
 
+        public static void RemoveEventEndFlag()
+        {
+                ScenarioDataUtill.RemoveEventEndFlag(SceneEdit.Instance.maid);
+        }
 
         private static void OnMenuButtonClickCallback()
         {

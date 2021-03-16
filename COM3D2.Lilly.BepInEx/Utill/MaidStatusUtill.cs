@@ -107,7 +107,7 @@ namespace COM3D2.Lilly.Plugin
                 List<Skill.Data> learnPossibleSkills = Skill.GetLearnPossibleSkills(maid.status);
                 foreach (Skill.Data data in learnPossibleSkills)
                 {
-                    MyLog.LogDebug(".Skill1: " + MaidUtill.GetMaidFullNale(maid) );
+                    MyLog.LogMessage(".Skill1: " + MaidUtill.GetMaidFullNale(maid) );
                     MyLog.LogDebug("id: " + data.id + " , " + data.name  + " , " + data.start_call_file + " , " + data.start_call_file2 + " , " + data.termName);
                     MyLog.LogDebug("ban_id_array: " + MyUtill.Join<int>(" , ", data.ban_id_array));
                     MyLog.LogDebug("skill_exp_table: " + MyUtill.Join<int>(" , ", data.skill_exp_table));                    
@@ -127,9 +127,9 @@ namespace COM3D2.Lilly.Plugin
             try
             {
                 List<Skill.Old.Data> learnPossibleSkills = Skill.Old.GetLearnPossibleSkills(maid.status);
-                MyLog.LogMessage(".Skill2: " + MaidUtill.GetMaidFullNale(maid) );
                 foreach (Skill.Old.Data data in learnPossibleSkills)
                 {
+                    MyLog.LogMessage(".Skill2: " + MaidUtill.GetMaidFullNale(maid) );
                     MyLog.LogDebug("id: " + data.id + " , " + data.name + " , " + data.start_call_file + " , " + data.start_call_file2);
                     MyLog.LogDebug("ban_id_array: " + MyUtill.Join(" , ", data.ban_id_array));
                     MyLog.LogDebug("skill_exp_table: " + MyUtill.Join(" , ", data.skill_exp_table));
@@ -151,16 +151,18 @@ namespace COM3D2.Lilly.Plugin
                 JobClassSystem jobClassSystem = maid.status.jobClass;
 
                 List<JobClass.Data> learnPossibleClassDatas = jobClassSystem.GetLearnPossibleClassDatas(true, AbstractClassData.ClassType.Share | AbstractClassData.ClassType.New);
-                MyLog.LogMessage("JobClass.learn: " + MaidUtill.GetMaidFullNale(maid), learnPossibleClassDatas.Count);
                 
                 foreach (JobClass.Data data in learnPossibleClassDatas)
                 {
+                    
+                    if (jobClassSystem.Contains(data))
+                        continue;
+            
+                    MyLog.LogMessage("JobClass.learn: " + MaidUtill.GetMaidFullNale(maid), learnPossibleClassDatas.Count);
                     MyLog.LogDebug("JobClass.learn:" + data.id + " , " + data.uniqueName+ " , " + data.drawName + " , " + data.explanatoryText + " , " + data.termExplanatoryText);
                     MyLog.LogDebug("JobClass.learn: " + jobClassSystem.Contains(data) , MyUtill.Join(" , ", data.levelBonuss));
-                    if (!jobClassSystem.Contains(data))
-                    {
-                        ClassData<JobClass.Data> classData=jobClassSystem.Add(data, true, true);
-                    } 
+                    ClassData<JobClass.Data> classData=jobClassSystem.Add(data, true, true);
+                    
                     //ClassData<JobClass.Data> classData=jobClassSystem.Get(data);
                     //SimpleExperienceSystem expSystem = classData.expSystem;
                     //expSystem.SetTotalExp(expSystem.GetMaxLevelNeedExp());

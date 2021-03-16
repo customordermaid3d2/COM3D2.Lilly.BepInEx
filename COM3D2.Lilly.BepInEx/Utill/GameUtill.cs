@@ -166,7 +166,7 @@ namespace COM3D2.Lilly.Plugin
             // new 로 받아서 가져오기때문에 성능 낭비 발생
             try
             {
-                if (scneario == null)
+                if (scneario.Count==0)
                 {
                     // var newArray = Array.ConvertAll(array, item => (NewType)item);
                     // AbstractFreeModeItem  / protected static HashSet<int> GetEnabledIdList() / 에서 처리하자

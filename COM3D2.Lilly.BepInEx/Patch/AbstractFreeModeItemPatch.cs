@@ -23,18 +23,17 @@ namespace COM3D2.Lilly.Plugin
         public static void get_is_enabled(AbstractFreeModeItem __instance, bool __result)
         {
             __result = true;
-            AbstractFreeModeItem data = __instance;
             MyLog.LogMessage("AbstractFreeModeItem.get_is_enabled"
-            , data.item_id
-            , data.is_enabled
-            , data.play_file_name
-            , data.title
-            , data.text
-            , data.type
-            , MyUtill.Join(" / ", data.condition_texts)
-            , data.titleTerm
-            , data.textTerm
-            , MyUtill.Join(" , ", data.condition_text_terms)
+            , __instance.item_id
+            , __instance.is_enabled
+            , __instance.play_file_name
+            , __instance.title
+            , __instance.text
+            , __instance.type
+            , MyUtill.Join(" / ", __instance.condition_texts)
+            , __instance.titleTerm
+            , __instance.textTerm
+            , MyUtill.Join(" , ", __instance.condition_text_terms)
             );
         }        
         
@@ -43,18 +42,17 @@ namespace COM3D2.Lilly.Plugin
         public static void get_is_enabled(FreeModeItemEveryday __instance, bool __result)
         {
             __result = true;
-            FreeModeItemEveryday data = __instance;
             MyLog.LogMessage("AbstractFreeModeItem.get_is_enabled"
-            , data.item_id
-            , data.is_enabled
-            , data.play_file_name
-            , data.title
-            , data.text
-            , data.type
-            , MyUtill.Join(" / ", data.condition_texts)
-            , data.titleTerm
-            , data.textTerm
-            , MyUtill.Join(" , ", data.condition_text_terms)
+            , __instance.item_id
+            , __instance.is_enabled
+            , __instance.play_file_name
+            , __instance.title
+            , __instance.text
+            , __instance.type
+            , MyUtill.Join(" / ", __instance.condition_texts)
+            , __instance.titleTerm
+            , __instance.textTerm
+            , MyUtill.Join(" , ", __instance.condition_text_terms)
             );
         }        
 
@@ -63,18 +61,17 @@ namespace COM3D2.Lilly.Plugin
         public static void get_is_enabled(FreeModeItemLifeMode __instance, bool __result)
         {
             __result = true;
-            FreeModeItemLifeMode data = __instance;
             MyLog.LogMessage("AbstractFreeModeItem.get_is_enabled"
-            , data.item_id
-            , data.is_enabled
-            , data.play_file_name
-            , data.title
-            , data.text
-            , data.type
-            , MyUtill.Join(" / ", data.condition_texts)
-            , data.titleTerm
-            , data.textTerm
-            , MyUtill.Join(" , ", data.condition_text_terms)
+            , __instance.item_id
+            , __instance.is_enabled
+            , __instance.play_file_name
+            , __instance.title
+            , __instance.text
+            , __instance.type
+            , MyUtill.Join(" / ", __instance.condition_texts)
+            , __instance.titleTerm
+            , __instance.textTerm
+            , MyUtill.Join(" , ", __instance.condition_text_terms)
             );
         }        
 
@@ -85,16 +82,16 @@ namespace COM3D2.Lilly.Plugin
             __result = true;
             FreeModeItemVip data = __instance;
             MyLog.LogMessage("AbstractFreeModeItem.get_is_enabled"
-            , data.item_id
-            , data.is_enabled
-            , data.play_file_name
-            , data.title
-            , data.text
-            , data.type
-            , MyUtill.Join(" / ", data.condition_texts)
-            , data.titleTerm
-            , data.textTerm
-            , MyUtill.Join(" , ", data.condition_text_terms)
+            , __instance.item_id
+            , __instance.is_enabled
+            , __instance.play_file_name
+            , __instance.title
+            , __instance.text
+            , __instance.type
+            , MyUtill.Join(" / ", __instance.condition_texts)
+            , __instance.titleTerm
+            , __instance.textTerm
+            , MyUtill.Join(" , ", __instance.condition_text_terms)
             );
         }
     }

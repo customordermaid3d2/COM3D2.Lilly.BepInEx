@@ -70,7 +70,6 @@ namespace COM3D2.Lilly.Plugin
         private void SetOnSceneLoaded()
         {   
             actioOnSceneLoaded += (GearMenuAddPlugin.OnSceneLoaded);
-            actioOnSceneLoaded += (SceneMaidManagementPlugin.OnSceneLoaded);
             //actioOnSceneLoaded+=(threadPlugin.OnSceneLoaded);//정상 작동
         }
 
@@ -143,7 +142,7 @@ namespace COM3D2.Lilly.Plugin
                 //typeof(GameUtyPatch)
             };
 
-            listA.Add(typeof(AbstractFreeModeItemPatch));// 프리 모드에서 모든 이벤트 열기 위한용
+            // listA.Add(typeof(AbstractFreeModeItemPatch));// 프리 모드에서 모든 이벤트 열기 위한용 오버 플로우
             listA.Add(typeof(AudioSourceMgrPatch));
             listA.Add(typeof(BgMgrPatch));
             //lists.Add(typeof(CameraMainPatch));
