@@ -35,8 +35,8 @@ namespace COM3D2.Lilly.Plugin
         {
         }
 
-        [HarmonyPatch(typeof(Maid), "SetProp", new Type[] { typeof(MaidProp) })]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(Maid), "SetProp", new Type[] { typeof(MaidProp) })]
+        //[HarmonyPostfix]
         // public void SetProp(MaidProp mps) 
         public static void SetProp(MaidProp mps)
         {
@@ -73,7 +73,10 @@ namespace COM3D2.Lilly.Plugin
 
         public static void print(string s,MaidProp maidProp)
         {
-            MyLog.LogMessage(s+ ": " + maidProp.idx.ToString().PadLeft(3) , maidProp.strFileName);
+            if (maidProp.strFileName.Length !=0)
+            {
+                MyLog.LogMessage(s+ ": " + maidProp.idx.ToString().PadLeft(3) , maidProp.strFileName);
+            }
         }
 
         // public void SetUpModel(string f_strPresetMenuFileName)

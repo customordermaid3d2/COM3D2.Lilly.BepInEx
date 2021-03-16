@@ -11,8 +11,16 @@ namespace COM3D2.Lilly.Plugin
 	{
 		// Status
 
-		[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
-		[HarmonyPostfix]
+		//[HarmonyPatch(typeof(Status),MethodType.Constructor)]//,new Type[] { typeof(Personal.Data) }
+		//[HarmonyPostfix]
+		public static void Constructor(Dictionary<string, int> flags_)//Status __instance,
+        {
+
+        }
+
+
+		//[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
+		//[HarmonyPostfix]
 		public static void GetFlag( string flagName)//Status __instance,
 		{
             //if (__instance ==null)
@@ -23,8 +31,8 @@ namespace COM3D2.Lilly.Plugin
 			//MyLog.LogMessage("GetFlag: " + MaidUtill.GetMaidFullNale( __instance.maid), flagName);
 		}		
 
-		[HarmonyPatch(typeof(Status), "AddFlag")]//,new Type[] { typeof(Personal.Data) }
-		[HarmonyPostfix]
+		//[HarmonyPatch(typeof(Status), "AddFlag")]//,new Type[] { typeof(Personal.Data) }
+		//[HarmonyPostfix]
 		public static void AddFlag( string flagName, int value)//Status __instance,
 		{
 			//if (__instance == null)
@@ -35,8 +43,8 @@ namespace COM3D2.Lilly.Plugin
 			//MyLog.LogMessage("AddFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName, value);
 		}
 
-		[HarmonyPatch(typeof(Status), "RemoveFlag")]//,new Type[] { typeof(Personal.Data) }
-		[HarmonyPostfix]
+		//[HarmonyPatch(typeof(Status), "RemoveFlag")]//,new Type[] { typeof(Personal.Data) }
+		//[HarmonyPostfix]
 		public static void RemoveFlag(string flagName)//Status __instance, 
 		{
 			//if (__instance == null)
@@ -45,6 +53,13 @@ namespace COM3D2.Lilly.Plugin
 				return;
 			}
 			//MyLog.LogMessage("RemoveFlag: " + MaidUtill.GetMaidFullNale(__instance.maid), flagName);
+		}
+
+		[HarmonyPatch(typeof(Status), "SetEventEndFlag")]//,new Type[] { typeof(Personal.Data) }
+		[HarmonyPostfix]
+		public void SetEventEndFlag(int id, bool value)
+        {
+			MyLog.LogMessage("SetEventEndFlag: " + value, id);
 		}
 
 		//[HarmonyPatch(typeof(Status), "GetFlag")]//,new Type[] { typeof(Personal.Data) }
@@ -74,46 +89,46 @@ namespace COM3D2.Lilly.Plugin
 		//[HarmonyPatch(typeof(Status), "SetPersonal",new Type[] { typeof(Personal.Data) })]
 		//[HarmonyPostfix]
 		//private static void SetPersonal(Status __instance, Personal.Data data) // string __m_BGMName 못가져옴
-			/*
-        {
-            if (__instance != null)
-            {
-				instance = __instance;				
-            }
-            if (__instance.maid != null)
-            {
-				MyLog.LogMessage("SetPersonal:" + MaidUtill.GetMaidFullNale(__instance.maid));
-
-            }
-			*/
-
-			// Personal.Data personal = __instance.personal;
-
-			//return;
-			/*
-			if (!Personal.IsEnabled(data.id) && !data.oldPersonal)
-			{
-				Debug.LogError("性格[" + data.drawName + "]は有効ではないので設定できません");
-				return false;
-			}
-			this.personal_ = data;
-			this.additionalRelation = this.additionalRelation;
-			if (this.personal_.oldPersonal)
-			{
-				this.heroineType = HeroineType.Transfer;
-				if (this.OldStatus == null)
-				{
-					this.OldStatus = new Status(this);
-				}
-			}
-			else if (this.heroineType == HeroineType.Transfer)
-			{
-				this.heroineType = HeroineType.Original;
-				this.OldStatus = null;
-			}
-			return true;
+		/*
+	{
+		if (__instance != null)
+		{
+			instance = __instance;				
 		}
-			*/
+		if (__instance.maid != null)
+		{
+			MyLog.LogMessage("SetPersonal:" + MaidUtill.GetMaidFullNale(__instance.maid));
+
+		}
+		*/
+
+		// Personal.Data personal = __instance.personal;
+
+		//return;
+		/*
+		if (!Personal.IsEnabled(data.id) && !data.oldPersonal)
+		{
+			Debug.LogError("性格[" + data.drawName + "]は有効ではないので設定できません");
+			return false;
+		}
+		this.personal_ = data;
+		this.additionalRelation = this.additionalRelation;
+		if (this.personal_.oldPersonal)
+		{
+			this.heroineType = HeroineType.Transfer;
+			if (this.OldStatus == null)
+			{
+				this.OldStatus = new Status(this);
+			}
+		}
+		else if (this.heroineType == HeroineType.Transfer)
+		{
+			this.heroineType = HeroineType.Original;
+			this.OldStatus = null;
+		}
+		return true;
+	}
+		*/
 
 
 		/*

@@ -10,7 +10,7 @@ namespace COM3D2.Lilly.Plugin
 {
     class GameUtill
     {
-        static List<AbstractFreeModeItem> scneario = new List<AbstractFreeModeItem>();
+        public static List<AbstractFreeModeItem> scnearioFree = new List<AbstractFreeModeItem>();
 
         public static void GetGameInfo()
         {
@@ -166,19 +166,8 @@ namespace COM3D2.Lilly.Plugin
             // new 로 받아서 가져오기때문에 성능 낭비 발생
             try
             {
-                if (scneario.Count==0)
-                {
-                    // var newArray = Array.ConvertAll(array, item => (NewType)item);
-                    // AbstractFreeModeItem  / protected static HashSet<int> GetEnabledIdList() / 에서 처리하자
-                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null).ConvertAll(item => (AbstractFreeModeItem)item));
-                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, null).ConvertAll(item => (AbstractFreeModeItem)item));
-                    scneario.AddRange(FreeModeItemLifeMode.CreateItemList(true).ConvertAll(item => (AbstractFreeModeItem)item));
-                    scneario.AddRange(FreeModeItemVip.CreateItemVipList(null).ConvertAll(item => (AbstractFreeModeItem)item));
-                    // 이걸 가져올 방법이 없어서 이렇게 씀
-                    //scneario.AddRange(FreeModeItemLifeMode.CreateItemList(true));
-                    //scneario.AddRange(FreeModeItemVip.CreateItemVipList(null));
-                }
-                foreach (var data in scneario)
+                SetScneario();
+                foreach (var data in scnearioFree)
                 {
                     MyLog.LogMessage("scneario"
                         , data.item_id
@@ -199,6 +188,55 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogMessage("scneario:" + e.ToString());
             }
             MyLog.LogInfo();
+            
+            try
+            {                
+                foreach (var data in GameMain.Instance.CharacterMgr.status.flags)
+                {
+                    MyLog.LogMessage("Playerflags"
+                        , data.Key
+                        , data.Value
+                        );
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("Playerflags:" + e.ToString());
+            }
+            MyLog.LogInfo();
+            
+            try
+            {                
+                foreach (var data in GameMain.Instance.CharacterMgr.status.haveItems)
+                {
+                    MyLog.LogMessage("haveItems"
+                        , data.Key
+                        , data.Value
+                        );
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("haveItems:" + e.ToString());
+            }
+            MyLog.LogInfo();
+            
+            try
+            {                
+                foreach (var data in GameMain.Instance.CharacterMgr.status.havePartsItems)
+                {
+                    MyLog.LogMessage("havePartsItems"
+                        , data.Key
+                        , data.Value
+                        );
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("havePartsItems:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
 
             /*
             FreeModeItemList freemode_item_list_= UTY.GetChildObject(base.root_obj, "FreeModeItemList", false).GetComponent<FreeModeItemList>(); ;
@@ -215,6 +253,22 @@ namespace COM3D2.Lilly.Plugin
             */
 
             MyLog.LogInfo("=== GetGameInfo ed ===");
+        }
+
+        private static void SetScneario()
+        {
+            if (scnearioFree.Count == 0)
+            {
+                // var newArray = Array.ConvertAll(array, item => (NewType)item);
+                // AbstractFreeModeItem  / protected static HashSet<int> GetEnabledIdList() / 에서 처리하자
+                scnearioFree.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null).ConvertAll(item => (AbstractFreeModeItem)item));
+                scnearioFree.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, null).ConvertAll(item => (AbstractFreeModeItem)item));
+                scnearioFree.AddRange(FreeModeItemLifeMode.CreateItemList(true).ConvertAll(item => (AbstractFreeModeItem)item));
+                scnearioFree.AddRange(FreeModeItemVip.CreateItemVipList(null).ConvertAll(item => (AbstractFreeModeItem)item));
+                // 이걸 가져올 방법이 없어서 이렇게 씀
+                //scneario.AddRange(FreeModeItemLifeMode.CreateItemList(true));
+                //scneario.AddRange(FreeModeItemVip.CreateItemVipList(null));
+            }
         }
 
         // Application.installerName :

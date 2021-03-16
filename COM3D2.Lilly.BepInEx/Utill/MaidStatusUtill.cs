@@ -151,7 +151,7 @@ namespace COM3D2.Lilly.Plugin
                 JobClassSystem jobClassSystem = maid.status.jobClass;
 
                 List<JobClass.Data> learnPossibleClassDatas = jobClassSystem.GetLearnPossibleClassDatas(true, AbstractClassData.ClassType.Share | AbstractClassData.ClassType.New);
-                
+                // 클래스 추가?
                 foreach (JobClass.Data data in learnPossibleClassDatas)
                 {
                     
@@ -171,7 +171,7 @@ namespace COM3D2.Lilly.Plugin
 
                 SortedDictionary<int, ClassData<JobClass.Data>> keyValuePairs =jobClassSystem.GetAllDatas();
                 MyLog.LogMessage("JobClass.expSystem: " + MaidUtill.GetMaidFullNale(maid) , keyValuePairs.Count);
-                
+                // 경험치 설정
                 foreach (var item in keyValuePairs)
                 {
                     ClassData<JobClass.Data> classData = item.Value;
@@ -192,6 +192,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 MyLog.LogError("JobClass: " + e.ToString());
             }
+
 
             return;
 
@@ -270,13 +271,17 @@ namespace COM3D2.Lilly.Plugin
             Maid maid_= GameMain.Instance.CharacterMgr.GetStockMaid(0);
 
             ReadOnlyDictionary<int, bool> eventEndFlags= maid_.status.eventEndFlags;
+            foreach (var item in eventEndFlags)
+            {
+                MyLog.LogMessage("eventEndFlags: " + item.Key, item.Value);
+            }
 
             ReadOnlyDictionary<string, int> flags =maid_.status.flags;
             foreach (var item in flags)
             {
                 MyLog.LogMessage("flags: " +  item.Key,item.Value);
             }
-                        
+
             ReadOnlyDictionary<int, WorkData> workDatas = maid_.status.workDatas;
             foreach (var item in workDatas)
             {

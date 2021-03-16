@@ -35,6 +35,8 @@ namespace COM3D2.Lilly.Plugin
 
         }
 
+        /*
+
         public class ScnerioData
         {
             // Token: 0x06003655 RID: 13909 RVA: 0x0019B50E File Offset: 0x0019990E
@@ -86,6 +88,8 @@ namespace COM3D2.Lilly.Plugin
             // Token: 0x040030A9 RID: 12457
             public List<int> personalIdList = new List<int>();
         }
+
+        */
 
     }
 

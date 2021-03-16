@@ -39,13 +39,13 @@ namespace COM3D2.Lilly.Plugin
                 SystemShortcutAPI.AddButton(name, new Action(OnMenuButtonClickCallback_Patch), name, png);                
                
                 name = "ScenarioDataUtill.RemoveEventEndFlagAll 이벤트 클리어 제거";
-                SystemShortcutAPI.AddButton(name, new Action(ScenarioDataUtill.RemoveEventEndFlagAll), name, png);                
+                SystemShortcutAPI.AddButton(name, new Action(ScenarioUtill.RemoveEventEndFlagAll), name, png);                
 
                 name = "ScenarioDataUtill.RemoveEventEndFlag";
                 SystemShortcutAPI.AddButton(name, new Action(RemoveEventEndFlag), name, GearMenuAddPlugin.png);
 
                 name = "ScenarioDataUtill.SetEventEndFlagAll 이벤트 클리어 처리";
-                SystemShortcutAPI.AddButton(name, new Action(ScenarioDataUtill.SetScenarioDataAll), name, png);                
+                SystemShortcutAPI.AddButton(name, new Action(ScenarioUtill.SetScenarioDataAll), name, png);                
                 
                 name = "SetMaidStatusAll. stat,sikill,job";
                 SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.SetMaidStatusAll), name, png);                
@@ -62,7 +62,7 @@ namespace COM3D2.Lilly.Plugin
 
         public static void RemoveEventEndFlag()
         {
-                ScenarioDataUtill.RemoveEventEndFlag(SceneEdit.Instance.maid);
+                ScenarioUtill.RemoveEventEndFlag(SceneEdit.Instance.maid);
         }
 
         private static void OnMenuButtonClickCallback()
