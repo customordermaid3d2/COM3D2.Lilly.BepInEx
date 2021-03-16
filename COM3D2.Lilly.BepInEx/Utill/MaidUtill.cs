@@ -54,8 +54,12 @@ namespace COM3D2.Lilly.Plugin
             return s.ToString();
         }
 
+        static List<AbstractFreeModeItem> scneario=new List<AbstractFreeModeItem>();
+
         public static void GetGameInfo()
         {
+            MyLog.LogInfo("=== GetGameInfo st ===");
+
             MyLog.LogInfo("Application.installerName : " + Application.installerName);
             MyLog.LogInfo("Application.version : " + Application.version);
             MyLog.LogInfo("Application.unityVersion : " + Application.unityVersion);
@@ -202,8 +206,57 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogMessage("YotogiStage:" + e.ToString());
             }
             MyLog.LogInfo();
+            
+            // new 로 받아서 가져오기때문에 성능 낭비 발생
+            try
+            {
+                if (scneario ==null)
+                {
+                    // AbstractFreeModeItem  / protected static HashSet<int> GetEnabledIdList() / 에서 처리하자
+                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null));
+                    scneario.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, null));
+                    // private static Dictionary<FreeModeItemEveryday.ScnearioType, FreeModeItemEveryday.ScnerioData> DataDic 
+                    // 이걸 가져올 방법이 없어서 이렇게 씀
+                    scneario.AddRange(FreeModeItemLifeMode.CreateItemList(true));
+                    scneario.AddRange(FreeModeItemVip.CreateItemVipList(null));
+                }
+                foreach (var data in scneario)
+                {
+                    MyLog.LogMessage("scneario"
+                        , data.item_id
+                        , data.is_enabled
+                        , data.play_file_name
+                        , data.title
+                        , data.text
+                        , data.type
+                        , MyUtill.Join(" / " , data.condition_texts)                        
+                        , data.titleTerm
+                        , data.textTerm
+                        , MyUtill.Join(" , " , data.condition_text_terms)
+                        );
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("scneario:" + e.ToString());
+            }
+            MyLog.LogInfo();
 
+            /*
+            FreeModeItemList freemode_item_list_= UTY.GetChildObject(base.root_obj, "FreeModeItemList", false).GetComponent<FreeModeItemList>(); ;
 
+            bool isEnabled;
+
+                isEnabled = freemode_item_list_.SetList(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null).ToArray());
+            
+
+                isEnabled = freemode_item_list_.SetList(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, this.maid_.status).ToArray());
+            
+
+                isEnabled = freemode_item_list_.SetList(FreeModeItemLifeMode.CreateItemList(true).ToArray());
+            */
+
+            MyLog.LogInfo("=== GetGameInfo ed ===");
         }
 
         // Application.installerName :

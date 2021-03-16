@@ -143,6 +143,7 @@ namespace COM3D2.Lilly.Plugin
                 //typeof(GameUtyPatch)
             };
 
+            listA.Add(typeof(AbstractFreeModeItemPatch));// 프리 모드에서 모든 이벤트 열기 위한용
             listA.Add(typeof(AudioSourceMgrPatch));
             listA.Add(typeof(BgMgrPatch));
             //lists.Add(typeof(CameraMainPatch));

@@ -192,6 +192,20 @@ namespace COM3D2.Lilly.Plugin
 
             // SceneFreeModeSelectManager.Start 참조
 
+            /*
+            if (this.mode == FreeModeSceneSelectBase.SelectMode.Story)
+            {
+                isEnabled = this.freemode_item_list_.SetList(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null).ToArray());
+            }
+            else if (this.mode == FreeModeSceneSelectBase.SelectMode.Everyday)
+            {
+                isEnabled = this.freemode_item_list_.SetList(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, this.maid_.status).ToArray());
+            }
+            else if (this.mode == FreeModeSceneSelectBase.SelectMode.LifeMode)
+            {
+                isEnabled = this.freemode_item_list_.SetList(FreeModeItemLifeMode.CreateItemList(true).ToArray());
+            }
+            */
             try
             {
                 foreach (FreeModeItemVip item in FreeModeItemVip.CreateItemVipList(maid.status))
