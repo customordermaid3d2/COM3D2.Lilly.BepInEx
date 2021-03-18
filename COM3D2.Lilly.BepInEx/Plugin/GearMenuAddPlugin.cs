@@ -53,8 +53,11 @@ namespace COM3D2.Lilly.Plugin
                 name = "SetMaidStatusAll. stat,sikill,job";
                 SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.SetMaidStatusAll), name, png);                
                 
-                name = "게임 정보 얻기";
-                SystemShortcutAPI.AddButton(name, new Action(GameUtill.GetGameInfo), name, png);                
+                name = "게임 정보 얻기1";
+                SystemShortcutAPI.AddButton(name, new Action(GameUtill.GetGameInfo1), name, png);                
+                                
+                name = "게임 정보 얻기2";
+                SystemShortcutAPI.AddButton(name, new Action(GameUtill.GetGameInfo1), name, png);                
                 
                 name = "메이드 정보 얻기";
                 SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.GetMaidStatus), name, png);

@@ -12,22 +12,22 @@ namespace COM3D2.Lilly.Plugin
     class TJSScriptPatch
     {
         // public void EvalScript(string eval_str)
-        [HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(string) })]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(string) })]
+        //[HarmonyPostfix]
         private static void EvalScriptPost0(string eval_str) // string __m_BGMName 못가져옴
         {
             //MyLog.LogMessageS("TJSScript.EvalScriptPost0:" + eval_str);
         }        
         
-        [HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(string) , typeof(TJSVariant) })]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(string) , typeof(TJSVariant) })]
+        //[HarmonyPostfix]
         private static void EvalScriptPost1(string eval_str) // string __m_BGMName 못가져옴
         {
             //MyLog.LogMessageS("TJSScript.EvalScriptPost1:" + eval_str);
         }
 
-        [HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(AFileBase) })]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(TJSScript), "EvalScript",new Type[] { typeof(AFileBase) })]
+        //[HarmonyPostfix]
         private static void EvalScriptPost2(AFileBase file) // string __m_BGMName 못가져옴
         {
             MyLog.LogMessage("TJSScript.EvalScriptPost2:" + file.ToString());

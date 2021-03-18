@@ -47,9 +47,10 @@ namespace COM3D2.Lilly.Plugin
         // public void SetProp(MPN idx, int val, bool f_bTemp = false)
         [HarmonyPatch(typeof(Maid), "SetProp", new Type[] { typeof(MPN), typeof(int), typeof(bool) })]
         [HarmonyPostfix]
-        public static void SetProp(MPN idx, int val, bool f_bTemp, MaidProp[] ___m_aryMaidProp)
+        public static void SetProp(Maid __instance, MPN idx, int val, bool f_bTemp, MaidProp[] ___m_aryMaidProp)
         {
-            print("SetProp2",___m_aryMaidProp[(int)idx]);
+            if (__instance.Visible)
+                print("SetProp2",___m_aryMaidProp[(int)idx]);
         }
 
         // public void SetProp(string tag, string filename, int f_nFileNameRID, bool f_bTemp = false, bool f_bNoScale = false)
@@ -57,9 +58,12 @@ namespace COM3D2.Lilly.Plugin
         // private void SetProp(MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale = false)
         [HarmonyPatch(typeof(Maid), "SetProp", new Type[] { typeof(MaidProp), typeof(string), typeof(int), typeof(bool) , typeof(bool) })]
         [HarmonyPostfix]
-        public static void SetProp(MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale )
+        public static void SetProp(Maid __instance, MaidProp mp, string filename, int f_nFileNameRID, bool f_bTemp, bool f_bNoScale )
         {
-            print("SetProp3",mp);
+            if (__instance.Visible)
+            {
+                print("SetProp3",mp);
+            }
         }
 
         // public void SetSubProp(MPN idx, int subno, string filename, int f_nFileNameRID = 0)
@@ -68,7 +72,8 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPrefix]
         public static void DelProp(Maid __instance, MPN idx, bool f_bTemp, MaidProp[] ___m_aryMaidProp)
         {
-            print("DelProp",___m_aryMaidProp[(int)idx]);
+            if (__instance.Visible)
+                print("DelProp",___m_aryMaidProp[(int)idx]);
         }
 
         public static void print(string s,MaidProp maidProp)

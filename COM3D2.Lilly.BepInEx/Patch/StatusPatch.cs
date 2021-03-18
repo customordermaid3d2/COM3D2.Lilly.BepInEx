@@ -57,7 +57,7 @@ namespace COM3D2.Lilly.Plugin
 
 		[HarmonyPatch(typeof(Status), "SetEventEndFlag")]//,new Type[] { typeof(Personal.Data) }
 		[HarmonyPostfix]
-		public void SetEventEndFlag(int id, bool value)
+		public static void SetEventEndFlag(int id, bool value)
         {
 			MyLog.LogMessage("SetEventEndFlag: " + value, id);
 		}

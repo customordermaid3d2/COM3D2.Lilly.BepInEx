@@ -12,7 +12,7 @@ namespace COM3D2.Lilly.Plugin
     {
         public static List<AbstractFreeModeItem> scnearioFree = new List<AbstractFreeModeItem>();
 
-        public static void GetGameInfo()
+        public static void GetGameInfo1()
         {
             MyLog.LogInfo("=== GetGameInfo st ===");
 
@@ -30,76 +30,6 @@ namespace COM3D2.Lilly.Plugin
 
             MyLog.LogInfo();
 
-            try
-            {
-                foreach (var item in Feature.GetAllDatas(false))
-                {
-                    MyLog.LogMessage("Feature:", item.id, item.uniqueName, item.drawName, item.termName);//
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("Feature:" + e.ToString());
-            }
-            MyLog.LogInfo();
-
-            try
-            {
-                foreach (var item in Personal.GetAllDatas(false))
-                {
-                    MyLog.LogMessage("Personal:", item.id, item.replaceText, item.uniqueName, item.drawName, item.termName);//
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("Personal:" + e.ToString());
-            }
-            MyLog.LogInfo();
-
-            try
-            {
-                foreach (var item in Propensity.GetAllDatas(false))
-                {
-                    MyLog.LogMessage("Propensity:", item.id, item.uniqueName, item.drawName, item.termName);//
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("Propensity:" + e.ToString());
-            }
-            MyLog.LogInfo();
-
-            // [Message: Lilly] YotogiClass: らぶらぶメイド: ご主人様ととってもらぶらぶになりたいメイドの為の夜伽クラス。大好きな恋人とらぶらぶえっちしましょう。 : 3700 : MaidStatus / 夜伽クラス / 説明 / loveloveplus : MaidStatus / 夜伽クラス / loveloveplus : loveloveplus
-            // [Message: Lilly] YotogiClass: 欲情メイド: ご主人様に欲情してちょっとアブノーマルになったメイドの為の夜伽クラス。恋人の為ならどんなことだって…… : 3710 : MaidStatus / 夜伽クラス / 説明 / yokujyouplus : MaidStatus / 夜伽クラス / yokujyouplus : yokujyouplus
-            // [Message: Lilly] YotogiClass: らぶらぶメイド: ご主人様ととってもらぶらぶになりたいメイドの為の夜伽クラス。大好きな恋人とらぶらぶえっちしましょう。 : 3720 : MaidStatus / 夜伽クラス / 説明 / loveloveplus_add : MaidStatus / 夜伽クラス / loveloveplus_add : loveloveplus_add
-            // [Message: Lilly] YotogiClass: 欲情メイド: ご主人様に欲情してちょっとアブノーマルになったメイドの為の夜伽クラス。恋人の為ならどんなことだって…… : 3730 : MaidStatus / 夜伽クラス / 説明 / yokujyouplus_add : MaidStatus / 夜伽クラス / yokujyouplus_add : yokujyouplus_add
-            // [Message: Lilly] YotogiClass: 発情淫語メイド: ご主人様の為に恥ずかしくて下品な言葉を言っちゃうようになっちゃった夜伽クラス。こんな言葉は、ご主人様だけ……♪ : 3800 : MaidStatus / 夜伽クラス / 説明 / Hatujyouingo : MaidStatus / 夜伽クラス / Hatujyouingo : Hatujyouingo
-            try
-            {
-                foreach (var data in JobClass.GetAllDatas(false))
-                {
-                    MyLog.LogMessage("JobClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("JobClass:" + e.ToString());
-            }
-            MyLog.LogInfo();
-
-            try
-            {
-                foreach (var data in YotogiClass.GetAllDatas(false))
-                {
-                    MyLog.LogMessage("YotogiClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
-                }
-            }
-            catch (Exception e)
-            {
-
-                MyLog.LogMessage("YotogiClass:" + e.ToString());
-            }
-            MyLog.LogInfo();
 
             try
             {
@@ -163,9 +93,132 @@ namespace COM3D2.Lilly.Plugin
             }
             MyLog.LogInfo();
 
-            // new 로 받아서 가져오기때문에 성능 낭비 발생
+
             try
             {
+                foreach (var data in GameMain.Instance.CharacterMgr.status.flags)
+                {
+                    MyLog.LogMessage("Playerflags"
+                        , data.Key
+                        , data.Value
+                        );
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("Playerflags:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            try
+            {
+                foreach (var data in GameMain.Instance.CharacterMgr.status.haveItems)
+                {
+                    MyLog.LogMessage("haveItems"
+                        , data.Key
+                        , data.Value
+                        );
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("haveItems:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            try
+            {
+                foreach (var data in GameMain.Instance.CharacterMgr.status.havePartsItems)
+                {
+                    MyLog.LogMessage("havePartsItems"
+                        , data.Key
+                        , data.Value
+                        );
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("havePartsItems:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            MyLog.LogInfo("=== GetGameInfo ed ===");
+        }
+
+
+        public static void GetGameInfo2()
+        {
+            MyLog.LogInfo("=== GetGameInfo st ===");
+
+            try
+            {
+                foreach (var item in Feature.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("Feature:", item.id, item.uniqueName, item.drawName, item.termName);//
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("Feature:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            try
+            {
+                foreach (var item in Personal.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("Personal:", item.id, item.replaceText, item.uniqueName, item.drawName, item.termName);//
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("Personal:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            try
+            {
+                foreach (var item in Propensity.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("Propensity:", item.id, item.uniqueName, item.drawName, item.termName);//
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("Propensity:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            try
+            {
+                foreach (var data in JobClass.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("JobClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                }
+            }
+            catch (Exception e)
+            {
+                MyLog.LogMessage("JobClass:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            try
+            {
+                foreach (var data in YotogiClass.GetAllDatas(false))
+                {
+                    MyLog.LogMessage("YotogiClass", data.id, data.classType, data.drawName, data.uniqueName, data.explanatoryText, data.termExplanatoryText);//, data.termName
+                }
+            }
+            catch (Exception e)
+            {
+
+                MyLog.LogMessage("YotogiClass:" + e.ToString());
+            }
+            MyLog.LogInfo();
+
+            try
+            {
+                // 시나리오. 일상 등등?
                 SetScneario();
                 foreach (var data in scnearioFree)
                 {
@@ -189,54 +242,6 @@ namespace COM3D2.Lilly.Plugin
             }
             MyLog.LogInfo();
             
-            try
-            {                
-                foreach (var data in GameMain.Instance.CharacterMgr.status.flags)
-                {
-                    MyLog.LogMessage("Playerflags"
-                        , data.Key
-                        , data.Value
-                        );
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("Playerflags:" + e.ToString());
-            }
-            MyLog.LogInfo();
-            
-            try
-            {                
-                foreach (var data in GameMain.Instance.CharacterMgr.status.haveItems)
-                {
-                    MyLog.LogMessage("haveItems"
-                        , data.Key
-                        , data.Value
-                        );
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("haveItems:" + e.ToString());
-            }
-            MyLog.LogInfo();
-            
-            try
-            {                
-                foreach (var data in GameMain.Instance.CharacterMgr.status.havePartsItems)
-                {
-                    MyLog.LogMessage("havePartsItems"
-                        , data.Key
-                        , data.Value
-                        );
-                }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogMessage("havePartsItems:" + e.ToString());
-            }
-            MyLog.LogInfo();
-
 
             /*
             FreeModeItemList freemode_item_list_= UTY.GetChildObject(base.root_obj, "FreeModeItemList", false).GetComponent<FreeModeItemList>(); ;
@@ -261,6 +266,13 @@ namespace COM3D2.Lilly.Plugin
             {
                 // var newArray = Array.ConvertAll(array, item => (NewType)item);
                 // AbstractFreeModeItem  / protected static HashSet<int> GetEnabledIdList() / 에서 처리하자
+                try
+                {
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
                 scnearioFree.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Story, null).ConvertAll(item => (AbstractFreeModeItem)item));
                 scnearioFree.AddRange(FreeModeItemEveryday.CreateItemEverydayList(FreeModeItemEveryday.ScnearioType.Nitijyou, null).ConvertAll(item => (AbstractFreeModeItem)item));
                 scnearioFree.AddRange(FreeModeItemLifeMode.CreateItemList(true).ConvertAll(item => (AbstractFreeModeItem)item));

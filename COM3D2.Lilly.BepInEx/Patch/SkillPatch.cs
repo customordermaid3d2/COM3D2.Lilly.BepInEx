@@ -10,8 +10,8 @@ namespace COM3D2.Lilly.Plugin
 {
     class SkillPatch
     {
-        [HarmonyPatch(typeof(Skill.Data), "IsExecStage", new Type[] { typeof(YotogiStage.Data) })]
-        [HarmonyPostfix]
+        // [HarmonyPatch(typeof(Skill.Data), "IsExecStage", new Type[] { typeof(YotogiStage.Data) })]
+        // [HarmonyPostfix]
         static void IsExecStagePost(YotogiStage.Data stageData, ref bool __result, Skill.Data __instance)
         {   // ■ Skill.Data.IsExecStagePostBGM022.ogg , bigsight_night , System.String[] , SceneYotogi/背景タイプ/bigsight_night , bigsight_night
 			MyLog.LogMessage("Skill.Data.IsExecStagePost:" + stageData.bgmFileName 
@@ -22,7 +22,7 @@ namespace COM3D2.Lilly.Plugin
 
 			for (int i = 0; i < stageData.prefabName.Length; i++)
 			{				
-				MyLog.LogMessage(stageData.prefabName[i].ToString().Trim().ToLower());
+				MyLog.LogMessage("Skill:"+stageData.prefabName[i].ToString().Trim().ToLower());
 			}
 
 			

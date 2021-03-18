@@ -11,10 +11,40 @@ namespace COM3D2.Lilly.Plugin
     ///  프리 모드에서 모든 이벤트 열기 위한용
     ///  분석용
     /// </summary>
+    /// TypeDefinition type10 = CS$<>8__locals1.ass.MainModule.GetType("FreeModeItemEveryday");
     class FreeModeItemEverydayPatch
     {
         // FreeModeItemEveryday
-        
+
+        //type10.GetMethod("get_is_enabled").InjectWith(method2, 0, null, InjectFlags.ModifyReturn, InjectDirection.Before, null, null);
+
+
+        //type10.GetMethod("IsEnabledFlag").InjectWith(method2, 0, null, InjectFlags.ModifyReturn, InjectDirection.Before, null, null);
+        //public static bool IsEnabledFlag(FreeModeItemEveryday.ScnearioType type, string flag_name)
+        /// <summary>
+        /// AbstractFreeModeItemPatch와 중복됨
+        /// 버그남
+        /// </summary>
+        /// <param name="__result"></param>
+        /// <param name="type"></param>
+        /// <param name="flag_name"></param>
+        [HarmonyPatch(typeof(FreeModeItemEveryday), "IsEnabledFlag")]
+        [HarmonyPrefix]
+        public static void IsEnabledFlag(bool __result)
+        {
+            __result = true;
+            AbstractFreeModeItemPatch.OutMsg("FreeModeItemEveryday.IsEnabledFlag");
+        }
+
+        [HarmonyPatch(typeof(FreeModeItemEveryday), "is_enabled", MethodType.Getter)]
+        [HarmonyPrefix]//HarmonyPostfix ,HarmonyPrefix
+        public static void get_is_enabled( bool __result)
+        {
+            __result = true;
+            AbstractFreeModeItemPatch.OutMsg("FreeModeItemEveryday.get_is_enabled");
+        }
+
+
         /*
         public static Dictionary<FreeModeItemEveryday.ScnearioType, FreeModeItemEveryday.ScnerioData> DataDic;        
         

@@ -1,11 +1,29 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace COM3D2.Lilly.Plugin
 {
-    internal class ScenarioDataPatch 
+    internal class ScenarioDataPatch
     {
+        /// <summary>
+        ///  피드러 참고.
+        ///  회상모드 처리용?
+        /// </summary>
+        /// <param name="___m_EventMaid"></param>
+        // private List<Maid> m_EventMaid = new List<Maid>();
+        [HarmonyPatch(typeof(ScenarioData), "IsPlayable",MethodType.Getter)] // GetIsScenarioPlayable m_EventMaid
+        [HarmonyPrefix]
+        private static void get_IsPlayable(List<Maid> ___m_EventMaid)
+        {
+            ___m_EventMaid.Clear();
+			List<Maid> list = ___m_EventMaid;
+            ___m_EventMaid.AddRange(from m in GameMain.Instance.CharacterMgr.GetStockMaidList()
+            where !list.Contains(m)
+            select m);
+        }
+
         // public void ScenarioPlay(List<Maid> maid_list)
         // AddEventMaid
         [HarmonyPatch(typeof(ScenarioData), "ScenarioPlay")]

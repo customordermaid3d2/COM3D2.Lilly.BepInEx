@@ -87,7 +87,9 @@ namespace COM3D2.Lilly.Plugin
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
 
             // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
-            
+            MyLog.LogDebug("harmonys.Add:===========================START==============================");
+            MyLog.LogDebug("harmonys.Add:===========================START==============================");
+            MyLog.LogDebug("harmonys.Add:===========================START==============================");
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
                 try
@@ -103,6 +105,10 @@ namespace COM3D2.Lilly.Plugin
                     MyLog.LogError("Plugin:" + e.ToString());
                 }
             }
+            MyLog.LogDebug ("harmonys.Add:=========================END================================");
+            MyLog.LogDebug ("harmonys.Add:=========================END================================");
+            MyLog.LogDebug ("harmonys.Add:=========================END================================");
+
         }
 
         public void DelHarmonyPatch()
@@ -142,34 +148,40 @@ namespace COM3D2.Lilly.Plugin
                 //typeof(GameUtyPatch)
             };
 
-            // listA.Add(typeof(AbstractFreeModeItemPatch));// 프리 모드에서 모든 이벤트 열기 위한용 오버 플로우
+            listA.Add(typeof(AbstractFreeModeItemPatch));// 프리 모드에서 모든 이벤트 열기 위한용 오버 플로우
             listA.Add(typeof(AudioSourceMgrPatch));
             listA.Add(typeof(BgMgrPatch));
             //lists.Add(typeof(CameraMainPatch));
             listA.Add(typeof(CharacterMgrPatch));// 프리셋값 출력용
             //lists.Add(typeof(DeskManagerPatch));
-            //lists.Add(typeof(GameMainPatch));
-            //lists.Add(typeof(KasizukiMainMenuPatch));
             //listA.Add(typeof(CsvCommonIdManagerPatch));
             // listA.Add(typeof(ClassChangePanelPatch));
+            listA.Add(typeof(EmpireLifeModeManagerPatch));// 회상모드 시나리오 처리용?
+            listA.Add(typeof(FreeModeItemVipPatch));// 회상모드 시나리오 처리용?
+            listA.Add(typeof(FreeModeItemLifeModePatch));// 회상모드 시나리오 처리용?
+            listA.Add(typeof(FreeModeItemEverydayPatch));// 회상모드 시나리오 처리용?
+            //lists.Add(typeof(GameMainPatch));
             //listA.Add(typeof(JobClassPatch));
             //lists.Add(typeof(JobClassSystemPatch));
+            //lists.Add(typeof(KasizukiMainMenuPatch));
             listA.Add(typeof(MaidManagementMainPatch));// 메이드 관리 화면
             listA.Add(typeof(MaidPatch));
+            //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
             listA.Add(typeof(ProfileCtrlPatch));// MaidUtill.GetGameInfo 용으로 남겨둠
             listA.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서 MaidUtill 용으로 남겨둠
-            //lists.Add(typeof(StatusPatch));// 오류/떠서 사용 포기
-            //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
             //lists.Add(typeof(PhotoMotionDataPatch));
             //lists.Add(typeof(PopupAndTabListPatch));
             //lists.Add(typeof(SaveAndLoadCtrlPatch));
-            //lists.Add(typeof(ScenarioDataPatch));//
+            //lists.Add(typeof(StatusPatch));// 오류/떠서 사용 포기
+            listA.Add(typeof(ScenarioDataPatch));// 회상모드 시나리오 처리용?
+            listA.Add(typeof(ScheduleAPIPatch));// 회상모드 시나리오 처리용?
             //lists.Add(typeof(SceneADVPatch));
             listA.Add(typeof(SceneEditPatch)); //자꾸 오류남?
             //lists.Add(typeof(SceneMgrPatch));
             //lists.Add(typeof(ScenarioSelectMgrPatch));// 이벤트 기초 목록 관련
-            //listA.Add(typeof(FreeModeItemEverydayPatch));
-            //listA.Add(typeof(SceneFreeModeSelectManagerPatch));
+
+            listA.Add(typeof(SceneFreeModeSelectManagerPatch));
+            //listA.Add(typeof(SceneFreeModeSelectPatch));
             listA.Add(typeof(SceneScenarioSelectPatch));
             listA.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.
             //lists.Add(typeof(ScriptManagerFastPatch));
@@ -179,7 +191,8 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(PlayerStatusPatch.StatusPatch));// 플레그 확인용. 
             listA.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
             //listA.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입.. 쓸일 없음
-                                               //lists.Add(typeof(TJSScriptPatch));
+            //lists.Add(typeof(TJSScriptPatch));
+            listA.Add(typeof(UTYPatch));
             //listA.Add(typeof(YotogiSkillSystemPatch));// 코드 분석용
             // listA.Add(typeof(YotogiClassSystemPatch));// 코드 분석용
         }

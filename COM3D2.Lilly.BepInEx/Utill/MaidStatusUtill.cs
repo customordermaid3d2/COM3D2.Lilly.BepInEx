@@ -145,6 +145,29 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogError("Skill2: " + MaidUtill.GetMaidFullNale(maid), e.ToString());
             }
 
+
+            // 피드러 참고
+            foreach (YotogiClass.Data data in YotogiClass.GetAllDatas(true))
+            {
+                ClassData<YotogiClass.Data> classData = maid.status.yotogiClass.Get(data.id) ?? maid.status.yotogiClass.Add(data, true, true);
+                if ( classData != null)
+                {
+                    classData.expSystem.SetLevel(classData.expSystem.GetMaxLevel());
+                }
+            }
+
+            //  피들러 참고 근데 사실상 똑같음
+            /*
+            foreach (JobClass.Data data in JobClass.GetAllDatas(true))
+            {
+                ClassData<JobClass.Data> classData = maid.status.jobClass.Get(data.id) ?? maid.status.jobClass.Add(data, true, true);
+                if ( classData != null)
+                {
+                    classData.expSystem.SetLevel(classData.expSystem.GetMaxLevel());
+                }
+            }
+            */
+
             // 실패한듯
             try
             {
@@ -170,7 +193,7 @@ namespace COM3D2.Lilly.Plugin
                 }
 
                 SortedDictionary<int, ClassData<JobClass.Data>> keyValuePairs = jobClassSystem.GetAllDatas();
-                MyLog.LogMessage("JobClass.expSystem: " + MaidUtill.GetMaidFullNale(maid), keyValuePairs.Count);
+                //MyLog.LogMessage("JobClass.expSystem: " + MaidUtill.GetMaidFullNale(maid), keyValuePairs.Count);
                 // 경험치 설정
                 foreach (var item in keyValuePairs)
                 {
@@ -182,6 +205,7 @@ namespace COM3D2.Lilly.Plugin
                         continue;
 
                     MyLog.LogDebug("JobClass.expSystem:" + data.id + " , " + data.uniqueName + " , " + data.drawName + " , " + data.explanatoryText + " , " + data.termExplanatoryText);
+                    MyLog.LogDebug("JobClass.expSystem:" + expSystem.GetType() , expSystem.GetMaxLevel() , expSystem.GetCurrentLevel());
 
                     expSystem.SetTotalExp(expSystem.GetMaxLevelNeedExp());
                     expSystem.SetLevel(expSystem.GetMaxLevel());
@@ -212,6 +236,8 @@ namespace COM3D2.Lilly.Plugin
                 isEnabled = this.freemode_item_list_.SetList(FreeModeItemLifeMode.CreateItemList(true).ToArray());
             }
             */
+
+            /*
             try
             {
                 foreach (FreeModeItemVip item in FreeModeItemVip.CreateItemVipList(maid.status))
@@ -262,7 +288,7 @@ namespace COM3D2.Lilly.Plugin
 
             List<FreeModeItemLifeMode> list2 = FreeModeItemLifeMode.CreateItemList(true);
 
-
+            */
         }
 
 
