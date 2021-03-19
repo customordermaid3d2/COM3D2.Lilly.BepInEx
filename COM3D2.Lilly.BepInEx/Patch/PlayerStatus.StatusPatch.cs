@@ -8,6 +8,8 @@ namespace COM3D2.Lilly.Plugin.PlayerStatusPatch
 {
     class StatusPatch
     {
+        // public ReadOnlyDictionary<int, NightWorkState> night_works_state_dic { get; private set; }
+
         [HarmonyPatch(typeof(PlayerStatus.Status), "AddFlag")]
         [HarmonyPostfix]//HarmonyPostfix ,HarmonyPrefix
         public static void AddFlag(string flagName, int value)

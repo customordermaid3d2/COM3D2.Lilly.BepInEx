@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace COM3D2.Lilly.Plugin
@@ -21,43 +22,59 @@ namespace COM3D2.Lilly.Plugin
         /// </summary>
         public static void SetScenarioDataAll()
         {
-            MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll st"); 
-            
-            try
+            MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll st");
+            Task taskA = new Task(() =>
             {
-                // 병렬 처리
-                foreach (var scenarioData in GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData())
+                try
                 {
-                // MyLog.LogMessageS(".SetScenarioDataAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
-                if (scenarioData.IsPlayable)
+                    // 병렬 처리
+                    foreach (var scenarioData in GameMain.Instance.ScenarioSelectMgr.GetAllScenarioData())
                     {
-                        bool b;
-                        //MyLog.LogMessageS(".m_EventMaid");
-                        foreach (var maid in scenarioData.GetEventMaidList())
+                        try
                         {
-                            b = maid.status.GetEventEndFlag(scenarioData.ID);
-                            MyLog.LogMessage(".SetEventEndFlagAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b + " , " + scenarioData.ScenarioScript.Contains("_Marriage") + " , " + scenarioData.Title); ;
-                            if (!b)
+                            // MyLog.LogMessageS(".SetScenarioDataAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + scenarioData.IsPlayable + " , " + scenarioData.Title); ;
+                            if (scenarioData.IsPlayable)
                             {
-                                maid.status.SetEventEndFlag(scenarioData.ID, true);
-                                if (scenarioData.ScenarioScript.Contains("_Marriage"))
+                                bool b;
+                                //MyLog.LogMessageS(".m_EventMaid");
+                                foreach (var maid in scenarioData.GetEventMaidList())
                                 {
-                                    maid.status.specialRelation = SpecialRelation.Married;
-                                    maid.status.relation = Relation.Lover;
-                                    maid.status.OldStatus.isMarriage = true;
-                                    maid.status.OldStatus.isNewWife = true;
-                                    //SetMaidCondition(0, '嫁');
+                                    try
+                                    {
+                                        b = maid.status.GetEventEndFlag(scenarioData.ID);
+                                        if (!b)
+                                        {
+                                            MyLog.LogMessage(".SetEventEndFlagAll:" + scenarioData.ID + " , " + scenarioData.ScenarioScript + " , " + maid.status.firstName + " , " + maid.status.lastName + " , " + b + " , " + scenarioData.ScenarioScript.Contains("_Marriage") + " , " + scenarioData.Title); ;
+                                            maid.status.SetEventEndFlag(scenarioData.ID, true);
+                                            if (scenarioData.ScenarioScript.Contains("_Marriage"))
+                                            {
+                                                maid.status.specialRelation = SpecialRelation.Married;
+                                                maid.status.relation = Relation.Lover;
+                                                maid.status.OldStatus.isMarriage = true;
+                                                maid.status.OldStatus.isNewWife = true;
+                                                //SetMaidCondition(0, '嫁');
+                                            }
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        MyLog.LogError("ScenarioDataUtill.SetScenarioDataAll3 : " + e.ToString());
+                                    }
                                 }
                             }
                         }
+                        catch (Exception e)
+                        {
+                            MyLog.LogError("ScenarioDataUtill.SetScenarioDataAll2 : " + e.ToString());
+                        }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                MyLog.LogError("ScenarioDataUtill.SetScenarioDataAll : " + e.ToString());
-            }
-
+                catch (Exception e)
+                {
+                    MyLog.LogError("ScenarioDataUtill.SetScenarioDataAll1 : " + e.ToString());
+                }
+            });
+            taskA.Start();
             return;
         }
 
@@ -65,9 +82,29 @@ namespace COM3D2.Lilly.Plugin
         {
             SetEveryday(FreeModeItemEveryday.ScnearioType.Nitijyou);
             SetEveryday(FreeModeItemEveryday.ScnearioType.Story);
-            SetFlagLifeMode();
-            SetItemVip();
 
+            foreach (var item in ScheduleCSVData.YotogiData)
+            {
+                ScheduleCSVData.Yotogi yotogi = item.Value;
+                //foreach (var item1 in yotogi.condPackage)
+                //{
+                //
+                //}
+                if (yotogi.condManVisibleFlag1.Count > 0)
+                {
+                    for (int j = 0; j < yotogi.condManVisibleFlag1.Count; j++)
+                    {
+                        if (GameMain.Instance.CharacterMgr.status.GetFlag(yotogi.condManVisibleFlag1[j]) < 1)
+                        {
+                            GameMain.Instance.CharacterMgr.status.SetFlag(yotogi.condManVisibleFlag1[j] , 1);
+                        }
+                    }
+                }
+            }
+
+            SetFlagLifeMode();//미적용 상태
+            SetItemVip();// 미적용 상태
+            /*
             foreach (var data in GameMain.Instance.CharacterMgr.status.flags)
             {
                 MyLog.LogMessage("flags"
@@ -75,6 +112,7 @@ namespace COM3D2.Lilly.Plugin
                     , data.Value
                     );
             }
+            */
         }
 
         private static void SetItemVip()
@@ -119,11 +157,19 @@ namespace COM3D2.Lilly.Plugin
                             int cellAsInteger2 = csvParser.GetCellAsInteger(1, i);
                             string s =csvParser.GetCellAsString(2, i);
                             //    ScheduleCSVData.ScheduleBase scheduleBase = ScheduleCSVData.AllData[cellAsInteger2];
-                            MyLog.LogMessage("ItemVip:" 
+                            MyLog.LogMessage("ItemVip처리필요" 
                                 , cellAsInteger
                                 , cellAsInteger2
                                 , s
-                                ); 
+                                );
+                            // 프,ㄹ레그 어떻게 박지?
+                            // [Message: Lilly] ItemVip: , 2000085 , 10940 , C1_VIP_dlc005_01000main2
+                            // [Message: Lilly] ItemVip: , 2000086 , 10950 , A1_VIP_dlc005_02000main2
+                            // [Message: Lilly] ItemVip: , 2000087 , 10960 , B1_VIP_dlc005_02000main2
+                            // [Message: Lilly] ItemVip: , 2000088 , 10970 , C1_VIP_dlc005_02000main2
+                            // [Message: Lilly] ItemVip: , 2000089 , 10980 , F1_VIP_01000main2
+                            // [Message: Lilly] ItemVip: , 2000090 , 10990 , F1_VIP_02000main2
+                            // [Message: Lilly] ItemVip: , 2000091 , 11000 , F1_VIP_03000main2
 
                         }
                     }
@@ -214,14 +260,17 @@ namespace COM3D2.Lilly.Plugin
                                         }
                                         num++;
                                     }
-                                GameMain.Instance.CharacterMgr.status.SetFlag(fixingFlagText + check_flag_name, 1);
-                                MyLog.LogMessage("Everyday"
-                                , check_flag_name
-                                , call_file_name
-                                , cellAsInteger
-                                , name
-                                , info_text
-                                );
+                                if (GameMain.Instance.CharacterMgr.status.GetFlag(fixingFlagText + check_flag_name)==0)
+                                {                                
+                                    GameMain.Instance.CharacterMgr.status.SetFlag(fixingFlagText + check_flag_name, 1);
+                                    MyLog.LogMessage("Everyday"
+                                    , check_flag_name
+                                    , call_file_name
+                                    , cellAsInteger
+                                    , name
+                                    , info_text
+                                    );
+                                }
                             }
                         }
                     }
@@ -229,8 +278,15 @@ namespace COM3D2.Lilly.Plugin
             }
         }
 
-        private static void SetFlagLifeMode()
+        //public static Dictionary<int, FreeModeItemLifeMode> m_DataDic;
+        //public static HashSet<int> enabledIdList ;
+        public static void SetFlagLifeMode()
         {
+            //enabledIdList = AbstractFreeModeItem.GetEnabledIdList();
+            //if (enabledIdList == null || enabledIdList.Count <= 0)
+            //{
+            //    return;
+            //}
             string text = "recollection_life_mode.nei";
             using (AFileBase afileBase = GameUty.FileSystem.FileOpen(text))
             {
@@ -241,8 +297,11 @@ namespace COM3D2.Lilly.Plugin
                     {
                         if (csv.IsCellToExistData(0, y))
                         {
+                            //if (freeModeItemLifeMode.m_IsAllEnabledPersonal)
+                            //{
+                            //    FreeModeItemLifeMode.m_DataDic.Add(cellAsInteger, freeModeItemLifeMode);
+                            //}
                             int cellAsInteger = csv.GetCellAsInteger(0, y);
-
                             int num = 0;
                             int m_ID = csv.GetCellAsInteger(num++, y);
                             int  m_LifeModeDataID = csv.GetCellAsInteger(num++, y);
@@ -254,11 +313,8 @@ namespace COM3D2.Lilly.Plugin
                             {
                                 list.Add(csv.GetCellAsString(num++, y));
                             }
-                            // if (freeModeItemLifeMode.m_IsAllEnabledPersonal)
-                            // {
-                            //     FreeModeItemLifeMode.m_DataDic.Add(cellAsInteger, freeModeItemLifeMode);
-                            // }
-                            MyLog.LogMessage("life_mode"
+                            string[] m_ConditionTexts = list.ToArray();
+                            MyLog.LogMessage("life_mode처리필요"
                             , m_ID
                             , m_LifeModeDataID
                             , m_Title

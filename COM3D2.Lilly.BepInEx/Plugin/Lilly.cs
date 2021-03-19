@@ -157,6 +157,7 @@ namespace COM3D2.Lilly.Plugin
             //listA.Add(typeof(CsvCommonIdManagerPatch));
             // listA.Add(typeof(ClassChangePanelPatch));
             listA.Add(typeof(EmpireLifeModeManagerPatch));// 회상모드 시나리오 처리용?
+            //listA.Add(typeof(EmpireLifeModeDataPatch));// 관련 데이터 사전
             listA.Add(typeof(FreeModeItemVipPatch));// 회상모드 시나리오 처리용?
             listA.Add(typeof(FreeModeItemLifeModePatch));// 회상모드 시나리오 처리용?
             listA.Add(typeof(FreeModeItemEverydayPatch));// 회상모드 시나리오 처리용?
@@ -164,11 +165,11 @@ namespace COM3D2.Lilly.Plugin
             //listA.Add(typeof(JobClassPatch));
             //lists.Add(typeof(JobClassSystemPatch));
             //lists.Add(typeof(KasizukiMainMenuPatch));
-            listA.Add(typeof(MaidManagementMainPatch));// 메이드 관리 화면
-            listA.Add(typeof(MaidPatch));
+            listA.Add(typeof(MaidManagementMainPatch));// 메이드 관리 화면. 모든 버튼 활성화
+            listA.Add(typeof(MaidPatch));// 아이템 장착 확인용
             //lists.Add(typeof(MotionWindowPatch));//포토모드 모션창
             listA.Add(typeof(ProfileCtrlPatch));// MaidUtill.GetGameInfo 용으로 남겨둠
-            listA.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서 MaidUtill 용으로 남겨둠
+            //listA.Add(typeof(PersonalPatch)); // basicDatas 정보 얻기 위해서 MaidUtill 용으로 남겨둠
             //lists.Add(typeof(PhotoMotionDataPatch));
             //lists.Add(typeof(PopupAndTabListPatch));
             //lists.Add(typeof(SaveAndLoadCtrlPatch));
@@ -176,11 +177,11 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(ScenarioDataPatch));// 회상모드 시나리오 처리용?
             listA.Add(typeof(ScheduleAPIPatch));// 회상모드 시나리오 처리용?
             //lists.Add(typeof(SceneADVPatch));
-            listA.Add(typeof(SceneEditPatch)); //자꾸 오류남?
+            listA.Add(typeof(SceneEditPatch)); //메이드 에딧 진입시 모든 스텟 적용
             //lists.Add(typeof(SceneMgrPatch));
             //lists.Add(typeof(ScenarioSelectMgrPatch));// 이벤트 기초 목록 관련
 
-            listA.Add(typeof(SceneFreeModeSelectManagerPatch));
+            listA.Add(typeof(SceneFreeModeSelectManagerPatch));// 회상 모드에서 버튼 활성화용
             //listA.Add(typeof(SceneFreeModeSelectPatch));
             listA.Add(typeof(SceneScenarioSelectPatch));
             listA.Add(typeof(ScoutManagerPatch));// 스카우트 모드의 필요사항 (메이드 수 등등)을 해제.

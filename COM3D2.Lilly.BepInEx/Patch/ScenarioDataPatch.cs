@@ -26,8 +26,8 @@ namespace COM3D2.Lilly.Plugin
 
         // public void ScenarioPlay(List<Maid> maid_list)
         // AddEventMaid
-        [HarmonyPatch(typeof(ScenarioData), "ScenarioPlay")]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(ScenarioData), "ScenarioPlay")]
+        //[HarmonyPostfix]
         private static void ScenarioPlay()
         {
             // !maid.status.GetEventEndFlag(this.ID)
@@ -40,8 +40,8 @@ namespace COM3D2.Lilly.Plugin
         }
 
 
-        [HarmonyPatch(typeof(ScenarioData), "RemoveEventMaid",new Type[] {typeof(Maid),typeof(bool) })]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(ScenarioData), "RemoveEventMaid",new Type[] {typeof(Maid),typeof(bool) })]
+        //[HarmonyPostfix]
         private static void RemoveEventMaid2(Maid maid, bool not_again, List<Maid> ___m_EventMaid, int ___ID)
         {
             //MyLog.LogMessageS("RemoveEventMaid2");
@@ -66,8 +66,8 @@ namespace COM3D2.Lilly.Plugin
         }
 
         //public bool CheckPlayableCondition(ScenarioData.PlayableCondition condition, bool maid_update = true)
-        [HarmonyPatch(typeof(ScenarioData), "CheckPlayableCondition", new Type[] { typeof(ScenarioData.PlayableCondition), typeof(bool) })]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(ScenarioData), "CheckPlayableCondition", new Type[] { typeof(ScenarioData.PlayableCondition), typeof(bool) })]
+        //[HarmonyPostfix]
         private static void CheckPlayableCondition1(
             ScenarioData.PlayableCondition condition            , 
             bool maid_update ,
@@ -105,8 +105,8 @@ namespace COM3D2.Lilly.Plugin
 
         // 의미 없음?
         // private bool CheckPlayableCondition(bool update_important = false)
-        [HarmonyPatch(typeof(ScenarioData), "CheckPlayableCondition",new Type[] {typeof(bool) })]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(ScenarioData), "CheckPlayableCondition",new Type[] {typeof(bool) })]
+        //[HarmonyPostfix]
         private static void CheckPlayableCondition2(bool update_important )
         {
             // !maid.status.GetEventEndFlag(this.ID)

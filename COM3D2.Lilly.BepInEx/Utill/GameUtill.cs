@@ -219,7 +219,7 @@ namespace COM3D2.Lilly.Plugin
             try
             {
                 // 시나리오. 일상 등등?
-                SetScneario();
+                SetscnearioFreeList();
                 foreach (var data in scnearioFree)
                 {
                     MyLog.LogMessage("scneario"
@@ -260,7 +260,7 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogInfo("=== GetGameInfo ed ===");
         }
 
-        private static void SetScneario()
+        private static void SetscnearioFreeList()
         {
             if (scnearioFree.Count == 0)
             {

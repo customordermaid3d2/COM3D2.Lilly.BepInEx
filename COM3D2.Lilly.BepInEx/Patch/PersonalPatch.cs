@@ -29,21 +29,21 @@ namespace COM3D2.Lilly.Plugin
 
         PersonalPatch()
         {
-            Type type = typeof(Personal);
-
-            System.Reflection.FieldInfo[] fields = type.GetFields();
-            
-            foreach (var field in fields)
-            {
-                MyLog.LogDebug(string.Format("{0}.{1} {2}", type.Name, field.Name, field.FieldType));
-            }
-
-            // 효율때문에
-            FieldInfo info = type.GetField("commonIdManager", BindingFlags.NonPublic | BindingFlags.Static);
-            commonIdManager = (CsvCommonIdManager)info.GetValue(null);
-
-            FieldInfo info2 = type.GetField("basicDatas", BindingFlags.NonPublic | BindingFlags.Static);
-            basicDatas = (Dictionary<int, Personal.Data>)info2.GetValue(null);
+            // Type type = typeof(Personal);
+            // 
+            // System.Reflection.FieldInfo[] fields = type.GetFields();
+            // 
+            // foreach (var field in fields)
+            // {
+            //     MyLog.LogDebug(string.Format("{0}.{1} {2}", type.Name, field.Name, field.FieldType));
+            // }
+            // 
+            // // 효율때문에
+            // FieldInfo info = type.GetField("commonIdManager", BindingFlags.NonPublic | BindingFlags.Static);
+            // commonIdManager = (CsvCommonIdManager)info.GetValue(null);
+            // 
+            // FieldInfo info2 = type.GetField("basicDatas", BindingFlags.NonPublic | BindingFlags.Static);
+            // basicDatas = (Dictionary<int, Personal.Data>)info2.GetValue(null);
         }
 
         /// <summary>
@@ -52,8 +52,8 @@ namespace COM3D2.Lilly.Plugin
         /// <param name="___commonIdManager"></param>
         /// <param name="___basicDatas"></param>
         // public static int uniqueNameToId(string name)
-        [HarmonyPatch(typeof(Personal), "CreateData")]
-        [HarmonyPostfix]
+        //[HarmonyPatch(typeof(Personal), "CreateData")]
+        //[HarmonyPostfix]
         private static void CreateData(CsvCommonIdManager ___commonIdManager, Dictionary<int, Personal.Data> ___basicDatas) // Personal __instance,
         {
             if (commonIdManager != null)
@@ -61,7 +61,7 @@ namespace COM3D2.Lilly.Plugin
                 return;
             }
 
-            MyLog.LogMessage("CreateData." );
+            MyLog.LogMessage("Personal.CreateData.");
 
             commonIdManager = ___commonIdManager;
             basicDatas = ___basicDatas;

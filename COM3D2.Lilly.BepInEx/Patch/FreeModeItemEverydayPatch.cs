@@ -30,18 +30,20 @@ namespace COM3D2.Lilly.Plugin
         /// <param name="flag_name"></param>
         [HarmonyPatch(typeof(FreeModeItemEveryday), "IsEnabledFlag")]
         [HarmonyPrefix]
-        public static void IsEnabledFlag(bool __result)
+        public static bool IsEnabledFlag(bool __result)
         {
             __result = true;
             AbstractFreeModeItemPatch.OutMsg("FreeModeItemEveryday.IsEnabledFlag");
+            return false;
         }
 
         [HarmonyPatch(typeof(FreeModeItemEveryday), "is_enabled", MethodType.Getter)]
         [HarmonyPrefix]//HarmonyPostfix ,HarmonyPrefix
-        public static void get_is_enabled( bool __result)
+        public static bool get_is_enabled( bool __result)
         {
             __result = true;
             AbstractFreeModeItemPatch.OutMsg("FreeModeItemEveryday.get_is_enabled");
+            return false;
         }
 
 

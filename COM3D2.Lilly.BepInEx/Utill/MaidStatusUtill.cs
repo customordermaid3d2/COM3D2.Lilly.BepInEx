@@ -1,5 +1,6 @@
 ﻿using MaidStatus;
 using MaidStatus.CsvData;
+using Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,9 @@ namespace COM3D2.Lilly.Plugin
         public static void SetMaidStatusAll()
         {
             MyLog.LogDebug("MaidStatusAll ");
+
+            ScheduleCSVData.vipFullOpenDay = 0;
+            GameMain.Instance.CharacterMgr.status.clubGrade = 5;
 
             foreach (var maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
             {
