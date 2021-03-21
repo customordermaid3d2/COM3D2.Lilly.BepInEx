@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using wf;
 
 namespace COM3D2.Lilly.Plugin
@@ -35,11 +36,13 @@ namespace COM3D2.Lilly.Plugin
 			//if (SceneFreeModeSelectManager.IsFreeMode)
             {
 				__result= true;
+				/*
 				MyLog.LogMessage("VisibleNightWork:" + SceneFreeModeSelectManager.IsFreeMode
 				, workId
 				, ScheduleCSVData.AllData[workId].name
 				, maid != null ? MaidUtill.GetMaidFullNale(maid) : "");
 				//return false;
+				*/
 			}
 			//return true; // SceneFreeModeSelectManager.IsFreeMode;
         }		
@@ -59,12 +62,14 @@ namespace COM3D2.Lilly.Plugin
 			//if (SceneFreeModeSelectManager.IsFreeMode)
 			{
 				__result = true;
+				/*
 				if (Lilly.isLogOnOffAll)
 					MyLog.LogMessage("EnableNightWork:" + SceneFreeModeSelectManager.IsFreeMode
 				, workId
 				, ScheduleCSVData.AllData[workId].name
 				, maid != null ? MaidUtill.GetMaidFullNale(maid) : "");
 				//return false;
+				*/
 			}
 			//return true;
 			/*
@@ -89,85 +94,96 @@ namespace COM3D2.Lilly.Plugin
         public static void EnableNoonWork( out bool __result, int workId, Maid maid)
         {
             __result = true;
+			/*
 			if (Lilly.isLogOnOffAll)
 				MyLog.LogMessage("EnableNoonWork:" + SceneFreeModeSelectManager.IsFreeMode
 				, workId
 				, ScheduleCSVData.AllData[workId].name
 				, maid != null ? MaidUtill.GetMaidFullNale(maid) : "" );
-
+			*/
 			//return false; // SceneFreeModeSelectManager.IsFreeMode;
         }
 
+		static bool isSetAllWorkRun;
+
 		public static void SetAllWork()
         {
-
-			ReadOnlyDictionary<int, NightWorkState> night_works_state_dic = GameMain.Instance.CharacterMgr.status.night_works_state_dic;
-            foreach (var item in night_works_state_dic)
-            {
-				NightWorkState nightWorkState = item.Value;
-				nightWorkState.finish= true;
-			}
-
-			//if (night_works_state_dic.ContainsKey(this.vip_data_.id) && night_works_state_dic[this.vip_data_.id].finish)
-			//{
-			//	this.is_enabled_ = true;
-			//}
-
-			foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
+			if (!isSetAllWorkRun)
 			{
-				//maid.status.SetFlag("_YotogiPlayed", 1);
-				foreach (ScheduleCSVData.Yotogi yotogi in ScheduleCSVData.YotogiData.Values)
+				Task.Factory.StartNew(() =>
 				{
-					MyLog.LogMessage("SetAllWork:" + MaidUtill.GetMaidFullNale(maid)
-						, yotogi.id
-						);
-					if (DailyMgr.IsLegacy)
+					isSetAllWorkRun = true;
+					ReadOnlyDictionary<int, NightWorkState> night_works_state_dic = GameMain.Instance.CharacterMgr.status.night_works_state_dic;
+					foreach (var item in night_works_state_dic)
 					{
-						maid.status.OldStatus.SetFlag("_PlayedNightWorkId" + yotogi.id, 1);
-					}
-					else
-					{
-						maid.status.SetFlag("_PlayedNightWorkId" + yotogi.id, 1);
+						NightWorkState nightWorkState = item.Value;
+						nightWorkState.finish = true;
 					}
 
-					if (yotogi.condFlag1.Count > 0)
-					{
-						for (int n = 0; n < yotogi.condFlag1.Count; n++)
-						{
-							maid.status.SetFlag(yotogi.condFlag1[n],1);
-							//if (ScheduleAPI.SetMaidFlag(maid, yotogi.condFlag1[n]) < 1)
-							//{
-							//	return false;
-							//}
-						}
-					}
-					if (yotogi.condFlag0.Count > 0)
-					{
-						for (int num = 0; num < yotogi.condFlag0.Count; num++)
-						{
-							maid.status.SetFlag(yotogi.condFlag0[num], 0);
-							//if (ScheduleAPI.GetMaidFlag(maid, yotogi.condFlag0[num]) > 0)
-							//{
-							//	return false;
-							//}
-						}
-					}
-					//ScheduleCSVData.YotogiType yotogiType = yotogi.yotogiType;
-					//if (yotogiType == ScheduleCSVData.YotogiType.Vip || yotogiType == ScheduleCSVData.YotogiType.VipCall)
+					//if (night_works_state_dic.ContainsKey(this.vip_data_.id) && night_works_state_dic[this.vip_data_.id].finish)
 					//{
+					//	this.is_enabled_ = true;
 					//}
-				}
-				if (DailyMgr.IsLegacy)
-				{
-					maid.status.OldStatus.SetFlag("_PlayedNightWorkVip", 1);
-				}
-				else
-				{
-					maid.status.SetFlag("_PlayedNightWorkVip", 1);
-				}
 
+					foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
+					{
+						//maid.status.SetFlag("_YotogiPlayed", 1);
+						foreach (ScheduleCSVData.Yotogi yotogi in ScheduleCSVData.YotogiData.Values)
+						{
+							if (Lilly.isLogOnOffAll)
+								MyLog.LogMessage("SetAllWork:" + MaidUtill.GetMaidFullNale(maid)
+								, yotogi.id
+								, maid.status.GetFlag("_PlayedNightWorkId" + yotogi.id)
+								, maid.status.OldStatus.GetFlag("_PlayedNightWorkId" + yotogi.id)
+								);
+							if (DailyMgr.IsLegacy)
+							{
+								maid.status.OldStatus.SetFlag("_PlayedNightWorkId" + yotogi.id, 1);
+							}
+							else
+							{
+								maid.status.SetFlag("_PlayedNightWorkId" + yotogi.id, 1);
+							}
+							if (yotogi.condFlag1.Count > 0)
+							{
+								for (int n = 0; n < yotogi.condFlag1.Count; n++)
+								{
+									maid.status.SetFlag(yotogi.condFlag1[n], 1);
+									//if (ScheduleAPI.SetMaidFlag(maid, yotogi.condFlag1[n]) < 1)
+									//{
+									//	return false;
+									//}
+								}
+							}
+							if (yotogi.condFlag0.Count > 0)
+							{
+								for (int num = 0; num < yotogi.condFlag0.Count; num++)
+								{
+									maid.status.SetFlag(yotogi.condFlag0[num], 0);
+									//if (ScheduleAPI.GetMaidFlag(maid, yotogi.condFlag0[num]) > 0)
+									//{
+									//	return false;
+									//}
+								}
+							}
+							//ScheduleCSVData.YotogiType yotogiType = yotogi.yotogiType;
+							//if (yotogiType == ScheduleCSVData.YotogiType.Vip || yotogiType == ScheduleCSVData.YotogiType.VipCall)
+							//{
+							//}
+						}
+						if (DailyMgr.IsLegacy)
+						{
+							maid.status.OldStatus.SetFlag("_PlayedNightWorkVip", 1);
+						}
+						else
+						{
+							maid.status.SetFlag("_PlayedNightWorkVip", 1);
+						}
+
+					}
+					isSetAllWorkRun = false;
+				});
 			}
-
 		}
 
 

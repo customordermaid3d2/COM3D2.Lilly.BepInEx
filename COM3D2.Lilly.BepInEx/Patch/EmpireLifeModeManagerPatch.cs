@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using wf;
 
 namespace COM3D2.Lilly.Plugin
@@ -38,44 +39,65 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogMessage("GetScenarioExecuteCount.");
         }
 
+        static bool isScenarioExecuteCountAllRun;
+
         /// <summary>
         /// 피들러 참고. 이숫자 대체 어디서 들고오는거야
         /// </summary>
         public static void SetScenarioExecuteCountAll()
         {
 
-            foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
+            if (!isScenarioExecuteCountAllRun)
             {
-                foreach (var data in EmpireLifeModeData.GetAllDatas(true))
+                Task.Factory.StartNew(() =>
                 {
-                    try
+                    MyLog.LogMessage("SetScenarioExecuteCountAll. start");
+                    isScenarioExecuteCountAllRun = true;
+                
+                    foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
                     {
-                        int cnt = GameMain.Instance.LifeModeMgr.GetScenarioExecuteCount(data.ID);
-                        MyLog.LogMessage("SetScenarioExecuteCountAll:" 
-                            + cnt
-                            + MaidUtill.GetMaidFullNale(maid)
-                            , data.ID
-                            , data.strUniqueName
-                            , data.dataScenarioFileName
-                            , data.dataScenarioFileLabel
-                        );
-                        IncrementMaidScenarioExecuteCount(data.ID, maid);
-                        if(data.dataFlagMaid!=null)
-                            MyLog.LogMessage("SetScenarioExecuteCountAll.Maid:"
-                                + MyUtill.Join(" | ", data.dataFlagMaid.Keys.ToArray())
-                            );
-                        if (data.dataFlagPlayer != null)
-                            MyLog.LogMessage("SetScenarioExecuteCountAll.gPlayer:"
-                            + MyUtill.Join(" | ", data.dataFlagPlayer.Keys.ToArray())
-                        );
-                        //m_SaveDataScenarioExecuteCountArray.Add(key, 255, true);
-                    }
-                    catch (Exception e)
-                    {
-                        MyLog.LogMessage("SetScenarioExecuteCountAll:" + e.ToString());
+                        foreach (var data in EmpireLifeModeData.GetAllDatas(true))
+                        {
+                            try
+                            {
+                                int cnt = GameMain.Instance.LifeModeMgr.GetScenarioExecuteCount(data.ID);
+                                if (cnt<255)
+                                {
+                                    IncrementMaidScenarioExecuteCount(data.ID, maid);
+                                }
+
+                                if (Lilly.isLogOnOffAll)
+                                    continue;
+
+                                MyLog.LogMessage("SetScenarioExecuteCountAll:" 
+                                    + cnt
+                                    + MaidUtill.GetMaidFullNale(maid)
+                                    , data.ID
+                                    , data.strUniqueName
+                                    , data.dataScenarioFileName
+                                    , data.dataScenarioFileLabel
+                                );
+                                if(data.dataFlagMaid!=null)
+                                    MyLog.LogMessage("SetScenarioExecuteCountAll.Maid:"
+                                        + MyUtill.Join(" | ", data.dataFlagMaid.Keys.ToArray())
+                                    );
+                                if (data.dataFlagPlayer != null)
+                                    MyLog.LogMessage("SetScenarioExecuteCountAll.Player:"
+                                    + MyUtill.Join(" | ", data.dataFlagPlayer.Keys.ToArray())
+                                );
+                                //m_SaveDataScenarioExecuteCountArray.Add(key, 255, true);
+                            }
+                            catch (Exception e)
+                            {
+                                MyLog.LogMessage("SetScenarioExecuteCountAll:" + e.ToString());
+                            }
+
+                        }
                     }
 
-                }
+                    isScenarioExecuteCountAllRun = false;
+                    MyLog.LogMessage("SetScenarioExecuteCountAll. end");
+                });
             }
             /*
             CsvCommonIdManager commonIdManager = new CsvCommonIdManager("empire_life_mode", "エンパイアライフモード.csv", CsvCommonIdManager.Type.IdAndUniqueName, null);

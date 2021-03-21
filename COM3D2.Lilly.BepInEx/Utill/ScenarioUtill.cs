@@ -102,8 +102,9 @@ namespace COM3D2.Lilly.Plugin
                 }
             }
 
-            SetFlagLifeMode();//미적용 상태
-            SetItemVip();// 미적용 상태
+            // SetFlagLifeMode();//미적용 상태 다른쪽에서 구현됨
+            ///SetItemVip();// 미적용 상태 다른쪽에서 구현됨
+
             /*
             foreach (var data in GameMain.Instance.CharacterMgr.status.flags)
             {
@@ -115,6 +116,9 @@ namespace COM3D2.Lilly.Plugin
             */
         }
 
+        /// <summary>
+        /// 참고용. 플레그 반영은 다른족에서 구현됨
+        /// </summary>
         private static void SetItemVip()
         {
             SortedDictionary<int, ScheduleCSVData.Yotogi> vip_data_dic_ = new SortedDictionary<int, ScheduleCSVData.Yotogi>();
@@ -280,6 +284,11 @@ namespace COM3D2.Lilly.Plugin
 
         //public static Dictionary<int, FreeModeItemLifeMode> m_DataDic;
         //public static HashSet<int> enabledIdList ;
+
+        /// <summary>
+        /// 참고용 
+        /// 다른쪽에서 구현됨
+        /// </summary>
         public static void SetFlagLifeMode()
         {
             //enabledIdList = AbstractFreeModeItem.GetEnabledIdList();
