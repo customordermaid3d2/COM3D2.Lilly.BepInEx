@@ -10,6 +10,7 @@ namespace COM3D2.Lilly.Plugin
     /// <summary>
     ///  프리 모드에서 모든 이벤트 열기 위한용
     ///  분석용
+    ///  일상 이벤트
     /// </summary>
     /// TypeDefinition type10 = CS$<>8__locals1.ass.MainModule.GetType("FreeModeItemEveryday");
     class FreeModeItemEverydayPatch
@@ -30,20 +31,24 @@ namespace COM3D2.Lilly.Plugin
         /// <param name="flag_name"></param>
         [HarmonyPatch(typeof(FreeModeItemEveryday), "IsEnabledFlag")]
         [HarmonyPrefix]
+        [HarmonyPostfix]
         public static bool IsEnabledFlag(bool __result)
         {
             __result = true;
             AbstractFreeModeItemPatch.OutMsg("FreeModeItemEveryday.IsEnabledFlag");
-            return false;
+            return true;
+           // return false;
         }
 
         [HarmonyPatch(typeof(FreeModeItemEveryday), "is_enabled", MethodType.Getter)]
         [HarmonyPrefix]//HarmonyPostfix ,HarmonyPrefix
+        [HarmonyPostfix]
         public static bool get_is_enabled( bool __result)
         {
             __result = true;
             AbstractFreeModeItemPatch.OutMsg("FreeModeItemEveryday.get_is_enabled");
-            return false;
+            return true;
+            //return false;
         }
 
 

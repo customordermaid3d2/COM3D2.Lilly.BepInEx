@@ -55,6 +55,9 @@ namespace COM3D2.Lilly.Plugin
                                 
                 name = "SetAllWork";
                 SystemShortcutAPI.AddButton(name, new Action(ScheduleAPIPatch.SetAllWork), name, png);                
+                                
+                name = "EmpireLifeModeManagerPatch.SetScenarioExecuteCountAll";
+                SystemShortcutAPI.AddButton(name, new Action(EmpireLifeModeManagerPatch.SetScenarioExecuteCountAll), name, png);                
                 
                 name = "게임 정보 얻기 메이드 관련";
                 SystemShortcutAPI.AddButton(name, new Action(GameUtill.GetGameInfo2), name, png);                

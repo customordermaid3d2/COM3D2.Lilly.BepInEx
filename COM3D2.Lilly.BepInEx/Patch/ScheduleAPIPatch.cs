@@ -12,33 +12,95 @@ namespace COM3D2.Lilly.Plugin
 {
     class ScheduleAPIPatch
     {
-        // ScheduleAPI
+		// ScheduleAPI
 
-        // public static bool VisibleNightWork(int workId, Maid maid = null, bool checkFinish = true)
-        // public static bool EnableNightWork(int workId, Maid maid = null, bool calledTargetCheck = true, bool withMaid = true)
-        // public static bool EnableNoonWork(int workId, Maid maid = null)
-        /// <summary>
+		// public static bool VisibleNightWork(int workId, Maid maid = null, bool checkFinish = true)
+		// public static bool EnableNightWork(int workId, Maid maid = null, bool calledTargetCheck = true, bool withMaid = true)
+		// public static bool EnableNoonWork(int workId, Maid maid = null)
+		/// <summary>
 		/// 스케즐 버튼 듸우기?
+		/// 모든 밤시중이 활성화 되버려서 이방법 위험
+		/// ScheduleCSVData.GetNightTravelWorkId:夜の旅行仕事IDが発見できませんでした。
+		/// 발생
 		/// </summary>
 		/// <param name="__result"></param>
 		/// <param name="workId"></param>
 		/// <param name="maid"></param> null 잇을수 있음
 		/// <returns></returns>
 		[HarmonyPatch(typeof(ScheduleAPI), "VisibleNightWork") ]
+        //[HarmonyPrefix]//HarmonyPostfix ,HarmonyPrefix
+        [HarmonyPostfix]//HarmonyPostfix ,HarmonyPrefix
+        public static void VisibleNightWork(out bool __result, int workId, Maid maid)
+        {
+			//if (SceneFreeModeSelectManager.IsFreeMode)
+            {
+				__result= true;
+				MyLog.LogMessage("VisibleNightWork:" + SceneFreeModeSelectManager.IsFreeMode
+				, workId
+				, ScheduleCSVData.AllData[workId].name
+				, maid != null ? MaidUtill.GetMaidFullNale(maid) : "");
+				//return false;
+			}
+			//return true; // SceneFreeModeSelectManager.IsFreeMode;
+        }		
+		
+		/// <summary>
+		/// 스케줄 등록시
+		/// </summary>
+		/// <param name="__result"></param>
+		/// <param name="workId"></param>
+		/// <param name="maid"></param>
+		/// <returns></returns>
         [HarmonyPatch(typeof(ScheduleAPI), "EnableNightWork")]
-        [HarmonyPatch(typeof(ScheduleAPI), "EnableNoonWork")]
-        [HarmonyPrefix]//HarmonyPostfix ,HarmonyPrefix
-        public static bool ScheduleAPIWork( out bool __result, int workId, Maid maid)
+        //[HarmonyPrefix]//HarmonyPostfix ,HarmonyPrefix
+		[HarmonyPostfix]//HarmonyPostfix ,HarmonyPrefix
+		public static void EnableNightWork(out bool __result, int workId, Maid maid)
+        {
+			//if (SceneFreeModeSelectManager.IsFreeMode)
+			{
+				__result = true;
+				if (Lilly.isLogOnOffAll)
+					MyLog.LogMessage("EnableNightWork:" + SceneFreeModeSelectManager.IsFreeMode
+				, workId
+				, ScheduleCSVData.AllData[workId].name
+				, maid != null ? MaidUtill.GetMaidFullNale(maid) : "");
+				//return false;
+			}
+			//return true;
+			/*
+			ScheduleCSVData.Yotogi yotogi = ScheduleCSVData.YotogiData[workId];
+			foreach (KeyValuePair<int, int> keyValuePair in yotogi.condSkill)
+			{
+				if (!maid.status.yotogiSkill.Contains(keyValuePair.Key))
+				{
+					__result= false;
+					//return false;
+					//break;
+				}
+			}
+
+			*/
+
+			//return false; // SceneFreeModeSelectManager.IsFreeMode;
+        }
+		        
+		//[HarmonyPatch(typeof(ScheduleAPI), "EnableNoonWork")]
+        //[HarmonyPrefix]//HarmonyPostfix ,HarmonyPrefix
+        public static void EnableNoonWork( out bool __result, int workId, Maid maid)
         {
             __result = true;
+			if (Lilly.isLogOnOffAll)
+				MyLog.LogMessage("EnableNoonWork:" + SceneFreeModeSelectManager.IsFreeMode
+				, workId
+				, ScheduleCSVData.AllData[workId].name
+				, maid != null ? MaidUtill.GetMaidFullNale(maid) : "" );
 
-				MyLog.LogMessage("ScheduleAPIWork:" + SceneFreeModeSelectManager.IsFreeMode, workId, maid != null ? MaidUtill.GetMaidFullNale(maid) : "" );
-
-			return false; // SceneFreeModeSelectManager.IsFreeMode;
+			//return false; // SceneFreeModeSelectManager.IsFreeMode;
         }
 
 		public static void SetAllWork()
         {
+
 			ReadOnlyDictionary<int, NightWorkState> night_works_state_dic = GameMain.Instance.CharacterMgr.status.night_works_state_dic;
             foreach (var item in night_works_state_dic)
             {
@@ -66,6 +128,29 @@ namespace COM3D2.Lilly.Plugin
 					else
 					{
 						maid.status.SetFlag("_PlayedNightWorkId" + yotogi.id, 1);
+					}
+
+					if (yotogi.condFlag1.Count > 0)
+					{
+						for (int n = 0; n < yotogi.condFlag1.Count; n++)
+						{
+							maid.status.SetFlag(yotogi.condFlag1[n],1);
+							//if (ScheduleAPI.SetMaidFlag(maid, yotogi.condFlag1[n]) < 1)
+							//{
+							//	return false;
+							//}
+						}
+					}
+					if (yotogi.condFlag0.Count > 0)
+					{
+						for (int num = 0; num < yotogi.condFlag0.Count; num++)
+						{
+							maid.status.SetFlag(yotogi.condFlag0[num], 0);
+							//if (ScheduleAPI.GetMaidFlag(maid, yotogi.condFlag0[num]) > 0)
+							//{
+							//	return false;
+							//}
+						}
 					}
 					//ScheduleCSVData.YotogiType yotogiType = yotogi.yotogiType;
 					//if (yotogiType == ScheduleCSVData.YotogiType.Vip || yotogiType == ScheduleCSVData.YotogiType.VipCall)

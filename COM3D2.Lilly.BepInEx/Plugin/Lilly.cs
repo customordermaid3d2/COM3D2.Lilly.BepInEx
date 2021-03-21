@@ -88,8 +88,8 @@ namespace COM3D2.Lilly.Plugin
 
             // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
             MyLog.LogDebug("harmonys.Add:===========================START==============================");
-            MyLog.LogDebug("harmonys.Add:===========================START==============================");
-            MyLog.LogDebug("harmonys.Add:===========================START==============================");
+            MyLog.LogInfo("harmonys.Add:===========================START==============================");
+            MyLog.LogMessage("harmonys.Add:===========================START==============================");
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
                 try
@@ -105,8 +105,8 @@ namespace COM3D2.Lilly.Plugin
                     MyLog.LogError("Plugin:" + e.ToString());
                 }
             }
-            MyLog.LogDebug ("harmonys.Add:=========================END================================");
-            MyLog.LogDebug ("harmonys.Add:=========================END================================");
+            MyLog.LogMessage("harmonys.Add:=========================END================================");
+            MyLog.LogInfo("harmonys.Add:=========================END================================");
             MyLog.LogDebug ("harmonys.Add:=========================END================================");
 
         }
@@ -158,9 +158,9 @@ namespace COM3D2.Lilly.Plugin
             // listA.Add(typeof(ClassChangePanelPatch));
             listA.Add(typeof(EmpireLifeModeManagerPatch));// 회상모드 시나리오 처리용?
             //listA.Add(typeof(EmpireLifeModeDataPatch));// 관련 데이터 사전
-            listA.Add(typeof(FreeModeItemVipPatch));// 회상모드 시나리오 처리용?
-            listA.Add(typeof(FreeModeItemLifeModePatch));// 회상모드 시나리오 처리용?
-            listA.Add(typeof(FreeModeItemEverydayPatch));// 회상모드 시나리오 처리용?
+            //listA.Add(typeof(FreeModeItemVipPatch));// 회상모드 시나리오 처리용?
+            //listA.Add(typeof(FreeModeItemLifeModePatch));// 회상모드 시나리오 처리용?
+            //listA.Add(typeof(FreeModeItemEverydayPatch));// 회상모드 시나리오 처리용?
             //lists.Add(typeof(GameMainPatch));
             //listA.Add(typeof(JobClassPatch));
             //lists.Add(typeof(JobClassSystemPatch));
