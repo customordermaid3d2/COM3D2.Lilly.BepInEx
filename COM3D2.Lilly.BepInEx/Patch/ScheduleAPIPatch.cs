@@ -104,7 +104,7 @@ namespace COM3D2.Lilly.Plugin
 			//return false; // SceneFreeModeSelectManager.IsFreeMode;
         }
 
-		static bool isSetAllWorkRun;
+		static bool isSetAllWorkRun=false;
 
 		public static void SetAllWork()
         {
@@ -113,28 +113,30 @@ namespace COM3D2.Lilly.Plugin
 				Task.Factory.StartNew(() =>
 				{
 					isSetAllWorkRun = true;
+					MyLog.LogMessage("ScheduleAPIPatch.SetAllWork. start");
+
 					ReadOnlyDictionary<int, NightWorkState> night_works_state_dic = GameMain.Instance.CharacterMgr.status.night_works_state_dic;
+					MyLog.LogMessage("ScheduleAPIPatch.SetAllWork.night_works_state_dic:" + night_works_state_dic.Count);
+
 					foreach (var item in night_works_state_dic)
 					{
 						NightWorkState nightWorkState = item.Value;
 						nightWorkState.finish = true;
 					}
 
-					//if (night_works_state_dic.ContainsKey(this.vip_data_.id) && night_works_state_dic[this.vip_data_.id].finish)
-					//{
-					//	this.is_enabled_ = true;
-					//}
-
+					MyLog.LogMessage("ScheduleAPIPatch.SetAllWork.YotogiData:" + ScheduleCSVData.YotogiData.Values.Count);
 					foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
-					{
-						//maid.status.SetFlag("_YotogiPlayed", 1);
+					{						
+						MyLog.LogMessage(".SetAllWork.Yotogi:" + MaidUtill.GetMaidFullNale(maid));
+
 						foreach (ScheduleCSVData.Yotogi yotogi in ScheduleCSVData.YotogiData.Values)
 						{
 							if (Lilly.isLogOnOffAll)
-								MyLog.LogMessage("SetAllWork:" + MaidUtill.GetMaidFullNale(maid)
-								, yotogi.id
-								, maid.status.GetFlag("_PlayedNightWorkId" + yotogi.id)
-								, maid.status.OldStatus.GetFlag("_PlayedNightWorkId" + yotogi.id)
+								MyLog.LogInfo(".SetAllWork:" 
+									+ yotogi.id
+									, yotogi.name
+									, yotogi.type
+									, yotogi.yotogiType
 								);
 							if (DailyMgr.IsLegacy)
 							{
@@ -149,10 +151,6 @@ namespace COM3D2.Lilly.Plugin
 								for (int n = 0; n < yotogi.condFlag1.Count; n++)
 								{
 									maid.status.SetFlag(yotogi.condFlag1[n], 1);
-									//if (ScheduleAPI.SetMaidFlag(maid, yotogi.condFlag1[n]) < 1)
-									//{
-									//	return false;
-									//}
 								}
 							}
 							if (yotogi.condFlag0.Count > 0)
@@ -160,16 +158,8 @@ namespace COM3D2.Lilly.Plugin
 								for (int num = 0; num < yotogi.condFlag0.Count; num++)
 								{
 									maid.status.SetFlag(yotogi.condFlag0[num], 0);
-									//if (ScheduleAPI.GetMaidFlag(maid, yotogi.condFlag0[num]) > 0)
-									//{
-									//	return false;
-									//}
 								}
 							}
-							//ScheduleCSVData.YotogiType yotogiType = yotogi.yotogiType;
-							//if (yotogiType == ScheduleCSVData.YotogiType.Vip || yotogiType == ScheduleCSVData.YotogiType.VipCall)
-							//{
-							//}
 						}
 						if (DailyMgr.IsLegacy)
 						{
@@ -179,8 +169,9 @@ namespace COM3D2.Lilly.Plugin
 						{
 							maid.status.SetFlag("_PlayedNightWorkVip", 1);
 						}
-
 					}
+
+					MyLog.LogMessage("ScheduleAPIPatch.SetAllWork. end");
 					isSetAllWorkRun = false;
 				});
 			}
@@ -189,58 +180,52 @@ namespace COM3D2.Lilly.Plugin
 
 		public static void SetAllWork1()
         {
+			List<Maid> maids=  GameMain.Instance.CharacterMgr.GetStockMaidList();
+			ScheduleCSVData.ScheduleBase scheduleBase;
+			ScheduleCSVData.YotogiType yotogiType;
+			ScheduleCSVData.Yotogi yotogi;
 			//var scheduleBases = ScheduleCSVData.AllData;
 			foreach (var item in ScheduleCSVData.AllData)
 			{
-				var scheduleBase = item.Value;
-				foreach (Maid scheduleSlot in GameMain.Instance.CharacterMgr.GetStockMaidList())
+				scheduleBase = item.Value;
+				foreach (Maid scheduleSlot in maids)
 				{
-				//ScheduleAPI.EnableNightWork(value.id, null, true, true)
+                    //ScheduleAPI.EnableNightWork(value.id, null, true, true)
+                    try
+                    {
+                        if (scheduleBase.type != ScheduleTaskCtrl.TaskType.Yotogi)                        
+							continue;
+                        
+                        yotogi = (ScheduleCSVData.Yotogi)scheduleBase;
+                        yotogiType = yotogi.yotogiType;
 
-					ScheduleTaskCtrl.TaskType type = scheduleBase.type;
-					if (type == ScheduleTaskCtrl.TaskType.Yotogi)
-					{
-						ScheduleCSVData.Yotogi yotogi = (ScheduleCSVData.Yotogi)scheduleBase;
-						//if (BackupParamAccessor.YotogiPlayed(j, scene_ID))
-						{
-							//scheduleSlot.status.SetFlag("_YotogiPlayed", 1);
-						}
-						//else
-						{
-							//	scheduleSlot.status.SetFlag("_YotogiPlayed", 0);
-						}
-						//ScheduleAPI.YotogiResultSimulateParam param = ScheduleAPI.YotogiResultSimulate(scheduleSlot, num);
-						//ScheduleAPI.AddYotogiWorkResultParam(yotogi, scheduleSlot, param);
-						//BackupParamAccessor.BackupParam(new int?(j), sceneId_f);
-						if (DailyMgr.IsLegacy)
-						{
-							scheduleSlot.status.OldStatus.SetFlag("_PlayedNightWorkId" + scheduleSlot.status.nightWorkId.ToString(), 1);
-						}
-						else
-						{
-							scheduleSlot.status.SetFlag("_PlayedNightWorkId" + scheduleSlot.status.nightWorkId.ToString(), 1);
-						}
-						ScheduleCSVData.YotogiType yotogiType = yotogi.yotogiType;
-						if (yotogiType == ScheduleCSVData.YotogiType.Vip || yotogiType == ScheduleCSVData.YotogiType.VipCall)
-						{
-							if (DailyMgr.IsLegacy)
-							{
-								scheduleSlot.status.OldStatus.SetFlag("_PlayedNightWorkVip", 1);
-							}
-							else
-							{
-								scheduleSlot.status.SetFlag("_PlayedNightWorkVip", 1);
-							}
-						}
-						ScheduleCSVData.YotogiType yotogiType2 = yotogi.yotogiType;
-						if (yotogiType2 == ScheduleCSVData.YotogiType.Vip || yotogiType2 == ScheduleCSVData.YotogiType.VipCall)
-						{
-							if (GameMain.Instance.CharacterMgr.status.night_works_state_dic.ContainsKey(item.Key))
-							{
-								GameMain.Instance.CharacterMgr.status.night_works_state_dic[item.Key].finish = true;
-							}
-						}
-							
+                        if (DailyMgr.IsLegacy)
+                        {
+                            scheduleSlot.status.OldStatus.SetFlag("_PlayedNightWorkId" + scheduleSlot.status.nightWorkId.ToString(), 1);
+                        }
+                        else
+                        {
+                            scheduleSlot.status.SetFlag("_PlayedNightWorkId" + scheduleSlot.status.nightWorkId.ToString(), 1);
+                        }
+                        if (yotogiType == ScheduleCSVData.YotogiType.Vip || yotogiType == ScheduleCSVData.YotogiType.VipCall)
+                        {
+                            if (DailyMgr.IsLegacy)
+                            {
+                                scheduleSlot.status.OldStatus.SetFlag("_PlayedNightWorkVip", 1);
+                            }
+                            else
+                            {
+                                scheduleSlot.status.SetFlag("_PlayedNightWorkVip", 1);
+                            }
+                            if (GameMain.Instance.CharacterMgr.status.night_works_state_dic.ContainsKey(item.Key))
+                            {
+                                GameMain.Instance.CharacterMgr.status.night_works_state_dic[item.Key].finish = true;
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+						MyLog.LogMessage("ScheduleAPIPatch.SetAllWork1."+e.ToString());
 					}
 				}
 			}

@@ -21,7 +21,7 @@ namespace COM3D2.Lilly.Plugin
 
         public static void SetMaidStatusAll()
         {
-            MyLog.LogDebug("MaidStatusAll ");
+            MyLog.LogMessage("MaidStatusUtill.SetMaidStatusAll. start");
 
             ScheduleCSVData.vipFullOpenDay = 0;
             GameMain.Instance.CharacterMgr.status.clubGrade = 5;
@@ -38,6 +38,7 @@ namespace COM3D2.Lilly.Plugin
                 SetMaidStatus(maid);
             });
             */
+            MyLog.LogMessage("MaidStatusUtill.SetMaidStatusAll. end");
         }
 
         public static void SetMaidStatus(Maid maid)
@@ -298,6 +299,8 @@ namespace COM3D2.Lilly.Plugin
 
         public static void GetMaidStatus()
         {
+            MyLog.LogMessage("ScenarioDataUtill.GetMaidStatus. start");
+
             Maid maid_ = GameMain.Instance.CharacterMgr.GetStockMaid(0);
 
             MyLog.LogMessage("Maid: " + MaidUtill.GetMaidFullNale(maid_));
@@ -318,8 +321,9 @@ namespace COM3D2.Lilly.Plugin
             foreach (var item in workDatas)
             {
                 MyLog.LogMessage("workDatas: " + item.Key, item.Value.id, item.Value.level);
-            }            
+            }
 
+            MyLog.LogMessage("ScenarioDataUtill.GetMaidStatus. start");
         }
     }
 }

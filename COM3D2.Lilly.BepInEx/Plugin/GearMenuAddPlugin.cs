@@ -41,19 +41,19 @@ namespace COM3D2.Lilly.Plugin
                 name = "ScenarioDataUtill.RemoveEventEndFlagAll 이벤트 클리어 제거";
                 SystemShortcutAPI.AddButton(name, new Action(ScenarioUtill.RemoveEventEndFlagAll), name, png);                
 
-                name = "ScenarioDataUtill.RemoveEventEndFlag";
+                name = "ScenarioDataUtill.RemoveEventEndFlag 현제 메인 메이드만 이벤트 클리어 제거";
                 SystemShortcutAPI.AddButton(name, new Action(RemoveEventEndFlag), name, GearMenuAddPlugin.png);
 
-                name = "ScenarioUtill.SetScenarioDataAll 이벤트 클리어 처리";
+                name = "ScenarioUtill.SetScenarioDataAll 시나리오 이벤트 처리";
                 SystemShortcutAPI.AddButton(name, new Action(ScenarioUtill.SetScenarioDataAll), name, png);                
 
-                name = "ScenarioUtill.SetScenarioAll 회상 플레그 처리";
+                name = "ScenarioUtill.SetScenarioAll 회상 모드 관련 일상, 밤시중 플레그 처리";
                 SystemShortcutAPI.AddButton(name, new Action(ScenarioUtill.SetScenarioAll), name, png);                
                 
-                name = "SetMaidStatusAll. stat,sikill,job";
+                name = "SetMaidStatusAll. 스텟 스킬 , 잡 , 클래스 max 처리";
                 SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.SetMaidStatusAll), name, png);                
                                 
-                name = "SetAllWork";
+                name = "ScheduleAPIPatch.SetAllWork 스케줄 관련 밤시중 플레그 처리";
                 SystemShortcutAPI.AddButton(name, new Action(ScheduleAPIPatch.SetAllWork), name, png);                
                                 
                 name = "EmpireLifeModeManagerPatch.SetScenarioExecuteCountAll 라이프 모드 관련 클리어";

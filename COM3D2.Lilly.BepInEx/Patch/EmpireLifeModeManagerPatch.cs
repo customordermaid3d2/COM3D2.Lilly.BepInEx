@@ -34,12 +34,12 @@ namespace COM3D2.Lilly.Plugin
         [HarmonyPostfix]//HarmonyPostfix ,HarmonyPrefix
         public static void GetScenarioExecuteCount(out int __result)
         {
-            __result = 9999;
+            __result = 9999;/*
             if (Lilly.isLogOnOffAll)
-                MyLog.LogMessage("GetScenarioExecuteCount.");
+                MyLog.LogMessage("GetScenarioExecuteCount.");*/
         }
 
-        static bool isScenarioExecuteCountAllRun;
+        static bool isScenarioExecuteCountAllRun=false;
 
         /// <summary>
         /// 피들러 참고. 이숫자 대체 어디서 들고오는거야
