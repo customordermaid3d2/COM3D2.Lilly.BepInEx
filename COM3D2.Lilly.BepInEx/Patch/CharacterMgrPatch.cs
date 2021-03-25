@@ -82,9 +82,10 @@ namespace COM3D2.Lilly.Plugin
             MyLog.LogMessage("CharacterMgr.PresetSavePost0: " + MaidUtill.GetMaidFullNale(f_maid) + " , " + __result.strFileName + " , " + __result.ePreType);
         }
 
-        // public void PresetSet(Maid f_maid, CharacterMgr.Preset f_prest)
+        // public void PresetSet(Maid f_maid, CharacterMgr.Preset f_prest, bool forceBody = false) // 157
+        // public void PresetSet(Maid f_maid, CharacterMgr.Preset f_prest) // 155
         // 테스팅 완료
-        [HarmonyPatch(typeof(CharacterMgr), "PresetSet", new Type[]{typeof(Maid) ,typeof(CharacterMgr.Preset)})]
+        [HarmonyPatch(typeof(CharacterMgr), "PresetSet", new Type[]{typeof(Maid) ,typeof(CharacterMgr.Preset),typeof(bool) })]
         [HarmonyPostfix]
         public static void PresetSetPostfix2(Maid f_maid, CharacterMgr.Preset f_prest)
         {

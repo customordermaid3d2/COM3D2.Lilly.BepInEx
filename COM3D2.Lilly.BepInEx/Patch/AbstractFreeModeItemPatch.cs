@@ -6,13 +6,13 @@ using System.Text;
 
 namespace COM3D2.Lilly.Plugin
 {
-    class AbstractFreeModeItemPatch : AbstractFreeModeItem
+    class AbstractFreeModeItemPatch //: AbstractFreeModeItem
     {
         // AbstractFreeModeItem
-
+        /*
         public override ItemType type { get { return ItemType.Normal; } }
         public override string play_file_name { get { return null; } }
-        public override bool is_enabled { get { return false; } }
+       
         public override string[] condition_text_terms { get { return null; } }
         public override string[] condition_texts { get { return null; } }
         public override string textTerm { get { return null; } }
@@ -20,6 +20,7 @@ namespace COM3D2.Lilly.Plugin
         public override string titleTerm { get { return null; } }
         public override string title { get { return null; } }
         public override int item_id { get { return 0; } }
+        protected override bool is_enabled { get { return false; } }
 
         public static HashSet<int> GetEnabledIdList_()
         {
@@ -29,7 +30,7 @@ namespace COM3D2.Lilly.Plugin
         {
             return GetEnabledOldIdList();
         }
-
+        */
         /// <summary>
         /// FreeModeItemEveryday
         /// FreeModeItemLifeMode

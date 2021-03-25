@@ -75,7 +75,7 @@ namespace COM3D2.Lilly.Plugin
                 MyLog.LogMessage("FreeModeItemList"
                     , gameObject.name
                     , data.item_id
-                    , data.is_enabled
+                    //, data.isEnabled
                     , data.play_file_name
                     , data.title
                     , data.text

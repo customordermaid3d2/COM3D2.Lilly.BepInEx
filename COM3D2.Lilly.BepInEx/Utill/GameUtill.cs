@@ -224,7 +224,7 @@ namespace COM3D2.Lilly.Plugin
                 {
                     MyLog.LogMessage("scneario"
                         , data.item_id
-                        , data.is_enabled
+                        //, data.is_enabled
                         , data.play_file_name
                         , data.title
                         , data.text
