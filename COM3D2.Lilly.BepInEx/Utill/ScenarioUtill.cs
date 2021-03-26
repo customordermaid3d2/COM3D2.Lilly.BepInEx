@@ -87,28 +87,12 @@ namespace COM3D2.Lilly.Plugin
         public static void SetScenarioAll()
         {
             MyLog.LogMessage("ScenarioDataUtill.SetScenarioAll. start");
-            SetEveryday(FreeModeItemEveryday.ScnearioType.Nitijyou);
-            SetEveryday(FreeModeItemEveryday.ScnearioType.Story);
 
-            foreach (var item in ScheduleCSVData.YotogiData)
-            {
-                ScheduleCSVData.Yotogi yotogi = item.Value;
-                //foreach (var item1 in yotogi.condPackage)
-                //{
-                //
-                //}
-                if (yotogi.condManVisibleFlag1.Count > 0)
-                {
-                    for (int j = 0; j < yotogi.condManVisibleFlag1.Count; j++)
-                    {
-                        if (GameMain.Instance.CharacterMgr.status.GetFlag(yotogi.condManVisibleFlag1[j]) == 0)
-                        {
-                            MyLog.LogMessage("SetScenarioAll.yotogi." + yotogi.condManVisibleFlag1[j]);
-                            GameMain.Instance.CharacterMgr.status.SetFlag(yotogi.condManVisibleFlag1[j] , 1);
-                        }
-                    }
-                }
-            }
+            SetEveryday(FreeModeItemEveryday.ScnearioType.Nitijyou);
+            MyLog.LogInfo("ScenarioDataUtill.SetScenarioAll. Nitijyou end");
+
+            SetEveryday(FreeModeItemEveryday.ScnearioType.Story);
+            MyLog.LogInfo("ScenarioDataUtill.SetScenarioAll. Story emd");
 
             MyLog.LogMessage("ScenarioDataUtill.SetScenarioAll. end");
 
@@ -240,19 +224,22 @@ namespace COM3D2.Lilly.Plugin
                     NDebug.Assert(condition, fileName + "\nopen failed.");
                     for (int i = 1; i < csvParser.max_cell_y; i++)
                     {
-                        if (csvParser.IsCellToExistData(0, i))
+                        try
                         {
-                            int cellAsInteger = csvParser.GetCellAsInteger(0, i);
+
+                            if (csvParser.IsCellToExistData(0, i))
+                            {
+                                int cellAsInteger = csvParser.GetCellAsInteger(0, i);
 
                                 int num = 1;
-                                if (gameMode != AbstractFreeModeItem.GameMode.CM3D2 || type != FreeModeItemEveryday.ScnearioType.Nitijyou )
+                                if (gameMode != AbstractFreeModeItem.GameMode.CM3D2 || type != FreeModeItemEveryday.ScnearioType.Nitijyou)
                                 {
                                     string name = csvParser.GetCellAsString(num++, i);
                                     string call_file_name = csvParser.GetCellAsString(num++, i);
                                     string check_flag_name = csvParser.GetCellAsString(num++, i);
                                     if (gameMode == AbstractFreeModeItem.GameMode.COM3D)
                                     {
-                                    bool netorare = (csvParser.GetCellAsString(num++, i) == "○");
+                                        bool netorare = (csvParser.GetCellAsString(num++, i) == "○");
                                     }
                                     string info_text = csvParser.GetCellAsString(num++, i);
                                     List<string> list = new List<string>();
@@ -274,18 +261,26 @@ namespace COM3D2.Lilly.Plugin
                                         }
                                         num++;
                                     }
-                                if (GameMain.Instance.CharacterMgr.status.GetFlag(fixingFlagText + check_flag_name)==0)
-                                {                                
-                                    GameMain.Instance.CharacterMgr.status.SetFlag(fixingFlagText + check_flag_name, 1);
-                                    MyLog.LogMessage("Everyday"
-                                    , check_flag_name
-                                    , call_file_name
-                                    , cellAsInteger
-                                    , name
-                                    , info_text
-                                    );
+                                    if (GameMain.Instance.CharacterMgr.status.GetFlag(fixingFlagText + check_flag_name) == 0)
+                                    {
+                                        GameMain.Instance.CharacterMgr.status.SetFlag(fixingFlagText + check_flag_name, 1);
+                                        MyLog.LogMessage("SetEverydaySub"
+                                        , check_flag_name
+                                        , call_file_name
+                                        , cellAsInteger
+                                        , name
+                                        , info_text
+                                        );
+                                    }
                                 }
                             }
+                        }
+                        catch (Exception e)
+                        {
+                            MyLog.LogError("SetEverydaySub"
+                                , fixingFlagText
+                                , e.ToString()
+                            );
                         }
                     }
                 }

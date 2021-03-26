@@ -348,5 +348,29 @@ namespace COM3D2.Lilly.Plugin
 			return true;
 		}
 
+
+
+		public static void SetAllYotogi()
+        {
+			foreach (var item in ScheduleCSVData.YotogiData)
+			{
+				ScheduleCSVData.Yotogi yotogi = item.Value;
+				//foreach (var item1 in yotogi.condPackage)
+				//{
+				//
+				//}
+				if (yotogi.condManVisibleFlag1.Count > 0)
+				{
+					for (int j = 0; j < yotogi.condManVisibleFlag1.Count; j++)
+					{
+						if (GameMain.Instance.CharacterMgr.status.GetFlag(yotogi.condManVisibleFlag1[j]) == 0)
+						{
+							MyLog.LogMessage("SetScenarioAll.yotogi." + yotogi.condManVisibleFlag1[j]);
+							GameMain.Instance.CharacterMgr.status.SetFlag(yotogi.condManVisibleFlag1[j], 1);
+						}
+					}
+				}
+			}
+		}
 	}
 }

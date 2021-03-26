@@ -151,11 +151,12 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(AbstractFreeModeItemPatch));// 프리 모드에서 모든 이벤트 열기 위한용 오버 플로우
             listA.Add(typeof(AudioSourceMgrPatch));
             listA.Add(typeof(BgMgrPatch));
-            //lists.Add(typeof(CameraMainPatch));
+            listA.Add(typeof(CameraMainPatch));// 페이드 인 아웃 확인용
             listA.Add(typeof(CharacterMgrPatch));// 프리셋값 출력용
             //lists.Add(typeof(DeskManagerPatch));
             //listA.Add(typeof(CsvCommonIdManagerPatch));
             // listA.Add(typeof(ClassChangePanelPatch));
+            listA.Add(typeof(NDebugPatch));// 망할 메세지 박스
             listA.Add(typeof(EmpireLifeModeManagerPatch));// 회상모드 시나리오 처리용?
             //listA.Add(typeof(EmpireLifeModeDataPatch));// 관련 데이터 사전
             //listA.Add(typeof(FreeModeItemVipPatch));// 회상모드 시나리오 처리용?
