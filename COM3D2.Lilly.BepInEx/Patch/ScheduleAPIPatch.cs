@@ -352,6 +352,9 @@ namespace COM3D2.Lilly.Plugin
 
 		public static void SetAllYotogi()
         {
+			MyLog.LogMessage("SetAllYotogi START"
+			);
+
 			foreach (var item in ScheduleCSVData.YotogiData)
 			{
 				ScheduleCSVData.Yotogi yotogi = item.Value;
@@ -371,6 +374,9 @@ namespace COM3D2.Lilly.Plugin
 					}
 				}
 			}
+
+			MyLog.LogMessage("SetAllYotogi END"
+			);
 		}
 	}
 }

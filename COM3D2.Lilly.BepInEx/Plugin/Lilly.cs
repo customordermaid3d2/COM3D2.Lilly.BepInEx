@@ -151,6 +151,7 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(AbstractFreeModeItemPatch));// 프리 모드에서 모든 이벤트 열기 위한용 오버 플로우
             listA.Add(typeof(AudioSourceMgrPatch));
             listA.Add(typeof(BgMgrPatch));
+            listA.Add(typeof(BoneMorph_Patch));//157 임시조치용 메이드 보이스 피치
             listA.Add(typeof(CameraMainPatch));// 페이드 인 아웃 확인용
             listA.Add(typeof(CharacterMgrPatch));// 프리셋값 출력용
             //lists.Add(typeof(DeskManagerPatch));
@@ -194,6 +195,7 @@ namespace COM3D2.Lilly.Plugin
             listA.Add(typeof(StatusMgrPatch));//메이드 관리의 스텟 화면
             //listA.Add(typeof(StatusCtrlPatch));//메이드 관리의 스텟 화면에 값 주입.. 쓸일 없음
             //lists.Add(typeof(TJSScriptPatch));
+            listA.Add(typeof(TBodyPatch));
             listA.Add(typeof(UTYPatch));
             //listA.Add(typeof(YotogiSkillSystemPatch));// 코드 분석용
             // listA.Add(typeof(YotogiClassSystemPatch));// 코드 분석용

@@ -153,9 +153,9 @@ namespace COM3D2.Lilly.Plugin
                         {
                             int cellAsInteger = csvParser.GetCellAsInteger(0, i);
                             int cellAsInteger2 = csvParser.GetCellAsInteger(1, i);
-                            string s =csvParser.GetCellAsString(2, i);
+                            string s = csvParser.GetCellAsString(2, i);
                             //    ScheduleCSVData.ScheduleBase scheduleBase = ScheduleCSVData.AllData[cellAsInteger2];
-                            MyLog.LogMessage("ItemVip처리필요" 
+                            MyLog.LogMessage("ItemVip처리필요"
                                 , cellAsInteger
                                 , cellAsInteger2
                                 , s
@@ -202,7 +202,7 @@ namespace COM3D2.Lilly.Plugin
 
         private static void SetEverydaySub(FreeModeItemEveryday.ScnearioType type, string fileName, AbstractFreeModeItem.GameMode gameMode, string fixingFlagText)
         {
-           // HashSet<int> hashSet;
+            // HashSet<int> hashSet;
             AFileBase afileBase;
             if (gameMode == AbstractFreeModeItem.GameMode.CM3D2)
             {
@@ -224,64 +224,56 @@ namespace COM3D2.Lilly.Plugin
                     NDebug.Assert(condition, fileName + "\nopen failed.");
                     for (int i = 1; i < csvParser.max_cell_y; i++)
                     {
-                        try
+                        if (csvParser.IsCellToExistData(0, i))
                         {
+                            int cellAsInteger = csvParser.GetCellAsInteger(0, i);
 
-                            if (csvParser.IsCellToExistData(0, i))
+                            int num = 1;
+                            if (gameMode != AbstractFreeModeItem.GameMode.CM3D2 || type != FreeModeItemEveryday.ScnearioType.Nitijyou)
                             {
-                                int cellAsInteger = csvParser.GetCellAsInteger(0, i);
-
-                                int num = 1;
-                                if (gameMode != AbstractFreeModeItem.GameMode.CM3D2 || type != FreeModeItemEveryday.ScnearioType.Nitijyou)
+                                string name = csvParser.GetCellAsString(num++, i);
+                                string call_file_name = csvParser.GetCellAsString(num++, i);
+                                string check_flag_name = csvParser.GetCellAsString(num++, i);
+                                if (gameMode == AbstractFreeModeItem.GameMode.COM3D)
                                 {
-                                    string name = csvParser.GetCellAsString(num++, i);
-                                    string call_file_name = csvParser.GetCellAsString(num++, i);
-                                    string check_flag_name = csvParser.GetCellAsString(num++, i);
-                                    if (gameMode == AbstractFreeModeItem.GameMode.COM3D)
-                                    {
-                                        bool netorare = (csvParser.GetCellAsString(num++, i) == "○");
-                                    }
-                                    string info_text = csvParser.GetCellAsString(num++, i);
-                                    List<string> list = new List<string>();
-                                    for (int j = 0; j < 9; j++)
-                                    {
-                                        if (csvParser.IsCellToExistData(num, i))
-                                        {
-                                            list.Add(csvParser.GetCellAsString(num, i));
-                                        }
-                                        num++;
-                                    }
-                                    int subHerionID = csvParser.GetCellAsInteger(num++, i);
-                                    while (csvParser.IsCellToExistData(num, 0))
-                                    {
-                                        if (csvParser.GetCellAsString(num, i) == "○")
-                                        {
-                                            string cellAsString = csvParser.GetCellAsString(num, 0);
-                                            Personal.Data data = Personal.GetData(cellAsString);
-                                        }
-                                        num++;
-                                    }
-                                    if (GameMain.Instance.CharacterMgr.status.GetFlag(fixingFlagText + check_flag_name) == 0)
-                                    {
-                                        GameMain.Instance.CharacterMgr.status.SetFlag(fixingFlagText + check_flag_name, 1);
-                                        MyLog.LogMessage("SetEverydaySub"
-                                        , check_flag_name
-                                        , call_file_name
-                                        , cellAsInteger
-                                        , name
-                                        , info_text
-                                        );
-                                    }
+                                    bool netorare = (csvParser.GetCellAsString(num++, i) == "○");
                                 }
+                                string info_text = csvParser.GetCellAsString(num++, i);
+                                List<string> list = new List<string>();
+                                for (int j = 0; j < 9; j++)
+                                {
+                                    if (csvParser.IsCellToExistData(num, i))
+                                    {
+                                        list.Add(csvParser.GetCellAsString(num, i));
+                                    }
+                                    num++;
+                                }
+                                int subHerionID = csvParser.GetCellAsInteger(num++, i);
+                                while (csvParser.IsCellToExistData(num, 0))
+                                {
+                                    if (csvParser.GetCellAsString(num, i) == "○")
+                                    {
+                                        string cellAsString = csvParser.GetCellAsString(num, 0);
+                                        //Personal.Data data = Personal.GetData(cellAsString);
+                                    }
+                                    num++;
+                                }
+
+                                if (GameMain.Instance.CharacterMgr.status.GetFlag(fixingFlagText + check_flag_name) == 0)
+                                {
+                                    MyLog.LogMessage("SetEverydaySub.Flag"
+                                    , check_flag_name
+                                    , call_file_name
+                                    , cellAsInteger
+                                    , name
+                                    , info_text
+                                    );
+                                    GameMain.Instance.CharacterMgr.status.SetFlag(fixingFlagText + check_flag_name, 1);
+                                }
+
                             }
                         }
-                        catch (Exception e)
-                        {
-                            MyLog.LogError("SetEverydaySub"
-                                , fixingFlagText
-                                , e.ToString()
-                            );
-                        }
+
                     }
                 }
             }
@@ -318,7 +310,7 @@ namespace COM3D2.Lilly.Plugin
                             int cellAsInteger = csv.GetCellAsInteger(0, y);
                             int num = 0;
                             int m_ID = csv.GetCellAsInteger(num++, y);
-                            int  m_LifeModeDataID = csv.GetCellAsInteger(num++, y);
+                            int m_LifeModeDataID = csv.GetCellAsInteger(num++, y);
                             string m_Title = csv.GetCellAsString(num++, y);
                             string m_PlayFileName = csv.GetCellAsString(num++, y);
                             string m_Text = csv.GetCellAsString(num++, y);
@@ -363,12 +355,12 @@ namespace COM3D2.Lilly.Plugin
 
         public static void RemoveEventEndFlag(Maid maid)
         {
-            if (maid!=null)
+            if (maid != null)
             {
                 MyLog.LogMessage(".RemoveEventEndFlag:" + maid.status.firstName + " , " + maid.status.lastName); ;
                 maid.status.RemoveEventEndFlagAll();
             }
-          
+
         }
 
         //public void RemoveEventMaid(Maid maid, bool not_again = false)

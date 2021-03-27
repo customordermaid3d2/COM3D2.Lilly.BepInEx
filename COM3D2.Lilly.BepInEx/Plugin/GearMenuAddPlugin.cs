@@ -70,6 +70,9 @@ namespace COM3D2.Lilly.Plugin
                 
                 name = "메이드 정보 얻기";
                 SystemShortcutAPI.AddButton(name, new Action(MaidStatusUtill.GetMaidStatus), name, png);
+                                
+                name = "GetTbodyInfo";
+                SystemShortcutAPI.AddButton(name, new Action(TBodyPatch.GetTbodyInfo), name, png);
 
                 buttonAdded1 = true;
             }
