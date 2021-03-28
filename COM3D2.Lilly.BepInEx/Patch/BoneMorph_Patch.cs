@@ -25,8 +25,8 @@ namespace COM3D2.Lilly.Plugin
         {
             MyLog.LogMessage(
                 "InitBoneMorphEdit"
-                , t.name
-                , f_mpn
+                // , t.name// 의미 없음
+                , f_mpn // MPN 가 SlotID 보다 많음
                 , f_slot
                 , tbskin.obj_tr.name
                 );

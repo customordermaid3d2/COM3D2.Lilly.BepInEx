@@ -51,7 +51,7 @@ namespace COM3D2.Lilly.Plugin
             {
                 Task.Factory.StartNew(() =>
                 {
-                    MyLog.LogMessage("SetScenarioExecuteCountAll. start");
+                    MyLog.LogDarkBlue("SetScenarioExecuteCountAll. start");
                     isScenarioExecuteCountAllRun = true;
                 
                     foreach (Maid maid in GameMain.Instance.CharacterMgr.GetStockMaidList())
@@ -96,7 +96,7 @@ namespace COM3D2.Lilly.Plugin
                     }
 
                     isScenarioExecuteCountAllRun = false;
-                    MyLog.LogMessage("SetScenarioExecuteCountAll. end");
+                    MyLog.LogDarkBlue("SetScenarioExecuteCountAll. end");
                 });
             }
             /*

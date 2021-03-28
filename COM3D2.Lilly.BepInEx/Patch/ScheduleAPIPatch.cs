@@ -113,7 +113,7 @@ namespace COM3D2.Lilly.Plugin
 				Task.Factory.StartNew(() =>
 				{
 					isSetAllWorkRun = true;
-					MyLog.LogMessage("ScheduleAPIPatch.SetAllWork. start");
+					MyLog.LogDarkBlue("ScheduleAPIPatch.SetAllWork. start");
 
 					ReadOnlyDictionary<int, NightWorkState> night_works_state_dic = GameMain.Instance.CharacterMgr.status.night_works_state_dic;
 					MyLog.LogMessage("ScheduleAPIPatch.SetAllWork.night_works_state_dic:" + night_works_state_dic.Count);
@@ -171,7 +171,7 @@ namespace COM3D2.Lilly.Plugin
 						}
 					}
 
-					MyLog.LogMessage("ScheduleAPIPatch.SetAllWork. end");
+					MyLog.LogDarkBlue("ScheduleAPIPatch.SetAllWork. end");
 					isSetAllWorkRun = false;
 				});
 			}
@@ -352,7 +352,7 @@ namespace COM3D2.Lilly.Plugin
 
 		public static void SetAllYotogi()
         {
-			MyLog.LogMessage("SetAllYotogi START"
+			MyLog.LogDarkBlue("SetAllYotogi START"
 			);
 
 			foreach (var item in ScheduleCSVData.YotogiData)
@@ -375,7 +375,7 @@ namespace COM3D2.Lilly.Plugin
 				}
 			}
 
-			MyLog.LogMessage("SetAllYotogi END"
+			MyLog.LogDarkBlue("SetAllYotogi END"
 			);
 		}
 	}

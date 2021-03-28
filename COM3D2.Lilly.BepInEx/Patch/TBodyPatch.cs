@@ -25,23 +25,88 @@ namespace COM3D2.Lilly.Plugin
     /// </summary>
     class TBodyPatch
     {
-        // public static void AddItem(global::TBody tb, global::MPN mpn, int subno, string slotname, string filename, string AttachSlot, string AttachName, bool f_bTemp, int version)
-        // public        void AddItem(                          MPN mpn, string slotname, string filename, string AttachSlot, string AttachName, bool f_bTemp)
-        // public        void AddItem(                          MPN mpn, int subno, string slotname, string filename, string AttachSlot, string AttachName, bool f_bTemp, int version)
 
-        //public void ChangeTex(string slotname,                int matno, string prop_name, string filename,                                    Dictionary<string, byte[]> dicModTexData,         MaidParts.PARTS_COLOR f_ePartsColorId =         MaidParts.PARTS_COLOR.NONE)
-        //public void ChangeTex(string slotname, int subPropNo, int matno, string prop_name, string filename, global::System.Collections.Generic.Dictionary<string, byte[]> dicModTexData, global::MaidParts.PARTS_COLOR f_ePartsColorId = global::MaidParts.PARTS_COLOR.NONE)
-        public static void FaceTypeHook(global::TBody self, ref string slotname, ref int subPropNo, ref int matno, ref string prop_name, ref string filename, ref global::System.Collections.Generic.Dictionary<string, byte[]> dicModTexData, ref global::MaidParts.PARTS_COLOR f_ePartsColorId)
+        // public void ChangeTex(string slotname, int subPropNo, int matno, string prop_name, string filename, Dictionary<string, byte[]> dicModTexData, MaidParts.PARTS_COLOR f_ePartsColorId = MaidParts.PARTS_COLOR.NONE)
+        // maid.body0.ChangeTex( text                              , num, textureInfo.propName, text2, null, MaidParts.PARTS_COLOR.NONE);
+
+        // public void AddItem(MPN mpn, int subno, string slotname, string filename, string AttachSlot, string AttachName, bool f_bTemp, int version, bool crcImport, TBodySkin.SplitParam splitParam)
+        public static string text = "Bip01";
+
+        /// <summary>
+        /// 이것도 안된다
+        /// </summary>
+        /// <param name="__instance"></param>
+        /// <param name="mpn"></param>
+        /// <param name="subno"></param>
+        /// <param name="slotname"></param>
+        /// <param name="filename"></param>
+        /// <param name="AttachSlot"></param>
+        /// <param name="AttachName"></param>
+        /// <param name="f_bTemp"></param>
+        /// <param name="version"></param>
+        /// <param name="crcImport"></param>
+        /// <param name="splitParam"></param>
+        /// <param name="___UpperArmR"></param>
+        /// <param name="___UpperArmL"></param>
+        /// <param name="___ForearmR"></param>
+        /// <param name="___ForearmL"></param>
+        /// <param name="___ClavicleL"></param>
+        /// <param name="___ClavicleR"></param>
+        /// <param name="___Thigh_L"></param>
+        /// <param name="___Thigh_R"></param>
+        /// <param name="___Calf_L"></param>
+        /// <param name="___Calf_R"></param>
+        /*
+        [HarmonyPatch(typeof(TBody), "AddItem"
+            , typeof(MPN), typeof(int), typeof(string), typeof(string), typeof(string), typeof(string), typeof(bool), typeof(int), typeof(bool), typeof(TBodySkin.SplitParam))
+            , HarmonyPostfix]
+        */
+        public static void AddItem(TBody __instance
+            , MPN mpn, int subno, string slotname, string filename, string AttachSlot, string AttachName, bool f_bTemp, int version, bool crcImport, TBodySkin.SplitParam splitParam
+            , Transform ___UpperArmR
+            , Transform ___UpperArmL
+            , Transform ___ForearmR 
+            , Transform ___ForearmL 
+            , Transform ___ClavicleL
+            , Transform ___ClavicleR 
+            , Transform ___Thigh_L
+            , Transform ___Thigh_R 
+            , Transform ___Calf_L
+            , Transform ___Calf_R
+            )
         {
+            MyLog.LogInfo("TBody.AddItem"
+                , MaidUtill.GetMaidFullNale(__instance.maid)
+                , mpn
+                , subno
+                , slotname
+                , filename
+                , AttachSlot
+                , AttachName
+                , f_bTemp
+                , version
+                , crcImport                
+            );
 
+            SetBoneUpdateAll(___ClavicleR, ___UpperArmR, ___ForearmR);
+            SetBoneUpdateAll(___ClavicleL, ___UpperArmL, ___ForearmL);
+            SetBoneUpdateAll(___Thigh_R, ___Calf_R, CMT.SearchObjName(__instance.m_trBones, text + " R Foot", true) );
+            SetBoneUpdateAll(___Thigh_L, ___Calf_L, CMT.SearchObjName(__instance.m_trBones, text + " L Foot", true) );
 
+            //___ClavicleR = CMT.SearchObjName(__instance.m_trBones, text + " R Clavicle", true);
+            //___ClavicleL = CMT.SearchObjName(__instance.m_trBones, text + " L Clavicle", true);
+            //___UpperArmR = CMT.SearchObjName(__instance.m_trBones, text + " R UpperArm", true);
+            //___UpperArmL = CMT.SearchObjName(__instance.m_trBones, text + " L UpperArm", true);
+            //___ForearmR = CMT.SearchObjName(__instance.m_trBones, text + " R Forearm", true);
+            //___ForearmL = CMT.SearchObjName(__instance.m_trBones, text + " L Forearm", true);
         }
 
-       // public static string text = "Bip01";
-       // public static BoneMorph_ bonemorph;
-       // public static GameObject m_Bones;
-       // public static Transform m_trBones;
-       // public static Transform Body;
+        // public static string text = "Bip01";
+        // public static BoneMorph_ bonemorph;
+        // public static GameObject m_Bones;
+        // public static Transform m_trBones;
+        // public static Transform Body;
+
 
         [HarmonyPatch(typeof(TBody), "LoadBody_R", typeof(string), typeof(Maid) , typeof(int) , typeof(bool) ) ,HarmonyPostfix  ]
         public static void LoadBody_R(string f_strModelFileName, Maid f_maid, int bodyVer, bool crcImport
@@ -79,7 +144,11 @@ namespace COM3D2.Lilly.Plugin
         }
         */
 
-        [HarmonyPostfix, HarmonyPatch(typeof(TBody), "LateUpdate")]
+        /// <summary>
+        /// 안된다
+        /// </summary>
+        /// <param name="__instance"></param>
+        //[HarmonyPostfix, HarmonyPatch(typeof(TBody), "LateUpdate")]
         public static void LateUpdate(TBody __instance)
         {
             MyLog.LogInfo("TBody.LateUpdate"
@@ -103,28 +172,27 @@ namespace COM3D2.Lilly.Plugin
             }
             catch (Exception e)
             {
-                MyLog.LogInfo("TBody.LateUpdate"
+                MyLog.LogError("TBody.LateUpdate"
                 , e.ToString()
                 );
             }
         }
 
-        private static void SetBoneUpdateAll(TBody instance, params string[]  args)
+        private static void SetBoneUpdateAll(TBody __instance, params string[]  args)
         {
             for (int i = 0; i < args.Length - 1 ; i++)
-            {
-                SetBoneUpdate(instance, args[i], args[i+1]);
-            }
+                SetBoneUpdate(__instance.GetBone(args[i]), __instance.GetBone(args[i + 1]));
         }
 
-        public static void SetBoneUpdate(TBody __instance,string perent,string child)
+        private static void SetBoneUpdateAll(params Transform[] args)
         {
-            MyLog.LogInfo("SetBone"
-            , perent
-            , child
-            );
-            Transform t = __instance.GetBone(child);
-            float x = __instance.GetBone(perent).localScale.x;
+            for (int i = 0; i < args.Length - 1; i++)
+                SetBoneUpdate( args[i], args[i + 1]);
+        }
+
+        private static void SetBoneUpdate(Transform t, Transform c)
+        {
+            float x = c.localScale.x;
             Vector3 b = new Vector3(x, 1f, 1f);
             Vector3 point = new Vector3(1f / x - 1f, 0f, 0f);
             Vector3 eulerAngles = t.localRotation.eulerAngles;
@@ -135,10 +203,9 @@ namespace COM3D2.Lilly.Plugin
             t.localScale = s1;
         }
 
-
-
         public static void GetTbodyInfo()
         {
+                MyLog.LogDarkBlue("GetTbodyInfo");
 
                 Maid maid = GameMain.Instance.CharacterMgr.GetMaid(0);
                 if (maid == null)

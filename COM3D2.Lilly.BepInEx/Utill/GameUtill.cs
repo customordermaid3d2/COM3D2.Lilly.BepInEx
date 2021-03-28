@@ -14,7 +14,7 @@ namespace COM3D2.Lilly.Plugin
 
         public static void GetGameInfo1()
         {
-            MyLog.LogInfo("=== GetGameInfo st ===");
+            MyLog.LogDarkBlue("=== GetGameInfo st ===");
 
             MyLog.LogInfo("Application.installerName : " + Application.installerName);
             MyLog.LogInfo("Application.version : " + Application.version);
@@ -142,13 +142,13 @@ namespace COM3D2.Lilly.Plugin
             }
             MyLog.LogInfo();
 
-            MyLog.LogInfo("=== GetGameInfo ed ===");
+            MyLog.LogDarkBlue("=== GetGameInfo ed ===");
         }
 
 
         public static void GetGameInfo2()
         {
-            MyLog.LogInfo("=== GetGameInfo st ===");
+            MyLog.LogDarkBlue("=== GetGameInfo st ===");
 
             try
             {
@@ -257,7 +257,7 @@ namespace COM3D2.Lilly.Plugin
                 isEnabled = freemode_item_list_.SetList(FreeModeItemLifeMode.CreateItemList(true).ToArray());
             */
 
-            MyLog.LogInfo("=== GetGameInfo ed ===");
+            MyLog.LogDarkBlue("=== GetGameInfo ed ===");
         }
 
         private static void SetscnearioFreeList()

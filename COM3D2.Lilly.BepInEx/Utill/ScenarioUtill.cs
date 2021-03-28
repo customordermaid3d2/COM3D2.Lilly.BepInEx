@@ -28,7 +28,7 @@ namespace COM3D2.Lilly.Plugin
                 Task.Factory.StartNew(() =>
                 {
                     isRunSetScenarioDataAll = true;
-                    MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll. start");
+                    MyLog.LogDarkBlue("ScenarioDataUtill.SetScenarioDataAll. start");
                     try
                     {
                         // 병렬 처리
@@ -77,7 +77,7 @@ namespace COM3D2.Lilly.Plugin
                     {
                         MyLog.LogError("ScenarioDataUtill.SetScenarioDataAll1 : " + e.ToString());
                     }
-                    MyLog.LogDebug("ScenarioDataUtill.SetScenarioDataAll. end");
+                    MyLog.LogDarkBlue("ScenarioDataUtill.SetScenarioDataAll. end");
                     isRunSetScenarioDataAll = false;
                 });
             }
@@ -86,7 +86,7 @@ namespace COM3D2.Lilly.Plugin
 
         public static void SetScenarioAll()
         {
-            MyLog.LogMessage("ScenarioDataUtill.SetScenarioAll. start");
+            MyLog.LogDarkBlue("ScenarioDataUtill.SetScenarioAll. start");
 
             SetEveryday(FreeModeItemEveryday.ScnearioType.Nitijyou);
             MyLog.LogInfo("ScenarioDataUtill.SetScenarioAll. Nitijyou end");
@@ -94,7 +94,7 @@ namespace COM3D2.Lilly.Plugin
             SetEveryday(FreeModeItemEveryday.ScnearioType.Story);
             MyLog.LogInfo("ScenarioDataUtill.SetScenarioAll. Story emd");
 
-            MyLog.LogMessage("ScenarioDataUtill.SetScenarioAll. end");
+            MyLog.LogDarkBlue("ScenarioDataUtill.SetScenarioAll. end");
 
             // SetFlagLifeMode();//미적용 상태 다른쪽에서 구현됨
             ///SetItemVip();// 미적용 상태 다른쪽에서 구현됨
@@ -357,7 +357,7 @@ namespace COM3D2.Lilly.Plugin
         {
             if (maid != null)
             {
-                MyLog.LogMessage(".RemoveEventEndFlag:" + maid.status.firstName + " , " + maid.status.lastName); ;
+                MyLog.LogDarkBlue(".RemoveEventEndFlag:" + maid.status.firstName + " , " + maid.status.lastName); ;
                 maid.status.RemoveEventEndFlagAll();
             }
 

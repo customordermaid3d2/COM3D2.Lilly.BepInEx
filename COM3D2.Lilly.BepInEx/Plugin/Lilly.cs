@@ -15,7 +15,7 @@ namespace COM3D2.Lilly.Plugin
     // 이벤트 함수의 실행 순서
     // https://docs.unity3d.com/kr/current/Manual/ExecutionOrder.html
     
-    [BepInPlugin("COM3D2.Lilly.Plugin", "Lilly", "21.3.13")]// 버전 규칙 잇음. 반드시 2~4개의 숫자구성으로 해야함
+    [BepInPlugin("COM3D2.Lilly.Plugin", "Lilly", "21.3.28")]// 버전 규칙 잇음. 반드시 2~4개의 숫자구성으로 해야함. 미준수시 못읽어들임
     public class Lilly : BaseUnityPlugin 
     {
         public static Lilly lilly;
@@ -40,7 +40,8 @@ namespace COM3D2.Lilly.Plugin
         {
             lilly = this;
 
-            MyLog.LogMessage("MainPlugin()");
+            MyLog.LogMessage("Lilly()");
+            MyLog.LogTest();
 
             threadPlugin = new ThreadPlugin();
 
@@ -87,14 +88,12 @@ namespace COM3D2.Lilly.Plugin
             // 이거로 원본 메소드에 연결시켜줌. 이게 일종의 해킹
 
             // Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(),null);// 이건 사용법 모르겠음
-            MyLog.LogDebug("harmonys.Add:===========================START==============================");
-            MyLog.LogInfo("harmonys.Add:===========================START==============================");
-            MyLog.LogMessage("harmonys.Add:===========================START==============================");
+            MyLog.LogLine();
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
                 try
                 {
-                    MyLog.LogMessage("Plugin:" + item.Name);
+                    MyLog.LogDarkMagenta("SetHarmonyPatch:" + item.Name);
                     if (!harmonys.ContainsKey(item))
                     {
                         harmonys.Add(item, Harmony.CreateAndPatchAll(item, null));
@@ -102,12 +101,10 @@ namespace COM3D2.Lilly.Plugin
                 }
                 catch (Exception e)
                 {
-                    MyLog.LogError("Plugin:" + e.ToString());
+                    MyLog.LogError("SetHarmonyPatch:" + e.ToString());
                 }
             }
-            MyLog.LogMessage("harmonys.Add:=========================END================================");
-            MyLog.LogInfo("harmonys.Add:=========================END================================");
-            MyLog.LogDebug ("harmonys.Add:=========================END================================");
+            MyLog.LogLine();
 
         }
 
@@ -124,9 +121,9 @@ namespace COM3D2.Lilly.Plugin
 
             foreach (Type item in list) // 인셉션 나면 중단되는 현상 제거
             {
+                MyLog.LogDarkMagenta("Plugin:" + item.Name);
                 try
                 {
-                    MyLog.LogMessage("Plugin:" + item.Name);
                     Harmony harmony;
                     if (harmonys.TryGetValue(item, out harmony))
                     {
@@ -205,12 +202,12 @@ namespace COM3D2.Lilly.Plugin
 
         public void Awake()
         {
-            MyLog.LogDebug("=== Awake ===");
-            MyLog.LogInfo("Awake");
-            MyLog.LogMessage("Awake");
-            MyLog.LogWarning("Awake");
-            MyLog.LogFatal("Awake");
-            MyLog.LogError("Awake");
+           // MyLog.LogDebug("=== Awake ===");
+           // MyLog.LogInfo("Awake");
+            MyLog.LogMessage("=== Awake ===");
+           // MyLog.LogWarning("Awake");
+           // MyLog.LogFatal("Awake");
+           // MyLog.LogError("Awake");
 
             SetConfig();
 

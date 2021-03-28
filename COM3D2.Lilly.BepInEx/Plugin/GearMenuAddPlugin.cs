@@ -86,7 +86,7 @@ namespace COM3D2.Lilly.Plugin
         private static void OnMenuButtonClickCallback()
         {
             Lilly.isLogOnOffAll = !Lilly.isLogOnOffAll;
-            MyLog.LogMessage("OnMenuButtonClickCallback:" + Lilly.isLogOnOffAll);
+            MyLog.LogDarkBlue("OnMenuButtonClickCallback:" + Lilly.isLogOnOffAll);
         }
 
         private static void OnMenuButtonClickCallback_Patch()
@@ -101,7 +101,7 @@ namespace COM3D2.Lilly.Plugin
             }
             patchOnOff = !patchOnOff;
 
-            MyLog.LogMessage("OnMenuButtonClickCallback_Patch:" + patchOnOff);
+            MyLog.LogDarkBlue("OnMenuButtonClickCallback_Patch:" + patchOnOff);
         }
 
     }
